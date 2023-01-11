@@ -1,6 +1,6 @@
 module.exports = {
     parser: '@typescript-eslint/parser',
-    plugins: ['@typescript-eslint', 'prettier'],
+    plugins: ['@typescript-eslint', 'prettier', 'import', 'unused-imports'],
     extends: [
         'airbnb',
         'plugin:import/errors',
@@ -20,5 +20,26 @@ module.exports = {
         'react/prop-types': 0,
         'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
         'jsx-a11y/no-noninteractive-element-interactions': 0,
+        'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
+        'import/order': [
+            'error',
+            {
+                groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+                pathGroups: [
+                    {
+                        pattern: 'react',
+                        group: 'builtin',
+                        position: 'before',
+                    },
+                ],
+                pathGroupsExcludedImportTypes: ['react'],
+            },
+        ],
+        'no-unused-vars': 'off',
+        'unused-imports/no-unused-imports': 'error',
+        'unused-imports/no-unused-vars': [
+            'warn',
+            { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
+        ],
     },
 };
