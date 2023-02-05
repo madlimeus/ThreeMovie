@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import NavBarPage from '../pages/NavBar/NavBarPage';
 import Main from './Main/Main';
 import Detail from './Detail/Detail';
 import Login from './User/Login/Login';
@@ -10,6 +11,7 @@ import SignUp from './User/SignUp/SignUp';
 const AppRouter = () => {
     return (
         <BrowserRouter>
+            <NavBarPage />
             <Routes>
                 <Route path="/main/*" element={<Main />} />
                 <Route path="/Detail/*" element={<Detail />} />
