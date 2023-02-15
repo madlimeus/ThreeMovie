@@ -3,5 +3,7 @@ package com.threemovie.threemovieapi.service
 import com.threemovie.threemovieapi.Entity.ShowTime
 
 interface ShowTimeService {
-	fun getCGV(): List<ShowTime>
+	fun getShowTime(MovieTheater: String): List<ShowTime>
+
+	fun getShowTimeAll(): List<ShowTime>
 }

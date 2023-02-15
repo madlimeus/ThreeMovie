@@ -8,11 +8,12 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class QueryDslConfig{
-	@PersistenceContext
-	lateinit var entityManager: EntityManager
 
-	@Bean
-	fun jpaQueryFactory(): JPAQueryFactory {
-		return JPAQueryFactory(entityManager)
-	}
+		@PersistenceContext
+		lateinit var entityManager: EntityManager
+
+		@Bean
+		fun jpaQueryFactory(): JPAQueryFactory {
+			return JPAQueryFactory(entityManager)
+		}
 }
