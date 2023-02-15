@@ -15,5 +15,4 @@ class ShowTimeController(val service: ShowTimeServiceImpl) {
 
 	@GetMapping
 	fun getShowTimeAll(): List<ShowTime> = service.getShowTimeAll()
-
 }
