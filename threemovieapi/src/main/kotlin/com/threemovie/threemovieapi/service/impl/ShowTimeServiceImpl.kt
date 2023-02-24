@@ -23,11 +23,13 @@ class ShowTimeServiceImpl(
 //		return showTimeRepositorySupport.getShowTime(movieTheater)
 		val url = "http://www.cgv.co.kr/theaters/?areacode=01&theaterCode=0046"
 		val conn = Jsoup.connect(url)
-		val html = conn.get()
+		val doc = conn.get()
 
 		
 
-		return html
+		println()
+
+		return emptyList()
 	}
 
 	override fun getShowTimeAll(): List<ShowTime> {
