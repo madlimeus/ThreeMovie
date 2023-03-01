@@ -4,6 +4,7 @@ import com.threemovie.threemovieapi.Entity.ShowTime
 import com.threemovie.threemovieapi.Repository.Support.ShowTimeRepositorySupport
 import com.threemovie.threemovieapi.service.ShowTimeService
 import org.json.JSONArray
+import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.springframework.stereotype.Service
 import java.util.regex.Matcher
@@ -13,6 +14,16 @@ import java.util.regex.Pattern
 class ShowTimeServiceImpl(
 	val showTimeRepositorySupport: ShowTimeRepositorySupport
 ) : ShowTimeService {
+	override fun getShowTimeAll(): List<ShowTime> {
+////		val movingShowingTime = updateTimeRepositorySupport.getMovieShowingTime()
+//
+//		return showTimeRepositorySupport.getShowTimeAll()
+		val theaterlist = getCGVTheaterData()
+//		getCGVShowingTime(theaterlist)
+
+		return emptyList()
+	}
+
 	val userAgent: String =
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
 	val CGVurl = "http://www.cgv.co.kr"
@@ -25,17 +36,122 @@ class ShowTimeServiceImpl(
 //			throw NoSuchElementException("Could not find a $movieTheater")
 //
 //		return showTimeRepositorySupport.getShowTime(movieTheater)
-		val theaterlist = getCGVTheaterData()
-		getCGVShowingTime(theaterlist)
+		val theaterlist = getLotteCinemaTheaterData()
+		getLotteCinemaShowingTime(theaterlist)
 
 		return emptyList()
 	}
 
-	override fun getShowTimeAll(): List<ShowTime> {
-////		val movingShowingTime = updateTimeRepositorySupport.getMovieShowingTime()
-//
-//		return showTimeRepositorySupport.getShowTimeAll()
-		return emptyList()
+	fun getLotteCinemaTheaterData(): ArrayList<HashMap<String, Any>> {
+		val theaterlist = ArrayList<HashMap<String, Any>>()
+		val url: String =
+			"https://www.lottecinema.co.kr/LCWS/Cinema/CinemaData.aspx"
+
+		var paramlist = HashMap<String, Any>()
+		paramlist.put("MethodName", "GetCinemaItems")
+		paramlist.put("channelType", "HO")
+		paramlist.put("osType", "W")
+		paramlist.put("osVersion", userAgent)
+		val conn = Jsoup.connect(url)
+			.userAgent(userAgent)
+			.data("ParamList", JSONObject(paramlist).toString())
+		val doc = conn.post().body().text()
+		val data = JSONObject(doc)
+
+		val cinemas = data.getJSONObject("Cinemas").getJSONArray("Items")
+
+		for (i in 0 until cinemas.length()) {
+			val cinema = cinemas.getJSONObject(i)
+			val cinemaNameKR = "롯데시네마 " + cinema.getString("CinemaName") + "점"
+			val cinemaNameEN = "LotteCinema " + cinema.getString("CinemaNameUS")
+			val divisionCode = cinema.get("DivisionCode")
+			val detailDivisionCode = cinema.get("DetailDivisionCode")
+			val cinemaID = cinema.get("CinemaID")
+
+			val theatermap = HashMap<String, Any>()
+			theatermap.put("cinemaNameEN", cinemaNameEN)
+			theatermap.put("cinemaNameKR", cinemaNameKR)
+			theatermap.put("divisionCode", divisionCode)
+			theatermap.put("detailDivisionCode", detailDivisionCode)
+			theatermap.put("cinemaID", cinemaID)
+
+			theaterlist.add(theatermap)
+		}
+
+		return theaterlist
+	}
+
+	fun getLotteCinemaDateList(theatercode: String): ArrayList<String> {
+		var datelist = ArrayList<String>()
+		val url: String =
+			"https://www.lottecinema.co.kr/LCWS/Ticketing/TicketingData.aspx"
+
+		var paramlist = HashMap<String, Any>()
+		paramlist.put("MethodName", "GetInvisibleMoviePlayInfo")
+		paramlist.put("channelType", "HO")
+		paramlist.put("osType", "W")
+		paramlist.put("osVersion", userAgent)
+		paramlist.put("cinemaList", theatercode)
+		paramlist.put("movieCd", "")
+		paramlist.put("playDt", "2023-03-03")
+		val conn = Jsoup.connect(url)
+			.userAgent(userAgent)
+			.data("ParamList", JSONObject(paramlist).toString())
+		val doc = conn.post().body().text()
+		val data = JSONObject(doc).getJSONObject("PlayDates").getJSONArray("Items")
+
+		for (i in 0 until data.length()) {
+			val playdate = data.getJSONObject(i).getString("PlayDate").split(" ")
+
+			datelist.add(playdate[0])
+		}
+
+		return datelist
+	}
+
+	fun getLotteCinemaShowingTime(theaterlist: ArrayList<HashMap<String, Any>>): Unit {
+		for (theater in theaterlist) {
+			val cinemaCode: String =
+				"${theater.get("divisionCode")}|${theater.get("detailDivisionCode")}|${theater.get("cinemaID")}"
+			val datelist = getLotteCinemaDateList(cinemaCode)
+			for (date in datelist) {
+				val url: String =
+					"https://www.lottecinema.co.kr/LCWS/Ticketing/TicketingData.aspx"
+				var paramlist = HashMap<String, String>()
+				paramlist.put("MethodName", "GetPlaySequence")
+				paramlist.put("channelType", "HO")
+				paramlist.put("osType", "W")
+				paramlist.put("osVersion", userAgent)
+				paramlist.put("playDate", date)
+				paramlist.put("cinemaID", cinemaCode)
+				paramlist.put("representationMovieCode", "")
+				val conn = Jsoup.connect(url)
+					.userAgent(userAgent)
+					.data("ParamList", JSONObject(paramlist).toString())
+				val doc = conn.post().body().text()
+				val data = JSONObject(doc)
+				val playSeqs = data.getJSONObject("PlaySeqs").getJSONArray("Items")
+
+				println("${theater.get("cinemaNameKR")} ${theater.get("cinemaNameEN")} ${date}")
+				for (i in 0 until playSeqs.length()) {
+					val playdata = playSeqs.getJSONObject(i)
+					
+					val movieNameKR = playdata.get("MovieNameKR")
+					val movieNameUS = playdata.get("MovieNameUS")
+					val screenNameKR = playdata.get("ScreenNameKR")
+					val screenNameUS = playdata.get("ScreenNameUS")
+					val startTime = playdata.get("StartTime")
+					val endTime = playdata.get("EndTime")
+					val totalSeatCount = playdata.get("TotalSeatCount")
+					val playSequence = playdata.get("PlaySequence")
+					val bookingSeatCount = playdata.get("BookingSeatCount")
+
+					println("${movieNameKR} ${movieNameUS}\n${screenNameKR} ${screenNameUS}\n${startTime} ${endTime}\n${totalSeatCount} ${bookingSeatCount} ${playSequence}")
+				}
+			}
+
+		}
+
 	}
 
 	fun getCGVDateList(theatercode: String): ArrayList<String> {
@@ -72,7 +188,7 @@ class ShowTimeServiceImpl(
 		return datelist
 	}
 
-	fun getCGVTheaterData(): ArrayList<Triple<String, String, String>> {
+	fun getCGVTheaterData(): ArrayList<HashMap<String, Any>> {
 		val url: String =
 			"http://www.cgv.co.kr/theaters/"
 		val conn = Jsoup.connect(url)
@@ -94,7 +210,7 @@ class ShowTimeServiceImpl(
 		}
 
 		val jsonArray = JSONArray(theatersData)
-		val theaterlist = ArrayList<Triple<String, String, String>>()
+		val theaterlist = ArrayList<HashMap<String, Any>>()
 
 		for (i in 0 until jsonArray.length()) {
 			val theaters = jsonArray.getJSONObject(i)
@@ -106,7 +222,11 @@ class ShowTimeServiceImpl(
 				val theaterCode = theater.getString("TheaterCode")
 				val theaterName = theater.getString("TheaterName")
 
-				theaterlist.add(Triple(regionName, theaterCode, theaterName))
+				val theatermap = HashMap<String, Any>()
+				theatermap.put("theaterCode", theaterCode)
+				theatermap.put("theaterName", theaterName)
+
+				theaterlist.add(theatermap)
 			}
 		}
 
