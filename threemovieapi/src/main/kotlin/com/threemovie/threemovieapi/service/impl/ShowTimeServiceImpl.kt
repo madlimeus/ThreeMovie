@@ -12,7 +12,7 @@ class ShowTimeServiceImpl(
 	val showTimeRepositorySupport: ShowTimeRepositorySupport
 ) : ShowTimeService {
 	override fun getShowTimeAll(): List<ShowTime> {
-////		val movingShowingTime = updateTimeRepositorySupport.getMovieShowingTime()
+//		val movingShowingTime = updateTimeRepositorySupport.getMovieShowingTime()
 //
 //		return showTimeRepositorySupport.getShowTimeAll()
 
@@ -130,11 +130,11 @@ class ShowTimeServiceImpl(
 					val startTime = showtime.getString("playStartTime")
 					val endTime = showtime.getString("playEndTime")
 					val movieNm = showtime.getString("rpstMovieNm")
+					val ticketPage = "https://www.megabox.co.kr/bookingByPlaySchdlNo?playSchdlNo=${playSchldNo}"
 
 					println("${totalSeat} ${restSeat} ${playSchldNo} ${startTime} ${endTime} ${movieNm}")
 				}
 			}
-
 		}
 	}
 
