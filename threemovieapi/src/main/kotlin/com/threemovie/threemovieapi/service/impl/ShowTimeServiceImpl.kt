@@ -38,8 +38,8 @@ class ShowTimeServiceImpl(
 		return emptyList()
 	}
 
-	fun getMBDates(brchNo: String, brchName: String): ArrayList<HashMap<String,String>> {
-		val dates = ArrayList<HashMap<String,String>>()
+	fun getMBDates(brchNo: String, brchName: String): ArrayList<HashMap<String, String>> {
+		val dates = ArrayList<HashMap<String, String>>()
 		val url = mburl + "/on/oh/ohc/Brch/schedulePage.do"
 
 		val paramlist = HashMap<String, String>()
@@ -52,20 +52,16 @@ class ShowTimeServiceImpl(
 			.userAgent(userAgent)
 			.data(paramlist)
 			.ignoreContentType(true)//에러나면 추가
-		val doc = conn.post().text()
+		val doc = conn.post().text().replace("\"\"", "\"")
 
-		println(doc)
-		println(JSONObject(doc).getJSONObject("megaMap"))
-		println(JSONObject(doc).getJSONObject("megaMap").getJSONArray("movieFormDeList"))
-		val datemap = HashMap<String,String>()
+		val datemap = HashMap<String, String>()
 		val showtimes = JSONObject(doc).getJSONObject("megaMap").getJSONArray("movieFormDeList")
 
 		for (i in 0 until showtimes.length()) {
 			val showtime = showtimes.getJSONObject(i)
 			val date = showtime.getString("playDe")
 
-			println(showtime)
-			datemap.put("date",date)
+			datemap.put("date", date)
 		}
 
 		println(doc)
@@ -107,22 +103,20 @@ class ShowTimeServiceImpl(
 		val url = mburl + "/on/oh/ohc/Brch/schedulePage.do"
 
 		for (theater in theaters) {
-			val brchName = theater.get("brchName")?:""
-			val brchNo = theater.get("brchNo")?:""
+			val brchName = theater["brchName"] ?: ""
+			val brchNo = theater["brchNo"] ?: ""
 
-			println("${brchNo} ${brchName}")
 			val dateninfoes = getMBDates(brchNo, brchName)
 
-			println("창원내서 씹라")
 			for (dateninfo in dateninfoes) {
-				val date = dateninfo["date"]?:""
+				val date = dateninfo["date"] ?: ""
 				val paramlist = HashMap<String, String>()
-				paramlist.put("brchNm", brchName)
-				paramlist.put("brchNo", brchNo)
-				paramlist.put("brchNo1", brchNo)
-				paramlist.put("masterType", "brch")
-				paramlist.put("playDe", date)
-				paramlist.put("firstAt", "N")
+				paramlist["brchNm"] = brchName
+				paramlist["brchNo"] = brchNo
+				paramlist["brchNo1"] = brchNo
+				paramlist["masterType"] = "brch"
+				paramlist["playDe"] = date
+				paramlist["firstAt"] = "N"
 				val conn = Jsoup.connect(url)
 					.userAgent(userAgent)
 					.data(paramlist)
@@ -135,12 +129,12 @@ class ShowTimeServiceImpl(
 					val showtime = showtimes.getJSONObject(i)
 					val totalSeat = showtime.getInt("totSeatCnt")
 					val restSeat = showtime.getInt("restSeatCnt")
-					val playSchldNo = showtime.getString("playSchdlNo")
+					val playSchldNo = showtime.getString("playSchdl No")
 					val startTime = showtime.getString("playStartTime")
 					val endTime = showtime.getString("playEndTime")
 					val runnigTime = showtime.getString("moviePlayTime")
 					val movieNm = showtime.getString("rpstMovieNm")
-					val movieNmEN = showtime.get("movieEngNm")?: ""
+					val movieNmEN = showtime.get("movieEngNm") ?: ""
 					val playKind = showtime.getString("playKindNm")
 					val ExpoNm = showtime.getString("theabExpoNm")
 					val ticketPage = "https://www.megabox.co.kr/bookingByPlaySchdlNo?playSchdlNo=${playSchldNo}"
