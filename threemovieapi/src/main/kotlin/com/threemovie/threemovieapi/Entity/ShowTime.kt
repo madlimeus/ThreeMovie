@@ -20,7 +20,7 @@ data class ShowTime(
 	@Column(name = "Dimension")
 	var Dimension: String,
 
-	@Column(name = "Time")
+	@Column(name = "time")
 	var Time: Long,
 
 	@Id

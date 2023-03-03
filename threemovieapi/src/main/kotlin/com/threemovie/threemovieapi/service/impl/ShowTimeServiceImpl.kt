@@ -38,31 +38,38 @@ class ShowTimeServiceImpl(
 		return emptyList()
 	}
 
-	fun getMBDates(brchNo: String): ArrayList<String> {
-		val dates = ArrayList<String>()
-		val url = "https://m.megabox.co.kr/on/oh/ohb/SimpleBooking/selectBokdList.do"
+	fun getMBDates(brchNo: String, brchName: String): ArrayList<HashMap<String,String>> {
+		val dates = ArrayList<HashMap<String,String>>()
+		val url = mburl + "/on/oh/ohc/Brch/schedulePage.do"
 
-		var paramlist = HashMap<String, String>()
-		paramlist.put("menuId", "M-RE-TH-02")
-		paramlist.put("sortMthd", "3")
-		paramlist.put("brchNo1", brchNo)
-		paramlist.put("flag", "BRANCH")
-		paramlist.put("sellChnlCd", "MOBILEWEB")
+		val paramlist = HashMap<String, String>()
+		paramlist["brchNm"] = brchName
+		paramlist["brchNo"] = brchNo
+		paramlist["brchNo1"] = brchNo
+		paramlist["firstAt"] = "Y"
+		paramlist["masterType"] = "brch"
 		val conn = Jsoup.connect(url)
 			.userAgent(userAgent)
 			.data(paramlist)
 			.ignoreContentType(true)//에러나면 추가
 		val doc = conn.post().text()
 
-		val showtimes = JSONObject(doc).getJSONArray("playDateList")
+		println(doc)
+		println(JSONObject(doc).getJSONObject("megaMap"))
+		println(JSONObject(doc).getJSONObject("megaMap").getJSONArray("movieFormDeList"))
+		val datemap = HashMap<String,String>()
+		val showtimes = JSONObject(doc).getJSONObject("megaMap").getJSONArray("movieFormDeList")
 
 		for (i in 0 until showtimes.length()) {
 			val showtime = showtimes.getJSONObject(i)
 			val date = showtime.getString("playDe")
 
-			dates.add(date)
+			println(showtime)
+			datemap.put("date",date)
 		}
 
+		println(doc)
+		println(showtimes)
 		return dates
 	}
 
@@ -78,9 +85,9 @@ class ShowTimeServiceImpl(
 
 		for (i in 0 until cities.size) {
 			val cityName = cities.get(i).getElementsByClass("sel-city")[0].text()
-			val theaters = theaters.get(i).getElementsByTag("li")
+			val theaterDatas = theaters.get(i).getElementsByTag("li")
 
-			for (theater in theaters) {
+			for (theater in theaterDatas) {
 				val theatermap = HashMap<String, String>()
 				val brchNo = theater.attr("data-brch-no")
 				val brchName = theater.text()
@@ -88,7 +95,6 @@ class ShowTimeServiceImpl(
 				theatermap.put("city", cityName)
 				theatermap.put("brchNo", brchNo)
 				theatermap.put("brchName", brchName)
-
 
 				theaterlist.add(theatermap)
 			}
@@ -101,13 +107,16 @@ class ShowTimeServiceImpl(
 		val url = mburl + "/on/oh/ohc/Brch/schedulePage.do"
 
 		for (theater in theaters) {
-			val brchName = "" + theater.get("brchName")
-			val brchNo = "" + theater.get("brchNo")
+			val brchName = theater.get("brchName")?:""
+			val brchNo = theater.get("brchNo")?:""
 
-			val dates = getMBDates(brchNo)
+			println("${brchNo} ${brchName}")
+			val dateninfoes = getMBDates(brchNo, brchName)
 
-			for (date in dates) {
-				var paramlist = HashMap<String, String>()
+			println("창원내서 씹라")
+			for (dateninfo in dateninfoes) {
+				val date = dateninfo["date"]?:""
+				val paramlist = HashMap<String, String>()
 				paramlist.put("brchNm", brchName)
 				paramlist.put("brchNo", brchNo)
 				paramlist.put("brchNo1", brchNo)
@@ -129,10 +138,14 @@ class ShowTimeServiceImpl(
 					val playSchldNo = showtime.getString("playSchdlNo")
 					val startTime = showtime.getString("playStartTime")
 					val endTime = showtime.getString("playEndTime")
+					val runnigTime = showtime.getString("moviePlayTime")
 					val movieNm = showtime.getString("rpstMovieNm")
+					val movieNmEN = showtime.get("movieEngNm")?: ""
+					val playKind = showtime.getString("playKindNm")
+					val ExpoNm = showtime.getString("theabExpoNm")
 					val ticketPage = "https://www.megabox.co.kr/bookingByPlaySchdlNo?playSchdlNo=${playSchldNo}"
 
-					println("${totalSeat} ${restSeat} ${playSchldNo} ${startTime} ${endTime} ${movieNm}")
+					println("${movieNm} ${movieNmEN} ${playKind} ${ExpoNm} ${ticketPage}\n${totalSeat} ${restSeat}\n${startTime} ${endTime} ${runnigTime}\n")
 				}
 			}
 		}
