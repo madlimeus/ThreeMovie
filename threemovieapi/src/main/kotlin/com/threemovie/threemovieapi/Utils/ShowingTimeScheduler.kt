@@ -164,9 +164,9 @@ class ShowingTimeScheduler(
 		val doc = conn.post().body().text()
 		val data = JSONObject(doc)
 
-		val Addr = data.getJSONObject("CinemaDetail").getString("Address")
+		val addr = data.getJSONObject("CinemaDetail").getString("Address")
 
-		return Addr
+		return addr
 	}
 
 	fun getLCTheaters(): ArrayList<HashMap<String, Any>> {

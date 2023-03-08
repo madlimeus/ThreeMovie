@@ -7,14 +7,14 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "UpdateTime")
-data class UpdateTime (
+data class UpdateTime(
 	@Id
 	@Column(name = "MovieAudience")
-	var MovieAudience: Long = 202302110107,
+	var movieAudience: Long = 202302110107,
 
 	@Column(name = "ReviewTime")
-	var ReviewTime: Long = 202302110107,
+	var reviewTime: Long = 202302110107,
 
 	@Column(name = "MovieShowingTime")
-	var MovieShowingTime: Long = 202302110107
+	var movieShowingTime: Long = 202302110107
 )

@@ -258,7 +258,6 @@ class ShowTimeServiceImpl(
 				}
 			}
 		}
-
 	}
 
 	fun getShowingTime(movieTheater: String): List<ShowTime> = showTimeRepositorySupport.getShowTime(movieTheater)
