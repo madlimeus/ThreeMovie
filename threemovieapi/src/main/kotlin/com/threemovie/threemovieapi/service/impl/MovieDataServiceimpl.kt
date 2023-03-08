@@ -40,7 +40,7 @@ class MovieDataServiceimpl(
         )
         val res = MovieDataRepository.save(member_MovieData)
     }
-    override fun turncate_MovieInfo() {
+    override fun turncate_MovieData() {
         MovieDataRepository.truncate()
     }
 }

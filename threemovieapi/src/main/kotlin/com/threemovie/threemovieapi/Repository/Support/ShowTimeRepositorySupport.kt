@@ -13,7 +13,7 @@ class ShowTimeRepositorySupport(
 
 	fun getShowTime(MovieTheater: String): List<ShowTime> = query.jpaQueryFactory()
 		.selectFrom(QShowTime.showTime)
-		.where(QShowTime.showTime.movieTheater.eq(MovieTheater))
+		.where(QShowTime.showTime.MovieTheater.eq(MovieTheater))
 		.fetch()
 
 

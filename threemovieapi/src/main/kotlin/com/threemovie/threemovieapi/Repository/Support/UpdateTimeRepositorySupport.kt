@@ -13,21 +13,21 @@ class UpdateTimeRepositorySupport(
 
 	fun getMovieAudience(): String
 		= query
-			.select(QUpdateTime.updateTime.movieAudience)
+			.select(QUpdateTime.updateTime.MovieAudience)
 			.from(QUpdateTime.updateTime)
 			.fetch()
 			.toString()
 
 	fun getReviewTime(): String
 		= query
-		.select(QUpdateTime.updateTime.reviewTime)
+		.select(QUpdateTime.updateTime.ReviewTime)
 		.from(QUpdateTime.updateTime)
 		.fetch()
 		.toString()
 
 	fun getMovieShowingTime(): String
 			= query
-		.select(QUpdateTime.updateTime.movieShowingTime)
+		.select(QUpdateTime.updateTime.MovieShowingTime)
 		.from(QUpdateTime.updateTime)
 		.fetch()
 		.toString()

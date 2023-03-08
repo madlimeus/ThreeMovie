@@ -7,23 +7,23 @@ import jakarta.persistence.*
 data class MovieData(
     @Id
     @Column(name = "MovieId")
-    val movieId: String = "",
+    val MovieId: String = "",
 
     @Column(name = "Summary")
-    val summary: String = "",
+    val Summary: String = "",
 
     @Column(name = "NameKR")
-    val nameKr: String = "",
+    val NameKR: String = "",
 
     @Column(name = "NameEN")
-    val nameEn: String = "",
+    val NameEN: String = "",
 
     @Column(name = "ReleaseDate")
-    val releaseDate: String? = "",
+    val ReleaseDate: String? = "",
 
     @Column(name = "Poster")
-    val poster: String? = "",
+    val Poster: String? = "",
 
     @Column(name = "Category")
-    val category: String = "",
+    val Category: String = "",
     )

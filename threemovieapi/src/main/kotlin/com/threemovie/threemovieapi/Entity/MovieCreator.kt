@@ -7,14 +7,14 @@ import jakarta.persistence.*
 data class MovieCreator(
     @Id
     @Column(name = "MovieId")
-    val movieId: String = "",
+    val MovieId: String = "",
 
     @Column(name = "Director")
-    val director: String = "",
+    val Director: String = "",
 
     @Column(name = "Actor")
-    val actor: String = "",
+    val Actor: String = "",
 
     @Column(name = "PhotoAddress")
-    val photoAddress: String = ""
+    val PhotoAddress: String = ""
 )

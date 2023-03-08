@@ -7,11 +7,11 @@ import jakarta.persistence.*
 data class MoviePreview(
     @Id
     @Column(name = "MovieId")
-    val movieId: String = "",
+    val MovieId: String = "",
 
     @Column(name = "Steelcuts")
-    val steelcuts: String = "",
+    val Steelcuts: String = "",
 
     @Column(name = "Trailer")
-    val trailer: String = ""
+    val Trailer: String = ""
 )

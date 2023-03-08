@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.Query
 interface MovieDataRepository : JpaRepository<MovieData, String> {
     @Transactional
     @Modifying
-    @Query(value = "truncate MovieInfo", nativeQuery = true)
+    @Query(value = "truncate MovieData", nativeQuery = true)
     fun truncate()
 }
