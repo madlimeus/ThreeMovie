@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-
 @RestController
 @RequestMapping("/api/movieinfo")
 class MovieController(
@@ -26,6 +25,15 @@ class MovieController(
         var tmp_data = GET_DATA_USE_DAUM_API(url_Daum_Main + api_list_screening);
         val list_screening_Array = JSONObject(tmp_data).getJSONArray("contents")
 
+        try{
+            MovieDataService.turncate_MovieInfo()
+            MovieCreatorService.turncate_MovieCreator()
+            MoviePreviewService.turncate_MoviePreview()
+        } catch (e: Exception){
+            println("turncate_error")
+            println(e)
+        }
+
         for (One_movie_Info in list_screening_Array) {
             val tmp_one_movie_data = JSONObject(One_movie_Info.toString())
             try{
@@ -39,9 +47,4 @@ class MovieController(
             }
         }
     }
-    @GetMapping("/test")
-    fun turncate_test(){
-        MovieDataService.turncate_MovieData()
-    }
-
 }

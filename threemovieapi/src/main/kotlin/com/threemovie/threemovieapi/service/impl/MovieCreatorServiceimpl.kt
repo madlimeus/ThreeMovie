@@ -54,4 +54,9 @@ class MovieCreatorServiceimpl(
         val res = MovieCreatorRepository.save(member_MovieCreator)
 
     }
+
+    override fun turncate_MovieCreator() {
+        MovieCreatorRepository.truncate()
+    }
+
 }

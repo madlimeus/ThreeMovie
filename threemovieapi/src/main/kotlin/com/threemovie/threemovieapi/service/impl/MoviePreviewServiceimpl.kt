@@ -53,4 +53,8 @@ class MoviePreviewServiceimpl(
 
         val res = MoviePreviewRepository.save(member_MoviePreview)
     }
+    override fun turncate_MoviePreview() {
+        MoviePreviewRepository.truncate()
+    }
+
 }
