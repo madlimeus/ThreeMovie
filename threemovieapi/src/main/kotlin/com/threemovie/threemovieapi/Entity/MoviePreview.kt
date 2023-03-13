@@ -10,11 +10,11 @@ import jakarta.persistence.Table
 data class MoviePreview(
 	@Id
 	@Column(name = "MovieId")
-	val MovieId: String = "",
+	val movieId: String = "",
 
 	@Column(name = "Steelcuts")
-	val Steelcuts: String = "",
+	val steelcuts: String = "",
 
 	@Column(name = "Trailer")
-	val Trailer: String = "",
+	val trailer: String = "",
 )

@@ -1,5 +1,6 @@
 package com.threemovie.threemovieapi.controller
 
+import com.threemovie.threemovieapi.Entity.DTO.MovieDetailDTO
 import com.threemovie.threemovieapi.Entity.DTO.MovieListDTO
 import com.threemovie.threemovieapi.Utils.GET_DATA_USE_DAUM_API.Companion.GET_DATA_USE_DAUM_API
 import com.threemovie.threemovieapi.service.impl.MovieCreatorServiceimpl
@@ -7,6 +8,7 @@ import com.threemovie.threemovieapi.service.impl.MovieInfoServiceimpl
 import com.threemovie.threemovieapi.service.impl.MoviePreviewServiceimpl
 import org.json.JSONObject
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -49,5 +51,10 @@ class MovieInfoController(
 	@GetMapping("/movielist")
 	fun getMovieList(): List<MovieListDTO> {
 		return movieInfoService.getMovieList()
+	}
+
+	@GetMapping("/detail/{movieId}")
+	fun getMovieDetail(@PathVariable movieId: String): MovieDetailDTO {
+		return movieInfoService.getMovieDetail(movieId)
 	}
 }

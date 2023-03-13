@@ -1,5 +1,6 @@
 package com.threemovie.threemovieapi.service.impl
 
+import com.threemovie.threemovieapi.Entity.DTO.MovieDetailDTO
 import com.threemovie.threemovieapi.Entity.DTO.MovieListDTO
 import com.threemovie.threemovieapi.Entity.MovieInfo
 import com.threemovie.threemovieapi.Repository.MovieInfoRepository
@@ -14,6 +15,10 @@ class MovieInfoServiceimpl(
 	val movieDataRepository: MovieInfoRepository,
 	val movieInfoRepositorySupport: MovieInfoRepositorySupport,
 ) : MovieInfoService {
+	override fun getMovieDetail(movieId: String): MovieDetailDTO {
+		return movieInfoRepositorySupport.getMovieDetail(movieId)
+	}
+
 	override fun getMovieList(): List<MovieListDTO> {
 		return movieInfoRepositorySupport.getMovieList()
 	}

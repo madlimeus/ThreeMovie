@@ -10,23 +10,23 @@ import jakarta.persistence.Table
 data class MovieInfo(
 	@Id
 	@Column(name = "MovieId")
-	val MovieId: String = "",
+	val movieId: String = "",
 
 	@Column(name = "Summary")
-	val Summary: String = "",
+	val summary: String = "",
 
 	@Column(name = "NameKR")
-	val NameKR: String = "",
+	val nameKR: String = "",
 
 	@Column(name = "NameEN")
-	val NameEN: String = "",
+	val nameEN: String = "",
 
 	@Column(name = "ReleaseDate")
-	val ReleaseDate: String? = "",
+	val releaseDate: String? = "",
 
 	@Column(name = "Poster")
-	val Poster: String? = "",
+	val poster: String? = "",
 
 	@Column(name = "Category")
-	val Category: String = "",
+	val category: String = "",
 )
