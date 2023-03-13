@@ -1,7 +1,7 @@
 package com.threemovie.threemovieapi.Repository
 
-import org.springframework.data.jpa.repository.JpaRepository
 import com.threemovie.threemovieapi.Entity.MovieCreator
+import org.springframework.data.jpa.repository.JpaRepository
 
 
 interface MovieCreatorRepository : JpaRepository<MovieCreator, String> {

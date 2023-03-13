@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/showtime")
+@RequestMapping("/api/showtimes")
 class ShowTimeController(val service: ShowTimeServiceImpl) {
-	@GetMapping("/{MovieTheater}")
-	fun getShowTime(@PathVariable MovieTheater: String): List<ShowTime> = service.getShowTime(MovieTheater)
-
 	@GetMapping
 	fun getShowTimeAll(): List<ShowTime> = service.getShowTimeAll()
+
+	@GetMapping("/{MovieTheater}")
+	fun getShowTime(@PathVariable MovieTheater: String): List<ShowTime> = service.getShowTime(MovieTheater)
 }

@@ -35,25 +35,28 @@ data class ShowTime(
 	@Column(name = "ScreenEN")
 	val screemEN: String = "",
 
-	@Column(name = "StartTime", columnDefinition = "longtext")
+	@Column(name = "Date")
+	val date: String = "",
+
+	@Column(name = "StartTime")
 	var startTime: String = "",
 
-	@Column(name = "EndTime", columnDefinition = "longtext")
+	@Column(name = "EndTime")
 	var endTime: String = "",
 
-	@Column(name = "RunnigTime")
+	@Column(name = "RunningTime")
 	var runningTime: Int = 200,
 
 	@Column(name = "TotalSeat")
 	val totalSeat: Int = 200,
 
-	@Column(name = "RestSeat", columnDefinition = "longtext")
-	var restSeat: String = "",
+	@Column(name = "RestSeat")
+	var restSeat: Int = 200,
 
 	@Column(name = "PlayKind")
 	var playKind: String = "",
 
 	@Id
-	@Column(name = "TicketPage", columnDefinition = "longtext")
-	val ticketPage: String = ""
+	@Column(name = "TicketPage")
+	val ticketPage: String = "",
 )

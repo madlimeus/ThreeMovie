@@ -1,6 +1,6 @@
 package com.threemovie.threemovieapi.Repository
 
-import com.threemovie.threemovieapi.Entity.ShowTime
+import com.threemovie.threemovieapi.Entity.UpdateTime
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface UpdateTimeRepository : JpaRepository<ShowTime, String>
+interface UpdateTimeRepository : JpaRepository<UpdateTime, Long>

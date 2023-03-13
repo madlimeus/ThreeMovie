@@ -11,14 +11,13 @@ class ShowTimeRepositorySupport(
 	val query: QueryDslConfig
 ) : QuerydslRepositorySupport(ShowTime::class.java) {
 
-	fun getShowTime(MovieTheater: String): List<ShowTime> = query.jpaQueryFactory()
+	fun getShowTime(movieTheater: String): List<ShowTime> = query.jpaQueryFactory()
 		.selectFrom(QShowTime.showTime)
-		.where(QShowTime.showTime.MovieTheater.eq(MovieTheater))
+		.where(QShowTime.showTime.movieTheater.eq(movieTheater))
 		.fetch()
 
 
 	fun getShowTimeAll(): List<ShowTime> = query.jpaQueryFactory()
 		.selectFrom(QShowTime.showTime)
 		.fetch()
-
 }

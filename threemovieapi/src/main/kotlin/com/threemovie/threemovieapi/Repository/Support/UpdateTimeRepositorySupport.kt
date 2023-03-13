@@ -1,34 +1,59 @@
 package com.threemovie.threemovieapi.Repository.Support
 
-import com.querydsl.jpa.impl.JPAQueryFactory
 import com.threemovie.threemovieapi.Entity.QUpdateTime
 import com.threemovie.threemovieapi.Entity.UpdateTime
+import com.threemovie.threemovieapi.config.QueryDslConfig
+import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 
 @Repository
 class UpdateTimeRepositorySupport(
-	val query: JPAQueryFactory
-): QuerydslRepositorySupport(UpdateTime::class.java) {
+	val query: QueryDslConfig
+) : QuerydslRepositorySupport(UpdateTime::class.java) {
 
-	fun getMovieAudience(): String
-		= query
-			.select(QUpdateTime.updateTime.MovieAudience)
-			.from(QUpdateTime.updateTime)
-			.fetch()
-			.toString()
-
-	fun getReviewTime(): String
-		= query
-		.select(QUpdateTime.updateTime.ReviewTime)
+	fun getShowTime(): Long = query.jpaQueryFactory()
+		.select(QUpdateTime.updateTime.showTime)
 		.from(QUpdateTime.updateTime)
-		.fetch()
-		.toString()
+		.fetchOne() ?: 0L
 
-	fun getMovieShowingTime(): String
-			= query
-		.select(QUpdateTime.updateTime.MovieShowingTime)
+	fun getReviewTime(): Long = query.jpaQueryFactory()
+		.select(QUpdateTime.updateTime.reviewTime)
 		.from(QUpdateTime.updateTime)
-		.fetch()
-		.toString()
+		.fetchOne() ?: 0L
+
+	fun getTheaterData(): Long = query.jpaQueryFactory()
+		.select(QUpdateTime.updateTime.theaterData)
+		.from(QUpdateTime.updateTime)
+		.fetchOne() ?: 0L
+
+	@Transactional
+	fun updateShowTime(newTime: Long): Unit {
+		val updateTime = QUpdateTime.updateTime
+
+		query.jpaQueryFactory()
+			.update(updateTime)
+			.set(updateTime.showTime, newTime)
+			.execute()
+	}
+
+	@Transactional
+	fun updateReviewTime(newTime: Long): Unit {
+		val updateTime = QUpdateTime.updateTime
+
+		query.jpaQueryFactory()
+			.update(updateTime)
+			.set(updateTime.reviewTime, newTime)
+			.execute()
+	}
+
+	@Transactional
+	fun updateTheaterData(newTime: Long): Unit {
+		val updateTime = QUpdateTime.updateTime
+		
+		query.jpaQueryFactory()
+			.update(updateTime)
+			.set(updateTime.theaterData, newTime)
+			.execute()
+	}
 }

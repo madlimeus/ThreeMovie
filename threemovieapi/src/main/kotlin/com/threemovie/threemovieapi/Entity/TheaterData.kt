@@ -1,13 +1,18 @@
 package com.threemovie.threemovieapi.Entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import com.threemovie.threemovieapi.Entity.PK.TheaterDataPK
+import jakarta.persistence.*
+import org.hibernate.annotations.SQLInsert
 
 @Entity
 @Table(name = "TheaterData")
+@IdClass(TheaterDataPK::class)
+@SQLInsert(
+	sql = "INSERT IGNORE INTO TheaterData(AddrEN, AddrKR, BrchEN, BrchKR, City, MovieTheater, TheaterCode)" +
+			"VALUES(?,?,?,?,?,?,?) "
+)
 data class TheaterData(
+	@Id
 	@Column(name = "MovieTheater")
 	val movieTheater: String = "MT",
 
@@ -23,10 +28,10 @@ data class TheaterData(
 	@Column(name = "AddrKR")
 	val addrKR: String = "",
 
-	@Column(name = "AddrEN")
-	val addrEN: String = "",
+	@Column(name = "AddrEN", nullable = true)
+	val addrEN: String? = null,
 
 	@Id
 	@Column(name = "TheaterCode")
-	val theaterCode: String = "1234"
+	val theaterCode: String = "1234",
 )

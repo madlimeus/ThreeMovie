@@ -17,13 +17,3 @@ O
 src/Routes/User/Login/Login.tsx,4\a\4ac44b97a7ff13a65c5cad6b18965ce600983a5a
 H
 src/Routes/Main/Main.tsx,6\b\6bb84330abaa8907b984493f54281b680fbac4ec
-O
-src/pages/NavBar/NavBarPage.tsx,7\b\7b0cb6dff453e9e332b6987b0a3f84efa49ee9d0
-H
-src/Routes/AppRouter.tsx,6\d\6d6dc2833cb78e4b09b17c86f9541392c2ab3f35
-K
-src/pages/Main/MainPage.tsx,b\7\b71268c62218cf0064b2ed4c2d33b3644d417670
-=
-src/index.tsx,5\a\5ab44fe33ca96299f51ad4778a73e425b92bf439
->
-src/styles.css,6\f\6f9d98ca6b2005fc0cd4b0f000b670b16bf3c496

@@ -16,7 +16,7 @@ class ScheduleConfig : AsyncConfigurer, SchedulingConfigurer {
 
 		return scheduler
 	}
-
+	
 	override fun configureTasks(taskRegistrar: ScheduledTaskRegistrar) {
 		taskRegistrar.setTaskScheduler(this.threadPoolTaskScheduler())
 	}

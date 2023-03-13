@@ -1,32 +1,35 @@
 package com.threemovie.threemovieapi.Utils
 
-import com.threemovie.threemovieapi.Repository.Support.UpdateTimeRepositorySupport
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class ChkNeedUpdate{
-    companion object {
-      val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm")
+class ChkNeedUpdate {
+	companion object {
+		val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm")
 
-      fun chkMovieAudience(MovieAudienceTime: Long): Boolean{
-        val current = LocalDateTime.now()
-        val formatted = current.format(formatter).toLong()
+		fun retFormatterTime(): Long {
+			return LocalDateTime.now().format(formatter).toLong()
+		}
 
-        return MovieAudienceTime - formatted >= 5
-      }
+		fun chkUpdateReviewTime(ReviewTime: Long): Boolean {
+			val current = LocalDateTime.now()
+			val formatted = current.format(formatter).toLong()
 
-      fun chkReviewTime(ReviewTime: Long): Boolean{
-        val current = LocalDateTime.now()
-        val formatted = current.format(formatter).toLong()
+			return formatted - ReviewTime >= 1
+		}
 
-        return ReviewTime - formatted >= 1
-      }
+		fun chkUpdateShowTime(ShowTime: Long): Boolean {
+			val current = LocalDateTime.now()
+			val formatted = current.format(formatter).toLong()
 
-      fun chkMovieShowingTime(MovieShowingTime: Long): Boolean{
-        val current = LocalDateTime.now()
-        val formatted = current.format(formatter).toLong()
+			return formatted - ShowTime >= 1
+		}
 
-        return MovieShowingTime - formatted >= 1200
-      }
-    }
+		fun chkUpdateTheaterData(TheaterData: Long): Boolean {
+			val current = LocalDateTime.now()
+			val formatted = current.format(formatter).toLong()
+			
+			return formatted - TheaterData >= 1200
+		}
+	}
 }
