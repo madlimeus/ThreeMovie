@@ -12,6 +12,12 @@ data class MovieInfo(
 	@Column(name = "MovieId")
 	val movieId: String = "",
 
+	@Column(name = "NetizenAvgRate")
+	val netizenAvgRate: Double = 0.0,
+
+	@Column(name = "ReservationRate")
+	val reservationRate: Double = 0.0,
+
 	@Column(name = "Summary")
 	val summary: String = "",
 

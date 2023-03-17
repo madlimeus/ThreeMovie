@@ -9,6 +9,7 @@ import com.threemovie.threemovieapi.Utils.GET_DATA_USE_DAUM_API.Companion.GET_DA
 import com.threemovie.threemovieapi.service.MovieInfoService
 import org.json.JSONObject
 import org.springframework.stereotype.Service
+import java.util.DoubleSummaryStatistics
 
 @Service
 class MovieInfoServiceimpl(
@@ -31,6 +32,9 @@ class MovieInfoServiceimpl(
 		val movie_releaseDate =
 			JSONObject(One_movie_Info.get("countryMovieInformation").toString()).get("releaseDate").toString()
 
+		val netizenAvgRate:Double = One_movie_Info.get("netizenAvgRate").toString().toDouble()
+		val reservationRate:Double = JSONObject(One_movie_Info.get("reservation").toString()).get("reservationRate").toString().toDouble()
+
 		var Poster: String?
 		try {
 			Poster = JSONObject(movie_data_json.get("mainPhoto").toString()).get("imageUrl").toString()
@@ -40,6 +44,8 @@ class MovieInfoServiceimpl(
 
 		val member_MovieData = MovieInfo(
 			One_movie_Info.get("titleKorean").toString() + "_" + movie_releaseDate,
+			netizenAvgRate,
+			reservationRate,
 			movie_data_json.get("plot").toString(),
 			movie_data_json.get("titleKorean").toString(),
 			movie_data_json.get("titleEnglish").toString(),
