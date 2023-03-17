@@ -1,5 +1,6 @@
 package com.threemovie.threemovieapi.Utils
 
+import java.time.Duration.between
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -11,25 +12,25 @@ class ChkNeedUpdate {
 			return LocalDateTime.now().format(formatter).toLong()
 		}
 
-		fun chkUpdateReviewTime(ReviewTime: Long): Boolean {
+		fun chkUpdateReviewTime(reviewTime: Long): Boolean {
 			val current = LocalDateTime.now()
-			val formatted = current.format(formatter).toLong()
+			val formatted = LocalDateTime.parse(reviewTime.toString(), formatter)
 
-			return formatted - ReviewTime >= 1
+			return between(current, formatted).seconds >= 60
 		}
 
-		fun chkUpdateShowTime(ShowTime: Long): Boolean {
+		fun chkUpdateShowTime(showTime: Long): Boolean {
 			val current = LocalDateTime.now()
-			val formatted = current.format(formatter).toLong()
+			val formatted = LocalDateTime.parse(showTime.toString(), formatter)
 
-			return formatted - ShowTime >= 10
+			return between(current, formatted).seconds >= 60 * 10
 		}
 
-		fun chkUpdateTheaterData(TheaterData: Long): Boolean {
+		fun chkUpdateTheaterData(theaterData: Long): Boolean {
 			val current = LocalDateTime.now()
-			val formatted = current.format(formatter).toLong()
+			val formatted = LocalDateTime.parse(theaterData.toString(), formatter)
 
-			return formatted - TheaterData >= 1200
+			return between(current, formatted).seconds >= 60 * 60 * 12
 		}
 	}
 }
