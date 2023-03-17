@@ -20,6 +20,7 @@ class MovieDataController(
 	fun getMovieDataFromDaum() {
 		movieDataControlService.truncateAllMovieData()
 		movieDataControlService.GET_MOVIE_INFO_DAUM()
+		movieDataControlService.GET_MOVIE_INFO_DAUM_for_upcoming()
 	}
 
 	@GetMapping("/detail/{movieId}")

@@ -13,8 +13,8 @@ data class MoviePreview(
 	val movieId: String = "",
 
 	@Column(name = "Steelcuts")
-	val steelcuts: String = "",
+	val steelcuts: String? = "",
 
 	@Column(name = "Trailer")
-	val trailer: String = "",
+	val trailer: String? = "",
 )

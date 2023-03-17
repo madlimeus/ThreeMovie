@@ -13,5 +13,5 @@ data class MovieCreator(
 	val movieId: String = "",
 
 	@Column(name = "Items")
-	val items: String = "",
+	val items: String? = "",
 )
