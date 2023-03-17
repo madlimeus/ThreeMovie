@@ -32,8 +32,19 @@ class MovieInfoServiceimpl(
 		val movie_releaseDate =
 			JSONObject(One_movie_Info.get("countryMovieInformation").toString()).get("releaseDate").toString()
 
-		val netizenAvgRate:Double = One_movie_Info.get("netizenAvgRate").toString().toDouble()
-		val reservationRate:Double = JSONObject(One_movie_Info.get("reservation").toString()).get("reservationRate").toString().toDouble()
+		var netizenAvgRate:Double
+		var reservationRate:Double
+		if(!One_movie_Info.get("netizenAvgRate").equals(null)){
+			netizenAvgRate = One_movie_Info.get("netizenAvgRate").toString().toDouble()
+		} else {
+			netizenAvgRate = 0.0
+		}
+		try {
+			reservationRate = JSONObject(One_movie_Info.get("reservation").toString()).get("reservationRate").toString().toDouble()
+		} catch (e: Exception){
+			reservationRate = 0.0
+		}
+
 
 		var Poster: String?
 		try {
@@ -42,13 +53,28 @@ class MovieInfoServiceimpl(
 			Poster = null
 		}
 
+		var NameKR: String?
+		if(movie_data_json.get("titleKorean").equals(null)){
+			NameKR = null
+		} else {
+			NameKR = movie_data_json.get("titleKorean").toString()
+		}
+
+		var NameEN: String?
+		if(movie_data_json.get("titleEnglish").equals(null)){
+			NameEN = null
+		} else {
+			NameEN = movie_data_json.get("titleEnglish").toString()
+		}
+
+
 		val member_MovieData = MovieInfo(
 			One_movie_Info.get("titleKorean").toString() + "_" + movie_releaseDate,
 			netizenAvgRate,
 			reservationRate,
 			movie_data_json.get("plot").toString(),
-			movie_data_json.get("titleKorean").toString(),
-			movie_data_json.get("titleEnglish").toString(),
+			NameKR,
+			NameEN,
 			movie_releaseDate,
 			Poster,
 			movie_data_json.get("genres").toString()
