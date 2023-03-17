@@ -12,12 +12,6 @@ data class MovieCreator(
 	@Column(name = "MovieId")
 	val movieId: String = "",
 
-	@Column(name = "Director")
-	val director: String = "",
-
-	@Column(name = "Actor")
-	val actor: String = "",
-
-	@Column(name = "PhotoAddress")
-	val photoAddress: String = "",
+	@Column(name = "Items")
+	val items: String = "",
 )

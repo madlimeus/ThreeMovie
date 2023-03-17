@@ -5,6 +5,10 @@ import com.querydsl.core.annotations.QueryProjection
 data class MovieDetailDTO @QueryProjection constructor(
 	val movieId: String = "",
 
+	val netizenAvgRate: Double = 0.0,
+
+	val reservationRate: Double = 0.0,
+
 	val summary: String = "",
 
 	val nameKR: String = "",
@@ -21,9 +25,6 @@ data class MovieDetailDTO @QueryProjection constructor(
 
 	val trailer: String = "",
 
-	val director: String = "",
+	val items: String = "",
 
-	val actor: String = "",
-
-	val photoAddress: String = "",
 )

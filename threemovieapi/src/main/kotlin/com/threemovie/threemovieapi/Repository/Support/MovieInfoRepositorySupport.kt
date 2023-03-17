@@ -26,6 +26,8 @@ class MovieInfoRepositorySupport(
 				Projections.fields(
 					MovieListDTO::class.java,
 					movieInfo.movieId,
+					movieInfo.netizenAvgRate,
+					movieInfo.reservationRate,
 					movieInfo.nameKR,
 					movieInfo.nameEN,
 					movieInfo.poster,
@@ -52,6 +54,8 @@ class MovieInfoRepositorySupport(
 				Projections.fields(
 					MovieDetailDTO::class.java,
 					movieInfo.movieId,
+					movieInfo.netizenAvgRate,
+					movieInfo.reservationRate,
 					movieInfo.summary,
 					movieInfo.nameKR,
 					movieInfo.nameEN,
@@ -60,9 +64,7 @@ class MovieInfoRepositorySupport(
 					movieInfo.category,
 					moviePreview.steelcuts,
 					moviePreview.trailer,
-					movieCreator.director,
-					movieCreator.actor,
-					movieCreator.photoAddress,
+					movieCreator.items
 				)
 			)
 			.from(movieInfo)
