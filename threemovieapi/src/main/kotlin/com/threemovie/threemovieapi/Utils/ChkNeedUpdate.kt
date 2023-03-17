@@ -22,13 +22,13 @@ class ChkNeedUpdate {
 			val current = LocalDateTime.now()
 			val formatted = current.format(formatter).toLong()
 
-			return formatted - ShowTime >= 1
+			return formatted - ShowTime >= 10
 		}
 
 		fun chkUpdateTheaterData(TheaterData: Long): Boolean {
 			val current = LocalDateTime.now()
 			val formatted = current.format(formatter).toLong()
-			
+
 			return formatted - TheaterData >= 1200
 		}
 	}

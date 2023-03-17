@@ -5,8 +5,8 @@ import jakarta.persistence.*
 
 @Entity
 @IdClass(ShowTimePK::class)
-@Table(name = "ShowTimes")
-data class ShowTime(
+@Table(name = "TmpShowTimes")
+data class TmpShowTime(
 	@Column(name = "MovieId")
 	val movieId: String = "",
 
@@ -51,7 +51,7 @@ data class ShowTime(
 	@Id
 	@Column(name = "PlayKind")
 	val playKind: String = "",
-	
+
 	@Column(name = "Items", columnDefinition = "json")
 	val items: String = "",
 )

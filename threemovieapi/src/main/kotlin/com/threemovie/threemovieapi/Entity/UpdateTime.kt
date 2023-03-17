@@ -11,10 +11,10 @@ data class UpdateTime(
 	@Column(name = "ShowTime")
 	var showTime: Long = 202302110107,
 
+	@Id
 	@Column(name = "ReviewTime")
 	var reviewTime: Long = 202302110107,
 
-	@Id
 	@Column(name = "TheaterData")
 	var theaterData: Long = 202302110107,
 )
