@@ -16,21 +16,24 @@ class ChkNeedUpdate {
 			val current = LocalDateTime.now()
 			val formatted = LocalDateTime.parse(reviewTime.toString(), formatter)
 
-			return between(current, formatted).seconds >= 60
+			println(between(formatted, current).seconds)
+			return between(formatted, current).seconds >= 60
 		}
 
 		fun chkUpdateShowTime(showTime: Long): Boolean {
 			val current = LocalDateTime.now()
 			val formatted = LocalDateTime.parse(showTime.toString(), formatter)
 
-			return between(current, formatted).seconds >= 60 * 10
+			println(between(formatted, current).seconds)
+			return between(formatted, current).seconds >= 60 * 10
 		}
 
 		fun chkUpdateTheaterData(theaterData: Long): Boolean {
 			val current = LocalDateTime.now()
 			val formatted = LocalDateTime.parse(theaterData.toString(), formatter)
 
-			return between(current, formatted).seconds >= 60 * 60 * 12
+			println(between(formatted, current).seconds)
+			return between(formatted, current).seconds >= 60 * 60 * 12
 		}
 	}
 }

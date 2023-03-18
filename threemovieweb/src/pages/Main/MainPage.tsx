@@ -1,8 +1,14 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import MainPreview from './MainPreview';
+import MainMovieList from './MainMovieList';
 
 const MainPage = () => {
-    return <Box />;
+    return (
+        <>
+            <MainPreview />
+            <MainMovieList />
+        </>
+    );
 };
 
 export default MainPage;

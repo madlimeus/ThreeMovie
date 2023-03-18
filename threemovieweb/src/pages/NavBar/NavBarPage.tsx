@@ -7,8 +7,8 @@ const NavBarPage = () => {
         <>
             <Box
                 sx={{
-                    height: '200px',
-                    width: '700px',
+                    height: '70px',
+                    width: '60vw',
                     backgroundColor: 'blue',
                 }}
             />
