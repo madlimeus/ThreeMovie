@@ -1,27 +1,33 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import NavBarPage from '../pages/NavBar/NavBarPage';
-import Main from './Main/Main';
-import Detail from './Detail/Detail';
-import Login from './User/Login/Login';
-import BookInfo from './Detail/BookInfo/BookInfo';
-import SearchResult from './SearchResult/SearchResult';
-import SignUp from './User/SignUp/SignUp';
+import MainPage from '../pages/Main/MainPage';
+import BookInfoPage from '../pages/Detail/BookInfo/BookInfoPage';
+import SearchResultPage from '../pages/SearchResult/SearchResultPage';
+import DetailPage from '../pages/Detail/DetailPage';
+import LoginPage from '../pages/User/Login/LoginPage';
+import SignUpPage from '../pages/User/SignUp/SignUpPage';
+import GlobalStyles from '../style/global';
 
 const AppRouter = () => {
     return (
-        <BrowserRouter>
-            <NavBarPage />
-            <Routes>
-                <Route path="/main/*" element={<Main />} />
-                <Route path="/Detail/*" element={<Detail />} />
-                <Route path="/BookInfo/*" element={<BookInfo />} />
-                <Route path="/SearchResult/*" element={<SearchResult />} />
-                <Route path="/login/*" element={<Login />} />
-                <Route path="/SignUp/*" element={<SignUp />} />
-                <Route path="/" element={<Navigate replace to="/main" />} />
-            </Routes>
-        </BrowserRouter>
+        <>
+            <GlobalStyles />
+            <BrowserRouter>
+                <Routes>
+                    <Route element={<NavBarPage />}>
+                        <Route path="/" element={<Navigate replace to="/main" />} />
+                        <Route path="/main/*" element={<MainPage />} />
+                        <Route path="/BookInfo/*" element={<BookInfoPage />} />
+                        <Route path="/SearchResult/*" element={<SearchResultPage />} />
+                    </Route>
+
+                    <Route path="/Detail/*" element={<DetailPage />} />
+                    <Route path="/login/*" element={<LoginPage />} />
+                    <Route path="/SignUp/*" element={<SignUpPage />} />
+                </Routes>
+            </BrowserRouter>
+        </>
     );
 };
 
