@@ -15,6 +15,6 @@ interface TmpShowTimeRepository : JpaRepository<TmpShowTime, ShowTimePK> {
 
 	@Transactional
 	@Modifying
-	@Query(value = "RENAME TABLE ShowTimes TO TmpShowTimes, TmpShowTimes TO ShowTimes  ", nativeQuery = true)
+	@Query(value = "RENAME TABLE ShowTimes TO BeforeShowTimes, TmpShowTimes TO ShowTimes, BeforeShowTimes TO TmpShowTimes", nativeQuery = true)
 	fun chgShowTimeTable()
 }
