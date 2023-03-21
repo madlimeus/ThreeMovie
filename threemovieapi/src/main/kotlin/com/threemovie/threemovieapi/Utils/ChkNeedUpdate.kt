@@ -16,7 +16,6 @@ class ChkNeedUpdate {
 			val current = LocalDateTime.now()
 			val formatted = LocalDateTime.parse(reviewTime.toString(), formatter)
 
-			println(between(formatted, current).seconds)
 			return between(formatted, current).seconds >= 60
 		}
 
@@ -24,7 +23,6 @@ class ChkNeedUpdate {
 			val current = LocalDateTime.now()
 			val formatted = LocalDateTime.parse(showTime.toString(), formatter)
 
-			println(between(formatted, current).seconds)
 			return between(formatted, current).seconds >= 60 * 10
 		}
 
@@ -32,7 +30,6 @@ class ChkNeedUpdate {
 			val current = LocalDateTime.now()
 			val formatted = LocalDateTime.parse(theaterData.toString(), formatter)
 
-			println(between(formatted, current).seconds)
 			return between(formatted, current).seconds >= 60 * 60 * 12
 		}
 	}

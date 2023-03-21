@@ -11,10 +11,14 @@ import org.springframework.stereotype.Repository
 @Repository
 class MovieInfoRepositorySupport(
 	val query: QueryDslConfig
-) : QuerydslRepositorySupport(ShowTimeMovieInfo::class.java) {
-	fun getShowTimeMovieInfo(): List<ShowTimeMovieInfo> =
+) : QuerydslRepositorySupport(MovieInfo::class.java) {
+//	fun getMovieNameKR(): List<MovieNameInfo> =
+//		query.jpaQueryFactory()
+//			.sele
+
+	fun getMovieNameInfo(): List<MovieNameInfo> =
 		query.jpaQueryFactory()
-			.selectFrom(QShowTimeMovieInfo.showTimeMovieInfo)
+			.selectFrom(QMovieNameInfo.movieNameInfo)
 			.fetch()
 
 	fun getMovieList(): List<MovieListDTO> {
