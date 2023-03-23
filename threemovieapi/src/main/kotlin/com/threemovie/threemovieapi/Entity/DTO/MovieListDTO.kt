@@ -17,7 +17,7 @@ data class MovieListDTO @QueryProjection constructor(
 
 	val category: String = "",
 
-	val steelcuts: String = "",
+	val steelcuts: String? = "",
 
-	val trailer: String = "",
+	val trailer: String? = "",
 )
