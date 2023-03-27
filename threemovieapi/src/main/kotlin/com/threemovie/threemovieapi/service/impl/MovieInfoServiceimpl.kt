@@ -79,7 +79,6 @@ class MovieInfoServiceimpl(
 			}
 		}
 
-
 		val member_MovieData = MovieInfo(
 			One_movie_Info.get("titleKorean").toString() + "_" + movie_releaseDate,
 			netizenAvgRate,
@@ -89,7 +88,7 @@ class MovieInfoServiceimpl(
 			NameEN,
 			movie_releaseDate,
 			Poster,
-			movie_data_json.get("genres").toString()
+			movie_data_json.get("genres").toString().replace("\"","")
 		)
 		val res = movieDataRepository.save(member_MovieData)
 	}

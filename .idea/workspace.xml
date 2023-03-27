@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8d5caa7-84d9-4c3a-b7a6-90151f0c830a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="f8d5caa7-84d9-4c3a-b7a6-90151f0c830a" name="Changes" comment="iframe 을 사용 하기 위해서 Trailer 에 저장 되는 주소를 변경">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/impl/MoviePreviewServiceimpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/impl/MoviePreviewServiceimpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/impl/MovieInfoServiceimpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/impl/MovieInfoServiceimpl.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +37,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
+        <option value="Kotlin Interface" />
       </list>
     </option>
   </component>
@@ -128,8 +128,16 @@
       <workItem from="1675582307537" duration="3035000" />
       <workItem from="1675589664198" duration="1151000" />
       <workItem from="1675590831977" duration="330000" />
-      <workItem from="1679901081535" duration="1480000" />
+      <workItem from="1679901081535" duration="3469000" />
     </task>
+    <task id="LOCAL-00001" summary="iframe 을 사용 하기 위해서 Trailer 에 저장 되는 주소를 변경">
+      <created>1679902689149</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679902689149</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,5 +156,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="iframe 을 사용 하기 위해서 Trailer 에 저장 되는 주소를 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="iframe 을 사용 하기 위해서 Trailer 에 저장 되는 주소를 변경" />
   </component>
 </project>
