@@ -3,6 +3,7 @@ package com.threemovie.threemovieapi.controller
 import com.threemovie.threemovieapi.Entity.DTO.MovieDetailDTO
 import com.threemovie.threemovieapi.service.impl.MovieDataControlServiceimpl
 import com.threemovie.threemovieapi.service.impl.MovieInfoServiceimpl
+import com.threemovie.threemovieapi.Utils.Review.GetReviewFromTheater
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 class MovieDataController(
 	val movieInfoService: MovieInfoServiceimpl,
 	val movieDataControlService: MovieDataControlServiceimpl,
+	val GetReviewFromTheater: GetReviewFromTheater,
 ) {
 
 	@GetMapping()
@@ -26,5 +28,10 @@ class MovieDataController(
 	@GetMapping("/detail/{movieId}")
 	fun getMovieDetail(@PathVariable movieId: String): MovieDetailDTO {
 		return movieInfoService.getMovieDetail(movieId)
+	}
+
+	@GetMapping("/review")
+	fun getreviewtest(){
+		GetReviewFromTheater.getReviewCGV()
 	}
 }
