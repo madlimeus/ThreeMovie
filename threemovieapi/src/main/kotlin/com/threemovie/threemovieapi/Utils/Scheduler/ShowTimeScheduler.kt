@@ -37,7 +37,6 @@ class ShowingTimeScheduler(
 	val LCurl = "http://www.lottecinema.co.kr"
 	val mburl = "https://www.megabox.co.kr"
 	val nameMap = HashMap<String, MovieNameInfoDTO>()
-	val parentheses = "\\([^)]*\\)".toRegex()
 	val square = "\\[[^)]*\\]".toRegex()
 
 	@Async
@@ -167,7 +166,7 @@ class ShowingTimeScheduler(
 				for (dto in dtos) {
 					var (movieKR, screenKR, playKind) = dto.key
 					val (screenEN, runningTime, totalSeat, items) = dto.value
-					movieKR = movieKR.replace(parentheses,"").replace(square,"").trim()
+					movieKR = movieKR.replace(square,"").trim()
 
 					if(nameMap[movieKR] == null){
 						var movieName = MovieNameInfoDTO()
@@ -352,7 +351,7 @@ class ShowingTimeScheduler(
 				for (dto in dtos) {
 					var (movieKR, screenKR, playKind) = dto.key
 					val (screenEN, runningTime, totalSeat, items) = dto.value
-					movieKR = movieKR.replace(parentheses,"").replace(square,"").trim()
+					movieKR = movieKR.replace(square,"").trim()
 
 					if(nameMap[movieKR] == null){
 						var movieName = MovieNameInfoDTO()
@@ -539,7 +538,7 @@ class ShowingTimeScheduler(
 				for (dto in dtos) {
 					var (movieKR, screenKR, playKind) = dto.key
 					val (screenEN, runningTime, totalSeat, items) = dto.value
-					movieKR = movieKR.replace(parentheses,"").replace(square,"").trim()
+					movieKR = movieKR.replace(square,"").trim()
 
 					if(nameMap[movieKR] == null){
 						var movieName = MovieNameInfoDTO()
