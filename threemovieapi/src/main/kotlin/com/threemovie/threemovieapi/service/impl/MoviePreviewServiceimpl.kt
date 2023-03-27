@@ -42,7 +42,10 @@ class MoviePreviewServiceimpl(
             val One_preview_json = JSONObject(One_preview.toString())
             if(One_preview_json.get("title").toString().contains("예고편")){
                 val videoUrl = One_preview_json.get("videoUrl")
-                videoUrl_list.add(videoUrl.toString())
+                val str_tmp = videoUrl.toString()
+                val split_arr_tmp = str_tmp.split("/")
+                val iframeUrl = "https://play-tv.kakao.com/embed/player/cliplink/${split_arr_tmp[split_arr_tmp.size-1]}?service=player_share"
+                videoUrl_list.add(iframeUrl)
             }
         }
 
@@ -59,11 +62,12 @@ class MoviePreviewServiceimpl(
             str_videoUrl_list = null
         } else {
             str_videoUrl_list = videoUrl_list.toString()
+
         }
 
         val member_MoviePreview = MoviePreview(
             One_movie_Info.get("titleKorean").toString()+"_"+movie_releaseDate,
-            str_videoUrl_list,
+            str_imageUrl_list,
             str_videoUrl_list
         )
 
