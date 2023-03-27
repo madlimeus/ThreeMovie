@@ -17,9 +17,16 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         color: white;
+        font-family: 'NanumSquareRound';
+        font-color: white;
     }
-    button { 
+    button {
         cursor: pointer;
+    }
+    
+    @font-face {
+        font-family: 'NanumSquareRound';
+        src: local("../assets/font/NanumSquareRoundB.ttf") format('truetype')
     }
 `;
 

@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { SyntheticEvent, useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/scss';
-import 'swiper/scss/pagination';
 import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
+
+import moviePlaceHolder from '../../assets/images/MoviePlaceHolder.jpg';
+import movieListAtom from '../../Recoil/Atom/movieLIstAtom';
+import movieInfoSelector from '../../Recoil/Selector/movieInfoSelector';
 
 const MainPreview = () => {
+    const movieList = useRecoilValue(movieListAtom);
+    const movieinfo = useRecoilValue(movieInfoSelector);
     SwiperCore.use([Navigation, Pagination]);
+
+    const onErrorImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+        e.currentTarget.src = `${moviePlaceHolder}`;
+    };
+
+    useEffect(() => {
+        console.log(movieinfo);
+    }, [movieList]);
+
     return (
         <Swiper
             className="previewSwiper"
@@ -16,16 +32,22 @@ const MainPreview = () => {
             pagination={{ clickable: true }}
             navigation
             modules={[Pagination, Navigation]}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
         >
-            <SwiperSlide>Slide 1</SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
-            <SwiperSlide>Slide 4</SwiperSlide>
-            <SwiperSlide>Slide 5</SwiperSlide>
-            <SwiperSlide>Slide 6</SwiperSlide>
-            <SwiperSlide>Slide 7</SwiperSlide>
-            <SwiperSlide>Slide 8</SwiperSlide>
-            <SwiperSlide>Slide 9</SwiperSlide>
+            <SwiperSlide>slide 1</SwiperSlide>
+            {movieinfo && !movieinfo.steelcuts && !movieinfo.trailer && (
+                <SwiperSlide>
+                    <img src={movieinfo.poster || ''} onError={onErrorImg} alt="" />
+                </SwiperSlide>
+            )}
+            {movieinfo &&
+                movieinfo.steelcuts &&
+                movieinfo.steelcuts.length > 0 &&
+                movieinfo.steelcuts?.map((steelcut) => (
+                    <SwiperSlide>
+                        <img src={steelcut} onError={onErrorImg} alt="" />
+                    </SwiperSlide>
+                ))}
         </Swiper>
     );
 };
