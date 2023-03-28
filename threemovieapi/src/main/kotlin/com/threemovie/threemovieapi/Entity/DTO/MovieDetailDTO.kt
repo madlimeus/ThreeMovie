@@ -21,10 +21,12 @@ data class MovieDetailDTO @QueryProjection constructor(
 
 	val category: String = "",
 
+	val makingNote: String? = null,
+
 	val steelcuts: String? = null,
 
 	val trailer: String? = null,
 
 	val items: String = "",
 
-)
+	)

@@ -1,5 +1,4 @@
 .coverHeader {
-	width: 80vw;
 	min-width: 1080px;
 	max-width: 1920px;
 	align-items: center;
@@ -14,14 +13,11 @@
 }
 
 .headmenu {
-	width: 100%;
 	margin-top: 10px;
 	text-align: center;
 	margin-bottom: -5px;
 	
 	.searchArea {
-		margin-left: auto;
-		margin-right: auto;
 		margin-bottom: 10px;
 		font-size: 30px;
 		justify-content: end;
@@ -29,8 +25,8 @@
 	}
 	
 	.logo {
-		margin-left: auto;
-		margin-right: auto;
+		margin-left: 80px;
+		margin-right: 80px;
 		width: 40vw;
 		
 		img {
@@ -40,8 +36,6 @@
 	
 	.account {
 		margin-bottom: 10px;
-		margin-left: auto;
-		margin-right: auto;
 		color: white;
 	}
 }

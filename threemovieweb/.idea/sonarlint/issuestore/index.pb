@@ -23,8 +23,6 @@ L
 src/assets/hook/useAxios.tsx,0\e\0ecb86fff6c44426f0f3ef31d32e5dcc59eaee35
 F
 src/style/typotheme.ts,d\2\d2051fb287f551284c6686b74470f025e6e6d37d
-P
- src/Recoil/Atom/movieLIstAtom.ts,6\9\69fd382a87149f5f0941c08f46d2744b349db813
 E
 src/types/images.d.ts,6\b\6b5adf692531e81b3b3d1ca6b2b5f425ef0f451f
 ;

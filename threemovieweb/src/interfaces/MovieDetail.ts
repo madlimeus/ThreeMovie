@@ -6,10 +6,10 @@ interface MovieDetail {
     nameKR: string;
     nameEN: string;
     releaseDate: string;
-    poster: string | null;
+    poster: string | undefined;
     category: string;
-    steelcuts: string | null;
-    trailer: string | null;
+    steelcuts: string | undefined;
+    trailer: string | undefined;
     // creator info
     itmes: string;
 }

@@ -95,7 +95,7 @@ const MainMovieList = () => {
                     <Box className="movieinfo" sx={{ fontFamily: 'NanumSquareRound' }}>
                         <Typography>{movieinfo.nameKR}</Typography>
                         <Typography>
-                            예매율 {movieinfo.reservationRate} | {movieinfo.netizenAvgRate}
+                            예매율 : {movieinfo.reservationRate} | 평점 : {movieinfo.netizenAvgRate}
                         </Typography>
                     </Box>
                 </SwiperSlide>

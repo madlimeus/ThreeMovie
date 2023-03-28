@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-const MoviePreview = () => {
+const MovieCreator = () => {
     return (
         <Box className="tabCover">
             <Box />
@@ -9,4 +9,4 @@ const MoviePreview = () => {
     );
 };
 
-export default MoviePreview;
+export default MovieCreator;

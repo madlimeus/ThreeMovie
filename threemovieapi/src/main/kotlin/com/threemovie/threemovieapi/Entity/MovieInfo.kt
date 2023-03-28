@@ -25,14 +25,17 @@ data class MovieInfo(
 	val nameKR: String? = "",
 
 	@Column(name = "NameEN")
-	val nameEN: String? = "",
+	val nameEN: String? = null,
 
 	@Column(name = "ReleaseDate")
 	val releaseDate: String = "",
 
 	@Column(name = "Poster")
-	val poster: String? = "",
+	val poster: String? = null,
 
 	@Column(name = "Category")
-	val category: String? = "",
+	val category: String? = null,
+
+	@Column(name = "MakingNote")
+	val makingNote: String? = null,
 )

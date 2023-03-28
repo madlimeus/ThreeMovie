@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
-const MovieReview = () => {
+const MovieMakingNote = () => {
     return (
         <Box className="tabCover">
             <Typography>준비중 입니다...</Typography>
@@ -9,4 +9,4 @@ const MovieReview = () => {
     );
 };
 
-export default MovieReview;
+export default MovieMakingNote;
