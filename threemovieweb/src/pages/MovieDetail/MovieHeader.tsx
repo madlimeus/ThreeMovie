@@ -1,4 +1,5 @@
 import React, { SyntheticEvent } from 'react';
+import { Star } from '@mui/icons-material';
 import { Box, Button, Typography } from '@mui/material';
 import moviePlaceHolder from '../../assets/images/MoviePlaceHolder.jpg';
 
@@ -63,13 +64,14 @@ const MovieHeader = ({
                     {reservationRate && (
                         <Box className="contentBox">
                             <Typography className="contentType">예매율</Typography>
-                            <Typography className="content">{reservationRate}</Typography>
+                            <Typography className="content">{reservationRate} %</Typography>
                         </Box>
                     )}
-                    {releaseDate && (
+                    {netizenAvgRate && (
                         <Box className="contentBox">
                             <Typography className="contentType">개봉</Typography>
-                            <Typography className="content">{releaseDate}</Typography>
+                            <Star sx={{ marginRight: '5px', color: '#aacafd' }} />
+                            <Typography className="content">{netizenAvgRate}</Typography>
                         </Box>
                     )}
                     {releaseDate && (

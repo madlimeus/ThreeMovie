@@ -1,4 +1,5 @@
 import React, { SyntheticEvent, useState } from 'react';
+import { Star } from '@mui/icons-material';
 import { Box, Button, Typography } from '@mui/material';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import SwiperCore, { Navigation } from 'swiper';
@@ -92,11 +93,13 @@ const MainMovieList = () => {
                         </Box>
                     )}
 
-                    <Box className="movieinfo" sx={{ fontFamily: 'NanumSquareRound' }}>
+                    <Box className="movieInfo" sx={{ fontFamily: 'NanumSquareRound' }}>
                         <Typography>{movieinfo.nameKR}</Typography>
-                        <Typography>
-                            예매율 : {movieinfo.reservationRate} | 평점 : {movieinfo.netizenAvgRate}
-                        </Typography>
+                        <Box className="rankInfo">
+                            <Typography>예매율 : {movieinfo.reservationRate}% | </Typography>
+                            <Star sx={{ marginLeft: '5px', marginRight: '5px', color: '#aacafd' }} />
+                            <Typography> {movieinfo.netizenAvgRate}</Typography>
+                        </Box>
                     </Box>
                 </SwiperSlide>
             ))}

@@ -109,6 +109,18 @@
 				}
 			}
 		}
+		
+		.movieInfo {
+			display: flex;
+			flex-direction: column;
+			
+			
+			.rankInfo {
+				text-align: center;
+				display: flex;
+				justify-content: center;
+			}
+		}
 	}
 	
 	.swiper-button-prev {
