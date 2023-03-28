@@ -41,8 +41,13 @@ class MovieInfoRepositorySupport(
 				)
 			)
 			.from(movieInfo)
-			.join(moviePreview)
+			.leftJoin(moviePreview)
+			.fetchJoin()
 			.on(movieInfo.movieId.eq(moviePreview.movieId))
+			.orderBy(
+				movieInfo.reservationRate.desc(),
+				movieInfo.netizenAvgRate.desc()
+			)
 			.fetch()
 
 		return movieList

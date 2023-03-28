@@ -1,19 +1,19 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import '../../style/scss/_flexbox.scss';
+import '../../style/scss/_navbar.scss';
+import NavHeader from './NavHeader';
+import NavMenu from './NavMenu';
 
 const NavBarPage = () => {
     return (
         <Box className="flexbox">
-            <Box
-                sx={{
-                    minWidth: '1080px',
-                    height: '70px',
-                    width: '60vw',
-                    backgroundColor: 'blue',
-                }}
-            />
+            <Box className="coverHeader">
+                <NavHeader />
+                <Divider className="divide" variant="middle" />
+                <NavMenu />
+            </Box>
             <Outlet />
         </Box>
     );

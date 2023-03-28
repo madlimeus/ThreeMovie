@@ -13,11 +13,11 @@ data class MovieListDTO @QueryProjection constructor(
 
 	val nameEN: String = "",
 
-	val poster: String? = "",
+	val poster: String? = null,
 
 	val category: String = "",
 
-	val steelcuts: String? = "",
+	val steelcuts: String? = null,
 
-	val trailer: String? = "",
+	val trailer: String? = null,
 )

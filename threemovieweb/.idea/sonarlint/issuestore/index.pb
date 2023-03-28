@@ -15,10 +15,6 @@ H
 src/Routes/Main/Main.tsx,6\b\6bb84330abaa8907b984493f54281b680fbac4ec
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-H
-src/Routes/AppRouter.tsx,6\d\6d6dc2833cb78e4b09b17c86f9541392c2ab3f35
-O
-src/pages/NavBar/NavBarPage.tsx,7\b\7b0cb6dff453e9e332b6987b0a3f84efa49ee9d0
 <
 .eslintrc.js,d\b\dbc0c31823b8f2e4ed04a397722fed33a67f123f
 A
@@ -27,3 +23,21 @@ L
 src/assets/hook/useAxios.tsx,0\e\0ecb86fff6c44426f0f3ef31d32e5dcc59eaee35
 F
 src/style/typotheme.ts,d\2\d2051fb287f551284c6686b74470f025e6e6d37d
+P
+ src/Recoil/Atom/movieLIstAtom.ts,6\9\69fd382a87149f5f0941c08f46d2744b349db813
+E
+src/types/images.d.ts,6\b\6b5adf692531e81b3b3d1ca6b2b5f425ef0f451f
+;
+src/App.tsx,8\3\835da56f32df714aaed6285a5b7fc3a7807851e4
+L
+src/style/scss/_flexbox.scss,0\e\0e3c5a4464caf3f08cb27a294881d19939ae7ad2
+E
+src/pages/Loading.tsx,4\a\4aa78a342cc303c1dc69829787bd85db25da5bc6
+=
+tsconfig.json,6\1\61ebb9fd6e8cf9082658121d5d81e297791dacd0
+=
+src/index.tsx,5\a\5ab44fe33ca96299f51ad4778a73e425b92bf439
+L
+src/style/scss/_loading.scss,c\a\cab443fe6daf8b6b055a1f9c640bf97c72895c59
+C
+src/style/global.ts,9\0\9019ab1bc2d4b71cde39ac6dbf5ceec58599db91
