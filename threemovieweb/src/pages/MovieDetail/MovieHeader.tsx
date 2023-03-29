@@ -12,6 +12,11 @@ interface headerProps {
     releaseDate: string | undefined;
     poster: string | undefined;
     category: string | undefined;
+    runningTime: number | undefined;
+    admissionCode: string | undefined;
+    country: string | undefined;
+    reservationRank: string | undefined;
+    totalAudience: string | undefined;
 }
 
 const MovieHeader = ({
@@ -23,6 +28,11 @@ const MovieHeader = ({
     releaseDate,
     poster,
     category,
+    runningTime,
+    admissionCode,
+    country,
+    reservationRank,
+    totalAudience,
 }: headerProps) => {
     const onErrorImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
         e.currentTarget.src = `${moviePlaceHolder}`;
@@ -69,45 +79,44 @@ const MovieHeader = ({
                     )}
                     {netizenAvgRate && (
                         <Box className="contentBox">
-                            <Typography className="contentType">개봉</Typography>
+                            <Typography className="contentType">평점</Typography>
                             <Star sx={{ marginRight: '5px', color: '#aacafd' }} />
                             <Typography className="content">{netizenAvgRate}</Typography>
                         </Box>
                     )}
-                    {releaseDate && (
+                    {runningTime && (
                         <Box className="contentBox">
-                            <Typography className="contentType">개봉</Typography>
-                            <Typography className="content">{releaseDate}</Typography>
+                            <Typography className="contentType">상영시간</Typography>
+                            <Star sx={{ marginRight: '5px', color: '#aacafd' }} />
+                            <Typography className="content">{runningTime}</Typography>
                         </Box>
                     )}
-                    {releaseDate && (
+                    {admissionCode && (
                         <Box className="contentBox">
-                            <Typography className="contentType">개봉</Typography>
-                            <Typography className="content">{releaseDate}</Typography>
+                            <Typography className="contentType">평점</Typography>
+                            <Star sx={{ marginRight: '5px', color: '#aacafd' }} />
+                            <Typography className="content">{admissionCode}</Typography>
                         </Box>
                     )}
-                    {releaseDate && (
+                    {country && (
                         <Box className="contentBox">
-                            <Typography className="contentType">개봉</Typography>
-                            <Typography className="content">{releaseDate}</Typography>
+                            <Typography className="contentType">평점</Typography>
+                            <Star sx={{ marginRight: '5px', color: '#aacafd' }} />
+                            <Typography className="content">{country}</Typography>
                         </Box>
                     )}
-                    {releaseDate && (
+                    {reservationRank && (
                         <Box className="contentBox">
-                            <Typography className="contentType">개봉</Typography>
-                            <Typography className="content">{releaseDate}</Typography>
+                            <Typography className="contentType">평점</Typography>
+                            <Star sx={{ marginRight: '5px', color: '#aacafd' }} />
+                            <Typography className="content">{reservationRank}</Typography>
                         </Box>
                     )}
-                    {releaseDate && (
+                    {totalAudience && (
                         <Box className="contentBox">
-                            <Typography className="contentType">개봉</Typography>
-                            <Typography className="content">{releaseDate}</Typography>
-                        </Box>
-                    )}
-                    {releaseDate && (
-                        <Box className="contentBox">
-                            <Typography className="contentType">개봉</Typography>
-                            <Typography className="content">{releaseDate}</Typography>
+                            <Typography className="contentType">평점</Typography>
+                            <Star sx={{ marginRight: '5px', color: '#aacafd' }} />
+                            <Typography className="content">{totalAudience}</Typography>
                         </Box>
                     )}
                 </Box>

@@ -3,9 +3,6 @@ package com.threemovie.threemovieapi.Utils.Scheduler
 import com.threemovie.threemovieapi.Entity.DTO.MovieNameInfoDTO
 import com.threemovie.threemovieapi.Entity.DTO.ShowTimeDTO
 import com.threemovie.threemovieapi.Entity.MovieNameInfo
-import com.threemovie.threemovieapi.Entity.QMovieInfo.movieInfo
-import com.threemovie.threemovieapi.Entity.QShowTimeMovieInfo.showTimeMovieInfo
-import com.threemovie.threemovieapi.Entity.ShowTimeMovieInfo
 import com.threemovie.threemovieapi.Entity.TheaterData
 import com.threemovie.threemovieapi.Entity.TmpShowTime
 import com.threemovie.threemovieapi.Repository.Support.MovieInfoRepositorySupport
@@ -20,7 +17,6 @@ import org.jsoup.Jsoup
 import org.springframework.scheduling.annotation.Async
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
-import java.time.LocalDateTime
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -128,7 +124,6 @@ class ShowingTimeScheduler(
 					val showtime = showtimes.getJSONObject(i)
 					val totalSeat = showtime.getInt("totSeatCnt")
 					val playSchldNo = showtime.getString("playSchdlNo")
-					val runningTime = showtime.getString("moviePlayTime").toInt()
 					val movieKR = showtime.getString("rpstMovieNm")
 					val playKind = showtime.getString("playKindNm")
 					val screenKR = showtime.getString("theabExpoNm")
@@ -152,7 +147,6 @@ class ShowingTimeScheduler(
 						val showTimeDTO =
 							ShowTimeDTO(
 								screenEN,
-								runningTime,
 								totalSeat,
 								items
 							)
@@ -165,15 +159,15 @@ class ShowingTimeScheduler(
 
 				for (dto in dtos) {
 					var (movieKR, screenKR, playKind) = dto.key
-					val (screenEN, runningTime, totalSeat, items) = dto.value
-					movieKR = movieKR.replace(square,"").trim()
+					val (screenEN, totalSeat, items) = dto.value
+					movieKR = movieKR.replace(square, "").trim()
 
-					if(nameMap[movieKR] == null){
+					if (nameMap[movieKR] == null) {
 						var movieName = MovieNameInfoDTO()
-						for(nameInfo in movieInfoMap){
+						for (nameInfo in movieInfoMap) {
 							val similarity = CalcSimilarity.calcSimilarity(nameInfo.nameKR, movieKR)
 
-							if(similarity > 0.7 && movieName.similarity < similarity){
+							if (similarity > 0.7 && movieName.similarity < similarity) {
 								movieName.movieId = nameInfo.movieId
 								movieName.nameKR = nameInfo.nameKR.toString()
 								movieName.nameEN = movieKR
@@ -196,7 +190,6 @@ class ShowingTimeScheduler(
 						screenKR,
 						screenEN,
 						datestr,
-						runningTime,
 						totalSeat,
 						playKind,
 						JSONArray(items).toString()
@@ -246,13 +239,6 @@ class ShowingTimeScheduler(
 		}
 
 		return datelist
-	}
-
-	fun getRunnigTime(startTime: String, endTime: String): Int {
-		val end = endTime.split(":")
-		val start = startTime.split(":")
-
-		return end[0].toInt() * 60 + end[1].toInt() - start[0].toInt() * 60 - start[1].toInt()
 	}
 
 	fun updateLCShowtimes(
@@ -314,7 +300,6 @@ class ShowingTimeScheduler(
 					val totalSeat = playdata.getInt("TotalSeatCount")
 					val restSeat = playdata.getInt("BookingSeatCount").toString()
 					val translationCode = playdata.getInt("TranslationDivisionCode")
-					val runningTime = getRunnigTime(startTime, endTime)
 
 					var playKind = playdata.getString("FilmNameKR")
 					if (translationCode != 900)
@@ -337,7 +322,6 @@ class ShowingTimeScheduler(
 						val showTimeDTO =
 							ShowTimeDTO(
 								screenEN,
-								runningTime,
 								totalSeat,
 								items
 							)
@@ -350,15 +334,15 @@ class ShowingTimeScheduler(
 
 				for (dto in dtos) {
 					var (movieKR, screenKR, playKind) = dto.key
-					val (screenEN, runningTime, totalSeat, items) = dto.value
-					movieKR = movieKR.replace(square,"").trim()
+					val (screenEN, totalSeat, items) = dto.value
+					movieKR = movieKR.replace(square, "").trim()
 
-					if(nameMap[movieKR] == null){
+					if (nameMap[movieKR] == null) {
 						var movieName = MovieNameInfoDTO()
-						for(nameInfo in movieInfoMap){
+						for (nameInfo in movieInfoMap) {
 							val similarity = CalcSimilarity.calcSimilarity(nameInfo.nameKR, movieKR)
 
-							if(similarity > 0.7 && movieName.similarity < similarity){
+							if (similarity > 0.7 && movieName.similarity < similarity) {
 								movieName.movieId = nameInfo.movieId
 								movieName.nameKR = nameInfo.nameKR.toString()
 								movieName.nameEN = movieKR
@@ -381,7 +365,6 @@ class ShowingTimeScheduler(
 						screenKR,
 						screenEN,
 						date,
-						runningTime,
 						totalSeat,
 						playKind,
 						JSONArray(items).toString()
@@ -481,7 +464,6 @@ class ShowingTimeScheduler(
 				for (showtime in showtimes) {
 					val infoMovie = showtime.getElementsByClass("info-movie")[0]
 					val movieKR = infoMovie.getElementsByTag("a")[0].text()
-					val runningTime = infoMovie.getElementsByTag("i")[2].text().replace("분", "").toInt()
 
 					val typeHalls = showtime.getElementsByClass("type-hall")
 					for (typeHall in typeHalls) {
@@ -521,7 +503,6 @@ class ShowingTimeScheduler(
 								val showTimeDTO =
 									ShowTimeDTO(
 										screenEN,
-										runningTime,
 										totalSeat,
 										items
 									)
@@ -537,15 +518,15 @@ class ShowingTimeScheduler(
 
 				for (dto in dtos) {
 					var (movieKR, screenKR, playKind) = dto.key
-					val (screenEN, runningTime, totalSeat, items) = dto.value
-					movieKR = movieKR.replace(square,"").trim()
+					val (screenEN, totalSeat, items) = dto.value
+					movieKR = movieKR.replace(square, "").trim()
 
-					if(nameMap[movieKR] == null){
+					if (nameMap[movieKR] == null) {
 						var movieName = MovieNameInfoDTO()
-						for(nameInfo in movieInfoMap){
+						for (nameInfo in movieInfoMap) {
 							val similarity = CalcSimilarity.calcSimilarity(nameInfo.nameKR, movieKR)
 
-							if(similarity > 0.7 && movieName.similarity < similarity){
+							if (similarity > 0.7 && movieName.similarity < similarity) {
 								movieName.movieId = nameInfo.movieId
 								movieName.nameKR = nameInfo.nameKR.toString()
 								movieName.nameEN = movieKR
@@ -568,7 +549,6 @@ class ShowingTimeScheduler(
 						screenKR,
 						screenEN,
 						datestr,
-						runningTime,
 						totalSeat,
 						playKind,
 						JSONArray(items).toString()

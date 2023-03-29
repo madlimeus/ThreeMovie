@@ -42,16 +42,13 @@ data class ShowTime(
 	@Column(name = "Date")
 	val date: String = "",
 
-	@Column(name = "RunningTime")
-	val runningTime: Int = 200,
-
 	@Column(name = "TotalSeat")
 	val totalSeat: Int = 200,
 
 	@Id
 	@Column(name = "PlayKind")
 	val playKind: String = "",
-	
+
 	@Column(name = "Items", columnDefinition = "json")
 	val items: String = "",
 )
