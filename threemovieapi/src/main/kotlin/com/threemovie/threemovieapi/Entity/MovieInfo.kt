@@ -19,7 +19,7 @@ data class MovieInfo(
 	val reservationRate: Double? = 0.0,
 
 	@Column(name = "Summary")
-	val summary: String = "",
+	val summary: String? = "",
 
 	@Column(name = "NameKR")
 	val nameKR: String? = "",
@@ -35,4 +35,23 @@ data class MovieInfo(
 
 	@Column(name = "Category")
 	val category: String? = "",
+
+	@Column(name = "MakingNote")
+	val makingNote: String? = "",
+
+	@Column(name = "RunningTime")
+	val runningTime: String? = "",
+
+	@Column(name = "AdmissionCode")
+	val admissionCode: String? = "",
+
+	@Column(name = "Country")
+	val country: String? = "",
+
+	@Column(name = "ReservationRank")
+	val reservationRank: String? = "",
+
+	@Column(name = "TotalAudience")
+	val totalAudience: String? = "",
+
 )
