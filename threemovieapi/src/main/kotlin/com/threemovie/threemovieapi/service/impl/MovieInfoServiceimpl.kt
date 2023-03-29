@@ -79,17 +79,48 @@ class MovieInfoServiceimpl(
 			}
 		}
 
+		var plot : String? = movie_data_json.get("plot").toString()
+		var makingNote : String? = movie_data_json.get("makingNote").toString()
+//		var runningTime : String? = JSONObject(movie_data_json.get("countryMovieInformation").toString()).get("duration").toString()
+//		var admissionCode : String? = JSONObject(movie_data_json.get("countryMovieInformation").toString()).get("admissionCode").toString()
+		var reservationRank : String? = movie_data_json.get("reservationRank").toString()
+		var totalAudience : String? = movie_data_json.get("totalAudienceCount").toString()
+		var countryMovieInformation = movie_data_json.getJSONArray("countryMovieInformation")
+
+		var runningTime : String? = null
+		var admissionCode : String? = null
+		for(arr_tmp in countryMovieInformation){
+			println(arr_tmp)
+			var countryId = JSONObject(JSONObject(arr_tmp.toString()).get("country").toString()).get("id").toString()
+			if(countryId.equals("KR")){
+				runningTime = JSONObject(arr_tmp.toString()).get("duration").toString()
+				admissionCode = JSONObject(arr_tmp.toString()).get("admissionCode").toString()
+			}
+		}
+
+		plot = if(plot != null && (plot.equals("null") || plot.length == 0)) null else plot
+		makingNote = if(makingNote != null && (makingNote.equals("null") || makingNote.length == 0)) null else makingNote
+		runningTime = if(runningTime != null && (runningTime.equals("null") || runningTime.length == 0)) null else runningTime
+		admissionCode = if(admissionCode != null && (admissionCode.equals("null") || admissionCode.length == 0)) null else admissionCode
+		reservationRank = if(reservationRank != null && (reservationRank.equals("null") || reservationRank.length == 0)) null else reservationRank
+		totalAudience = if(totalAudience != null && (totalAudience.equals("null") || totalAudience.length == 0)) null else totalAudience
 
 		val member_MovieData = MovieInfo(
 			One_movie_Info.get("titleKorean").toString() + "_" + movie_releaseDate,
 			netizenAvgRate,
 			reservationRate,
-			movie_data_json.get("plot").toString(),
+			plot,
 			NameKR,
 			NameEN,
 			movie_releaseDate,
 			Poster,
-			movie_data_json.get("genres").toString()
+			movie_data_json.get("genres").toString().replace("\"",""),
+			makingNote,
+			runningTime,
+			admissionCode,
+			movie_data_json.get("productionCountries").toString().replace("\"",""),
+			reservationRank,
+			totalAudience
 		)
 		val res = movieDataRepository.save(member_MovieData)
 	}

@@ -28,8 +28,18 @@ class MovieCreatorServiceimpl(
             val One_person_json = JSONObject(One_person.toString())
             var json_tmp = JSONObject()
 
-            json_tmp.put("Name", One_person_json.get("nameKorean"))
-            json_tmp.put("Role", JSONObject(One_person_json.get("movieJob").toString()).get("role"))
+            var nameKR : String? = One_person_json.get("nameKorean").toString()
+            var nameEN : String? = One_person_json.get("nameEnglish").toString()
+            var role = JSONObject(One_person_json.get("movieJob").toString()).get("role").toString()
+            var roleKR : String? = One_person_json.get("description").toString()
+
+            nameKR = if(nameKR != null && nameKR.length == 0) null else nameKR
+            nameEN = if(nameEN != null && nameEN.length == 0) null else nameEN
+            roleKR = if(roleKR != null && (roleKR.equals("null") || roleKR.length == 0)) role else roleKR
+
+            json_tmp.put("NameKR", nameKR)
+            json_tmp.put("NameEN", nameEN)
+            json_tmp.put("Role", roleKR)
             json_tmp.put("PhotoAddress", One_person_json.get("profileImage"))
 
             casts_items.put(json_tmp)
