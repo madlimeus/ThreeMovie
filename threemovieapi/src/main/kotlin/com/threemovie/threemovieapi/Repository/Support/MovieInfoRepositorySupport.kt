@@ -41,8 +41,13 @@ class MovieInfoRepositorySupport(
 				)
 			)
 			.from(movieInfo)
-			.join(moviePreview)
+			.leftJoin(moviePreview)
+			.fetchJoin()
 			.on(movieInfo.movieId.eq(moviePreview.movieId))
+			.orderBy(
+				movieInfo.reservationRate.desc(),
+				movieInfo.netizenAvgRate.desc()
+			)
 			.fetch()
 
 		return movieList
@@ -63,6 +68,7 @@ class MovieInfoRepositorySupport(
 					movieInfo.summary,
 					movieInfo.nameKR,
 					movieInfo.nameEN,
+					movieInfo.makingNote,
 					movieInfo.releaseDate,
 					movieInfo.poster,
 					movieInfo.category,
@@ -74,8 +80,10 @@ class MovieInfoRepositorySupport(
 			.from(movieInfo)
 			.where(movieInfo.movieId.eq(movieId))
 			.join(moviePreview)
+			.fetchJoin()
 			.on(movieInfo.movieId.eq(moviePreview.movieId))
 			.join(movieCreator)
+			.fetchJoin()
 			.on(movieInfo.movieId.eq(movieCreator.movieId))
 			.fetchOne()
 			?: throw NoSuchElementException()

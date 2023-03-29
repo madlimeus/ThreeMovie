@@ -35,6 +35,14 @@
 	.swiper-button-next {
 		color: #87A0C9;
 	}
+	
+	.swiper-pagination-bullet {
+		background-color: #ffffff;
+	}
+	
+	.swiper-pagination-bullet-active {
+		background-color: #aacafd;
+	}
 }
 
 .listSwiper {
@@ -43,6 +51,7 @@
 	min-width: 1024px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 30px;
 	
 	.swiper-slide {
 		height: 100%;
@@ -59,19 +68,20 @@
 		flex-direction: column;
 		
 		.posterinfo {
-			height: 300px;
-			width: 200px;
+			height: 250px;
+			width: 180px;
 			position: relative;
 			
 			img {
 				display: block;
+				border-radius: 7px;
 				width: 100%;
 				height: 100%;
 				object-fit: fill;
 				vertical-align: top;
 			}
 			
-			.Typo {
+			.typo {
 				position: absolute;
 				top: 2%;
 				left: 10%;
@@ -79,20 +89,47 @@
 				color: white;
 				-webkit-text-stroke: 0.4px black;
 			}
-			
-			:hover {
-				filter: brightness(70%);
-			}
-			
 		}
 		
+		.buttonGroup {
+			position: absolute;
+			top: 45%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			
+			Button {
+				width: 150px;
+				margin-bottom: 10px;
+				border: 2px solid white;
+				color: #aacafd;
+				
+				&:hover {
+					color: #87A0C9;
+					filter: brightness(70%);
+				}
+			}
+		}
+		
+		.movieInfo {
+			display: flex;
+			flex-direction: column;
+			
+			
+			.rankInfo {
+				text-align: center;
+				display: flex;
+				justify-content: center;
+			}
+		}
 	}
 	
 	.swiper-button-prev {
+		top: 40%;
 		color: #87A0C9;
 	}
 	
 	.swiper-button-next {
+		top: 40%;
 		color: #87A0C9;
 	}
 }

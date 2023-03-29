@@ -1,0 +1,52 @@
+.coverHeader {
+	min-width: 1080px;
+	max-width: 1920px;
+	align-items: center;
+	
+	filter: brightness(90%);
+	
+	.divide {
+		background-color: white;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+}
+
+.headmenu {
+	margin-top: 10px;
+	text-align: center;
+	margin-bottom: -5px;
+	
+	.searchArea {
+		margin-bottom: 10px;
+		font-size: 30px;
+		justify-content: end;
+		color: white;
+	}
+	
+	.logo {
+		margin-left: 80px;
+		margin-right: 80px;
+		width: 40vw;
+		
+		img {
+			height: 65px;
+		}
+	}
+	
+	.account {
+		margin-bottom: 10px;
+		color: white;
+	}
+}
+
+.navMenu {
+	display: flex;
+	width: fit-content;
+	text-align: center;
+	margin: 10px auto;
+	
+	p {
+		color: white;
+	}
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import BookInfoPage from '../../../pages/Detail/BookInfo/BookInfoPage';
+import BookInfoPage from '../../../pages/BookInfo/BookInfoPage';
 
 const BookInfo = () => {
     return <BookInfoPage />;
