@@ -102,7 +102,7 @@ class MovieInfoServiceimpl(
 		runningTime = if(runningTime != null && (runningTime.equals("null") || runningTime.length == 0)) null else runningTime
 		admissionCode = if(admissionCode != null && (admissionCode.equals("null") || admissionCode.length == 0)) null else admissionCode
 		reservationRank = if(reservationRank != null && (reservationRank.equals("null") || reservationRank.length == 0)) null else reservationRank
-		totalAudience = if(totalAudience != null && (totalAudience.equals("null") || totalAudience.length == 0)) null else totalAudience
+		totalAudience = if(totalAudience != null && (totalAudience.equals("null"))) "0" else totalAudience
 
 		val member_MovieData = MovieInfo(
 			One_movie_Info.get("titleKorean").toString() + "_" + movie_releaseDate,
