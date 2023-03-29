@@ -25,13 +25,33 @@ data class MovieInfo(
 	val nameKR: String? = "",
 
 	@Column(name = "NameEN")
-	val nameEN: String? = null,
+	val nameEN: String? = "",
 
 	@Column(name = "ReleaseDate")
 	val releaseDate: String = "",
 
 	@Column(name = "Poster")
-	val poster: String? = null,
+	val poster: String? = "",
 
 	@Column(name = "Category")
+	val category: String? = "",
+
+	@Column(name = "MakingNote")
+	val makingNote: String? = "",
+
+	@Column(name = "RunningTime")
+	val runningTime: String? = "",
+
+	@Column(name = "AdmissionCode")
+	val admissionCode: String? = "",
+
+	@Column(name = "Country")
+	val country: String? = "",
+
+	@Column(name = "ReservationRank")
+	val reservationRank: String? = "",
+
+	@Column(name = "TotalAudience")
+	val totalAudience: String? = "",
+
 )
