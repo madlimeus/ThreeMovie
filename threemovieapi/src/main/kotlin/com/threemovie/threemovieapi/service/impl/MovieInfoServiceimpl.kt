@@ -90,7 +90,6 @@ class MovieInfoServiceimpl(
 		var runningTime : String? = null
 		var admissionCode : String? = null
 		for(arr_tmp in countryMovieInformation){
-			println(arr_tmp)
 			var countryId = JSONObject(JSONObject(arr_tmp.toString()).get("country").toString()).get("id").toString()
 			if(countryId.equals("KR")){
 				runningTime = JSONObject(arr_tmp.toString()).get("duration").toString()

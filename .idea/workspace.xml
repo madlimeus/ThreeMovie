@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f8d5caa7-84d9-4c3a-b7a6-90151f0c830a" name="Changes" comment="iframe 을 사용 하기 위해서 Trailer 에 저장 되는 주소를 변경">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/MovieInfo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/MovieInfo.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/impl/MovieCreatorServiceimpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/impl/MovieCreatorServiceimpl.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/impl/MovieInfoServiceimpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/impl/MovieInfoServiceimpl.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +130,7 @@
       <workItem from="1675590831977" duration="330000" />
       <workItem from="1679901081535" duration="3469000" />
       <workItem from="1680013421113" duration="6719000" />
-      <workItem from="1680070732203" duration="3350000" />
+      <workItem from="1680070732203" duration="4147000" />
     </task>
     <task id="LOCAL-00001" summary="iframe 을 사용 하기 위해서 Trailer 에 저장 되는 주소를 변경">
       <created>1679902689149</created>
