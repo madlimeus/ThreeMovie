@@ -60,13 +60,13 @@ const MovieDetailPage = () => {
                     </TabList>
                 </Box>
                 <TabPanel value="detail">
-                    <MovieMakingNote />
+                    <MovieMakingNote makingNote={response?.makingNote} summary={response?.summary} />
                 </TabPanel>
-                <TabPanel value="creator">
-                    <MovieCreator />
+                <TabPanel value="creator" >
+                    <MovieCreator Items={response?.items} />
                 </TabPanel>
                 <TabPanel value="preview">
-                    <MoviePreview />
+                    <MoviePreview steelcuts={response?.steelcuts} trailer={response?.trailer} />
                 </TabPanel>
                 <TabPanel value="review">
                     <MovieReview />

@@ -1,9 +1,14 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-const MoviePreview = () => {
+interface previewProps {
+    steelcuts : string | undefined;
+    trailer : string | undefined;
+}
+
+const MoviePreview = ({steelcuts, trailer}:previewProps) => {
     return (
-        <Box className="tabCover">
+        <Box className="previewCover">
             <Box />
         </Box>
     );

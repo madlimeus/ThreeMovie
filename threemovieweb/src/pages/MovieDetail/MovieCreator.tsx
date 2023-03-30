@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 
-const MovieCreator = () => {
+interface creatorProps {
+    Items : string | undefined;
+}
+
+const MovieCreator = ({Items}: creatorProps) => {
+    const [dat, setDat] = useState()
+    
+    useEffect(() => {
+        if(Items)
+            setDat(JSON.parse(Items))
+    }, [Items])
+    
     return (
-        <Box className="tabCover">
+        <Box className="creatorCover">
             <Box />
         </Box>
     );

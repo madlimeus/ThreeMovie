@@ -35,6 +35,8 @@ const MovieHeader = ({
     totalAudience,
 }: headerProps) => {
     const onErrorImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+        console.log(netizenAvgRate)
+        console.log(reservationRate)
         e.currentTarget.src = `${moviePlaceHolder}`;
     };
 
@@ -71,13 +73,13 @@ const MovieHeader = ({
                             <Typography className="content">{removeArr()}</Typography>
                         </Box>
                     )}
-                    {reservationRate && (
+                    {typeof reservationRate !== undefined && reservationRate !== 0 && (
                         <Box className="contentBox">
                             <Typography className="contentType">예매율</Typography>
                             <Typography className="content">{reservationRate} %</Typography>
                         </Box>
                     )}
-                    {netizenAvgRate && (
+                    {typeof netizenAvgRate !== undefined && netizenAvgRate !== 0 && (
                         <Box className="contentBox">
                             <Typography className="contentType">평점</Typography>
                             <Star sx={{ marginRight: '5px', color: '#aacafd' }} />
@@ -87,35 +89,29 @@ const MovieHeader = ({
                     {runningTime && (
                         <Box className="contentBox">
                             <Typography className="contentType">상영시간</Typography>
-                            <Star sx={{ marginRight: '5px', color: '#aacafd' }} />
                             <Typography className="content">{runningTime}</Typography>
                         </Box>
                     )}
                     {admissionCode && (
                         <Box className="contentBox">
-                            <Typography className="contentType">평점</Typography>
-                            <Star sx={{ marginRight: '5px', color: '#aacafd' }} />
                             <Typography className="content">{admissionCode}</Typography>
                         </Box>
                     )}
                     {country && (
                         <Box className="contentBox">
-                            <Typography className="contentType">평점</Typography>
-                            <Star sx={{ marginRight: '5px', color: '#aacafd' }} />
+                            <Typography className="contentType">제작 국가</Typography>
                             <Typography className="content">{country}</Typography>
                         </Box>
                     )}
                     {reservationRank && (
                         <Box className="contentBox">
-                            <Typography className="contentType">평점</Typography>
-                            <Star sx={{ marginRight: '5px', color: '#aacafd' }} />
+                            <Typography className="contentType">박스오피스</Typography>
                             <Typography className="content">{reservationRank}</Typography>
                         </Box>
                     )}
                     {totalAudience && (
                         <Box className="contentBox">
-                            <Typography className="contentType">평점</Typography>
-                            <Star sx={{ marginRight: '5px', color: '#aacafd' }} />
+                            <Typography className="contentType">관객수</Typography>
                             <Typography className="content">{totalAudience}</Typography>
                         </Box>
                     )}
