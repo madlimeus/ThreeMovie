@@ -72,4 +72,45 @@
   .summary {
     margin-bottom: 30px;
   }
+
+  .divide {
+    justify-content: center;
+    width: 90%;
+    background-color: white;
+    margin-bottom: 20px;
+  }
+}
+
+.creatorCover {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .creatorBox {
+    width: 450px;
+    display: flex;
+    margin-bottom: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    .thumb {
+      object-fit: fill;
+      width: 150px;
+      height: 200px;
+      margin-right: 20px;
+    }
+
+    .role {
+      font-size: 20px;
+      font-weight: bolder;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+
+    .name {
+      filter: brightness(90%);
+      font-size: 15px;
+    }
+  }
 }

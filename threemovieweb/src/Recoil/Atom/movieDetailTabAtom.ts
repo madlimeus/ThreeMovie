@@ -1,8 +1,8 @@
-import { atom } from 'recoil';
+import {atom} from 'recoil';
 
 const movieDetailTabAtom = atom<string>({
-    key: 'movieDetailTab',
-    default: 'detail',
+	key: 'movieDetailTab',
+	default: 'review',
 });
 
 export default movieDetailTabAtom;
