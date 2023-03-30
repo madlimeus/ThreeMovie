@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box} from '@mui/material';
+import { Box, Typography} from '@mui/material';
 
 interface makingNoteProps {
     summary: string | undefined;
@@ -11,11 +11,15 @@ const MovieMakingNote = ({summary, makingNote}: makingNoteProps) => {
         <Box className="makingNoteCover">
             {
                 summary &&
-                <Box/>
+                <Typography>
+                    {summary}
+                </Typography>
             }
             {
                 makingNote &&
-                <Box/>
+                <Box>
+                    {makingNote}
+                </Box>
             }
         </Box>
     );
