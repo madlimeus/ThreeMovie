@@ -1,11 +1,11 @@
-import React, {SyntheticEvent, useEffect, useState} from 'react';
+import React, {SyntheticEvent, useMemo, useState} from 'react';
 import {Box} from '@mui/material';
 import SwiperCore, {FreeMode, Navigation, Thumbs} from "swiper";
 
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+import "swiper/scss";
+import "swiper/scss/free-mode";
+import "swiper/scss/navigation";
+import "swiper/scss/thumbs";
 import {Swiper, SwiperSlide} from "swiper/react";
 import moviePlaceHolder from "../../assets/images/MoviePlaceHolder.jpg";
 
@@ -16,92 +16,84 @@ interface previewProps {
 }
 
 const MoviePreview = ({steelcutsProp, trailerProp, nameKR}: previewProps) => {
-	const [steelcuts, setSteelcuts] = useState<string[]>();
-	const [trailer, setTrailer] = useState<string[]>();
 	const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
 	
 	const onErrorImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
 		e.currentTarget.src = `${moviePlaceHolder}`;
 	};
 	
-	const stringToArray = (str: string | null) => {
+	const stringToArray = (str: string | undefined) => {
 		if (!str) return undefined;
 		const ret = str.replace('[', '').replace(']', '').split(',');
 		return ret;
 	};
 	
-	useEffect(() => {
-		console.log(steelcutsProp);
-		if (steelcutsProp) {
-			const steelcuts = stringToArray(steelcutsProp);
-			setSteelcuts(steelcuts);
-		}
-		if (trailerProp) {
-			const trailer = stringToArray(trailerProp);
-			setTrailer(trailer);
-		}
-	}, [nameKR]);
+	const steelcuts = useMemo<string[] | undefined>(() => stringToArray(steelcutsProp), [steelcutsProp]);
+	const trailer = useMemo<string[] | undefined>(() => stringToArray(trailerProp), [trailerProp]);
 	
 	SwiperCore.use([FreeMode, Navigation, Thumbs]);
 	return (
 		<Box className="previewCover">
-			<Swiper loop
-			        spaceBetween={10}
-			        navigation
-			        thumbs={{swiper: thumbsSwiper}}
-			        modules={[FreeMode, Navigation, Thumbs]}>
-				{steelcuts && steelcuts.map((steelcut) => (
-					<SwiperSlide key={steelcut}>
-						<img src={steelcut || ''} onError={onErrorImg} alt=""/>
-					</SwiperSlide>
-				))}
-				{trailer && trailer.map((teaser) => (
-					<SwiperSlide key={teaser}>
-						<iframe
-							title={nameKR || teaser}
-							width="100%"
-							height="100%"
-							src={`${teaser}?service=player_share`}
-							allowFullScreen
-							frameBorder="0"
-							scrolling="no"
-							allow="autopley; fullscreen; encrypted-media"
-						/>
-					</SwiperSlide>
-				))}
-			</Swiper>
-			<Swiper
-				onSwiper={setThumbsSwiper}
-				loop
-				spaceBetween={10}
-				slidesPerView={4}
-				freeMode
-				watchSlidesProgress
-				modules={[FreeMode, Navigation, Thumbs]}
-				className="mySwiper"
-			>
-				{steelcuts && steelcuts.map((steelcut) => (
-					<SwiperSlide key={steelcut}>
-						<img src={steelcut || ''} onError={onErrorImg} alt=""/>
-					</SwiperSlide>
-				))}
-				{trailer && trailer.map((teaser) => (
-					<SwiperSlide>
-						<SwiperSlide key={teaser}>
-							<iframe
-								title={nameKR}
-								width="100%"
-								height="100%"
-								src={`${teaser}?service=player_share`}
-								allowFullScreen
-								frameBorder="0"
-								scrolling="no"
-								allow="autopley; fullscreen; encrypted-media"
-							/>
-						</SwiperSlide>
-					</SwiperSlide>
-				))}
-			</Swiper>
+			{(steelcutsProp || trailerProp) &&
+				(<Box>
+						<Swiper
+							className="previewSwiper"
+							loop
+							spaceBetween={10}
+							navigation
+							thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}
+							modules={[FreeMode, Navigation, Thumbs]}>
+							{Array.isArray(steelcuts) && steelcuts.map((steelcut) => (
+								<SwiperSlide key={steelcut}>
+									<img src={steelcut || ''} onError={onErrorImg} alt=""/>
+								</SwiperSlide>
+							))}
+							{Array.isArray(trailer) && trailer.map((teaser) => (
+								<SwiperSlide key={teaser}>
+									<iframe
+										title={nameKR || teaser}
+										width="100%"
+										height="100%"
+										src={`${teaser}?service=player_share`}
+										allowFullScreen
+										frameBorder="0"
+										scrolling="no"
+										allow="autopley; fullscreen; encrypted-media"
+									/>
+								</SwiperSlide>
+							))}
+						</Swiper>
+						<Swiper
+							className="thumbSwiper"
+							onSwiper={setThumbsSwiper}
+							loop
+							spaceBetween={10}
+							slidesPerView={4}
+							freeMode
+							watchSlidesProgress
+							modules={[FreeMode, Navigation, Thumbs]}
+						>
+							{Array.isArray(steelcuts) && steelcuts.map((steelcut) => (
+								<SwiperSlide key={steelcut}>
+									<img src={steelcut || ''} onError={onErrorImg} alt=""/>
+								</SwiperSlide>
+							))}
+							{Array.isArray(trailer) && trailer.map((teaser) => (
+								<SwiperSlide key={teaser}>
+									<iframe
+										title={nameKR || teaser}
+										src={`${teaser}?service=player_share`}
+										allowFullScreen
+										frameBorder="0"
+										scrolling="no"
+										allow="fullscreen; encrypted-media"
+									/>
+								</SwiperSlide>
+							))}
+						</Swiper>
+					</Box>
+				)}
+		
 		</Box>
 	);
 };

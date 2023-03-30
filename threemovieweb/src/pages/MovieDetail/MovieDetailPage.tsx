@@ -53,7 +53,7 @@ const MovieDetailPage = () => {
 			<TabContext value={value}>
 				<Box className="tabCover">
 					<TabList value={value} onChange={handleChange}>
-						{(response?.summary || response?.makingNote) && <Tab label="상세 정보" value="detail"/>}
+						<Tab label="상세 정보" value="detail"/>
 						{response?.items && <Tab label="감독/배우" value="creator"/>}
 						{(response?.steelcuts || response?.trailer) && <Tab label="미리보기" value="preview"/>}
 						<Tab label="리뷰" value="review"/>
@@ -76,5 +76,4 @@ const MovieDetailPage = () => {
 		</Box>
 	);
 };
-
 export default MovieDetailPage;

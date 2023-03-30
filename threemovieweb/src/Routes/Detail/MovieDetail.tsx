@@ -1,8 +1,8 @@
 import React from 'react';
 import MovieDetailPage from '../../pages/MovieDetail/MovieDetailPage';
 
-const Detail = () => {
-    return <MovieDetailPage />;
+const MovieDetail = () => {
+	return <MovieDetailPage/>;
 };
 
-export default Detail;
+export default MovieDetail;

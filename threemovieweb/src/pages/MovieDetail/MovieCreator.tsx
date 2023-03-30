@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useEffect, useState} from 'react';
+import React, {SyntheticEvent, useMemo} from 'react';
 import {Box, Typography} from '@mui/material';
 import moviePlaceHolder from "../../assets/images/MoviePlaceHolder.jpg";
 
@@ -14,17 +14,18 @@ interface creator {
 }
 
 const MovieCreator = ({Items}: creatorProps) => {
-	const [dat, setDat] = useState<creator | undefined>(undefined)
+	const datArr = () => {
+		if (Items)
+			return JSON.parse(Items);
+		return undefined;
+	}
+	
+	const dat = useMemo<creator | undefined>(datArr, [Items]);
 	
 	const onErrorImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
 		e.currentTarget.src = `${moviePlaceHolder}`;
 	};
 	
-	useEffect(() => {
-		if (Items) {
-			setDat(JSON.parse(Items));
-		}
-	}, [])
 	
 	return (
 		<Box className="creatorCover">
