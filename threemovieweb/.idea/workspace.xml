@@ -2,8 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/MovieDetailDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/MovieDetailDTO.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/threemovieweb.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Hangeulkim.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/c/0c6dde4fb76ce7eeaf66034703584ce1df028af3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/e/0e3c5a4464caf3f08cb27a294881d19939ae7ad2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/e/0ecb86fff6c44426f0f3ef31d32e5dcc59eaee35" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/7/178a5b5c35b7cab370dbf6199a80849c0ee7ab2a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/e/2eb75bffcc2627774d71af9c126be5bf3673ba52" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/6/461431c53d0b54f6073d79479833f973a0bb626f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/a/4aa78a342cc303c1dc69829787bd85db25da5bc6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/9/59fa7bd46657a026613900d58e95b677f0e42ecc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/a/5ab44fe33ca96299f51ad4778a73e425b92bf439" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/1/61ebb9fd6e8cf9082658121d5d81e297791dacd0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/9/69fd382a87149f5f0941c08f46d2744b349db813" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/b/6b5adf692531e81b3b3d1ca6b2b5f425ef0f451f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/d/6d6dc2833cb78e4b09b17c86f9541392c2ab3f35" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/a/7ad9b000798b6c76e8391dd3a8e9a040ec638ea4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/b/7b0cb6dff453e9e332b6987b0a3f84efa49ee9d0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/b/7bb94083abccea4d39d68583b42b08b9f2d083cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/3/835da56f32df714aaed6285a5b7fc3a7807851e4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/0/9019ab1bc2d4b71cde39ac6dbf5ceec58599db91" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/7/b71268c62218cf0064b2ed4c2d33b3644d417670" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/a/cab443fe6daf8b6b055a1f9c640bf97c72895c59" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/2/d2051fb287f551284c6686b74470f025e6e6d37d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/2/d270955a6f6c2a016bbb1cf31ff99a5ed70152ff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/b/dbc0c31823b8f2e4ed04a397722fed33a67f123f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/f/df52a6d8b6a3ac905463ea771b715100016f0645" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/7/e7be9584da48dc0cbcbabf6321c1a45ca3030f1a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/4/f43ecdf8d666ee908aacce037b4cd72159e4741b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/f/ff7699c9672986e96091f45139a489d3434ced91" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MovieDetail/MovieMakingNote.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MovieDetail/MovieMakingNote.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/scss/_moviedetail.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/scss/_moviedetail.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,19 +83,19 @@
     "WebServerToolWindowFactoryState": "false",
     "code.cleanup.on.save": "true",
     "js.linters.configure.manually.selectedeslint": "true",
-    "last_opened_file_path": "Y:/ThreeMovie/threemovieweb/src/assets/images",
+    "last_opened_file_path": "Y:/ThreeMovie/threemovieweb",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\eslint",
     "node.js.selected.package.standard": "",
     "nodejs_package_manager_path": "yarn",
     "prettierjs.PrettierConfiguration.Package": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\prettier",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "editor.preferences.import",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.2\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
+    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
+    "ts.external.directory.path": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\typescript\\lib",
     "typescript.add.unambiguous.imports.on.the.fly": "true"
   }
 }]]></component>
@@ -101,7 +138,9 @@
       <workItem from="1679893618635" duration="19973000" />
       <workItem from="1679973582635" duration="34765000" />
       <workItem from="1680062114358" duration="6117000" />
-      <workItem from="1680150761494" duration="3933000" />
+      <workItem from="1680150761494" duration="4141000" />
+      <workItem from="1680157879355" duration="126000" />
+      <workItem from="1680158012444" duration="1091000" />
     </task>
     <servers />
   </component>
