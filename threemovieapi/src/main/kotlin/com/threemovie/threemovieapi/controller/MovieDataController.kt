@@ -2,9 +2,9 @@ package com.threemovie.threemovieapi.controller
 
 import com.threemovie.threemovieapi.Entity.DTO.MovieDetailDTO
 import com.threemovie.threemovieapi.Entity.DTO.MovieListDTO
+import com.threemovie.threemovieapi.Service.impl.MovieDataControlServiceimpl
+import com.threemovie.threemovieapi.Service.impl.MovieInfoServiceimpl
 import com.threemovie.threemovieapi.Utils.Review.GetReviewFromTheater
-import com.threemovie.threemovieapi.service.impl.MovieDataControlServiceimpl
-import com.threemovie.threemovieapi.service.impl.MovieInfoServiceimpl
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping

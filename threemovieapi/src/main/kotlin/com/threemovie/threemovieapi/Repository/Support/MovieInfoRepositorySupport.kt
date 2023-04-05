@@ -12,9 +12,9 @@ import org.springframework.stereotype.Repository
 class MovieInfoRepositorySupport(
 	val query: QueryDslConfig
 ) : QuerydslRepositorySupport(MovieInfo::class.java) {
-//	fun getMovieNameKR(): List<MovieNameInfo> =
-//		query.jpaQueryFactory()
-//			.sele
+	val moviePreview: QMoviePreview = QMoviePreview.moviePreview
+	val movieInfo: QMovieInfo = QMovieInfo.movieInfo
+	val movieCreator: QMovieCreator = QMovieCreator.movieCreator
 
 	fun getMovieNameInfo(): List<MovieNameInfo> =
 		query.jpaQueryFactory()
@@ -22,10 +22,8 @@ class MovieInfoRepositorySupport(
 			.fetch()
 
 	fun getMovieList(): List<MovieListDTO> {
-		val moviePreview = QMoviePreview.moviePreview
-		val movieInfo = QMovieInfo.movieInfo
 
-		val movieList = query.jpaQueryFactory()
+		return query.jpaQueryFactory()
 			.select(
 				Projections.fields(
 					MovieListDTO::class.java,
@@ -49,16 +47,11 @@ class MovieInfoRepositorySupport(
 				movieInfo.netizenAvgRate.desc()
 			)
 			.fetch()
-
-		return movieList
 	}
 
 	fun getMovieDetail(movieId: String): MovieDetailDTO {
-		val moviePreview = QMoviePreview.moviePreview
-		val movieInfo = QMovieInfo.movieInfo
-		val movieCreator = QMovieCreator.movieCreator
 
-		val movieDetail = query.jpaQueryFactory()
+		return query.jpaQueryFactory()
 			.select(
 				Projections.fields(
 					MovieDetailDTO::class.java,
@@ -87,7 +80,5 @@ class MovieInfoRepositorySupport(
 			.on(movieInfo.movieId.eq(movieCreator.movieId))
 			.fetchOne()
 			?: throw NoSuchElementException()
-
-		return movieDetail
 	}
 }

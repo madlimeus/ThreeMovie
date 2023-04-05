@@ -1,4 +1,4 @@
-package com.threemovie.threemovieapi.service
+package com.threemovie.threemovieapi.Service
 
 import com.threemovie.threemovieapi.Entity.TheaterData
 

@@ -1,9 +1,9 @@
-package com.threemovie.threemovieapi.service.impl
+package com.threemovie.threemovieapi.Service.impl
 
 import com.threemovie.threemovieapi.Entity.TheaterData
 import com.threemovie.threemovieapi.Repository.Support.TheaterDataRepositorySupport
 import com.threemovie.threemovieapi.Repository.UpdateTimeRepository
-import com.threemovie.threemovieapi.service.TheaterDataService
+import com.threemovie.threemovieapi.Service.TheaterDataService
 import org.springframework.stereotype.Service
 
 @Service

@@ -1,4 +1,4 @@
-threemovieapi/src/main/resources/application.properties
 threemovieweb/package-lock.json
 threemovieweb/yarn.lock
 
+threemovieapi/src/main/resources/application-db-config.properties

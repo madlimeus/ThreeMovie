@@ -31,5 +31,9 @@ M
 src/style/scss/_mainpage.scss,4\6\461431c53d0b54f6073d79479833f973a0bb626f
 P
  src/style/scss/_moviedetail.scss,f\f\ff7699c9672986e96091f45139a489d3434ced91
+<
+package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 Y
 )src/pages/MovieDetail/MovieDetailPage.tsx,e\1\e1fe727bd1c40694b05876327e0e2f651642f5d7
+S
+#src/pages/BookInfo/BookInfoPage.tsx,5\9\59fa7bd46657a026613900d58e95b677f0e42ecc

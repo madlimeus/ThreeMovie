@@ -1,0 +1,41 @@
+type Query {
+    getMovieList: [MovieEntity]
+    getTheaterList(filter: Filter): [TheaterEntity]
+    getDateList(filter: Filter): [String]
+    getShowTimeList(filter: Filter): [ShowTimeEntity]
+}
+
+input Filter{
+    movieFilter: [String]
+    movieTheaterFilter: [String]
+    theaterFilter: [String]
+    dateFilter: [String]
+}
+
+type MovieEntity {
+    movieId : String!
+    movieKR : String!
+    movieEN : String
+    category : String
+    runningTime : String
+    country : String
+    poster : String
+    reservationRank : String
+}
+
+type TheaterEntity {
+    movieTheater : String!
+    brchKR : String!
+    brchEN : String
+    city : String!
+    addrKR : String!
+    addrEN : String
+}
+
+type ShowTimeEntity {
+    totalSeat : Int
+    playKind : String
+    screenKR : String
+    screenEN : String
+    item : String
+}

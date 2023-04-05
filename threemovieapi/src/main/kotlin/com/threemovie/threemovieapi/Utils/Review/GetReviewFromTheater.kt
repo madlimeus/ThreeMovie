@@ -1,7 +1,7 @@
 package com.threemovie.threemovieapi.Utils.Review
 
 
-import com.threemovie.threemovieapi.service.impl.MovieInfoServiceimpl
+import com.threemovie.threemovieapi.Service.impl.MovieInfoServiceimpl
 import org.jsoup.Jsoup
 import org.springframework.stereotype.Component
 

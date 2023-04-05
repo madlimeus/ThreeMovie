@@ -1,4 +1,4 @@
-package com.threemovie.threemovieapi.service
+package com.threemovie.threemovieapi.Service
 
 interface MovieDataControlService {
     fun GET_MOVIE_INFO_DAUM()
