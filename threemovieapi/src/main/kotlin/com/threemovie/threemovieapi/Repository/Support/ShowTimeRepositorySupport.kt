@@ -3,6 +3,7 @@ package com.threemovie.threemovieapi.Repository.Support
 import com.querydsl.core.BooleanBuilder
 import com.querydsl.core.types.Projections
 import com.querydsl.core.types.dsl.BooleanExpression
+import com.threemovie.threemovieapi.Entity.DTO.ShowDateDTO
 import com.threemovie.threemovieapi.Entity.DTO.ShowMovieDTO
 import com.threemovie.threemovieapi.Entity.DTO.ShowTheaterDTO
 import com.threemovie.threemovieapi.Entity.DTO.ShowTimeItemDTO
@@ -69,12 +70,19 @@ class ShowTimeRepositorySupport(
 			.where(movieIn(movieFilter), dateIn(dateFilter))
 			.on(showTime.movieTheater.eq(theaterInfo.movieTheater), showTime.brchKR.eq(theaterInfo.brchKR))
 			.distinct()
+			.orderBy(showTime.brchKR.asc())
 			.fetch()
 	}
 	
-	fun getDateList(movieFilter: List<String>?, theaterFilter: List<Pair<String, String>>?): List<String> {
+	fun getDateList(movieFilter: List<String>?, theaterFilter: List<Pair<String, String>>?): List<ShowDateDTO> {
 		return query.jpaQueryFactory()
-			.select(showTime.date)
+			.select(
+				Projections.fields(
+					ShowDateDTO::class.java,
+					showTime.date,
+				)
+			)
+			.from(showTime)
 			.where(movieIn(movieFilter), theaterIn(theaterFilter))
 			.distinct()
 			.fetch()
@@ -89,6 +97,11 @@ class ShowTimeRepositorySupport(
 			.select(
 				Projections.fields(
 					ShowTimeItemDTO::class.java,
+					showTime.movieKR,
+					showTime.movieTheater,
+					showTime.brchKR,
+					showTime.brchEN,
+					showTime.date,
 					showTime.totalSeat,
 					showTime.playKind,
 					showTime.screenKR,
@@ -97,6 +110,8 @@ class ShowTimeRepositorySupport(
 				)
 			)
 			.from(showTime)
+			.orderBy(showTime.date.asc())
+			.where(movieIn(movieFilter), theaterIn(theaterFilter), dateIn(dateFilter))
 			.distinct()
 			.fetch()
 	}

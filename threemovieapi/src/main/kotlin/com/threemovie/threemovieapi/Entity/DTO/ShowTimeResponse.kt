@@ -1,8 +1,6 @@
 package com.threemovie.threemovieapi.Entity.DTO
 
-import com.querydsl.core.annotations.QueryProjection
-
-data class ShowTimeItemDTO @QueryProjection constructor(
+data class ShowTimeResponse(
 	val movieKR: String = "MT제작기",
 	
 	val movieTheater: String = "MT",
@@ -21,5 +19,12 @@ data class ShowTimeItemDTO @QueryProjection constructor(
 	
 	val screenEN: String? = null,
 	
-	val items: String = "none",
+	val items: List<ShowTimeItems>? = null,
+)
+
+data class ShowTimeItems(
+	val ticketPage: String,
+	val startTime: String,
+	val endTime: String,
+	val restSeat: String
 )

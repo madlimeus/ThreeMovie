@@ -1,0 +1,310 @@
+.bookCover {
+	background-color: gainsboro;
+	width: 90vw;
+	height: 75vh;
+	
+	border: 2px solid whitesmoke;
+	border-radius: 10px;
+	
+	display: flex;
+	flex-direction: row;
+	
+	.bookDateShowTimeCover {
+		width: 100%;
+		height: 95%;
+		background-color: #87A0C9;
+	}
+}
+
+.bookMovieCover {
+	width: 100%;
+	height: 95%;
+	padding-left: 20px;
+	padding-right: 20px;
+	
+	.Mui-focused {
+		background-color: gray;
+		color: white;
+	}
+	
+	.searchField {
+		font-size: 20px;
+		width: 100%;
+		height: 40px;
+		border: 1px solid black;
+		margin-bottom: 15px;
+		border-radius: 5px;
+		
+		input {
+			padding-left: 10px;
+			padding-right: 10px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap
+		}
+		
+	}
+	
+	.movielistCover {
+		height: 65%;
+		overflow-y: scroll;
+		padding-left: 10px;
+		padding-right: 10px;
+		
+		border: 2px solid grey;
+		
+		.movieButton {
+			margin-top: 5px;
+			width: 100%;
+			color: black;
+			font-size: 15px;
+			border: 1px solid grey;
+			
+			&:hover {
+				background-color: #aacafd;
+			}
+		}
+		
+		.active {
+			color: white;
+			background-color: darkgray;
+		}
+		
+		&::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+			
+			border-radius: 6px;
+			background: rgba(255, 255, 255, 0.4);
+		}
+		
+		&::-webkit-scrollbar-thumb {
+			background-color: rgba(0, 0, 0, 0.3);
+			border-radius: 6px;
+		}
+		
+		.searchNone {
+			width: 100%;
+			height: 100%;
+			padding-top: 40%;
+			text-align: center;
+			font-size: 20px;
+			color: black;
+		}
+	}
+	
+	.movieFilterCover {
+		margin-top: 10px;
+		width: 100%;
+		
+		display: flex;
+		text-align: center;
+		
+		.filterCover {
+			width: 100px;
+			margin: auto;
+			
+			&:hover {
+				filter: brightness(70%);
+				cursor: pointer;
+			}
+		}
+		
+		.filterImg {
+			width: 100px;
+			height: 150px;
+		}
+		
+		.filterMovie {
+			width: 100px;
+			font-size: 12px;
+			color: black;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+}
+
+.bookTheaterCover {
+	width: 100%;
+	height: 95%;
+	padding-left: 20px;
+	padding-right: 20px;
+	
+	.Mui-focused {
+		background-color: gray;
+		color: white;
+	}
+	
+	.searchField {
+		font-size: 20px;
+		width: 100%;
+		height: 40px;
+		border: 1px solid black;
+		margin-bottom: 15px;
+		border-radius: 5px;
+		
+		input {
+			padding-left: 10px;
+			padding-right: 10px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+	
+	.MuiToggleButtonGroup-root {
+		width: 100%;
+		height: 10%;
+		margin-bottom: 5px;
+		
+		.MuiToggleButton-root {
+			width: 100%;
+			border: 2px solid black;
+			
+			&:hover {
+				background-color: #aacafd;
+			}
+			
+			img {
+				width: 70px;
+				height: 50px;
+			}
+		}
+		
+		.Mui-selected {
+			background-color: gray;
+		}
+	}
+	
+	.cityBrchCover {
+		height: 65%;
+		width: 100%;
+		
+		display: flex;
+		
+		border: 1px solid grey;
+		
+		.cityCover {
+			height: 100%;
+			width: 30%;
+			overflow-y: scroll;
+			
+			&::-webkit-scrollbar {
+				width: 8px;
+				height: 8px;
+				
+				border-radius: 6px;
+				background: rgba(255, 255, 255, 0.4);
+			}
+			
+			&::-webkit-scrollbar-thumb {
+				background-color: rgba(0, 0, 0, 0.3);
+				border-radius: 6px;
+			}
+			
+			.city {
+				width: 100%;
+				height: 50px;
+				border: 1px solid grey;
+				border-radius: 0px;
+				color: black;
+				
+				&:hover {
+					background-color: #aacafd;
+				}
+			}
+			
+			.active {
+				color: white;
+				background-color: darkgray;
+			}
+		}
+		
+		.brchCover {
+			height: 100%;
+			width: 100%;
+			
+			overflow-y: scroll;
+			display: flex;
+			flex-direction: column;
+			
+			
+			&::-webkit-scrollbar {
+				width: 8px;
+				height: 8px;
+				
+				border-radius: 6px;
+				background: rgba(255, 255, 255, 0.4);
+			}
+			
+			&::-webkit-scrollbar-thumb {
+				background-color: rgba(0, 0, 0, 0.3);
+				border-radius: 6px;
+			}
+			
+			.brch {
+				width: 100%;
+				text-align: left;
+				border: 1px solid gray;
+				border-radius: 0px;
+				
+				.brchName {
+					color: black;
+					margin-left: 10px;
+					margin-right: auto;
+				}
+				
+				.theaterImg {
+					height: 20px;
+					width: 30px;
+				}
+				
+				&:hover {
+					background-color: #aacafd;
+				}
+			}
+			
+			.active {
+				.brchName {
+					color: white;
+				}
+				
+				background-color: darkgray;
+			}
+			
+			.searchNone {
+				margin: auto;
+				margin-top: 50%;
+				color: black;
+				font-size: 20px;
+			}
+		}
+	}
+	
+	.filterCover {
+		width: 100%;
+		display: flex;
+		margin-top: 20px;
+		
+		.filterBox {
+			width: 100px;
+			margin: auto;
+			text-align: center;
+			
+			img {
+				width: 80px;
+				height: 60px;
+			}
+			
+			.brchFilterName {
+				color: black;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		}
+		
+	}
+}

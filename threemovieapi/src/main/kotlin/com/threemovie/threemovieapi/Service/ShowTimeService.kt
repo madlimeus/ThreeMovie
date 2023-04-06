@@ -1,16 +1,13 @@
 package com.threemovie.threemovieapi.Service
 
-import com.threemovie.threemovieapi.Entity.DTO.ShowMovieDTO
-import com.threemovie.threemovieapi.Entity.DTO.ShowTheaterDTO
-import com.threemovie.threemovieapi.Entity.DTO.ShowTimeItemDTO
-import com.threemovie.threemovieapi.Entity.DTO.filterRequest
+import com.threemovie.threemovieapi.Entity.DTO.*
 
 interface ShowTimeService {
 	fun getMovieList(): List<ShowMovieDTO>
 	
-	fun getTheaterList(filter: filterRequest): List<ShowTheaterDTO>
+	fun getTheaterList(filter: FilterRequest?): List<ShowTheaterResponse>
 	
-	fun getDateList(filter: filterRequest): List<String>
+	fun getDateList(filter: FilterRequest?): List<ShowDateDTO>
 	
-	fun getShowTimeList(filter: filterRequest): List<ShowTimeItemDTO>
+	fun getShowTimeList(filter: FilterRequest?): List<ShowTimeResponse>
 }
