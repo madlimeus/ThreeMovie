@@ -12,7 +12,7 @@
 	.bookDateShowTimeCover {
 		width: 100%;
 		height: 95%;
-		background-color: #87A0C9;
+		padding-right: 20px;
 	}
 }
 
@@ -20,7 +20,6 @@
 	width: 100%;
 	height: 95%;
 	padding-left: 20px;
-	padding-right: 20px;
 	
 	.Mui-focused {
 		background-color: gray;
@@ -188,7 +187,7 @@
 		
 		.cityCover {
 			height: 100%;
-			width: 30%;
+			width: 32%;
 			overflow-y: scroll;
 			
 			&::-webkit-scrollbar {
@@ -287,11 +286,13 @@
 		width: 100%;
 		display: flex;
 		margin-top: 20px;
+		align-items: center;
+		align-content: center;
+		text-align: center;
 		
 		.filterBox {
 			width: 100px;
 			margin: auto;
-			text-align: center;
 			
 			img {
 				width: 80px;
@@ -304,7 +305,215 @@
 				text-overflow: ellipsis;
 				white-space: nowrap;
 			}
+			
+			&:hover {
+				background-color: grey;
+				border-radius: 10px;
+				cursor: pointer;
+				filter: brightness(60%);
+			}
 		}
 		
+	}
+}
+
+.bookDateCover {
+	width: 100%;
+	
+	.dateSwiper {
+		border: 1px solid black;
+		margin: 0px;
+		text-align: center;
+		width: 30vw;
+		min-width: 340px;
+		
+		.dateSlide {
+			width: 50px;
+			
+			.dateButton {
+				font-size: 8px;
+				font-weight: bold;
+				color: black;
+				display: flex;
+				flex-direction: column;
+				height: 70px;
+				width: 30px;
+				text-align: center;
+				
+				&:hover {
+					background-color: #aacafd;
+				}
+			}
+			
+			.sat {
+				color: #233CA3;
+			}
+			
+			.sun {
+				color: #AD2727;
+			}
+			
+			.active {
+				background-color: darkgray;
+				filter: brightness(110%);
+			}
+		}
+		
+		
+		.swiper-button-next {
+			color: white;
+			--swiper-navigation-size: 20px;
+		}
+		
+		.swiper-button-prev {
+			color: white;
+			--swiper-navigation-size: 20px;
+		}
+	}
+	
+	.filterCover {
+		margin-top: 10px;
+		text-align: center;
+		width: 100%;
+		border: 1px solid gray;
+		
+		.selectDate {
+			font-size: 30px;
+			font-weight: bolder;
+			color: black;
+		}
+		
+		.sat {
+			color: #233CA3;
+		}
+		
+		.sun {
+			color: #AD2727;
+		}
+	}
+}
+
+.showTimeListCover {
+	overflow-y: scroll;
+	height: 70%;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid gray;
+	
+	.showTimeBox {
+		margin-left: 20px;
+		margin-right: 20px;
+		color: black;
+		
+		.movieBrchCover {
+			.movieBrchName {
+				display: flex;
+				margin-bottom: auto;
+				margin-top: auto;
+				
+				.movieTitle {
+					margin-right: 20px;
+					font-size: 18px;
+				}
+				
+				.brchName {
+					margin-top: auto;
+					margin-bottom: auto;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+				
+				img {
+					margin-top: auto;
+					margin-bottom: auto;
+					width: 30px;
+					height: 20px;
+				}
+			}
+			
+			
+			.nameImg {
+				display: flex;
+				flex-direction: row;
+				font-size: 8px;
+				
+			}
+		}
+		
+		.showTimeCover {
+			display: flex;
+			flex-direction: row;
+			text-align: center;
+			flex-wrap: wrap;
+			
+			.showTimeButton {
+				margin: 5px;
+				display: flex;
+				flex-direction: column;
+				color: black;
+				border: 1px solid gray;
+				
+				&:hover {
+					background-color: #aacafd;
+				}
+			}
+			
+			.active {
+				background-color: gray;
+				color: white;
+			}
+		}
+		
+		.divide {
+			margin-top: 10px;
+			margin-bottom: 10px;
+			background-color: gray;
+		}
+	}
+	
+	&::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+		
+		border-radius: 6px;
+		background: rgba(255, 255, 255, 0.4);
+	}
+	
+	&::-webkit-scrollbar-thumb {
+		background-color: rgba(0, 0, 0, 0.3);
+		border-radius: 6px;
+	}
+}
+
+.submitButtonCover {
+	width: 100%;
+	margin-top: 30px;
+	display: flex;
+	text-align: center;
+	
+	
+	.button {
+		border: 2px solid gray;
+		color: black;
+		margin: auto;
+		width: 40%;
+		height: 5%;
+		
+		&:hover {
+			background-color: #aacafd;
+		}
+	}
+	
+	.activeAddr {
+		background-color: darkblue;
+		color: white;
+		filter: brightness(90%);
+	}
+	
+	.activeTicketPage {
+		background-color: darkred;
+		color: white;
+		filter: brightness(90%);
 	}
 }

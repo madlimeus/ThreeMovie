@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material';
 
 const typotheme = createTheme({
     typography: {
-        fontFamily: 'NanumSquareRound',
+        fontFamily: 'GothicA1-Light',
         fontSize: 14,
         fontWeightLight: 300,
         fontWeightRegular: 400,

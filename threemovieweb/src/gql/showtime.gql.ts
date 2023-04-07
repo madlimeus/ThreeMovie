@@ -49,6 +49,8 @@ export const GET_SHOW_TIME_LIST = gql`
             playKind
             screenKR
             screenEN
+            addrKR
+            addrEN
             items {
                 ticketPage
                 startTime

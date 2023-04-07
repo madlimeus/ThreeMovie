@@ -19,6 +19,10 @@ data class ShowTimeResponse(
 	
 	val screenEN: String? = null,
 	
+	val addrKR: String = "신대방동",
+	
+	val addrEN: String? = null,
+	
 	val items: List<ShowTimeItems>? = null,
 )
 

@@ -21,5 +21,9 @@ data class ShowTimeItemDTO @QueryProjection constructor(
 	
 	val screenEN: String? = null,
 	
+	val addrKR: String = "신대방동",
+	
+	val addrEN: String? = null,
+	
 	val items: String = "none",
 )

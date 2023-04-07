@@ -5,19 +5,19 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Loading from '../Loading';
 import { GET_THEATER_LIST } from '../../gql/showtime.gql';
-import bookBrchFilterAtom from '../../Recoil/Atom/bookBrchFilter';
-import bookMovieTheaterFilterAtom from '../../Recoil/Atom/bookMovieTheaterFilter';
-import bookDateFilterAtom from '../../Recoil/Atom/bookDateFilter';
-import bookMovieFilterAtom from '../../Recoil/Atom/bookMovieFilter';
+import bookBrchFilterAtom from '../../Recoil/Atom/bookBrchFilterAtom';
+import bookMovieTheaterFilterAtom from '../../Recoil/Atom/bookMovieTheaterFilterAtom';
+import bookDateFilterAtom from '../../Recoil/Atom/bookDateFilterAtom';
+import bookMovieFilterAtom from '../../Recoil/Atom/bookMovieFilterAtom';
 import { BookBrch, TheaterItem } from '../../interfaces/BookBrch';
 import CGV from '../../assets/images/CGV.png';
 import LC from '../../assets/images/LotteCinema.png';
 import MB from '../../assets/images/MegaBox.png';
 import retFilter from './retFilter';
 
-const BookTheater = () => {
+const BookBrchList = () => {
     const [theaters, setTheaters] = React.useState(() => ['CGV', 'LC', 'MB']);
-    const [activeCity, setActiveCity] = useState<string>('');
+    const [activeCity, setActiveCity] = useState<string>('서울');
     const [search, setSearch] = useState<string>('');
     const [theaterList, setTheaterList] = useState<BookBrch[] | undefined>(undefined);
     const [movieTheaterFilter, setMovieTheaterFilter] = useRecoilState(bookMovieTheaterFilterAtom);
@@ -195,7 +195,11 @@ const BookTheater = () => {
                 {movieTheaterFilter &&
                     brchFilter &&
                     movieTheaterFilter.map((movieTheater, idx) => (
-                        <Box key={`${brchFilter.at(idx)}${movieTheater}`} className="filterBox">
+                        <Box
+                            onClick={() => onClickBrch(movieTheater, brchFilter.at(idx)!)}
+                            key={`${brchFilter.at(idx)}${movieTheater}`}
+                            className="filterBox"
+                        >
                             <Box className="movieTheaterFilter">
                                 <img src={onTheaterImg(movieTheater)} alt={movieTheater} />
                             </Box>
@@ -209,4 +213,4 @@ const BookTheater = () => {
     );
 };
 
-export default BookTheater;
+export default BookBrchList;

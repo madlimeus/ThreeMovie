@@ -4,13 +4,14 @@ import QueryString from 'qs';
 import { useLocation } from 'react-router-dom';
 import '../../style/scss/_bookinfo.scss';
 import { useRecoilState } from 'recoil';
-import bookMovieFilterAtom from '../../Recoil/Atom/bookMovieFilter';
-import bookMovieTheaterFilterAtom from '../../Recoil/Atom/bookMovieTheaterFilter';
-import bookBrchFilterAtom from '../../Recoil/Atom/bookBrchFilter';
-import BookTheater from './BookTheater';
-import BookDate from './BookDate';
-import BookShowTime from './BookShowTime';
+import bookMovieFilterAtom from '../../Recoil/Atom/bookMovieFilterAtom';
+import bookMovieTheaterFilterAtom from '../../Recoil/Atom/bookMovieTheaterFilterAtom';
+import bookBrchFilterAtom from '../../Recoil/Atom/bookBrchFilterAtom';
+import BookBrchList from './BookBrchList';
+import BookDateList from './BookDateList';
+import BookShowTimeList from './BookShowTimeList';
 import BookMovieList from './BookMovieList';
+import BookSubmit from './BookSubmit';
 
 const BookInfoPage = () => {
     const [movieFilter, setMovieFilter] = useRecoilState(bookMovieFilterAtom);
@@ -43,10 +44,11 @@ const BookInfoPage = () => {
     return (
         <Box className="flexbox bookCover">
             <BookMovieList />
-            <BookTheater />
+            <BookBrchList />
             <Box className="bookDateShowTimeCover">
-                <BookDate />
-                <BookShowTime />
+                <BookDateList />
+                <BookShowTimeList />
+                <BookSubmit />
             </Box>
         </Box>
     );

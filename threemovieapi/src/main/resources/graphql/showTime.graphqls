@@ -50,6 +50,8 @@ type ShowTimeEntity {
     playKind : String
     screenKR : String
     screenEN : String
+    addrKR : String!
+    addrEN : String
     items : [showTimeItems]
 }
 

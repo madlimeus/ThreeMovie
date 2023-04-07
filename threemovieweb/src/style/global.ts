@@ -17,16 +17,22 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         color: white;
-        font-family: 'NanumSquareRound';
+        font-family: 'GothicA1-Light';
         font-color: white;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        user-select:none
     }
     button {
         cursor: pointer;
     }
     
     @font-face {
-        font-family: 'NanumSquareRound';
-        src: local("../assets/font/NanumSquareRoundB.ttf") format('truetype')
+        font-family: 'GothicA1-Light';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
+        font-weight: 300;
+        font-style: normal;
     }
 `;
 

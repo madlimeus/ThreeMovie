@@ -2,46 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/ShowDateDTO.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/ShowTheaterResponse.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/ShowTimeResponse.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recoil/Atom/bookBrchFilter.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recoil/Atom/bookDateFilter.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recoil/Atom/bookMovieFilter.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recoil/Atom/bookMovieTheaterFilter.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apollo/cache.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apollo/client.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gql/showtime.gql.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/BookBrch.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/BookMovie.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/Filter.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/BookInfo/BookDate.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/BookInfo/BookMovieList.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/BookInfo/BookShowTime.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/BookInfo/BookTheater.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/BookInfo/retFilter.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/style/scss/_bookinfo.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Recoil/Atom/bookAddrAtom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Recoil/Atom/bookTicketPageAtom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interfaces/BookDate.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interfaces/BookShowTime.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/BookInfo/BookDateList.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/BookInfo/BookShowTimeList.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/BookInfo/BookSubmit.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/ShowTimeItemDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/ShowTimeItemDTO.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/filterRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/FilterRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/ShowTimeResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/ShowTimeResponse.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/Support/ShowTimeRepositorySupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/Support/ShowTimeRepositorySupport.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/ShowTimeService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/ShowTimeService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/impl/ShowTimeServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/impl/ShowTimeServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/ShowTimeController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/ShowTimeController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/resources/graphql/showTime.graphqls" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/resources/graphql/showTime.graphqls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/6/461431c53d0b54f6073d79479833f973a0bb626f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/c/0c6dde4fb76ce7eeaf66034703584ce1df028af3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/3/13249b523be6db07cb147bcf3b621872eec8e6f3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/9/59fa7bd46657a026613900d58e95b677f0e42ecc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/d/6d6dc2833cb78e4b09b17c86f9541392c2ab3f35" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/e/9e6179ceeb558899189015a1b4e9653273d60f38" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/7/77256b1d7b50ece4edb1a9e0cbcd8befeaf9fb79" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/c/8cda8fdcd605648fa24174c87454a3f86c81168f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/3/934a2ab7fd91db22be8e4d826e0e678ae4d03e40" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/6/966db947efa99b6fe819b90520d21df416589005" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/7/974f2c5401de1695976aeba718571c258aeed326" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/9/a92a6602fbf762e5c7ceee37b8be20cf7e1f72ed" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/b/bb1695f21daa289a4b5085296eeece95a372f654" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/1/e1fe727bd1c40694b05876327e0e2f651642f5d7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/1/c18b55feffe6cc3900b86cebc1811f5c3f8cbc13" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/2/d2051fb287f551284c6686b74470f025e6e6d37d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/7/e755e77879992af1d2c275baba30318415f06707" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/a/faa5f49ccdef3a882a626a26125973fe420cb3dd" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/f/ff7699c9672986e96091f45139a489d3434ced91" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Routes/AppRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/AppRouter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Recoil/Atom/bookBrchFilter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recoil/Atom/bookBrchFilterAtom.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Recoil/Atom/bookDateFilter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recoil/Atom/bookDateFilterAtom.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Recoil/Atom/bookMovieFilter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recoil/Atom/bookMovieFilterAtom.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Recoil/Atom/bookMovieTheaterFilter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recoil/Atom/bookMovieTheaterFilterAtom.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gql/showtime.gql.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/gql/showtime.gql.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/BookInfo/BookDate.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/BookInfo/BookInfoPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/BookInfo/BookInfoPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/BookInfo/BookMovieList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/BookInfo/BookMovieList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/BookInfo/BookShowTime.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/BookInfo/BookTheater.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/BookInfo/BookBrchList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/BookInfo/retFilter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/BookInfo/retFilter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/global.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/global.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/scss/_bookinfo.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/scss/_bookinfo.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/typotheme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/typotheme.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,31 +80,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;Y:/ThreeMovie/threemovieweb/src/Recoil/Atom&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;Y:\\ThreeMovie\\threemovieweb\\node_modules\\eslint&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;Y:\\ThreeMovie\\threemovieweb\\node_modules\\prettier&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;Y:\\ThreeMovie\\threemovieweb\\node_modules\\typescript\\lib&quot;,
-    &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "code.cleanup.on.save": "true",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "Y:/ThreeMovie/threemovieweb/src/interfaces",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\eslint",
+    "node.js.selected.package.standard": "",
+    "nodejs_package_manager_path": "yarn",
+    "prettierjs.PrettierConfiguration.Package": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\prettier",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "preferences.general",
+    "ts.external.directory.path": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\typescript\\lib",
+    "typescript.add.unambiguous.imports.on.the.fly": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="Y:\ThreeMovie\threemovieweb\src\interfaces" />
       <recent name="Y:\ThreeMovie\threemovieweb\src\Recoil\Atom" />
       <recent name="Y:\ThreeMovie\threemovieweb\src\assets\images" />
       <recent name="Y:\ThreeMovie\threemovieweb\src\pages\MovieDetail" />
@@ -148,6 +152,7 @@
       <workItem from="1680230834096" duration="4458000" />
       <workItem from="1680687571507" duration="14835000" />
       <workItem from="1680756163151" duration="40370000" />
+      <workItem from="1680842354380" duration="36182000" />
     </task>
     <servers />
   </component>

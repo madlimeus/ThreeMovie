@@ -52,6 +52,9 @@ class ShowTimeServiceImpl(
 	}
 	
 	override fun getShowTimeList(filter: FilterRequest?): List<ShowTimeResponse> {
+		if (filter?.movieFilter.isNullOrEmpty() || filter?.brchFilter.isNullOrEmpty() || filter?.dateFilter.isNullOrEmpty())
+			return ArrayList<ShowTimeResponse>()
+		
 		val theaterFilter = makeTheaterList(
 			filter?.movieTheaterFilter,
 			filter?.brchFilter
@@ -89,6 +92,8 @@ class ShowTimeServiceImpl(
 				showtime.playKind,
 				showtime.screenKR,
 				showtime.screenEN,
+				showtime.addrKR,
+				showtime.addrEN,
 				items
 			)
 			

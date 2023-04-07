@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil';
 import SearchIcon from '@mui/icons-material/Search';
 import { GET_MOVIE_LIST } from '../../gql/showtime.gql';
 import Loading from '../Loading';
-import bookMovieFilterAtom from '../../Recoil/Atom/bookMovieFilter';
+import bookMovieFilterAtom from '../../Recoil/Atom/bookMovieFilterAtom';
 import BookMovie from '../../interfaces/BookMovie';
 import moviePlaceHolder from '../../assets/images/MoviePlaceHolder.jpg';
 

@@ -84,6 +84,7 @@ class ShowTimeRepositorySupport(
 			)
 			.from(showTime)
 			.where(movieIn(movieFilter), theaterIn(theaterFilter))
+			.orderBy(showTime.date.asc())
 			.distinct()
 			.fetch()
 	}
@@ -106,11 +107,16 @@ class ShowTimeRepositorySupport(
 					showTime.playKind,
 					showTime.screenKR,
 					showTime.screenEN,
+					theaterInfo.addrKR,
+					theaterInfo.addrEN,
 					showTime.items
 				)
 			)
 			.from(showTime)
 			.orderBy(showTime.date.asc())
+			.leftJoin(theaterInfo)
+			.fetchJoin()
+			.on(showTime.brchKR.eq(theaterInfo.brchKR), showTime.movieTheater.eq(theaterInfo.movieTheater))
 			.where(movieIn(movieFilter), theaterIn(theaterFilter), dateIn(dateFilter))
 			.distinct()
 			.fetch()
