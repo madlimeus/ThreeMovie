@@ -21,9 +21,9 @@ const AppRouter = () => {
                         <Route path="/bookInfo/*" element={<BookInfo />} />
                         <Route path="/moviedetail/*" element={<MovieDetail />} />
                         <Route path="/searchresult/*" element={<SearchResult />} />
+                        <Route path="/login/*" element={<Login />} />
+                        <Route path="/signup/*" element={<SignUp />} />
                     </Route>
-                    <Route path="/login/*" element={<Login />} />
-                    <Route path="/signup/*" element={<SignUp />} />
                 </Routes>
             </BrowserRouter>
         </>

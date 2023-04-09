@@ -39,7 +39,12 @@ const BookShowTimeList = () => {
         return now < chkTime;
     };
 
-    const onClickShowTime = (addr: string, ticket: string) => {
+    const onClickShowTime = (movieTheater: string, brch: string, ticket: string) => {
+        let addr = '';
+        if (movieTheater === 'MB') addr = '메가박스';
+        else if (movieTheater === 'LC') addr = '롯데시네마';
+        else addr = 'CGV';
+        addr += ` ${brch}`;
         setSelectAddr(addr);
         setSelectTicketPage(ticket);
     };
@@ -50,6 +55,8 @@ const BookShowTimeList = () => {
 
     useEffect(() => {
         if (movieFilter.length > 0 && brchFilter.length > 0 && dateFilter.length > 0) refetch();
+        setSelectAddr('');
+        setSelectTicketPage('');
     }, [movieFilter, brchFilter, dateFilter]);
 
     if (loading) return <Loading />;
@@ -81,7 +88,9 @@ const BookShowTimeList = () => {
                                 .map((item) => (
                                     <Box key={item.ticketPage}>
                                         <Button
-                                            onClick={() => onClickShowTime(showTime.addrKR, item.ticketPage)}
+                                            onClick={() =>
+                                                onClickShowTime(showTime.movieTheater, showTime.brchKR, item.ticketPage)
+                                            }
                                             className={
                                                 item.ticketPage === selectTicketPage
                                                     ? 'active showTimeButton'

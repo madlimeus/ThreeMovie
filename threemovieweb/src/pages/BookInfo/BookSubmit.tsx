@@ -10,10 +10,12 @@ const BookSubmit = () => {
 
     const onClickAddr = () => {
         if (selectAddr) window.open(`https://map.naver.com/v5/search/${selectAddr}`);
+        else alert('영화, 영화관, 날짜, 시간표를 선택 해주세요.');
     };
 
     const onClickTicketPage = () => {
         if (selectTicketPage) window.open(`${selectTicketPage}`);
+        else alert('영화, 영화관, 날짜, 시간표를 선택 해주세요.');
     };
     return (
         <Box className="submitButtonCover">

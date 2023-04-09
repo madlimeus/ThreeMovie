@@ -21,8 +21,6 @@ U
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 Y
 )src/pages/MovieDetail/MovieDetailPage.tsx,e\1\e1fe727bd1c40694b05876327e0e2f651642f5d7
-H
-src/Routes/AppRouter.tsx,6\d\6d6dc2833cb78e4b09b17c86f9541392c2ab3f35
 L
 src/style/scss/_flexbox.scss,0\e\0e3c5a4464caf3f08cb27a294881d19939ae7ad2
 M
@@ -35,10 +33,6 @@ V
 &src/pages/MovieDetail/MovieCreator.tsx,9\e\9e6179ceeb558899189015a1b4e9653273d60f38
 K
 src/interfaces/BookMovie.ts,d\5\d5b0ce7f3816b3024d5043a7cf7f5bcdf3da8b2f
-R
-"src/Recoil/Atom/bookMovieFilter.ts,b\8\b8d837568150cda80a1123e44ee83a81ae89bbad
-Y
-)src/Recoil/Atom/bookMovieTheaterFilter.ts,e\b\ebe2deab6e6e8e89a185b8557bc5d1e40acfe025
 P
  src/pages/BookInfo/retFilter.tsx,f\a\faa5f49ccdef3a882a626a26125973fe420cb3dd
 T
@@ -55,35 +49,27 @@ G
 src/gql/showtime.gql.ts,c\1\c18b55feffe6cc3900b86cebc1811f5c3f8cbc13
 P
  src/pages/Main/MainMovieList.tsx,b\b\bb1695f21daa289a4b5085296eeece95a372f654
-K
-src/style/scss/_navbar.scss,7\a\7ad9b000798b6c76e8391dd3a8e9a040ec638ea4
 F
 src/style/typotheme.ts,d\2\d2051fb287f551284c6686b74470f025e6e6d37d
 S
 #src/pages/BookInfo/BookBrchList.tsx,c\0\c08d15dce8a55bc56df03437ff7655cdb783a025
-O
-src/pages/NavBar/NavBarPage.tsx,7\b\7b0cb6dff453e9e332b6987b0a3f84efa49ee9d0
 U
 %src/Recoil/Atom/bookDateFilterAtom.ts,a\3\a36149438b13e479e99aee30f901e540e6f4ee7f
 U
 %src/Recoil/Atom/bookBrchFilterAtom.ts,8\7\8721e3771ad09102ac71e1d028f1b5a4fdc58f46
 S
-#src/pages/BookInfo/BookDateList.tsx,7\e\7e122b85d042e428229a7db38623d6877239349a
-M
-src/style/scss/_bookinfo.scss,8\c\8cda8fdcd605648fa24174c87454a3f86c81168f
-N
-src/interfaces/BookShowTime.ts,c\b\cbbf620aa40c466fbdfe887a18bc38d64e06bb8b
-P
- src/style/scss/_moviedetail.scss,f\f\ff7699c9672986e96091f45139a489d3434ced91
-O
-src/Recoil/Atom/bookAddrAtom.ts,1\e\1edfbe9b6183065e53bf6d7f51357b0f04b3703e
-U
-%src/Recoil/Atom/bookTicketPageAtom.ts,7\0\700ca8dbe26dd85ab4afbd9b77960306e8ef64b7
+#src/pages/BookInfo/BookInfoPage.tsx,5\9\59fa7bd46657a026613900d58e95b677f0e42ecc
 Q
 !src/pages/BookInfo/BookSubmit.tsx,2\3\23cad4f3906963f382dd462ae37d80daee331c0f
-C
-src/style/global.ts,9\0\9019ab1bc2d4b71cde39ac6dbf5ceec58599db91
-S
-#src/pages/BookInfo/BookInfoPage.tsx,5\9\59fa7bd46657a026613900d58e95b677f0e42ecc
+O
+src/Recoil/Atom/bookAddrAtom.ts,1\e\1edfbe9b6183065e53bf6d7f51357b0f04b3703e
+N
+src/interfaces/BookShowTime.ts,c\b\cbbf620aa40c466fbdfe887a18bc38d64e06bb8b
 W
 'src/pages/BookInfo/BookShowTimeList.tsx,d\0\d02c5534eea1201c9513db9943359882d6cacf39
+S
+#src/pages/BookInfo/BookDateList.tsx,7\e\7e122b85d042e428229a7db38623d6877239349a
+U
+%src/Recoil/Atom/bookTicketPageAtom.ts,7\0\700ca8dbe26dd85ab4afbd9b77960306e8ef64b7
+M
+src/style/scss/_bookinfo.scss,8\c\8cda8fdcd605648fa24174c87454a3f86c81168f

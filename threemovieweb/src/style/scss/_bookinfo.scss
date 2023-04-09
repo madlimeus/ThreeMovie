@@ -324,13 +324,15 @@
 		border: 1px solid black;
 		margin: 0px;
 		text-align: center;
+		overflow: hidden;
 		width: 30vw;
-		min-width: 340px;
 		
 		.dateSlide {
 			width: 50px;
+			display: flex;
 			
 			.dateButton {
+				margin: auto;
 				font-size: 8px;
 				font-weight: bold;
 				color: black;
