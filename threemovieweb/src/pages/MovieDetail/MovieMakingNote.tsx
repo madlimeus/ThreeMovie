@@ -1,10 +1,24 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import {Box, Divider, Typography} from '@mui/material';
 
-const MovieMakingNote = () => {
+interface makingNoteProps {
+    summary: string | undefined;
+    makingNote: string | undefined;
+}
+
+const MovieMakingNote = ({summary, makingNote}: makingNoteProps) => {
     return (
-        <Box className="tabCover">
-            <Typography>준비중 입니다...</Typography>
+        <Box className="makingNoteCover">
+            {summary &&
+                <Typography className="summary" dangerouslySetInnerHTML={{__html: summary}}/>
+            }
+
+            {makingNote &&
+                <Box>
+                    <Divider className="divide" variant="middle"/>
+                    <Typography dangerouslySetInnerHTML={{__html: makingNote}}/>
+                </Box>
+            }
         </Box>
     );
 };

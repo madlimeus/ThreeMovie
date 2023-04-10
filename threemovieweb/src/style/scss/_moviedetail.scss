@@ -14,6 +14,28 @@
 		background-color: white;
 		margin-bottom: 20px;
 	}
+	
+	.tabCover {
+		.MuiButtonBase-root {
+			color: #29313D;
+			margin: 10px 10px;
+			
+			border: 2px solid white;
+			border-radius: 10px;
+		}
+		
+		.MuiTabs-indicator {
+			display: none;
+		}
+		
+		.Mui-selected {
+			color: white !important;
+			background-color: #87A0C9;
+			border: 2px solid white;
+			border-radius: 10px;
+		}
+	}
+	
 }
 
 .headerCover {
@@ -65,5 +87,114 @@
 		padding-left: 10px;
 		
 		border: 2px solid white;
+	}
+}
+
+.makingNoteCover {
+	.summary {
+		margin-bottom: 30px;
+	}
+	
+	.divide {
+		justify-content: center;
+		width: 90%;
+		background-color: white;
+		margin-bottom: 20px;
+	}
+}
+
+.creatorCover {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	
+	.creatorBox {
+		width: 450px;
+		display: flex;
+		margin-bottom: 30px;
+		margin-left: 5px;
+		margin-right: 5px;
+		
+		.thumb {
+			object-fit: fill;
+			width: 150px;
+			height: 200px;
+			margin-right: 20px;
+		}
+		
+		.role {
+			font-size: 20px;
+			font-weight: bolder;
+			margin-top: 5px;
+			margin-bottom: 15px;
+		}
+		
+		.name {
+			filter: brightness(90%);
+			font-size: 15px;
+		}
+	}
+}
+
+.previewCover {
+	justify-content: center;
+	width: 80vw;
+	padding-left: 30px;
+	padding-right: 30px;
+	
+	.previewSwiper {
+		min-width: 80%;
+		height: 100%;
+		
+		.swiper-slide {
+			width: 80%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			
+			img {
+				display: block;
+				width: 100%;
+				object-fit: fill;
+			}
+		}
+	}
+	
+	.thumbSwiper {
+		width: 100%;
+		height: 28vh;
+		
+		img {
+			display: block;
+			width: 100%;
+			height: 80%;
+			object-fit: fill;
+		}
+		
+		.swiper-slide {
+			opacity: 0.5;
+			width: 20vw;
+			height: 35vh;
+			
+			img {
+				display: block;
+				width: 100%;
+				object-fit: fill;
+			}
+			
+			iframe {
+				display: block;
+				width: 100%;
+				height: 100%;
+				pointer-events: none;
+				
+			}
+		}
+		
+		.swiper-slide-thumb-active {
+			opacity: 1.0;
+		}
 	}
 }

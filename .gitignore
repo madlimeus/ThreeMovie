@@ -1,11 +1,5 @@
+threemovieweb/package-lock.json
+threemovieweb/yarn.lock
 
-threemovieapi/src/main/resources/application.properties
-threemovieweb/yarn.lock
-threemovieweb/package-lock.json
-threemovieweb/.idea/sonarlint/issuestore/index.pb
-*.pb
-threemovieweb/package-lock.json
-threemovieweb/yarn.lock
-threemovieweb/.idea/sonarlint/issuestore/index.pb
-threemovieweb/package-lock.json
-threemovieweb/yarn.lock
+threemovieapi/src/main/resources/application-db-config.properties
+threemovieapi/src/main/resources/application-smtp-config.properties

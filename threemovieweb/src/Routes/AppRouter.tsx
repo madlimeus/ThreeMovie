@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import BookInfoPage from '../pages/BookInfo/BookInfoPage';
-import MainPage from '../pages/Main/MainPage';
-import MovieDetailPage from '../pages/MovieDetail/MovieDetailPage';
 import NavBarPage from '../pages/NavBar/NavBarPage';
-import SearchResultPage from '../pages/SearchResult/SearchResultPage';
-import LoginPage from '../pages/User/Login/LoginPage';
-import SignUpPage from '../pages/User/SignUp/SignUpPage';
 import GlobalStyles from '../style/global';
+import Main from './Main/Main';
+import BookInfo from './Detail/BookInfo/BookInfo';
+import MovieDetail from './Detail/MovieDetail';
+import SearchResult from './SearchResult/SearchResult';
+import Login from './User/Login/Login';
+import SignUp from './User/SignUp/SignUp';
 
 const AppRouter = () => {
     return (
@@ -17,13 +17,13 @@ const AppRouter = () => {
                 <Routes>
                     <Route element={<NavBarPage />}>
                         <Route path="/" element={<Navigate replace to="/main" />} />
-                        <Route path="/main/*" element={<MainPage />} />
-                        <Route path="/bookInfo/*" element={<BookInfoPage />} />
-                        <Route path="/moviedetail/*" element={<MovieDetailPage />} />
-                        <Route path="/searchresult/*" element={<SearchResultPage />} />
+                        <Route path="/main/*" element={<Main />} />
+                        <Route path="/bookInfo/*" element={<BookInfo />} />
+                        <Route path="/moviedetail/*" element={<MovieDetail />} />
+                        <Route path="/searchresult/*" element={<SearchResult />} />
+                        <Route path="/login/*" element={<Login />} />
+                        <Route path="/signup/*" element={<SignUp />} />
                     </Route>
-                    <Route path="/login/*" element={<LoginPage />} />
-                    <Route path="/signup/*" element={<SignUpPage />} />
                 </Routes>
             </BrowserRouter>
         </>

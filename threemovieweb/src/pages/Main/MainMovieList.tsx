@@ -1,9 +1,9 @@
-import React, { SyntheticEvent, useState } from 'react';
-import { Star } from '@mui/icons-material';
-import { Box, Button, Typography } from '@mui/material';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import SwiperCore, { Navigation } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import React, {SyntheticEvent, useState} from 'react';
+import {Star} from '@mui/icons-material';
+import {Box, Button, Typography} from '@mui/material';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
+import SwiperCore, {Navigation} from 'swiper';
+import {Swiper, SwiperSlide} from 'swiper/react';
 
 import 'swiper/scss';
 import 'swiper/scss/navigation';
@@ -21,7 +21,7 @@ const MainMovieList = () => {
     };
 
     const handleMovieNow = (index: number) => {
-        const { movieId } = movieList[index];
+        const {movieId} = movieList[index];
         setMovieNow(movieId);
     };
 
@@ -45,22 +45,19 @@ const MainMovieList = () => {
     return (
         <Swiper
             onSlideChange={(swiper) => handleMovieNow(swiper.realIndex)}
-            style={{ paddingLeft: '40px', paddingRight: '40px' }}
+            style={{paddingLeft: '40px', paddingRight: '40px'}}
             className="listSwiper"
             spaceBetween={40}
             slidesPerView={4}
             breakpoints={{
-                1100: {
+                1024: {
                     slidesPerView: 4,
                 },
-                1280: {
+                1460: {
                     slidesPerView: 5,
                 },
-                1600: {
-                    slidesPerView: 6,
-                },
                 1980: {
-                    slidesPerView: 7,
+                    slidesPerView: 6,
                 },
             }}
             slideToClickedSlide
@@ -82,7 +79,7 @@ const MainMovieList = () => {
                             filter: hover === index ? 'brightness(50%)' : 'brightness(100%)',
                         }}
                     >
-                        <img src={movieinfo.poster || ''} onError={onErrorImg} alt="" />
+                        <img src={movieinfo.poster || ''} onError={onErrorImg} alt=""/>
                         <Typography className="typo">{index + 1}</Typography>
                     </Box>
 
@@ -93,11 +90,11 @@ const MainMovieList = () => {
                         </Box>
                     )}
 
-                    <Box className="movieInfo" sx={{ fontFamily: 'NanumSquareRound' }}>
+                    <Box className="movieInfo" sx={{fontFamily: 'NanumSquareRound'}}>
                         <Typography>{movieinfo.nameKR}</Typography>
                         <Box className="rankInfo">
                             <Typography>예매율 : {movieinfo.reservationRate}% | </Typography>
-                            <Star sx={{ marginLeft: '5px', marginRight: '5px', color: '#aacafd' }} />
+                            <Star sx={{marginLeft: '5px', marginRight: '5px', color: '#aacafd'}}/>
                             <Typography> {movieinfo.netizenAvgRate}</Typography>
                         </Box>
                     </Box>

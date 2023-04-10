@@ -1,0 +1,521 @@
+.bookCover {
+	background-color: gainsboro;
+	width: 90vw;
+	height: 75vh;
+	
+	border: 2px solid whitesmoke;
+	border-radius: 10px;
+	
+	display: flex;
+	flex-direction: row;
+	
+	.bookDateShowTimeCover {
+		width: 100%;
+		height: 95%;
+		padding-right: 20px;
+	}
+}
+
+.bookMovieCover {
+	width: 100%;
+	height: 95%;
+	padding-left: 20px;
+	
+	.Mui-focused {
+		background-color: gray;
+		color: white;
+	}
+	
+	.searchField {
+		font-size: 20px;
+		width: 100%;
+		height: 40px;
+		border: 1px solid black;
+		margin-bottom: 15px;
+		border-radius: 5px;
+		
+		input {
+			padding-left: 10px;
+			padding-right: 10px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap
+		}
+		
+	}
+	
+	.movielistCover {
+		height: 65%;
+		overflow-y: scroll;
+		padding-left: 10px;
+		padding-right: 10px;
+		
+		border: 2px solid grey;
+		
+		.movieButton {
+			margin-top: 5px;
+			width: 100%;
+			color: black;
+			font-size: 15px;
+			border: 1px solid grey;
+			
+			&:hover {
+				background-color: #aacafd;
+			}
+		}
+		
+		.active {
+			color: white;
+			background-color: darkgray;
+		}
+		
+		&::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+			
+			border-radius: 6px;
+			background: rgba(255, 255, 255, 0.4);
+		}
+		
+		&::-webkit-scrollbar-thumb {
+			background-color: rgba(0, 0, 0, 0.3);
+			border-radius: 6px;
+		}
+		
+		.searchNone {
+			width: 100%;
+			height: 100%;
+			padding-top: 40%;
+			text-align: center;
+			font-size: 20px;
+			color: black;
+		}
+	}
+	
+	.movieFilterCover {
+		margin-top: 10px;
+		width: 100%;
+		
+		display: flex;
+		text-align: center;
+		
+		.filterCover {
+			width: 100px;
+			margin: auto;
+			
+			&:hover {
+				filter: brightness(70%);
+				cursor: pointer;
+			}
+		}
+		
+		.filterImg {
+			width: 100px;
+			height: 150px;
+		}
+		
+		.filterMovie {
+			width: 100px;
+			font-size: 12px;
+			color: black;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+}
+
+.bookTheaterCover {
+	width: 100%;
+	height: 95%;
+	padding-left: 20px;
+	padding-right: 20px;
+	
+	.Mui-focused {
+		background-color: gray;
+		color: white;
+	}
+	
+	.searchField {
+		font-size: 20px;
+		width: 100%;
+		height: 40px;
+		border: 1px solid black;
+		margin-bottom: 15px;
+		border-radius: 5px;
+		
+		input {
+			padding-left: 10px;
+			padding-right: 10px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+	
+	.MuiToggleButtonGroup-root {
+		width: 100%;
+		height: 10%;
+		margin-bottom: 5px;
+		
+		.MuiToggleButton-root {
+			width: 100%;
+			border: 2px solid black;
+			
+			&:hover {
+				background-color: #aacafd;
+			}
+			
+			img {
+				width: 70px;
+				height: 50px;
+			}
+		}
+		
+		.Mui-selected {
+			background-color: gray;
+		}
+	}
+	
+	.cityBrchCover {
+		height: 65%;
+		width: 100%;
+		
+		display: flex;
+		
+		border: 1px solid grey;
+		
+		.cityCover {
+			height: 100%;
+			width: 32%;
+			overflow-y: scroll;
+			
+			&::-webkit-scrollbar {
+				width: 8px;
+				height: 8px;
+				
+				border-radius: 6px;
+				background: rgba(255, 255, 255, 0.4);
+			}
+			
+			&::-webkit-scrollbar-thumb {
+				background-color: rgba(0, 0, 0, 0.3);
+				border-radius: 6px;
+			}
+			
+			.city {
+				width: 100%;
+				height: 50px;
+				border: 1px solid grey;
+				border-radius: 0px;
+				color: black;
+				
+				&:hover {
+					background-color: #aacafd;
+				}
+			}
+			
+			.active {
+				color: white;
+				background-color: darkgray;
+			}
+		}
+		
+		.brchCover {
+			height: 100%;
+			width: 100%;
+			
+			overflow-y: scroll;
+			display: flex;
+			flex-direction: column;
+			
+			
+			&::-webkit-scrollbar {
+				width: 8px;
+				height: 8px;
+				
+				border-radius: 6px;
+				background: rgba(255, 255, 255, 0.4);
+			}
+			
+			&::-webkit-scrollbar-thumb {
+				background-color: rgba(0, 0, 0, 0.3);
+				border-radius: 6px;
+			}
+			
+			.brch {
+				width: 100%;
+				text-align: left;
+				border: 1px solid gray;
+				border-radius: 0px;
+				
+				.brchName {
+					color: black;
+					margin-left: 10px;
+					margin-right: auto;
+				}
+				
+				.theaterImg {
+					height: 20px;
+					width: 30px;
+				}
+				
+				&:hover {
+					background-color: #aacafd;
+				}
+			}
+			
+			.active {
+				.brchName {
+					color: white;
+				}
+				
+				background-color: darkgray;
+			}
+			
+			.searchNone {
+				margin: auto;
+				margin-top: 50%;
+				color: black;
+				font-size: 20px;
+			}
+		}
+	}
+	
+	.filterCover {
+		width: 100%;
+		display: flex;
+		margin-top: 20px;
+		align-items: center;
+		align-content: center;
+		text-align: center;
+		
+		.filterBox {
+			width: 100px;
+			margin: auto;
+			
+			img {
+				width: 80px;
+				height: 60px;
+			}
+			
+			.brchFilterName {
+				color: black;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			
+			&:hover {
+				background-color: grey;
+				border-radius: 10px;
+				cursor: pointer;
+				filter: brightness(60%);
+			}
+		}
+		
+	}
+}
+
+.bookDateCover {
+	width: 100%;
+	
+	.dateSwiper {
+		border: 1px solid black;
+		margin: 0px;
+		text-align: center;
+		overflow: hidden;
+		width: 30vw;
+		
+		.dateSlide {
+			width: 50px;
+			display: flex;
+			
+			.dateButton {
+				margin: auto;
+				font-size: 8px;
+				font-weight: bold;
+				color: black;
+				display: flex;
+				flex-direction: column;
+				height: 70px;
+				width: 30px;
+				text-align: center;
+				
+				&:hover {
+					background-color: #aacafd;
+				}
+			}
+			
+			.sat {
+				color: #233CA3;
+			}
+			
+			.sun {
+				color: #AD2727;
+			}
+			
+			.active {
+				background-color: darkgray;
+				filter: brightness(110%);
+			}
+		}
+		
+		
+		.swiper-button-next {
+			color: white;
+			--swiper-navigation-size: 20px;
+		}
+		
+		.swiper-button-prev {
+			color: white;
+			--swiper-navigation-size: 20px;
+		}
+	}
+	
+	.filterCover {
+		margin-top: 10px;
+		text-align: center;
+		width: 100%;
+		border: 1px solid gray;
+		
+		.selectDate {
+			font-size: 30px;
+			font-weight: bolder;
+			color: black;
+		}
+		
+		.sat {
+			color: #233CA3;
+		}
+		
+		.sun {
+			color: #AD2727;
+		}
+	}
+}
+
+.showTimeListCover {
+	overflow-y: scroll;
+	height: 70%;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid gray;
+	
+	.showTimeBox {
+		margin-left: 20px;
+		margin-right: 20px;
+		color: black;
+		
+		.movieBrchCover {
+			.movieBrchName {
+				display: flex;
+				margin-bottom: auto;
+				margin-top: auto;
+				
+				.movieTitle {
+					margin-right: 20px;
+					font-size: 18px;
+				}
+				
+				.brchName {
+					margin-top: auto;
+					margin-bottom: auto;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+				
+				img {
+					margin-top: auto;
+					margin-bottom: auto;
+					width: 30px;
+					height: 20px;
+				}
+			}
+			
+			
+			.nameImg {
+				display: flex;
+				flex-direction: row;
+				font-size: 8px;
+				
+			}
+		}
+		
+		.showTimeCover {
+			display: flex;
+			flex-direction: row;
+			text-align: center;
+			flex-wrap: wrap;
+			
+			.showTimeButton {
+				margin: 5px;
+				display: flex;
+				flex-direction: column;
+				color: black;
+				border: 1px solid gray;
+				
+				&:hover {
+					background-color: #aacafd;
+				}
+			}
+			
+			.active {
+				background-color: gray;
+				color: white;
+			}
+		}
+		
+		.divide {
+			margin-top: 10px;
+			margin-bottom: 10px;
+			background-color: gray;
+		}
+	}
+	
+	&::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+		
+		border-radius: 6px;
+		background: rgba(255, 255, 255, 0.4);
+	}
+	
+	&::-webkit-scrollbar-thumb {
+		background-color: rgba(0, 0, 0, 0.3);
+		border-radius: 6px;
+	}
+}
+
+.submitButtonCover {
+	width: 100%;
+	margin-top: 30px;
+	display: flex;
+	text-align: center;
+	
+	
+	.button {
+		border: 2px solid gray;
+		color: black;
+		margin: auto;
+		width: 40%;
+		height: 5%;
+		
+		&:hover {
+			background-color: #aacafd;
+		}
+	}
+	
+	.activeAddr {
+		background-color: darkblue;
+		color: white;
+		filter: brightness(90%);
+	}
+	
+	.activeTicketPage {
+		background-color: darkred;
+		color: white;
+		filter: brightness(90%);
+	}
+}
