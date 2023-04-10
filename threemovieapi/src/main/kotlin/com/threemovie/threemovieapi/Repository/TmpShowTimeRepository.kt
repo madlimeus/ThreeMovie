@@ -12,9 +12,12 @@ interface TmpShowTimeRepository : JpaRepository<TmpShowTime, ShowTimePK> {
 	@Modifying
 	@Query(value = "truncate TmpShowTimes", nativeQuery = true)
 	fun truncateTmpShowTime()
-
+	
 	@Transactional
 	@Modifying
-	@Query(value = "RENAME TABLE ShowTimes TO BeforeShowTimes, TmpShowTimes TO ShowTimes, BeforeShowTimes TO TmpShowTimes", nativeQuery = true)
+	@Query(
+		value = "RENAME TABLE ShowTimes TO BeforeShowTimes, TmpShowTimes TO ShowTimes, BeforeShowTimes TO TmpShowTimes",
+		nativeQuery = true
+	)
 	fun chgShowTimeTable()
 }

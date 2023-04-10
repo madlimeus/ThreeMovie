@@ -2,11 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/UserRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/config/EmailConfig.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/resources/application-smtp-config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/Scheduler/ShowTimeScheduler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/Scheduler/ShowTimeScheduler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/UserInfo.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/UserLogin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/UserSignUpAuth.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/UserInfoRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/UserLoginRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/UserSingUpAuthRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/config/EncoderConfig.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Recoil/Atom/loadingAtom.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/TmpShowTimeRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/TmpShowTimeRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/UserRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/e/1edfbe9b6183065e53bf6d7f51357b0f04b3703e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/7/8721e3771ad09102ac71e1d028f1b5a4fdc58f46" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -44,34 +51,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;Y:/ThreeMovie/threemovieweb/src/assets/images&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;Y:\\ThreeMovie\\threemovieweb\\node_modules\\eslint&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;Y:\\ThreeMovie\\threemovieweb\\node_modules\\prettier&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;Y:\\ThreeMovie\\threemovieweb\\node_modules\\typescript\\lib&quot;,
-    &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "code.cleanup.on.save": "true",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "Y:/ThreeMovie/threemovieweb/src/Recoil/Atom",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\eslint",
+    "node.js.selected.package.standard": "",
+    "nodejs_package_manager_path": "yarn",
+    "prettierjs.PrettierConfiguration.Package": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\prettier",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "preferences.general",
+    "ts.external.directory.path": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\typescript\\lib",
+    "typescript.add.unambiguous.imports.on.the.fly": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="Y:\ThreeMovie\threemovieweb\src\Recoil\Atom" />
       <recent name="Y:\ThreeMovie\threemovieweb\src\assets\images" />
       <recent name="Y:\ThreeMovie\threemovieweb\src\interfaces" />
-      <recent name="Y:\ThreeMovie\threemovieweb\src\Recoil\Atom" />
       <recent name="Y:\ThreeMovie\threemovieweb\src\pages\MovieDetail" />
       <recent name="Y:\ThreeMovie\threemovieweb\src\assets\icons" />
     </key>
@@ -120,7 +127,7 @@
       <workItem from="1680957469588" duration="7298000" />
       <workItem from="1681007055275" duration="3129000" />
       <workItem from="1681037403347" duration="2564000" />
-      <workItem from="1681102307027" duration="679000" />
+      <workItem from="1681102307027" duration="1963000" />
     </task>
     <servers />
   </component>
