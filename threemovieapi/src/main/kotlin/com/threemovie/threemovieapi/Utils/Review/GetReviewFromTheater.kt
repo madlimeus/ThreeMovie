@@ -1,125 +1,231 @@
 package com.threemovie.threemovieapi.Utils.Review
 
 
+import com.threemovie.threemovieapi.Entity.DTO.MovieNameInfoDTO
+import com.threemovie.threemovieapi.Entity.MovieInfo
+import com.threemovie.threemovieapi.Entity.MovieReview
+import com.threemovie.threemovieapi.Repository.MovieInfoRepository
+import com.threemovie.threemovieapi.Repository.MovieReviewRepository
 import com.threemovie.threemovieapi.Service.impl.MovieInfoServiceimpl
+import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.springframework.stereotype.Component
-
+import com.threemovie.threemovieapi.Utils.CalcSimilarity
+import com.threemovie.threemovieapi.Utils.CalcSimilarity.Companion.calcSimilarity
+import org.json.JSONArray
+import javax.swing.text.Document
 
 @Component
 class GetReviewFromTheater(
-	val movieInfoService: MovieInfoServiceimpl
-) {
-	val userAgent: String =
-		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
-	val CGVurl = "http://www.cgv.co.kr/"
-	val mCGVurl = "https://m.cgv.co.kr/"
+    val movieInfoService: MovieInfoServiceimpl,
+    val movieReviewRepository: MovieReviewRepository,
 
-	fun getOneMovieUrlCGV(movieName: String?): String {
-		var result: String?
-		val url = CGVurl + "search/?query=${movieName}"
-		val conn = Jsoup.connect(url)
-		val html = conn.get()
-		val movieUrl = html.select("ul.preOrderMovie_list").select("a.img_wrap").attr("href")
+    ) {
+//MB 에서 MovieList 뽑아 오는 과정에서 줄거리에 " 가 들어 가서 JSON 으로 파싱이 안되는 문제 : getMovieListMB
+    val userAgent: String =
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
 
-		val cgvMovieid = movieUrl.split("=")
-		if (cgvMovieid.size > 0) {
-			result = cgvMovieid.get(cgvMovieid.size - 1)
-		} else {
-			result = "no review"
-		}
-		return result
-	}
+    var movieList = HashMap<String, String?>()
 
-	fun getMovieListDB(): HashMap<String, String?> {
-		val movieList = movieInfoService.getMovieInfo()
-		var resultHashMap = HashMap<String, String?>()
-		for (oneMovie in movieList) {
-			resultHashMap[oneMovie.movieId] = oneMovie.nameKR
-		}
-		return resultHashMap
-	}
+    fun getMovieListDB() : HashMap<String, String?>{
+        val movieList = movieInfoService.getMovieInfo()
+        var resultHashMap = HashMap<String, String?>()
+        for(oneMovie in movieList){
+            resultHashMap[oneMovie.movieId] = oneMovie.nameKR
+        }
+        return resultHashMap
+    }
 
-	fun getReviewCGV() {
-//		val movieList = getMovieListDB()
-//		val movieIdx = getOneMovieUrlCGV("스즈메의 문단속")
-//
-//
-//        for (tmp in movieList) {
-//            if (! getOneMovieUrlCGV(tmp.value).equals(null)) {
-//                val movieIdx = getOneMovieUrlCGV(tmp.value)
-//                val url = "https://moviestory.cgv.co.kr/fanpage/movieCommentsList"
-//                println("111111111")
-//                val paramlist = HashMap<String, String>()
-//                paramlist["filterType"] = "0"
-//                paramlist["maxCmtIdx"] = "0"
-//                paramlist["movieIdx"] = movieIdx
-//                paramlist["orderType"] = "1"
-//                paramlist["pageSize"] = "10"
-//                paramlist["pageStart"] = "1"
-//                println("222222222")
-//                val conn = Jsoup.connect(url)
-//                    .userAgent(userAgent)
-//                    .data(paramlist)
-//                    .ignoreContentType(true)//에러나면 추가
-//                println("333333333")
-//
-//                val html = conn.post()
-//                println(html)
-//            }
-//        }
-		val headers = HashMap<String, String>()
-		headers["origin"] = "https://moviestory.cgv.co.kr"
-		headers["referer"] = "https://moviestory.cgv.co.kr"
-		headers["accept"] = "application/json, text/javascript, */*; q=0.01"
-		headers["accept-encoding"] = "gzip, deflate, br"
-		headers["accept-language"] = "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"
-		headers["content-type"] = "application/json; charset=UTF-8"
-		headers["origin"] = "https://moviestory.cgv.co.kr"
-		headers["referer"] = "https://moviestory.cgv.co.kr"
-		headers["cookie"] = "JESSIONID=test;"
-		headers["x-requested-with"] = "XMLHttpRequest"
-		headers["sec-ch-ua"] = "\"Google Chrome\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\""
-		headers["sec-ch-ua-mobile"] = "?1"
-		headers["sec-ch-ua-platform"] = "\"Android\""
-		headers["sec-fetch-mode"] = "cors"
-		headers["sec-fetch-site"] = "same-origin"
+    fun usePostApiLC(url: String, paramList: HashMap<String, Any>): String{
+        val conn = Jsoup.connect(url)
+            .userAgent(userAgent)
+            .data("paramList", JSONObject(paramList).toString())
+            .ignoreContentType(true)//에러나면 추가
+        val doc = conn.post().text()
+        return doc
+    }
+
+    fun usePostApiMB(url: String, paramList: HashMap<String, String>): String{
+        val conn = Jsoup.connect(url)
+            .userAgent(userAgent)
+            .data(paramList)
+            .ignoreContentType(true)//에러나면 추가
+        val doc = conn.post().text()
+        return convertStringUnicodeToKorean(doc)
+    }
 
 
-		val paramlist = HashMap<String, String>()
-		paramlist["filterType"] = "0"
-		paramlist["maxCmtIdx"] = "10"
-		paramlist["movieIdx"] = "86720"
-		paramlist["orderType"] = "1"
-		paramlist["pageSize"] = "10"
-		paramlist["pageStart"] = "1"
-		val url = "https://moviestory.cgv.co.kr/fanpage/movieCommentsList"
-		val conn = Jsoup.connect(url)
-			.headers(headers)
-			.userAgent(userAgent)
-			.data(paramlist)
-			.ignoreContentType(true)
+    fun getMovieListLC(): HashMap<String, String>{
+        val url = "https://www.lottecinema.co.kr/LCWS/Movie/MovieData.aspx"
+        val paramList = HashMap<String, Any>()
+        var movieListLC = HashMap<String, String>()
+        paramList["MethodName"] = "GetMoviesToBe"
+        paramList["channelType"] = "MW"
+        paramList["osType"] = "Chrome"
+        paramList["osVersion"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
+        paramList["multiLanguageID"] = "KR"
+        paramList["division"] = 1
+        paramList["moviePlayYN"] = "Y"
+        paramList["orderType"] = 5
+        paramList["blockSize"] = 1000
+        paramList["pageNo"] = 1
+        paramList["memberOnNo"] = ""
 
-		println("start")
-		val html = conn.post()
-		println(html)
+        var movieLC = usePostApiLC(url, paramList)
+        var arr_movieList_tmp = JSONObject(JSONObject(movieLC).get("Movies").toString()).getJSONArray("Items")
+        for(json_tmp in arr_movieList_tmp){
+            var similarity : Double = 0.0
+            val movieNameLC = JSONObject(json_tmp.toString()).get("MovieNameKR").toString()
+            for(arr_tmp in movieList){
+                val tmpSimilarity = calcSimilarity(arr_tmp.value, movieNameLC)
+                if(similarity < tmpSimilarity){
+                    similarity = tmpSimilarity
+                    if(similarity > 0.7){
+                        movieListLC[arr_tmp.key] = JSONObject(json_tmp.toString()).get("RepresentationMovieCode").toString()
+                    }
+                }
+            }
+        }
 
+        return movieListLC
+    }
 
-	}
+    fun getReviewLT(){
+        val movieListLT = getMovieListLC()
+        val url = "https://www.lottecinema.co.kr/LCWS/Movie/MovieData.aspx"
+        val paramList = HashMap<String, Any>()
+        paramList["MethodName"] = "GetReviews"
+        paramList["channelType"] = "HO"
+        paramList["osType"] = "Chrome"
+        paramList["osVersion"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
+        paramList["memberID"] = ""
+        paramList["realReviewYN"] = "Y"
+        paramList["sortSeq"] = 3
+        paramList["pageNo"] = 1
+        paramList["pageSize"] = 10
+        println(movieListLT.size)
+        for(movie_tmp in movieListLT){
+            paramList["representationMovieCode"] = movie_tmp.value.toString()
+            val LT_MovieInfo = JSONObject(JSONObject(usePostApiLC(url, paramList).toString()).get("TotalReviewItems").toString()).getJSONArray("Items")
+            val MovieId = movie_tmp.key
+            for(oneReview in LT_MovieInfo){
+                val member_MovieReview = MovieReview(
+                    MovieId,
+                    JSONObject(oneReview.toString()).get("RecommandCount").toString(),
+                    JSONObject(oneReview.toString()).get("RegistDate").toString().replace(".", ""),
+                    JSONObject(oneReview.toString()).get("ReviewText").toString(),
+                    "LC",
+                )
+                val res = movieReviewRepository.save(member_MovieReview)
+//                println(MovieId + " " + oneReview.toString())
+            }
+//            println(movie_tmp.key + " " + LT_MovieInfo.length().toString() + " " + LT_MovieInfo.toString())
+        }
+    }
 
+    fun convertStringUnicodeToKorean(data: String): String {
+        val sb = StringBuilder() // 단일 쓰레드이므로 StringBuilder 선언
+        var i = 0
+        while (i < data.length) {
+            if (data[i] == '\\' && data[i + 1] == 'u') {
+                val word = data.substring(i + 2, i + 6).toInt(16).toChar()
+                sb.append(word)
+                i += 5
+            } else {
+                sb.append(data[i])
+            }
+            i++
+        }
+        return sb.toString()
+    }
 
-	fun getReviewCGV_bak() {
-		val url = mCGVurl + "WebAPP/MovieV4/movieList.aspx?mtype=now&iPage=1"
-		val conn = Jsoup.connect(url)
-		val html = conn.get()
-		val movieList = html.select("div.main_movie_list.clsAjaxList").select("div.mm_list_item")
+    fun getMovieListMB(): HashMap<String, String>{
+        val url = "https://www.megabox.co.kr/on/oh/oha/Movie/selectMovieList.do"
+        val paramList = HashMap<String, String>()
+        var movieListMB = HashMap<String, String>()
+        paramList["currentPage"] = "1"
+        paramList["ibxMovieNmSearch"] = ""
+        paramList["onairYn"] = "Y"
+        paramList["pageType"] = "ticketing"
+        paramList["recordCountPerPage"] = "100"
+        paramList["specialType"] = ""
+        paramList["specialYn"] = "N"
 
-		for (tmp in movieList) {
-			val split_tmp = tmp.attr("class").split("_")
-			val idCGV = split_tmp.get(split_tmp.size - 1)
-			println(idCGV)
+        var movieMB = usePostApiMB(url, paramList)
+        val split_movieMB = movieMB.split("\"")
 
-		}
+        var tmpMovieListMB = HashMap<String, String>()
+        var movieNo : String = ""
+        var movieNm : String = ""
+        for(i in 1 until split_movieMB.size){
+            if(split_movieMB[i].equals("movieNo")){
+                movieNo = split_movieMB[i+2]
+            } else if(split_movieMB[i].equals("movieNm")){
+                movieNm = split_movieMB[i+2]
+                tmpMovieListMB[movieNm] = movieNo
+            }
+        }
+//        println(tmpMovieListMB)
+        for(movie_tmp in tmpMovieListMB){
+            var similarity : Double = 0.0
+            val movieNameMB = movie_tmp.key
+            for(arr_tmp in movieList){
+                val tmpSimilarity = calcSimilarity(arr_tmp.value, movieNameMB)
+                if(similarity < tmpSimilarity){
+                    similarity = tmpSimilarity
+                    if(similarity > 0.7){
+                        movieListMB[arr_tmp.key] = movie_tmp.value
+                    }
+                }
+            }
+        }
+        return movieListMB
+    }
 
-	}
+    fun getReviewMB(){
+        val movieListMB = getMovieListMB()
+//        println(movieListMB)
+        val url = "https://www.megabox.co.kr/on/oh/oha/Movie/selectOneLnList.do"
+        val paramList = HashMap<String, String>()
+        paramList["currentPage"] = "1"
+        paramList["onelnEvalDivCd"] = ""
+        paramList["orderCd"] = "one"
+        paramList["recordCountPerPage"] = "10"
+
+        for(movie_tmp in movieListMB){
+            paramList["movieNo"] = movie_tmp.value
+            val MovieId = movie_tmp.key
+            var LT_MovieInfo = JSONArray()
+            try{
+                LT_MovieInfo = JSONObject(usePostApiMB(url, paramList)).getJSONArray("list")
+            } catch(e: Exception){
+                println(MovieId)
+                continue
+            }
+            for(oneReview in LT_MovieInfo){
+                val member_MovieReview = MovieReview(
+                    MovieId,
+                    JSONObject(oneReview.toString()).get("rcmmCnt").toString(),
+                    JSONObject(oneReview.toString()).get("fullLstUptDt").toString().split(" ")[0].replace(".", ""),
+                    JSONObject(oneReview.toString()).get("onelnEvalCn").toString(),
+                    "MB",
+                )
+                try{
+                    val res = movieReviewRepository.save(member_MovieReview)
+                } catch(e: Exception){
+                    println("is error")
+                    println(MovieId)
+
+                }
+            }
+            println("===============================================================================")
+        }
+    }
+
+    fun getReview(){
+        movieList = getMovieListDB()
+        getReviewLT()
+        getReviewMB()
+    }
 }
+
