@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/UserInfo.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/UserLogin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/UserSignUpAuth.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/UserInfoRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/UserLoginRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/UserSingUpAuthRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/config/EncoderConfig.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recoil/Atom/loadingAtom.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/TmpShowTimeRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/TmpShowTimeRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/UserRepository.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/e/1edfbe9b6183065e53bf6d7f51357b0f04b3703e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/7/8721e3771ad09102ac71e1d028f1b5a4fdc58f46" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/config/SecurityConfig.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
