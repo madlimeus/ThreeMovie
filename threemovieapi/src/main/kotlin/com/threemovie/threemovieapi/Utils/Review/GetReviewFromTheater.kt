@@ -6,7 +6,7 @@ import com.threemovie.threemovieapi.Entity.MovieInfo
 import com.threemovie.threemovieapi.Entity.MovieReview
 import com.threemovie.threemovieapi.Repository.MovieInfoRepository
 import com.threemovie.threemovieapi.Repository.MovieReviewRepository
-import com.threemovie.threemovieapi.service.impl.MovieInfoServiceimpl
+import com.threemovie.threemovieapi.Service.impl.MovieInfoServiceimpl
 import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.springframework.stereotype.Component

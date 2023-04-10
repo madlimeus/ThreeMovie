@@ -2,8 +2,8 @@ package com.threemovie.threemovieapi.service.impl
 
 import com.threemovie.threemovieapi.Entity.MoviePreview
 import com.threemovie.threemovieapi.Repository.MoviePreviewRepository
+import com.threemovie.threemovieapi.Service.MoviePreviewService
 import com.threemovie.threemovieapi.Utils.GET_DATA_USE_DAUM_API.Companion.GET_DATA_USE_DAUM_API
-import com.threemovie.threemovieapi.service.MoviePreviewService
 import org.json.JSONObject
 import org.springframework.stereotype.Service
 import java.net.URI
