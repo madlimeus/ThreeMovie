@@ -73,3 +73,9 @@ U
 %src/Recoil/Atom/bookTicketPageAtom.ts,7\0\700ca8dbe26dd85ab4afbd9b77960306e8ef64b7
 M
 src/style/scss/_bookinfo.scss,8\c\8cda8fdcd605648fa24174c87454a3f86c81168f
+P
+ src/style/scss/_moviedetail.scss,f\f\ff7699c9672986e96091f45139a489d3434ced91
+K
+src/style/scss/_navbar.scss,7\a\7ad9b000798b6c76e8391dd3a8e9a040ec638ea4
+J
+src/style/scss/_login.scss,5\3\53c28248b0b8bcc5124ad4a4c8baf1d50a4361a7

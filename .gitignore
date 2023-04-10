@@ -2,3 +2,4 @@ threemovieweb/package-lock.json
 threemovieweb/yarn.lock
 
 threemovieapi/src/main/resources/application-db-config.properties
+threemovieapi/src/main/resources/application-smtp-config.properties

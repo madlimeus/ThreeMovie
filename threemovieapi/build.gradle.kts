@@ -22,6 +22,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-mustache")
 	implementation("org.springframework.boot:spring-boot-starter-graphql")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -33,6 +35,10 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
 	implementation("org.json:json:20230227")
+	implementation("com.bucket4j:bucket4j-core:8.1.0")
+	implementation("com.bucket4j:bucket4j-jcache:8.1.0")
+	implementation("org.ehcache:ehcache:3.10.8")
+	
 	kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
 }
 

@@ -2,26 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/images/loginBackground.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/style/scss/_login.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/3/23cad4f3906963f382dd462ae37d80daee331c0f" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/3/23cad4f3906963f382dd462ae37d80daee331c0f" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/d/6d6dc2833cb78e4b09b17c86f9541392c2ab3f35" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/a/7ad9b000798b6c76e8391dd3a8e9a040ec638ea4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/b/7b0cb6dff453e9e332b6987b0a3f84efa49ee9d0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/e/7e122b85d042e428229a7db38623d6877239349a" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/e/7e122b85d042e428229a7db38623d6877239349a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/0/9019ab1bc2d4b71cde39ac6dbf5ceec58599db91" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/8/b8d837568150cda80a1123e44ee83a81ae89bbad" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/0/d02c5534eea1201c9513db9943359882d6cacf39" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/0/d02c5534eea1201c9513db9943359882d6cacf39" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/b/ebe2deab6e6e8e89a185b8557bc5d1e40acfe025" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/f/ff7699c9672986e96091f45139a489d3434ced91" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/UserRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/config/EmailConfig.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/resources/application-smtp-config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/Scheduler/ShowTimeScheduler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/Scheduler/ShowTimeScheduler.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Routes/AppRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/AppRouter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/BookInfo/BookShowTimeList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/BookInfo/BookShowTimeList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/BookInfo/BookSubmit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/BookInfo/BookSubmit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/User/Login/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/User/Login/LoginPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/global.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/global.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/scss/_bookinfo.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/scss/_bookinfo.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,29 +44,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "code.cleanup.on.save": "true",
-    "js.linters.configure.manually.selectedeslint": "true",
-    "last_opened_file_path": "Y:/ThreeMovie/threemovieweb/src/assets/images",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\eslint",
-    "node.js.selected.package.standard": "",
-    "nodejs_package_manager_path": "yarn",
-    "prettierjs.PrettierConfiguration.Package": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\prettier",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "preferences.general",
-    "ts.external.directory.path": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\typescript\\lib",
-    "typescript.add.unambiguous.imports.on.the.fly": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;Y:/ThreeMovie/threemovieweb/src/assets/images&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;Y:\\ThreeMovie\\threemovieweb\\node_modules\\eslint&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;Y:\\ThreeMovie\\threemovieweb\\node_modules\\prettier&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;Y:\\ThreeMovie\\threemovieweb\\node_modules\\typescript\\lib&quot;,
+    &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="Y:\ThreeMovie\threemovieweb\src\assets\images" />
@@ -131,7 +118,9 @@
       <workItem from="1680756163151" duration="40370000" />
       <workItem from="1680842354380" duration="36182000" />
       <workItem from="1680957469588" duration="7298000" />
-      <workItem from="1681007055275" duration="2781000" />
+      <workItem from="1681007055275" duration="3129000" />
+      <workItem from="1681037403347" duration="2564000" />
+      <workItem from="1681102307027" duration="679000" />
     </task>
     <servers />
   </component>

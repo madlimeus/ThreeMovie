@@ -53,6 +53,7 @@ class ShowingTimeScheduler(
 			
 			tmpShowTimeRepository.saveAll(showTimeList)
 			tmpShowTimeRepository.chgShowTimeTable()
+			tmpShowTimeRepository.truncateTmpShowTime()
 			updateTimeRepositorySupport.updateShowTime(ChkNeedUpdate.retFormatterTime())
 		}
 	}
