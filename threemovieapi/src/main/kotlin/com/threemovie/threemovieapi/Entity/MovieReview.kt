@@ -8,19 +8,19 @@ import jakarta.persistence.Table
 @Entity
 @Table(name = "MovieReview")
 data class MovieReview(
-	@Id
-	@Column(name = "MovieId")
-	val movieId: String = "",
 
-	@Column(name = "MovieTheater")
-	val movieTheater: String = "",
+    @Column(name = "MovieId")
+    val movieId: String = "",
 
-	@Column(name = "Recommendation")
-	val recommendation: String? = "",
+    @Column(name = "Recommendation")
+    val recommendation: String? = "",
 
-	@Column(name = "Date")
-	val date: String? = "",
+    @Column(name = "Date")
+    val date: String? = "",
+    @Id
+    @Column(name = "Review")
+    val review: String? = "",
 
-	@Column(name = "Review")
-	val review: String? = "",
+    @Column(name = "MovieTheater")
+    val movieTheater: String? = "",
 )

@@ -2,6 +2,7 @@ package com.threemovie.threemovieapi.Service.impl
 
 import com.threemovie.threemovieapi.Service.MovieDataControlService
 import com.threemovie.threemovieapi.Utils.GET_DATA_USE_DAUM_API.Companion.GET_DATA_USE_DAUM_API
+import com.threemovie.threemovieapi.service.impl.MoviePreviewServiceimpl
 import org.json.JSONObject
 import org.springframework.stereotype.Service
 
