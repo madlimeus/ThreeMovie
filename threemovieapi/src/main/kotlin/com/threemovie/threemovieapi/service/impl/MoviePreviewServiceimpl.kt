@@ -44,7 +44,7 @@ class MoviePreviewServiceimpl(
                 val videoUrl = One_preview_json.get("videoUrl")
                 val str_tmp = videoUrl.toString()
                 val split_arr_tmp = str_tmp.split("/")
-                val iframeUrl = "https://play-tv.kakao.com/embed/player/cliplink/${split_arr_tmp[split_arr_tmp.size-1]}?service=player_share"
+                val iframeUrl = "https://play-tv.kakao.com/embed/player/cliplink/${split_arr_tmp[split_arr_tmp.size-1]}?service=player_share#clipCoverImagePanel"
                 videoUrl_list.add(iframeUrl)
             }
         }

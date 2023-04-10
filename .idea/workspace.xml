@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8d5caa7-84d9-4c3a-b7a6-90151f0c830a" name="Changes" comment="iframe 을 사용 하기 위해서 Trailer 에 저장 되는 주소를 변경">
+      <change afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/MovieReviewRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/MovieReviewService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/impl/MovieReviewServiceimpl.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/impl/MovieInfoServiceimpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/impl/MovieInfoServiceimpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/MovieReview.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/MovieReview.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/Review/GetReviewFromTheater.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/Review/GetReviewFromTheater.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/MovieDataController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/MovieDataController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/impl/MoviePreviewServiceimpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/service/impl/MoviePreviewServiceimpl.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +42,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Class" />
         <option value="Kotlin Interface" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -91,6 +97,11 @@
     &quot;spring.configuration.checksum&quot;: &quot;48cd2c94586386322d4b8bab4255d30d&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.threemovie.threemovieapi.Repository" />
+    </key>
+  </component>
   <component name="RunManager" selected="Spring Boot.ThreemovieapiApplication">
     <configuration name="build.gradle.kts" type="KotlinStandaloneScriptRunConfigurationType" temporary="true" nameIsGenerated="true">
       <module name="threemovieapi.test" />
@@ -130,7 +141,15 @@
       <workItem from="1675590831977" duration="330000" />
       <workItem from="1679901081535" duration="3469000" />
       <workItem from="1680013421113" duration="6719000" />
-      <workItem from="1680070732203" duration="4614000" />
+      <workItem from="1680070732203" duration="6121000" />
+      <workItem from="1680148528883" duration="4000" />
+      <workItem from="1680150360845" duration="836000" />
+      <workItem from="1680181338284" duration="11349000" />
+      <workItem from="1680432166075" duration="12973000" />
+      <workItem from="1680455470450" duration="73000" />
+      <workItem from="1680506756555" duration="1194000" />
+      <workItem from="1680612738666" duration="6197000" />
+      <workItem from="1681052127810" duration="454000" />
     </task>
     <task id="LOCAL-00001" summary="iframe 을 사용 하기 위해서 Trailer 에 저장 되는 주소를 변경">
       <created>1679902689149</created>

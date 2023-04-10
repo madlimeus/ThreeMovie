@@ -38,6 +38,6 @@ class MovieDataController(
 
 	@GetMapping("/review")
 	fun getreviewtest() {
-		GetReviewFromTheater.getReviewCGV()
+		GetReviewFromTheater.getReview()
 	}
 }
