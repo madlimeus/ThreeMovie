@@ -55,14 +55,10 @@ S
 #src/pages/BookInfo/BookBrchList.tsx,c\0\c08d15dce8a55bc56df03437ff7655cdb783a025
 U
 %src/Recoil/Atom/bookDateFilterAtom.ts,a\3\a36149438b13e479e99aee30f901e540e6f4ee7f
-U
-%src/Recoil/Atom/bookBrchFilterAtom.ts,8\7\8721e3771ad09102ac71e1d028f1b5a4fdc58f46
 S
 #src/pages/BookInfo/BookInfoPage.tsx,5\9\59fa7bd46657a026613900d58e95b677f0e42ecc
 Q
 !src/pages/BookInfo/BookSubmit.tsx,2\3\23cad4f3906963f382dd462ae37d80daee331c0f
-O
-src/Recoil/Atom/bookAddrAtom.ts,1\e\1edfbe9b6183065e53bf6d7f51357b0f04b3703e
 N
 src/interfaces/BookShowTime.ts,c\b\cbbf620aa40c466fbdfe887a18bc38d64e06bb8b
 W
