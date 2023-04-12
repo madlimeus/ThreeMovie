@@ -27,7 +27,7 @@ class TheaterDataScheduler(
 	@Async
 	@Scheduled(cron = "0 0 0/1 * * ?")
 	fun updateTheaterData() {
-		if (ChkNeedUpdate.chkUpdateTwelveHours(updateTimeRepositorySupport.getTheaterData())) {
+		if (ChkNeedUpdate.chkUpdateOneMinute(updateTimeRepositorySupport.getTheaterData())) {
 			var cgv = getCGVTheaters()
 			var mb = getMBTheaters()
 			var lc = getLCTheaters()
