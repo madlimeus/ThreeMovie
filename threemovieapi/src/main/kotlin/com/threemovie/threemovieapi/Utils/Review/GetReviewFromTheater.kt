@@ -1,26 +1,25 @@
 package com.threemovie.threemovieapi.Utils.Review
 
 
-import com.threemovie.threemovieapi.Entity.DTO.MovieNameInfoDTO
-import com.threemovie.threemovieapi.Entity.MovieInfo
 import com.threemovie.threemovieapi.Entity.MovieReview
-import com.threemovie.threemovieapi.Repository.MovieInfoRepository
 import com.threemovie.threemovieapi.Repository.MovieReviewRepository
+import com.threemovie.threemovieapi.Repository.Support.UpdateTimeRepositorySupport
 import com.threemovie.threemovieapi.Service.impl.MovieInfoServiceimpl
 import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.springframework.stereotype.Component
-import com.threemovie.threemovieapi.Utils.CalcSimilarity
 import com.threemovie.threemovieapi.Utils.CalcSimilarity.Companion.calcSimilarity
+import com.threemovie.threemovieapi.Utils.ChkNeedUpdate
 import org.json.JSONArray
-import javax.swing.text.Document
+import org.springframework.scheduling.annotation.Async
+import org.springframework.scheduling.annotation.Scheduled
 
 @Component
 class GetReviewFromTheater(
     val movieInfoService: MovieInfoServiceimpl,
     val movieReviewRepository: MovieReviewRepository,
-
-    ) {
+    val UpdateTimeRepositorySupport: UpdateTimeRepositorySupport,
+) {
 //MB 에서 MovieList 뽑아 오는 과정에서 줄거리에 " 가 들어 가서 JSON 으로 파싱이 안되는 문제 : getMovieListMB
     val userAgent: String =
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
@@ -103,7 +102,7 @@ class GetReviewFromTheater(
         paramList["sortSeq"] = 3
         paramList["pageNo"] = 1
         paramList["pageSize"] = 10
-        println(movieListLT.size)
+//        println(movieListLT.size)
         for(movie_tmp in movieListLT){
             paramList["representationMovieCode"] = movie_tmp.value.toString()
             val LT_MovieInfo = JSONObject(JSONObject(usePostApiLC(url, paramList).toString()).get("TotalReviewItems").toString()).getJSONArray("Items")
@@ -218,14 +217,20 @@ class GetReviewFromTheater(
 
                 }
             }
-            println("===============================================================================")
+//            println("===============================================================================")
+        }
+    }
+    @Async
+    @Scheduled(cron = "0 0 0/12 * * *")
+    fun getReview(){
+        if (ChkNeedUpdate.chkUpdateTwelveHours(UpdateTimeRepositorySupport.getReviewTime())) {
+            movieReviewRepository.truncate()
+            movieList = getMovieListDB()
+            getReviewLT()
+            getReviewMB()
+            UpdateTimeRepositorySupport.updateReviewTime(ChkNeedUpdate.retFormatterTime())
         }
     }
 
-    fun getReview(){
-        movieList = getMovieListDB()
-        getReviewLT()
-        getReviewMB()
-    }
 }
 
