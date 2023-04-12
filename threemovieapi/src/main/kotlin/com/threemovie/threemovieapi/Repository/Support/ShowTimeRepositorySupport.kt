@@ -3,6 +3,7 @@ package com.threemovie.threemovieapi.Repository.Support
 import com.querydsl.core.BooleanBuilder
 import com.querydsl.core.types.Projections
 import com.querydsl.core.types.dsl.BooleanExpression
+import com.querydsl.jpa.impl.JPAQueryFactory
 import com.threemovie.threemovieapi.Entity.DTO.ShowDateDTO
 import com.threemovie.threemovieapi.Entity.DTO.ShowMovieDTO
 import com.threemovie.threemovieapi.Entity.DTO.ShowTheaterDTO
@@ -11,13 +12,12 @@ import com.threemovie.threemovieapi.Entity.QMovieInfo
 import com.threemovie.threemovieapi.Entity.QShowTime
 import com.threemovie.threemovieapi.Entity.QTheaterData
 import com.threemovie.threemovieapi.Entity.ShowTime
-import com.threemovie.threemovieapi.config.QueryDslConfig
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 
 @Repository
 class ShowTimeRepositorySupport(
-	val query: QueryDslConfig
+	val query: JPAQueryFactory
 ) : QuerydslRepositorySupport(ShowTime::class.java) {
 	val movieInfo: QMovieInfo = QMovieInfo.movieInfo
 	val showTime: QShowTime = QShowTime.showTime
@@ -25,7 +25,7 @@ class ShowTimeRepositorySupport(
 	
 	fun getMovieList(): List<ShowMovieDTO> {
 		
-		return query.jpaQueryFactory()
+		return query
 			.select(
 				Projections.fields(
 					ShowMovieDTO::class.java,
@@ -52,7 +52,7 @@ class ShowTimeRepositorySupport(
 	
 	fun getTheaterList(movieFilter: List<String>?, dateFilter: List<String>?): List<ShowTheaterDTO> {
 		
-		return query.jpaQueryFactory()
+		return query
 			.select(
 				Projections.fields(
 					ShowTheaterDTO::class.java,
@@ -75,7 +75,7 @@ class ShowTimeRepositorySupport(
 	}
 	
 	fun getDateList(movieFilter: List<String>?, theaterFilter: List<Pair<String, String>>?): List<ShowDateDTO> {
-		return query.jpaQueryFactory()
+		return query
 			.select(
 				Projections.fields(
 					ShowDateDTO::class.java,
@@ -94,7 +94,7 @@ class ShowTimeRepositorySupport(
 		theaterFilter: List<Pair<String, String>>?,
 		dateFilter: List<String>?
 	): List<ShowTimeItemDTO> {
-		return query.jpaQueryFactory()
+		return query
 			.select(
 				Projections.fields(
 					ShowTimeItemDTO::class.java,

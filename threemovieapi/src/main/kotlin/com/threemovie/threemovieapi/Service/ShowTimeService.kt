@@ -1,6 +1,10 @@
 package com.threemovie.threemovieapi.Service
 
-import com.threemovie.threemovieapi.Entity.DTO.*
+import com.threemovie.threemovieapi.Entity.DTO.Request.FilterRequest
+import com.threemovie.threemovieapi.Entity.DTO.Response.ShowTheaterResponse
+import com.threemovie.threemovieapi.Entity.DTO.Response.ShowTimeResponse
+import com.threemovie.threemovieapi.Entity.DTO.ShowDateDTO
+import com.threemovie.threemovieapi.Entity.DTO.ShowMovieDTO
 
 interface ShowTimeService {
 	fun getMovieList(): List<ShowMovieDTO>

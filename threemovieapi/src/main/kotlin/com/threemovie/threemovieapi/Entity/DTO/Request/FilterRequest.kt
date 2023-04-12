@@ -1,4 +1,4 @@
-package com.threemovie.threemovieapi.Entity.DTO
+package com.threemovie.threemovieapi.Entity.DTO.Request
 
 data class FilterRequest(
 	val movieFilter: List<String>? = null,

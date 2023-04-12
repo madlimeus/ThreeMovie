@@ -1,6 +1,10 @@
 package com.threemovie.threemovieapi.controller
 
-import com.threemovie.threemovieapi.Entity.DTO.*
+import com.threemovie.threemovieapi.Entity.DTO.Request.FilterRequest
+import com.threemovie.threemovieapi.Entity.DTO.Response.ShowTheaterResponse
+import com.threemovie.threemovieapi.Entity.DTO.Response.ShowTimeResponse
+import com.threemovie.threemovieapi.Entity.DTO.ShowDateDTO
+import com.threemovie.threemovieapi.Entity.DTO.ShowMovieDTO
 import com.threemovie.threemovieapi.Service.impl.ShowTimeServiceImpl
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.QueryMapping

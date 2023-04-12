@@ -1,4 +1,4 @@
-package com.threemovie.threemovieapi.Entity.DTO
+package com.threemovie.threemovieapi.Entity.DTO.Response
 
 data class ShowTimeResponse(
 	val movieKR: String = "MT제작기",

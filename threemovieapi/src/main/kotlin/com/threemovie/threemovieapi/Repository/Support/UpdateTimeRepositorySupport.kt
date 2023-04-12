@@ -1,29 +1,29 @@
 package com.threemovie.threemovieapi.Repository.Support
 
+import com.querydsl.jpa.impl.JPAQueryFactory
 import com.threemovie.threemovieapi.Entity.QUpdateTime
 import com.threemovie.threemovieapi.Entity.UpdateTime
-import com.threemovie.threemovieapi.config.QueryDslConfig
 import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 
 @Repository
 class UpdateTimeRepositorySupport(
-	val query: QueryDslConfig
+	val query: JPAQueryFactory
 ) : QuerydslRepositorySupport(UpdateTime::class.java) {
 	val updateTime: QUpdateTime = QUpdateTime.updateTime
 	
-	fun getShowTime(): Long = query.jpaQueryFactory()
+	fun getShowTime(): Long = query
 		.select(QUpdateTime.updateTime.showTime)
 		.from(QUpdateTime.updateTime)
 		.fetchOne() ?: 0L
 	
-	fun getReviewTime(): Long = query.jpaQueryFactory()
+	fun getReviewTime(): Long = query
 		.select(QUpdateTime.updateTime.reviewTime)
 		.from(QUpdateTime.updateTime)
 		.fetchOne() ?: 0L
 	
-	fun getTheaterData(): Long = query.jpaQueryFactory()
+	fun getTheaterData(): Long = query
 		.select(QUpdateTime.updateTime.theaterData)
 		.from(QUpdateTime.updateTime)
 		.fetchOne() ?: 0L
@@ -34,7 +34,7 @@ class UpdateTimeRepositorySupport(
 
 	@Transactional
 	fun updateShowTime(newTime: Long): Unit {
-		query.jpaQueryFactory()
+		query
 			.update(updateTime)
 			.set(updateTime.showTime, newTime)
 			.execute()
@@ -42,7 +42,7 @@ class UpdateTimeRepositorySupport(
 	
 	@Transactional
 	fun updateReviewTime(newTime: Long): Unit {
-		query.jpaQueryFactory()
+		query
 			.update(updateTime)
 			.set(updateTime.reviewTime, newTime)
 			.execute()
@@ -50,7 +50,7 @@ class UpdateTimeRepositorySupport(
 	
 	@Transactional
 	fun updateTheaterData(newTime: Long): Unit {
-		query.jpaQueryFactory()
+		query
 			.update(updateTime)
 			.set(updateTime.theaterData, newTime)
 			.execute()

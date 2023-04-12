@@ -1,29 +1,29 @@
 package com.threemovie.threemovieapi.Repository.Support
 
 import com.querydsl.core.types.Projections
+import com.querydsl.jpa.impl.JPAQueryFactory
 import com.threemovie.threemovieapi.Entity.*
 import com.threemovie.threemovieapi.Entity.DTO.MovieDetailDTO
 import com.threemovie.threemovieapi.Entity.DTO.MovieListDTO
-import com.threemovie.threemovieapi.config.QueryDslConfig
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 
 @Repository
 class MovieInfoRepositorySupport(
-	val query: QueryDslConfig
+	val query: JPAQueryFactory
 ) : QuerydslRepositorySupport(MovieInfo::class.java) {
 	val moviePreview: QMoviePreview = QMoviePreview.moviePreview
 	val movieInfo: QMovieInfo = QMovieInfo.movieInfo
 	val movieCreator: QMovieCreator = QMovieCreator.movieCreator
-
+	
 	fun getMovieNameInfo(): List<MovieNameInfo> =
-		query.jpaQueryFactory()
+		query
 			.selectFrom(QMovieNameInfo.movieNameInfo)
 			.fetch()
-
+	
 	fun getMovieList(): List<MovieListDTO> {
-
-		return query.jpaQueryFactory()
+		
+		return query
 			.select(
 				Projections.fields(
 					MovieListDTO::class.java,
@@ -48,10 +48,10 @@ class MovieInfoRepositorySupport(
 			)
 			.fetch()
 	}
-
+	
 	fun getMovieDetail(movieId: String): MovieDetailDTO {
-
-		return query.jpaQueryFactory()
+		
+		return query
 			.select(
 				Projections.fields(
 					MovieDetailDTO::class.java,
