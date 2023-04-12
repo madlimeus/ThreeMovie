@@ -17,4 +17,7 @@ data class UpdateTime(
 
 	@Column(name = "TheaterData")
 	var theaterData: Long = 202302110107,
+
+	@Column(name = "MovieData")
+	var movieData: Long = 202302110107,
 )

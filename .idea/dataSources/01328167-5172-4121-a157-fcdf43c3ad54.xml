@@ -1486,68 +1486,59 @@ PlayKind</ColNames>
       <DataType>bigint(20)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="419" parent="340" name="UserId">
-      <DataType>varchar(30)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
+    <column id="419" parent="339" name="MovieData">
+      <DataType>bigint(20)|0s</DataType>
+      <Position>4</Position>
     </column>
     <column id="420" parent="340" name="UserCategories">
       <DataType>text|0s</DataType>
-      <Position>2</Position>
+      <Position>1</Position>
     </column>
     <column id="421" parent="340" name="UserBrch">
       <DataType>text|0s</DataType>
-      <Position>3</Position>
+      <Position>2</Position>
     </column>
     <column id="422" parent="340" name="UserEmail">
-      <DataType>text|0s</DataType>
+      <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
-      <Position>4</Position>
+      <Position>3</Position>
     </column>
     <column id="423" parent="340" name="UserNickName">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="424" parent="340" name="UserId">
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="424" parent="341" name="UserId">
+    <column id="425" parent="341" name="UserEmail">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="426" parent="341" name="UserPassword">
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="427" parent="341" name="UserId">
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="428" parent="342" name="UserEmail">
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="425" parent="341" name="UserPassword">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <index id="426" parent="341" name="PRIMARY">
-      <ColNames>UserId</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="427" parent="341" name="UserId">
-      <ColNames>UserId</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="428" parent="341" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <key id="429" parent="341" name="UserId">
-      <UnderlyingIndexName>UserId</UnderlyingIndexName>
-    </key>
-    <column id="430" parent="342" name="UserEmail">
+    <column id="429" parent="342" name="CertificationCode">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="431" parent="342" name="CertificationCode">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="432" parent="342" name="ExpiredTime">
+    <column id="430" parent="342" name="ExpiredTime">
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
