@@ -20,10 +20,11 @@ import org.springframework.web.bind.annotation.RestController
 class MovieDataController(
 	val movieInfoService: MovieInfoServiceimpl,
 	val movieDataControlService: MovieDataControlServiceimpl,
-	val UpdateTimeRepositorySupport: UpdateTimeRepositorySupport
 ) {
 
 	@GetMapping()
+	@Async
+	@Scheduled(cron = "0 0/10 * * * ?")
 	fun getMovieDataFromDaum() {
 		movieDataControlService.truncateAllMovieData()
 		movieDataControlService.GET_MOVIE_INFO_DAUM()
