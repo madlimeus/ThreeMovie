@@ -29,4 +29,11 @@ class UserLoginRepositorySupport(
 		entityManager?.clear()
 		entityManager?.flush()
 	}
+	
+	fun checkLogin(email: String, pass: String): Boolean {
+		return query
+			.selectFrom(userLogin)
+			.where(userLogin.userEmail.eq(email), userLogin.userPassword.eq(pass))
+			.fetchFirst() != null
+	}
 }

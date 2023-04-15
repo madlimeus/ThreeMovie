@@ -9,8 +9,8 @@ data class UserSignUpAuth(
 	@Column(name = "UserEmail", length = 50)
 	var userEmail: String = "",
 	
-	@Column(name = "CertificationCode")
-	var certificationCode: String = "",
+	@Column(name = "AuthCode")
+	var authCode: String = "",
 	
 	@Column(name = "ExpiredDate")
 	var expiredDate: LocalDateTime = LocalDateTime.now(),

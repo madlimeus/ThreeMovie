@@ -8,6 +8,8 @@ import MovieDetail from './Detail/MovieDetail';
 import SearchResult from './SearchResult/SearchResult';
 import Login from './User/Login/Login';
 import SignUp from './User/SignUp/SignUp';
+import FindPass from './User/Find/FindPass';
+import MyInfo from './User/MyInfo/MyInfo';
 
 const AppRouter = () => {
     return (
@@ -21,8 +23,10 @@ const AppRouter = () => {
                         <Route path="/bookInfo/*" element={<BookInfo />} />
                         <Route path="/moviedetail/*" element={<MovieDetail />} />
                         <Route path="/searchresult/*" element={<SearchResult />} />
-                        <Route path="/login/*" element={<Login />} />
-                        <Route path="/signup/*" element={<SignUp />} />
+                        <Route path="/user/login/*" element={<Login />} />
+                        <Route path="/user/signup/*" element={<SignUp />} />
+                        <Route path="/user/find/pass" element={<FindPass />} />
+                        <Route path="/user/mypage/*" element={<MyInfo />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

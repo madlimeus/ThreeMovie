@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
 import { useSetRecoilState } from 'recoil';
-import useAxios from '../../assets/hook/useAxios';
+import useAxios from '../../hook/useAxios';
 import Movieinfo from '../../interfaces/Movieinfo';
 import movieListAtom from '../../Recoil/Atom/movieLIstAtom';
 import movieNowAtom from '../../Recoil/Atom/movieNowAtom';
@@ -13,7 +13,7 @@ import MainPreview from './MainPreview';
 const MainPage = () => {
     const setMovieList = useSetRecoilState(movieListAtom);
     const setMovieNow = useSetRecoilState(movieNowAtom);
-    const { response, loading, error } = useAxios<Movieinfo[]>({
+    const [{ response, loading, error }, refetch] = useAxios<Movieinfo[]>({
         method: 'get',
         url: '/api/movieinfo/movielist',
         config: {
@@ -22,11 +22,19 @@ const MainPage = () => {
     });
 
     useEffect(() => {
+        refetch();
+    }, []);
+
+    useEffect(() => {
         if (response && Array.isArray(response)) {
             setMovieList(response);
             setMovieNow(response[0].movieId);
         }
     }, [response]);
+
+    useEffect(() => {
+        if (error) alert(error);
+    }, [error]);
 
     if (loading) return <Loading />;
     return (

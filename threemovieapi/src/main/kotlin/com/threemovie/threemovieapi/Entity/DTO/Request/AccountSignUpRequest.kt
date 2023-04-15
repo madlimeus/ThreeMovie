@@ -6,6 +6,6 @@ data class AccountSignUpRequest(
 	val email: String,
 	val password: String,
 	val nickName: String,
-	val sex: Boolean,
-	val birth: LocalDate,
+	val sex: Boolean? = null,
+	val birth: LocalDate? = null,
 )

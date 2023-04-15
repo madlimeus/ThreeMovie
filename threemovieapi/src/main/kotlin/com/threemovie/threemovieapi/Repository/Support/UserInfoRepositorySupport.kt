@@ -19,4 +19,14 @@ class UserInfoRepositorySupport(
 			.where(userInfo.userNickName.eq(nickName))
 			.fetchFirst() != null
 	}
+	
+	fun updateNickName(email: String, nickName: String): Unit {
+		query.update(QUserInfo.userInfo)
+			.set(userInfo.userNickName, nickName)
+			.where(userInfo.userEmail.eq(email))
+			.execute()
+		
+		entityManager?.clear()
+		entityManager?.flush()
+	}
 }

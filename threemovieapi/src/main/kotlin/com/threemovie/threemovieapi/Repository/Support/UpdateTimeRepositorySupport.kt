@@ -27,11 +27,12 @@ class UpdateTimeRepositorySupport(
 		.select(QUpdateTime.updateTime.theaterData)
 		.from(QUpdateTime.updateTime)
 		.fetchOne() ?: 0L
-	fun getMovieData(): Long = query.jpaQueryFactory()
+	
+	fun getMovieData(): Long = query
 		.select(QUpdateTime.updateTime.movieData)
 		.from(QUpdateTime.updateTime)
 		.fetchOne() ?: 0L
-
+	
 	@Transactional
 	fun updateShowTime(newTime: Long): Unit {
 		query
@@ -55,9 +56,10 @@ class UpdateTimeRepositorySupport(
 			.set(updateTime.theaterData, newTime)
 			.execute()
 	}
+	
 	@Transactional
 	fun updateMovieData(newTime: Long): Unit {
-		query.jpaQueryFactory()
+		query
 			.update(updateTime)
 			.set(updateTime.movieData, newTime)
 			.execute()

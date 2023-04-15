@@ -60,6 +60,7 @@
 			border: 1px solid grey;
 			
 			&:hover {
+				transition-duration: 0.2s;
 				background-color: #aacafd;
 			}
 		}
@@ -104,6 +105,7 @@
 			margin: auto;
 			
 			&:hover {
+				transition-duration: 0.2s;
 				filter: brightness(70%);
 				cursor: pointer;
 			}
@@ -163,6 +165,7 @@
 			border: 2px solid black;
 			
 			&:hover {
+				transition-duration: 0.2s;
 				background-color: #aacafd;
 			}
 			
@@ -211,6 +214,7 @@
 				color: black;
 				
 				&:hover {
+					transition-duration: 0.2s;
 					background-color: #aacafd;
 				}
 			}
@@ -261,6 +265,7 @@
 				}
 				
 				&:hover {
+					transition-duration: 0.2s;
 					background-color: #aacafd;
 				}
 			}
@@ -307,6 +312,7 @@
 			}
 			
 			&:hover {
+				transition-duration: 0.2s;
 				background-color: grey;
 				border-radius: 10px;
 				cursor: pointer;
@@ -343,6 +349,7 @@
 				text-align: center;
 				
 				&:hover {
+					transition-duration: 0.2s;
 					background-color: #aacafd;
 				}
 			}
@@ -457,6 +464,7 @@
 				border: 1px solid gray;
 				
 				&:hover {
+					transition-duration: 0.2s;
 					background-color: #aacafd;
 				}
 			}
@@ -503,6 +511,7 @@
 		height: 5%;
 		
 		&:hover {
+			transition-duration: 0.2s;
 			background-color: #aacafd;
 		}
 	}
@@ -510,12 +519,14 @@
 	.activeAddr {
 		background-color: darkblue;
 		color: white;
+		transition-duration: 0.2s;
 		filter: brightness(90%);
 	}
 	
 	.activeTicketPage {
 		background-color: darkred;
 		color: white;
+		transition-duration: 0.2s;
 		filter: brightness(90%);
 	}
 }

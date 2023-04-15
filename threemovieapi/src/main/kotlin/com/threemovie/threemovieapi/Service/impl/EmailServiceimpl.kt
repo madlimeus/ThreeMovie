@@ -22,7 +22,7 @@ class EmailServiceimpl(
 	val userLoginRepository: UserLoginRepository,
 ) : EmailService {
 	
-	fun createSignUpMessage(to: String, ePw: String): MimeMessage {
+	fun createSignUpMessage(to: String, pass: String): MimeMessage {
 		val message = emailSender.createMimeMessage()
 		
 		message.addRecipients(Message.RecipientType.TO, to) //보내는 대상
@@ -41,7 +41,7 @@ class EmailServiceimpl(
 		msgg += "<h3 style='color:blue;'>메일 인증 코드입니다.</h3>"
 		msgg += "<div style='font-size:130%'>"
 		msgg += "CODE : <strong>"
-		msgg += ePw + "</strong><div><br/> "
+		msgg += pass + "</strong><div><br/> "
 		msgg += "</div>"
 		message.setText(msgg, "utf-8", "html") //내용
 		
@@ -49,7 +49,7 @@ class EmailServiceimpl(
 		return message
 	}
 	
-	fun createPassowrdResetMessage(to: String, ePw: String): MimeMessage {
+	fun createPassowrdResetMessage(to: String, pass: String): MimeMessage {
 		val message = emailSender.createMimeMessage()
 		
 		message.addRecipients(Message.RecipientType.TO, to) //보내는 대상
@@ -68,7 +68,7 @@ class EmailServiceimpl(
 		msgg += "<h3 style='color:blue;'>임시 비밀번호입니다.</h3>"
 		msgg += "<div style='font-size:130%'>"
 		msgg += "CODE : <strong>"
-		msgg += ePw + "</strong><div><br/> "
+		msgg += pass + "</strong><div><br/> "
 		msgg += "</div>"
 		message.setText(msgg, "utf-8", "html") //내용
 		
@@ -101,19 +101,19 @@ class EmailServiceimpl(
 	}
 	
 	fun sendAuthMail(to: String) {
-		val ePw = RandomKeyString.randomAlphabetNumber(8)
-		sendMessage(to, "auth", ePw)
+		val pass = RandomKeyString.randomAlphabetNumber(8)
+		sendMessage(to, "auth", pass)
 		
 		val date = LocalDateTime.now().plusMinutes(5)
-		val userSignUpAuth = UserSignUpAuth(to, ePw, date, false)
+		val userSignUpAuth = UserSignUpAuth(to, pass, date, false)
 		userSignUpAuthRepository.save(userSignUpAuth)
 	}
 	
-	override fun sendMessage(to: String, messageType: String, ePw: String) {
+	override fun sendMessage(to: String, messageType: String, pass: String) {
 		var message: MimeMessage
 		when (messageType) {
-			"auth" -> message = createSignUpMessage(to, ePw)
-			"resetpass" -> message = createPassowrdResetMessage(to, ePw)
+			"auth" -> message = createSignUpMessage(to, pass)
+			"resetpass" -> message = createPassowrdResetMessage(to, pass)
 			"changepass" -> message = createPassowrdChangeMessage(to)
 			else -> throw IllegalArgumentException()
 		}

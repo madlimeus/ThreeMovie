@@ -13,7 +13,7 @@ import LC from '../../assets/images/LotteCinema.png';
 import MB from '../../assets/images/MegaBox.png';
 import bookAddrAtom from '../../Recoil/Atom/bookAddrAtom';
 import bookTicketPageAtom from '../../Recoil/Atom/bookTicketPageAtom';
-import retFilter from './retFilter';
+import retFilter from '../../Util/retFilter';
 
 const BookShowTimeList = () => {
     const setSelectAddr = useSetRecoilState(bookAddrAtom);

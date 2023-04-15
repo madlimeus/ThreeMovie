@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios, { AxiosRequestConfig } from 'axios';
 import qs from 'qs';
 
@@ -16,11 +16,14 @@ const useAxios = <T,>({
     url,
     data,
     config,
-}: AxiosProps): {
-    response: T | undefined;
-    error: string;
-    loading: boolean;
-} => {
+}: AxiosProps): [
+    {
+        response: T | undefined;
+        error: string;
+        loading: boolean;
+    },
+    () => void,
+] => {
     const [response, setResponse] = useState<T>();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
@@ -53,11 +56,7 @@ const useAxios = <T,>({
         }
     };
 
-    useEffect(() => {
-        execution();
-    }, []);
-
-    return { response, error, loading };
+    return [{ response, error, loading }, execution];
 };
 
 export default useAxios;

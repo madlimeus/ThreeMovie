@@ -1,0 +1,126 @@
+.signUpInputCover {
+	border: 1px solid black;
+	border-radius: 2px;
+	padding: 10px;
+	width: 450px;
+	background: gray;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	
+	.signUpTitle {
+		font-size: 25px;
+		font-weight: bold;
+	}
+	
+	.signUpBox {
+		display: flex;
+		align-items: center;
+	}
+	
+	.signUpInput {
+		width: 330px;
+		
+		.Mui-focused {
+			background-color: white;
+			color: black;
+			
+			fieldset {
+				border-color: black;
+			}
+		}
+		
+		&:hover {
+			transition-duration: 0.2s;
+			background-color: #aacafd;
+			border-radius: 5px;
+		}
+	}
+	
+	.signUpPassInput {
+		width: 100%;
+		
+		.Mui-focused {
+			background-color: white;
+			color: black;
+			
+			fieldset {
+				border-color: black;
+			}
+		}
+		
+		&:hover {
+			transition-duration: 0.2s;
+			background-color: #aacafd;
+			border-radius: 5px;
+		}
+	}
+	
+	.signUpButton {
+		margin-top: 8px;
+		margin-bottom: 4px;
+		margin-left: 20px;
+		color: black;
+		border: 1px black solid;
+		
+		&:hover {
+			background-color: #aacafd;
+		}
+	}
+	
+	.divide {
+		margin-top: 20px;
+		margin-bottom: 20px;
+		border-color: white;
+	}
+	
+	.signUpBirth {
+		margin-top: 20px;
+		margin-bottom: 20px;
+		
+		.Mui-focused {
+			background-color: white;
+			color: black;
+			
+			fieldset {
+				border-color: black;
+			}
+		}
+		
+		&:hover {
+			transition-duration: 0.2s;
+			background-color: #aacafd;
+			border-radius: 5px;
+		}
+	}
+	
+	.sexControlForm {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin: auto;
+		
+		.Mui-checked {
+			color: white;
+		}
+	}
+	
+	.signUpConfirmButton {
+		color: black;
+		margin-top: 20px;
+		border: 1px solid black;
+		
+		&:hover {
+			background-color: #aacafd;
+		}
+	}
+	
+	.active {
+		background-color: white;
+		color: black;
+	}
+}
+
+.Mui-selected {
+	background-color: black !important;
+}

@@ -13,7 +13,7 @@ import { BookBrch, TheaterItem } from '../../interfaces/BookBrch';
 import CGV from '../../assets/images/CGV.png';
 import LC from '../../assets/images/LotteCinema.png';
 import MB from '../../assets/images/MegaBox.png';
-import retFilter from './retFilter';
+import retFilter from '../../Util/retFilter';
 
 const BookBrchList = () => {
     const [theaters, setTheaters] = React.useState(() => ['CGV', 'LC', 'MB']);

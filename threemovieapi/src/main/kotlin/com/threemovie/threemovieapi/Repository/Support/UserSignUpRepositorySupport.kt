@@ -13,6 +13,22 @@ class UserSignUpRepositorySupport(
 ) : QuerydslRepositorySupport(UserSignUpAuth::class.java) {
 	val userSignUp: QUserSignUpAuth = QUserSignUpAuth.userSignUpAuth
 	
+	fun checkAuthCode(email: String, authCode: String): Boolean {
+		return query
+			.selectFrom(userSignUp)
+			.where(userSignUp.userEmail.eq(email), userSignUp.authCode.eq(authCode))
+			.fetchFirst() != null
+	}
+	
+	fun deletePrevAuth(email: String) {
+		query.delete(userSignUp)
+			.where(userSignUp.userEmail.eq(email))
+			.execute()
+		
+		entityManager?.clear()
+		entityManager?.flush()
+	}
+	
 	fun existsSignCode(email: String): Boolean {
 		val dateCondition = LocalDateTime.now()
 		

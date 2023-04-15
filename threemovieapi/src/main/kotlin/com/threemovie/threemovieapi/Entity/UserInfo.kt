@@ -6,23 +6,23 @@ import java.time.LocalDate
 @Entity
 @Table(name = "UserInfo")
 data class UserInfo(
-	@Column(name = "UserCategories")
-	var userCategories: String = "",
-	
-	@Column(name = "UserBrch")
-	var userBrch: String = "",
-	
 	@Column(name = "UserEmail", length = 50)
-	var userEmail: String = "",
+	val userEmail: String = "",
 	
 	@Column(name = "UserNickName")
-	var userNickName: String = "",
+	val userNickName: String = "",
 	
 	@Column(name = "UserSex")
-	var userSex: Boolean = false,
+	val userSex: Boolean? = false,
 	
 	@Column(name = "UserBirth")
-	var userBirth: LocalDate = LocalDate.now(),
+	val userBirth: LocalDate? = LocalDate.now(),
+	
+	@Column(name = "UserCategories")
+	val userCategories: String = "",
+	
+	@Column(name = "UserBrch")
+	val userBrch: String = "",
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

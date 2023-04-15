@@ -9,7 +9,7 @@ const NavHeader = () => {
     };
 
     const onClickLogin = () => {
-        document.location.href = `/login`;
+        document.location.href = `/user/login`;
     };
 
     return (

@@ -18,23 +18,23 @@ class MovieInfoServiceimpl(
 	override fun getMovieDetail(movieId: String): MovieDetailDTO {
 		return movieInfoRepositorySupport.getMovieDetail(movieId)
 	}
-
+	
 	override fun getMovieList(): List<MovieListDTO> {
 		return movieInfoRepositorySupport.getMovieList()
 	}
-
+	
 	override fun getMovieInfo(): List<MovieInfo> {
 		return movieDataRepository.findAll()
 	}
-
+	
 	override fun save_MovieData(One_movie_Info: JSONObject, url_Daum_Main: String) {
 		val api_movie_data_screening = "api/movie/" + One_movie_Info.get("id").toString() + "/main"
-
+		
 		var tmp_data = GET_DATA_USE_DAUM_API(url_Daum_Main + api_movie_data_screening)
 		val movie_data_json = JSONObject(JSONObject(tmp_data).get("movieCommon").toString())
 		val movie_releaseDate =
 			JSONObject(One_movie_Info.get("countryMovieInformation").toString()).get("releaseDate").toString()
-
+		
 		var netizenAvgRate: Double
 		var reservationRate: Double
 		if (! One_movie_Info.get("netizenAvgRate").equals(null)) {
@@ -48,15 +48,14 @@ class MovieInfoServiceimpl(
 		} catch (e: Exception) {
 			reservationRate = 0.0
 		}
-
-
+		
 		var Poster: String?
 		try {
 			Poster = JSONObject(movie_data_json.get("mainPhoto").toString()).get("imageUrl").toString()
 		} catch (e: Exception) {
 			Poster = null
 		}
-
+		
 		var NameKR: String?
 		if (movie_data_json.get("titleKorean").equals(null)) {
 			NameKR = null
@@ -67,7 +66,7 @@ class MovieInfoServiceimpl(
 				NameKR = movie_data_json.get("titleKorean").toString()
 			}
 		}
-
+		
 		var NameEN: String?
 		if (movie_data_json.get("titleEnglish").equals(null)) {
 			NameEN = null
@@ -78,7 +77,7 @@ class MovieInfoServiceimpl(
 				NameEN = movie_data_json.get("titleEnglish").toString()
 			}
 		}
-
+		
 		var plot: String? = movie_data_json.get("plot").toString()
 		var makingNote: String? = movie_data_json.get("makingNote").toString()
 //		var runningTime : String? = JSONObject(movie_data_json.get("countryMovieInformation").toString()).get("duration").toString()
@@ -86,7 +85,7 @@ class MovieInfoServiceimpl(
 		var reservationRank: String? = movie_data_json.get("reservationRank").toString()
 		var totalAudience: String? = movie_data_json.get("totalAudienceCount").toString()
 		var countryMovieInformation = movie_data_json.getJSONArray("countryMovieInformation")
-
+		
 		var runningTime: String? = null
 		var admissionCode: String? = null
 		for (arr_tmp in countryMovieInformation) {
@@ -96,7 +95,7 @@ class MovieInfoServiceimpl(
 				admissionCode = JSONObject(arr_tmp.toString()).get("admissionCode").toString()
 			}
 		}
-
+		
 		plot = if (plot != null && (plot.equals("null") || plot.length == 0)) null else plot
 		makingNote =
 			if (makingNote != null && (makingNote.equals("null") || makingNote.length == 0)) null else makingNote
@@ -107,7 +106,7 @@ class MovieInfoServiceimpl(
 		reservationRank =
 			if (reservationRank != null && (reservationRank.equals("null") || reservationRank.length == 0)) null else reservationRank
 		totalAudience = if (totalAudience != null && (totalAudience.equals("null"))) "0" else totalAudience
-
+		
 		val member_MovieData = MovieInfo(
 			One_movie_Info.get("titleKorean").toString() + "_" + movie_releaseDate,
 			netizenAvgRate,
@@ -127,7 +126,7 @@ class MovieInfoServiceimpl(
 		)
 		val res = movieDataRepository.save(member_MovieData)
 	}
-
+	
 	override fun turncate_MovieData() {
 		movieDataRepository.truncate()
 	}
