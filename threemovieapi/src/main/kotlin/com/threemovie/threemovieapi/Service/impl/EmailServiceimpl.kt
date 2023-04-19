@@ -1,7 +1,7 @@
 package com.threemovie.threemovieapi.Service.impl
 
 import com.threemovie.threemovieapi.Entity.UserSignUpAuth
-import com.threemovie.threemovieapi.Repository.UserLoginRepository
+import com.threemovie.threemovieapi.Repository.Support.UserSignUpRepositorySupport
 import com.threemovie.threemovieapi.Repository.UserSignUpAuthRepository
 import com.threemovie.threemovieapi.Service.EmailService
 import com.threemovie.threemovieapi.Utils.RandomKeyString
@@ -19,7 +19,7 @@ import java.time.LocalDateTime
 class EmailServiceimpl(
 	val emailSender: JavaMailSender,
 	val userSignUpAuthRepository: UserSignUpAuthRepository,
-	val userLoginRepository: UserLoginRepository,
+	val userSignUpRepositorySupport: UserSignUpRepositorySupport,
 ) : EmailService {
 	
 	fun createSignUpMessage(to: String, pass: String): MimeMessage {
@@ -91,8 +91,6 @@ class EmailServiceimpl(
 		msgg += "<br>"
 		msgg += "<p>감사합니다!<p>"
 		msgg += "<br>"
-		msgg += "<div align='center' style='border:1px solid black; font-family:verdana';>"
-		msgg += "<div style='font-size:130%'>"
 		msgg += "</div>"
 		message.setText(msgg, "utf-8", "html") //내용
 		
@@ -101,6 +99,7 @@ class EmailServiceimpl(
 	}
 	
 	fun sendAuthMail(to: String) {
+		userSignUpRepositorySupport.deletePrevAuth(to)
 		val pass = RandomKeyString.randomAlphabetNumber(8)
 		sendMessage(to, "auth", pass)
 		

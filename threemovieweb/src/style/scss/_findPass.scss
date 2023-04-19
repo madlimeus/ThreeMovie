@@ -1,4 +1,4 @@
-.signUpInputCover {
+.findPassInputCover {
 	border: 1px solid black;
 	border-radius: 2px;
 	padding: 10px;
@@ -8,17 +8,17 @@
 	flex-direction: column;
 	text-align: center;
 	
-	.signUpTitle {
+	.findPassTitle {
 		font-size: 25px;
 		font-weight: bold;
 	}
 	
-	.signUpBox {
+	.findPassBox {
 		display: flex;
 		align-items: center;
 	}
 	
-	.signUpInput {
+	.findPassInput {
 		width: 330px;
 		
 		.Mui-focused {
@@ -37,7 +37,7 @@
 		}
 	}
 	
-	.signUpPassInput {
+	.findPassPassInput {
 		width: 100%;
 		
 		.Mui-focused {
@@ -56,7 +56,7 @@
 		}
 	}
 	
-	.signUpButton {
+	.findPassButton {
 		width: 80px;
 		margin-top: 8px;
 		margin-bottom: 4px;
@@ -84,7 +84,7 @@
 		border-color: white;
 	}
 	
-	.signUpBirth {
+	.findPassBirth {
 		margin-top: 20px;
 		margin-bottom: 20px;
 		
@@ -115,7 +115,7 @@
 		}
 	}
 	
-	.signUpConfirmButton {
+	.findPassConfirmButton {
 		color: black;
 		margin-top: 20px;
 		border: 1px solid black;

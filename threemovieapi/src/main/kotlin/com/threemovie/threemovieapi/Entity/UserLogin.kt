@@ -1,5 +1,6 @@
 package com.threemovie.threemovieapi.Entity
 
+import com.threemovie.threemovieapi.config.UserRole
 import jakarta.persistence.*
 
 @Entity
@@ -11,8 +12,12 @@ data class UserLogin(
 	@Column(name = "UserPassword")
 	var userPassword: String = "",
 	
+	@Column(name = "UserRole")
+	@Enumerated(EnumType.STRING)
+	var userRole: UserRole = UserRole.ROLE_NOT_PERMITTED,
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	var id: Long = 0L,
 )

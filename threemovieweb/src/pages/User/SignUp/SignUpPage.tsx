@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Checkbox, Divider, FormControlLabel, FormGroup, TextField, Typography } from '@mui/material';
 import '../../../style/scss/_signup.scss';
 import dayjs, { Dayjs } from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers';
 import { checkAuthCode, checkEmail, checkNickName, checkPass, checkPassConfirm } from '../../../Util/checkUserInfo';
 import useAxios from '../../../hook/useAxios';
+import timeFormat from '../../../Util/timeFormat';
 
 const SignUpPage = () => {
     const [email, setEmail] = useState<string>('');
@@ -15,32 +16,46 @@ const SignUpPage = () => {
     const [passConfirm, setPassConfirm] = useState<string>('');
     const [sex, setSex] = useState<boolean>(true);
     const [birth, setBirth] = useState<Dayjs | null>(dayjs('2023-04-04'));
+    const [time, setTime] = useState(0);
+    const [expireAt, setExpireAt] = useState<Date>(new Date());
+
+    // eslint-disable-next-line consistent-return
+    useEffect(() => {
+        if (time > 0) {
+            const Counter = setInterval(() => {
+                const gap = Math.floor((expireAt.getTime() - new Date().getTime()) / 1000);
+                setTime(300 + gap);
+            }, 1000);
+            return () => clearInterval(Counter);
+        }
+    }, [expireAt, time]);
 
     const refetchSendMail = useAxios({
         method: 'post',
-        url: '/api/mail/auth',
+        url: '/api/auth/mail',
         data: {
-            email: { email },
-        },
-        config: {
-            headers: { 'Content-Type': `application/json` },
+            email,
+            isSignUp: true,
         },
     });
 
     const onClickSendMail = () => {
-        try {
-            refetchSendMail[1]();
-        } catch (e) {
-            alert(refetchSendMail[0].error);
-        }
+        refetchSendMail[1]();
     };
+
+    useEffect(() => {
+        if (refetchSendMail[0].response) {
+            setTime(300);
+            setExpireAt(new Date());
+        }
+    }, [refetchSendMail[0].response]);
 
     const refetchAuthCode = useAxios({
         method: 'post',
-        url: '/api/user/auth',
+        url: '/api/auth/check/code',
         data: {
-            email: { email },
-            authCode: { authCode },
+            email,
+            authCode,
         },
         config: {
             headers: { 'Content-Type': `application/json` },
@@ -48,31 +63,30 @@ const SignUpPage = () => {
     });
 
     const onClickAuth = () => {
-        try {
-            refetchAuthCode[1]();
-        } catch (e) {
-            alert(refetchAuthCode[0].error);
-        }
+        refetchAuthCode[1]();
     };
+
+    useEffect(() => {
+        if (refetchAuthCode[0].response) {
+            setAuthCheck(true);
+            setTime(0);
+        }
+    }, [refetchAuthCode[0].response]);
 
     const refetchSignUp = useAxios({
         method: 'post',
-        url: '/api/user/signup',
+        url: '/api/auth/signup',
         data: {
-            email: { email },
-            pass: { pass },
-        },
-        config: {
-            headers: { 'Content-Type': `application/json` },
+            email,
+            password: `${pass}`,
+            nickName,
+            sex,
+            birth,
         },
     });
 
     const onClickSignUp = () => {
-        try {
-            refetchSignUp[1]();
-        } catch (e) {
-            alert(refetchSignUp[0].error);
-        }
+        refetchSignUp[1]();
     };
 
     const onEmailChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -113,6 +127,10 @@ const SignUpPage = () => {
         );
     };
 
+    useEffect(() => {
+        if (refetchSignUp[0].response) document.location.href = '/user/login';
+    }, [refetchSignUp[0].response]);
+
     return (
         <Box className="signUpInputCover">
             <Typography className="signUpTitle">회원 가입</Typography>
@@ -120,33 +138,38 @@ const SignUpPage = () => {
                 <TextField
                     label="이메일"
                     className="signUpInput"
-                    error={checkEmail(email)}
+                    error={!checkEmail(email)}
                     value={email}
                     onChange={onEmailChange}
                     placeholder="이메일을 입력 해주세요."
                     size="small"
                     margin="dense"
+                    disabled={authCheck}
                 />
                 <Button
                     className={checkEmail(email) ? 'signUpButton active' : 'signUpButton'}
                     onClick={onClickSendMail}
+                    disabled={time > 0 || authCheck}
                 >
                     메일 전송
+                    {time > 0 && timeFormat(time)}
                 </Button>
             </Box>
             <Box className="signUpBox">
                 <TextField
                     label="인증 번호"
                     className="signUpInput"
-                    error={checkAuthCode(authCode)}
+                    error={!checkAuthCode(authCode)}
                     value={authCode}
                     onChange={onAuthCode}
                     placeholder="인증 번호를 입력 해주세요."
                     size="small"
                     margin="dense"
+                    disabled={authCheck}
                 />
                 <Button
                     className={checkAuthCode(authCode) ? 'signUpButton active' : 'signUpButton'}
+                    disabled={authCheck}
                     onClick={onClickAuth}
                 >
                     인증 확인
@@ -157,9 +180,11 @@ const SignUpPage = () => {
             <TextField
                 label="비밀번호"
                 className="signUpPassInput"
+                error={!checkPass(pass)}
                 value={pass}
                 onChange={onPasswordChange}
                 placeholder="비밀번호는 8~20자리 대/소/특수 문자가 가능합니다."
+                helperText={!checkPass(pass) ? '비밀번호는 8~20자리 대/소/특수 문자로 입력 해주세요.' : ''}
                 type="password"
                 size="small"
                 margin="dense"
@@ -167,9 +192,13 @@ const SignUpPage = () => {
             <TextField
                 label="비밀번호 확인"
                 className="signUpPassInput"
+                error={checkPass(pass) && !checkPassConfirm(pass, passConfirm)}
                 value={passConfirm}
                 onChange={onConfirmPasswordChange}
                 placeholder="입력하신 비밀번호를 다시 한번 입력 해주세요."
+                helperText={
+                    checkPass(pass) && !checkPassConfirm(pass, passConfirm) ? '입력하신 비밀번호와 다릅니다.' : ''
+                }
                 type="password"
                 size="small"
                 margin="dense"
@@ -178,10 +207,12 @@ const SignUpPage = () => {
 
             <TextField
                 label="별명"
+                error={!checkNickName(nickName)}
                 className="signUpPassInput"
                 value={nickName}
                 onChange={onNickNameChange}
                 placeholder="별명은 2글자 이상으로 입력 해주세요."
+                helperText="2글자 이상으로 입력 해주세요."
                 size="small"
                 margin="dense"
             />

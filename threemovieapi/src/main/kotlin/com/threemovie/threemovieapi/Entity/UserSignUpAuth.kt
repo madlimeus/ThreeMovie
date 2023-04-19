@@ -9,7 +9,7 @@ data class UserSignUpAuth(
 	@Column(name = "UserEmail", length = 50)
 	var userEmail: String = "",
 	
-	@Column(name = "AuthCode")
+	@Column(name = "AuthCode", length = 8)
 	var authCode: String = "",
 	
 	@Column(name = "ExpiredDate")
@@ -19,7 +19,7 @@ data class UserSignUpAuth(
 	var authSuccess: Boolean = false,
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	var id: Long = 0L,
 )

@@ -1,8 +1,7 @@
 export const checkEmail = (email: string) => {
-    const email_format = /^([0-9a-zA-Z_.-]+)@([0-9a-zA-Z_-]+)(.[0-9a-zA-Z_-]+){1,2}$/;
+    const email_format = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,6}$/;
 
-    if (email_format.test(email)) return true;
-    return false;
+    return email_format.test(email);
 };
 
 export const checkNickName = (nickName: string) => {
@@ -14,8 +13,8 @@ export const checkPassConfirm = (pass: string, passConfirm: string) => {
 };
 
 export const checkPass = (pass: string) => {
-    if (pass.length >= 8 && pass.length <= 20) return true;
-    return false;
+    const password_format = /^[A-Za-z0-9\d$@$!%*#?&]{8,20}$/;
+    return password_format.test(pass);
 };
 
 export const checkAuthCode = (authCode: string) => {

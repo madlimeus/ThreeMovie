@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Divider, Input, InputAdornment, Typography } from '@mui/material';
 import '../../../style/scss/_login.scss';
 import MailIcon from '@mui/icons-material/Mail';
@@ -10,27 +10,25 @@ const LoginPage = () => {
     const [email, setEmail] = useState<string>('');
     const [pass, setPass] = useState<string>('');
 
-    const fetch = () =>
-        useAxios({
-            method: 'post',
-            url: '/api/user/login',
-            data: {
-                email: { email },
-                pass: { pass },
-            },
-            config: {
-                headers: { 'Content-Type': `application/json` },
-            },
-        });
+    const fetch = useAxios({
+        method: 'post',
+        url: '/api/auth/login',
+        data: {
+            email,
+            password: `${pass}`,
+        },
+        config: {
+            headers: { Accept: `*/*` },
+        },
+    });
 
     const onClickLogin = () => {
-        try {
-            fetch();
-            document.location.href = '/main';
-        } catch (e) {
-            alert(e);
-        }
+        fetch[1]();
     };
+
+    useEffect(() => {
+        if (fetch[0].response) console.log(fetch[0].response);
+    }, [fetch[0].response]);
 
     const onClickSignUp = () => {
         document.location.href = '/user/signup';
@@ -87,7 +85,10 @@ const LoginPage = () => {
                         />
                     </Box>
                     <Box className="loginButtonCover">
-                        <Button className={onCheckLogin() ? 'loginButton active' : 'loginButton'}>
+                        <Button
+                            className={onCheckLogin() ? 'loginButton active' : 'loginButton'}
+                            onClick={onClickLogin}
+                        >
                             <Typography>로그인</Typography>
                         </Button>
                     </Box>

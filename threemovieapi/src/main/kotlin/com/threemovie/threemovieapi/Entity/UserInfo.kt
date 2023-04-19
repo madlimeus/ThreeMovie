@@ -9,7 +9,7 @@ data class UserInfo(
 	@Column(name = "UserEmail", length = 50)
 	val userEmail: String = "",
 	
-	@Column(name = "UserNickName")
+	@Column(name = "UserNickName", length = 20)
 	val userNickName: String = "",
 	
 	@Column(name = "UserSex")
@@ -25,7 +25,7 @@ data class UserInfo(
 	val userBrch: String = "",
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	var id: Long = 0L,
 )

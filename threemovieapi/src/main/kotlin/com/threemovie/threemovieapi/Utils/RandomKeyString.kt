@@ -6,7 +6,7 @@ class RandomKeyString {
 			
 			val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 			
-			return (6..wishLength)
+			return (1..wishLength)
 				.map { kotlin.random.Random.nextInt(0, charPool.size) }
 				.map(charPool::get)
 				.joinToString("")

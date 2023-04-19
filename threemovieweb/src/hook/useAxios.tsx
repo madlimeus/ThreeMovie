@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import axios, { AxiosRequestConfig } from 'axios';
-import qs from 'qs';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.withCredentials = true;
 
 type AxiosProps = {
     method: 'get' | 'post' | 'put' | 'delete';
@@ -18,13 +18,13 @@ const useAxios = <T,>({
     config,
 }: AxiosProps): [
     {
-        response: T | undefined;
-        error: string;
+        response: any;
+        error: string | AxiosError;
         loading: boolean;
     },
     () => void,
 ] => {
-    const [response, setResponse] = useState<T>();
+    const [response, setResponse] = useState<any>();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
 
@@ -37,17 +37,21 @@ const useAxios = <T,>({
                     setResponse(res.data);
                 })
                 .catch((err) => {
+                    alert(err.response.data);
                     setError(err);
                 })
                 .finally(() => {
                     setLoading(false);
                 });
         } else {
-            axios[method](url, qs.stringify(data), config)
+            axios[method](url, data, config)
                 .then((res) => {
-                    setResponse(res.data);
+                    setResponse(res);
                 })
                 .catch((err) => {
+                    console.log(err);
+                    if (err.response.data.message) alert(err.response.data.message);
+                    else alert(err.response.data);
                     setError(err);
                 })
                 .finally(() => {

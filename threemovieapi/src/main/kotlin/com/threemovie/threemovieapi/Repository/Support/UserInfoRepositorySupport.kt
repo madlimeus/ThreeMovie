@@ -3,6 +3,7 @@ package com.threemovie.threemovieapi.Repository.Support
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.threemovie.threemovieapi.Entity.QUserInfo
 import com.threemovie.threemovieapi.Entity.UserInfo
+import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 
@@ -20,9 +21,20 @@ class UserInfoRepositorySupport(
 			.fetchFirst() != null
 	}
 	
-	fun updateNickName(email: String, nickName: String): Unit {
-		query.update(QUserInfo.userInfo)
+	@Transactional
+	fun updateNickName(email: String, nickName: String) {
+		query.update(userInfo)
 			.set(userInfo.userNickName, nickName)
+			.where(userInfo.userEmail.eq(email))
+			.execute()
+		
+		entityManager?.clear()
+		entityManager?.flush()
+	}
+	
+	@Transactional
+	fun deleteUserInfo(email: String) {
+		query.delete(userInfo)
 			.where(userInfo.userEmail.eq(email))
 			.execute()
 		
