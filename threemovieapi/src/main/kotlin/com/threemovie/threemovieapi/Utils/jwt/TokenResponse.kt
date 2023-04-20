@@ -1,6 +1,7 @@
 package com.threemovie.threemovieapi.Utils.jwt
 
 data class TokenResponse(
+	val accessToken: String,
 	val refreshToken: String,
-	val accessToken: String
+	val nickName: String
 )

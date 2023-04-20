@@ -32,7 +32,7 @@ const SignUpPage = () => {
 
     const refetchSendMail = useAxios({
         method: 'post',
-        url: '/api/auth/mail',
+        url: '/auth/mail',
         data: {
             email,
             isSignUp: true,
@@ -52,7 +52,7 @@ const SignUpPage = () => {
 
     const refetchAuthCode = useAxios({
         method: 'post',
-        url: '/api/auth/check/code',
+        url: '/auth/check/code',
         data: {
             email,
             authCode,
@@ -75,7 +75,7 @@ const SignUpPage = () => {
 
     const refetchSignUp = useAxios({
         method: 'post',
-        url: '/api/auth/signup',
+        url: '/auth/signup',
         data: {
             email,
             password: `${pass}`,
@@ -183,8 +183,8 @@ const SignUpPage = () => {
                 error={!checkPass(pass)}
                 value={pass}
                 onChange={onPasswordChange}
-                placeholder="비밀번호는 8~20자리 대/소/특수 문자가 가능합니다."
-                helperText={!checkPass(pass) ? '비밀번호는 8~20자리 대/소/특수 문자로 입력 해주세요.' : ''}
+                placeholder="비밀번호는 8~20자리 숫자/대/소/특수 문자가 가능합니다."
+                helperText={!checkPass(pass) ? '비밀번호는 8~20자리 숫자/대/소/특수 문자로 입력 해주세요.' : ''}
                 type="password"
                 size="small"
                 margin="dense"
@@ -212,7 +212,7 @@ const SignUpPage = () => {
                 value={nickName}
                 onChange={onNickNameChange}
                 placeholder="별명은 2글자 이상으로 입력 해주세요."
-                helperText="2글자 이상으로 입력 해주세요."
+                helperText="2~8 글자로 입력 해주세요."
                 size="small"
                 margin="dense"
             />

@@ -5,7 +5,7 @@ export const checkEmail = (email: string) => {
 };
 
 export const checkNickName = (nickName: string) => {
-    return nickName.length >= 2 && nickName.length <= 10;
+    return nickName && nickName.length >= 2 && nickName.length <= 10;
 };
 
 export const checkPassConfirm = (pass: string, passConfirm: string) => {

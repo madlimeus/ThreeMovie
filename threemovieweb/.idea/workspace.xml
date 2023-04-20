@@ -2,53 +2,57 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/Request/AuthRequest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/Request/ChangeNickNameRequest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/Request/EmailRequest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/Request/LoginRequest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/Request/NickNameRequest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/UserAuthService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/UserInfoService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/impl/UserAuthServiceimpl.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/CookieUtil.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/JwtAuthFilter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/JwtTokenProvider.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/RedisUtil.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/TokenResponse.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/config/UserRole.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/UserAuthController.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/UserInfoController.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/resources/application-jwt-config.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/resources/application-security-config.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Util/timeFormat.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/style/scss/_findPass.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/UserInfo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/UserInfo.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/DTO/Request/UpdateUserInfoRequest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Recoil/Atom/autoLoginAtom.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Util/cookieUtil.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Util/refreshToken.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interfaces/MyPageInfo.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/style/scss/_myPage.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/UserLogin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/UserLogin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/UserSignUpAuth.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Entity/UserSignUpAuth.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/Support/UpdateTimeRepositorySupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/Support/UpdateTimeRepositorySupport.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/Support/UserInfoRepositorySupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/Support/UserInfoRepositorySupport.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/Support/UserLoginRepositorySupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/Support/UserLoginRepositorySupport.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/Support/UserSignUpRepositorySupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Repository/Support/UserSignUpRepositorySupport.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/UserService.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/impl/EmailServiceimpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/impl/EmailServiceimpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/impl/UserServiceimpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/impl/UserInfoServiceimpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/RandomKeyString.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/RandomKeyString.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/config/EncoderConfig.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/UserAuthService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/UserAuthService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/impl/UserAuthServiceimpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/impl/UserAuthServiceimpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/impl/UserInfoServiceimpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/impl/UserInfoServiceimpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/JwtAuthFilter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/JwtAuthFilter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/JwtTokenProvider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/JwtTokenProvider.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/TokenResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/TokenResponse.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/config/SecurityConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/config/SecurityConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/config/UserRole.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/config/UserRole.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/config/WebConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/config/WebConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/MailController.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/UserController.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/4/1495a6c511fee290ead79e95d320aed5ef5b4c7f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/MovieDataController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/MovieDataController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/UserAuthController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/UserAuthController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/UserInfoController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/controller/UserInfoController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/7/178a5b5c35b7cab370dbf6199a80849c0ee7ab2a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/b/2bc821abb9642c73e11f562da36941b32945f50e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/9/59fa7bd46657a026613900d58e95b677f0e42ecc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/d/6d6dc2833cb78e4b09b17c86f9541392c2ab3f35" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/a/7ad9b000798b6c76e8391dd3a8e9a040ec638ea4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/b/7b0cb6dff453e9e332b6987b0a3f84efa49ee9d0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/b/7bb94083abccea4d39d68583b42b08b9f2d083cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/6/861dc67cd6b25ddab5613f620a1093682aaca682" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/7/8721e3771ad09102ac71e1d028f1b5a4fdc58f46" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/b/bb1695f21daa289a4b5085296eeece95a372f654" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Util/checkUserInfo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/checkUserInfo.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hook/useAxios.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hook/useAxios.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/MainPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MovieDetail/MovieDetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MovieDetail/MovieDetailPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/NavBar/NavBarPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/NavBar/NavBarPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/NavBar/NavHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/NavBar/NavHeader.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/User/Find/FindPassPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/User/Find/FindPassPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/User/Login/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/User/Login/LoginPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/User/MyInfo/MyInfoPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/User/MyInfo/MyInfoPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/User/SignUp/SignUpPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/User/SignUp/SignUpPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/scss/_signup.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/scss/_signup.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/scss/_findPass.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/scss/_findPass.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/scss/_login.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/scss/_login.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/scss/_navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/scss/_navbar.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +95,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
     &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;Y:/ThreeMovie/threemovieweb/src/style/scss&quot;,
+    &quot;last_opened_file_path&quot;: &quot;Y:/ThreeMovie/threemovieweb/src/interfaces&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;Y:\\ThreeMovie\\threemovieweb\\node_modules\\eslint&quot;,
@@ -109,11 +113,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="Y:\ThreeMovie\threemovieweb\src\interfaces" />
       <recent name="Y:\ThreeMovie\threemovieweb\src\style\scss" />
       <recent name="Y:\ThreeMovie\threemovieweb\src\pages\User" />
       <recent name="Y:\ThreeMovie\threemovieweb\src\Routes\User\MyInfo" />
       <recent name="Y:\ThreeMovie\threemovieweb\src\Routes\User\Find" />
-      <recent name="Y:\ThreeMovie\threemovieweb\src\Recoil\Atom" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="Y:\ThreeMovie\threemovieweb\src" />
@@ -171,7 +175,8 @@
       <workItem from="1681625067109" duration="2490000" />
       <workItem from="1681708632053" duration="2999000" />
       <workItem from="1681796836613" duration="620000" />
-      <workItem from="1681877867587" duration="9487000" />
+      <workItem from="1681877867587" duration="42536000" />
+      <workItem from="1681964703794" duration="2716000" />
     </task>
     <servers />
   </component>

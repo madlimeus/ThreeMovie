@@ -19,7 +19,7 @@ class UserSignUpRepositorySupport(
 		return query
 			.selectFrom(userSignUp)
 			.where(userSignUp.userEmail.eq(email), userSignUp.authCode.eq(authCode), userSignUp.expiredDate.goe(date))
-			.fetchFirst() != null
+			.fetchOne() != null
 	}
 	
 	@Transactional
@@ -51,6 +51,6 @@ class UserSignUpRepositorySupport(
 				userSignUp.userEmail.eq(email),
 				userSignUp.authSuccess.eq(true),
 			)
-			.fetchFirst() != null
+			.fetchOne() != null
 	}
 }

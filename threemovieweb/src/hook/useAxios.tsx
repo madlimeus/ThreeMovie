@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:8080';
-axios.defaults.withCredentials = true;
-
 type AxiosProps = {
     method: 'get' | 'post' | 'put' | 'delete';
     url: string;
     data?: unknown;
     config?: AxiosRequestConfig;
 };
+
+axios.defaults.baseURL = 'http://localhost:8080/api';
+axios.defaults.headers.withCredentials = true;
 
 const useAxios = <T,>({
     method = 'get',

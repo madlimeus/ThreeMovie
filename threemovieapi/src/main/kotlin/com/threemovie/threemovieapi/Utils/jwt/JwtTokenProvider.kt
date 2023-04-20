@@ -11,6 +11,8 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.User
 import org.springframework.stereotype.Component
 import java.security.Key
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.*
 
 @Component
@@ -34,15 +36,17 @@ class JwtTokenProvider(
 	}
 	
 	fun extractAllClaims(token: String): Claims {
-		return Jwts.parserBuilder()
+		val ret = Jwts.parserBuilder()
 			.setSigningKey(key)
 			.build()
 			.parseClaimsJws(token)
 			.body
+		println(ret)
+		return ret
 	}
 	
 	fun getEmail(token: String): String {
-		return extractAllClaims(token).get("email", String::class.java)
+		return extractAllClaims(token).get("sub", String::class.java)
 	}
 	
 	fun getExpiration(token: String): Long {
@@ -64,19 +68,20 @@ class JwtTokenProvider(
 		return UsernamePasswordAuthenticationToken(userDetails, "", userDetails.authorities)
 	}
 	
-	fun createAllToken(email: String, userRole: String): TokenResponse {
+	fun createAllToken(email: String, userRole: String, nickName: String): TokenResponse {
 		return TokenResponse(
 			generateAccessToken(email, userRole),
-			generateRefreshToken(email)
+			generateRefreshToken(email),
+			nickName
 		)
 	}
 	
 	fun generateAccessToken(email: String, userRole: String): String {
-		val now = Date().time
+		val now = LocalDateTime.now().plusSeconds(ACCESS_TOKEN_EXPIRE_TIME.toLong())
 		val accessToken = Jwts.builder()
 			.setSubject(email)
 			.claim("role", userRole)
-			.setExpiration(Date(now + ACCESS_TOKEN_EXPIRE_TIME))
+			.setExpiration(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()))
 			.signWith(key, signatureAlgorithm)
 			.compact()
 		
@@ -84,13 +89,13 @@ class JwtTokenProvider(
 	}
 	
 	fun generateRefreshToken(email: String): String {
-		val now = Date().time
-		val accessToken = Jwts.builder()
-			.setExpiration(Date(now + REFRESH_TOKEN_EXPIRE_TIME))
+		val now = LocalDateTime.now().plusSeconds(REFRESH_TOKEN_EXPIRE_TIME.toLong())
+		val refreshToken = Jwts.builder()
+			.setExpiration(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()))
 			.signWith(key, signatureAlgorithm)
 			.compact()
 		
-		return accessToken
+		return refreshToken
 	}
 	
 	fun validateToken(token: String): Boolean {

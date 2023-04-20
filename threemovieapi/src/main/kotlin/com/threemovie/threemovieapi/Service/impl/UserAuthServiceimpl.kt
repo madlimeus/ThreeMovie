@@ -31,16 +31,16 @@ class UserAuthServiceimpl(
 		val (email, pass, nickName, sex, birth) = signUpRequest
 		val encodePass = passwordEncoder.encode(pass)
 		
-		val userLogin = UserLogin(email, encodePass, UserRole.ROLE_USER)
+		val userLogin = UserLogin(email, encodePass, UserRole.USER)
 		val userInfo = UserInfo(email, nickName, sex, birth)
 		userLoginRepository.save(userLogin)
 		userInfoRepository.save(userInfo)
 		deletePrevAuth(email)
 	}
 	
-	override fun signOutAccount(refreshToken: String) {
+	override fun signOutAccount(accessToken: String) {
 		try {
-			val email = jwtTokenProvider.getEmail(refreshToken)
+			val email = jwtTokenProvider.getEmail(accessToken)
 			
 			userLoginRepositorySupport.deleteUserLogin(email)
 			userInfoRepositorySupport.deleteUserInfo(email)

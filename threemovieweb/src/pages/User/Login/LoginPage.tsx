@@ -1,24 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Divider, Input, InputAdornment, Typography } from '@mui/material';
+import {
+    Box,
+    Button,
+    Checkbox,
+    Divider,
+    FormControlLabel,
+    FormGroup,
+    Input,
+    InputAdornment,
+    Typography,
+} from '@mui/material';
 import '../../../style/scss/_login.scss';
 import MailIcon from '@mui/icons-material/Mail';
 import PasswordIcon from '@mui/icons-material/Password';
 import useAxios from '../../../hook/useAxios';
 import { checkEmail, checkPass } from '../../../Util/checkUserInfo';
+import { periodicRefresh } from '../../../Util/refreshToken';
+import { setCookie } from '../../../Util/cookieUtil';
 
 const LoginPage = () => {
     const [email, setEmail] = useState<string>('');
     const [pass, setPass] = useState<string>('');
+    const [autoLogin, setAutoLogin] = useState<boolean>(false);
 
     const fetch = useAxios({
         method: 'post',
-        url: '/api/auth/login',
+        url: '/auth/login',
         data: {
             email,
             password: `${pass}`,
-        },
-        config: {
-            headers: { Accept: `*/*` },
         },
     });
 
@@ -26,9 +36,28 @@ const LoginPage = () => {
         fetch[1]();
     };
 
+    const handleOnKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            fetch[1]();
+        }
+    };
+
     useEffect(() => {
-        if (fetch[0].response) console.log(fetch[0].response);
+        if (fetch[0].response) {
+            const { accessToken, refreshToken, nickName } = fetch[0].response.data;
+            setCookie('AccessToken', `Bearer ${accessToken}`);
+            setCookie('NickName', nickName);
+            if (autoLogin) {
+                localStorage.setItem('refreshToken', `Bearer ${refreshToken}`);
+                periodicRefresh();
+            }
+            window.location.href = '/main';
+        }
     }, [fetch[0].response]);
+
+    const onClickAutoLogin = () => {
+        setAutoLogin(!autoLogin);
+    };
 
     const onClickSignUp = () => {
         document.location.href = '/user/signup';
@@ -82,6 +111,7 @@ const LoginPage = () => {
                             }
                             placeholder="비밀번호를 입력 해주세요."
                             type="password"
+                            onKeyDown={handleOnKeyPress}
                         />
                     </Box>
                     <Box className="loginButtonCover">
@@ -95,6 +125,12 @@ const LoginPage = () => {
                 </Box>
                 <Box className="menuCover">
                     <Box className="signUpFindCover">
+                        <FormGroup className="autoLoginControlForm">
+                            <FormControlLabel
+                                control={<Checkbox checked={autoLogin} onChange={onClickAutoLogin} />}
+                                label="자동 로그인"
+                            />
+                        </FormGroup>
                         <Typography className="menuButton" onClick={() => onClickSignUp()}>
                             회원가입
                         </Typography>

@@ -39,10 +39,13 @@ class SecurityConfig(
 			.and()
 			.authorizeHttpRequests()
 			.requestMatchers("/api/user/mypage/**").authenticated() // 마이페이지 인증 필요
+			.requestMatchers("/**").permitAll()
 			.anyRequest().permitAll()
 			.and()
 			.headers()
 			.frameOptions().sameOrigin()
+			.and()
+			.cors()
 		
 		return http.build()
 	}

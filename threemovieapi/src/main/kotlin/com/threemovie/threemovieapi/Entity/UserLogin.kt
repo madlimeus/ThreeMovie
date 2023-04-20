@@ -14,7 +14,7 @@ data class UserLogin(
 	
 	@Column(name = "UserRole")
 	@Enumerated(EnumType.STRING)
-	var userRole: UserRole = UserRole.ROLE_NOT_PERMITTED,
+	var userRole: UserRole = UserRole.NOT_PERMITTED,
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

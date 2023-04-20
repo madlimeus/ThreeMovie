@@ -16,22 +16,22 @@ class UpdateTimeRepositorySupport(
 	fun getShowTime(): Long = query
 		.select(QUpdateTime.updateTime.showTime)
 		.from(QUpdateTime.updateTime)
-		.fetchOne() ?: 0L
+		.fetchFirst()
 	
 	fun getReviewTime(): Long = query
 		.select(QUpdateTime.updateTime.reviewTime)
 		.from(QUpdateTime.updateTime)
-		.fetchOne() ?: 0L
+		.fetchFirst()
 	
 	fun getTheaterData(): Long = query
 		.select(QUpdateTime.updateTime.theaterData)
 		.from(QUpdateTime.updateTime)
-		.fetchOne() ?: 0L
+		.fetchFirst()
 	
 	fun getMovieData(): Long = query
 		.select(QUpdateTime.updateTime.movieData)
 		.from(QUpdateTime.updateTime)
-		.fetchOne() ?: 0L
+		.fetchFirst()
 	
 	@Transactional
 	fun updateShowTime(newTime: Long): Unit {

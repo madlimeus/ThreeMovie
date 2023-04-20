@@ -4,6 +4,8 @@ import useAxios from '../../../hook/useAxios';
 import { checkAuthCode, checkEmail, checkPass, checkPassConfirm } from '../../../Util/checkUserInfo';
 import timeFormat from '../../../Util/timeFormat';
 import '../../../style/scss/_findPass.scss';
+import { delCookie } from '../../../Util/cookieUtil';
+import { periodicRefresh } from '../../../Util/refreshToken';
 
 const FindPassPage = () => {
     const [email, setEmail] = useState<string>('');
@@ -27,7 +29,7 @@ const FindPassPage = () => {
 
     const refetchSendMail = useAxios({
         method: 'post',
-        url: '/api/auth/mail',
+        url: '/auth/mail',
         data: {
             email,
         },
@@ -46,7 +48,7 @@ const FindPassPage = () => {
 
     const refetchAuthCode = useAxios({
         method: 'post',
-        url: '/api/auth/check/code',
+        url: '/auth/check/code',
         data: {
             email,
             authCode,
@@ -66,7 +68,7 @@ const FindPassPage = () => {
 
     const refetchPassChange = useAxios({
         method: 'post',
-        url: '/api/user/password/change',
+        url: '/auth/password/change',
         data: {
             email,
             password: `${pass}`,
@@ -98,7 +100,13 @@ const FindPassPage = () => {
     };
 
     useEffect(() => {
-        if (refetchPassChange[0].response) document.location.href = '/user/login';
+        if (refetchPassChange[0].response) {
+            delCookie('AccessToken');
+            delCookie('nickName');
+            clearTimeout(periodicRefresh());
+            localStorage.clear();
+            document.location.href = '/user/login';
+        }
     }, [refetchPassChange[0].response]);
 
     return (
@@ -150,7 +158,7 @@ const FindPassPage = () => {
                 <Box>
                     <TextField
                         label="비밀번호"
-                        className="findPassPassInput"
+                        className="findPassInput"
                         error={!checkPass(pass)}
                         value={pass}
                         onChange={onPasswordChange}
@@ -162,7 +170,7 @@ const FindPassPage = () => {
                     />
                     <TextField
                         label="비밀번호 확인"
-                        className="findPassPassInput"
+                        className="findPassInput"
                         error={checkPass(pass) && !checkPassConfirm(pass, passConfirm)}
                         value={passConfirm}
                         onChange={onConfirmPasswordChange}

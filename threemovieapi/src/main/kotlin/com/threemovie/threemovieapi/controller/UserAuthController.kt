@@ -7,30 +7,23 @@ import com.threemovie.threemovieapi.Entity.DTO.Request.LoginRequest
 import com.threemovie.threemovieapi.Service.impl.EmailServiceimpl
 import com.threemovie.threemovieapi.Service.impl.UserAuthServiceimpl
 import com.threemovie.threemovieapi.Service.impl.UserInfoServiceimpl
-import com.threemovie.threemovieapi.Utils.jwt.CookieUtil
 import com.threemovie.threemovieapi.Utils.jwt.JwtTokenProvider
-import com.threemovie.threemovieapi.Utils.jwt.RedisUtil
 import com.threemovie.threemovieapi.config.UserRole
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.servlet.http.HttpServletRequest
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @Tag(name = "UserAuthController", description = "인증 관련 컨트롤러")
 @RestController
+@CrossOrigin(origins = ["http://localhost:3000"])
 @RequestMapping("/api/auth")
 class UserAuthController(
 	val emailService: EmailServiceimpl,
 	val userAuthService: UserAuthServiceimpl,
 	val userInfoService: UserInfoServiceimpl,
-	val jwtTokenProvider: JwtTokenProvider,
-	val cookieUtil: CookieUtil,
-	val redisUtil: RedisUtil
+	val jwtTokenProvider: JwtTokenProvider
 ) {
 	
 	@PostMapping("/mail")
@@ -58,13 +51,18 @@ class UserAuthController(
 	@PostMapping("/login")
 	fun loginAccount(@RequestBody loginRequest: LoginRequest): ResponseEntity<Any> {
 		val (email, pass) = loginRequest
-		val ret = userAuthService.loginAccount(email, pass)
-		if (! ret) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("로그인에 실패 하였습니다.")
-		}
+		var ret = userInfoService.existsEmail(email)
+		if (! ret)
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("가입되지 않은 메일이거나 비밀번호가 틀렸습니다.")
 		
-		val userRole = UserRole.ROLE_NOT_PERMITTED.toString()
-		val retToken = jwtTokenProvider.createAllToken(email, userRole)
+		ret = userAuthService.loginAccount(email, pass)
+		
+		if (! ret) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("가입되지 않은 메일이거나 비밀번호가 틀렸습니다.")
+		}
+		val nickName = userInfoService.getNickName(email)
+		val userRole = UserRole.USER.toString()
+		val retToken = jwtTokenProvider.createAllToken(email, userRole, nickName)
 		
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(retToken)
@@ -72,7 +70,7 @@ class UserAuthController(
 	
 	@PostMapping("/logout")
 	fun logoutAccount(request: HttpServletRequest): ResponseEntity<String> {
-		val accessToken = cookieUtil.getCookie(request, "AccessToken")?.value.toString()
+		val accessToken = request.getHeader("Authorization").substring(7)
 		
 		val ret = userAuthService.logoutAccount(accessToken)
 		if (ret) {
@@ -104,28 +102,34 @@ class UserAuthController(
 	
 	@PostMapping("/signout")
 	fun signOutAccount(request: HttpServletRequest): ResponseEntity<String> {
-		val refreshToken = cookieUtil.getCookie(request, jwtTokenProvider.REFRESH_TOKEN_NAME)?.value.toString()
-		userAuthService.signOutAccount(refreshToken)
+		println(request.getHeader("Authorization"))
+		val accessToken = request.getHeader("Authorization").substring(7)
+		userAuthService.signOutAccount(accessToken)
 		return ResponseEntity.status(HttpStatus.OK).body("성공적으로 탈퇴 되었습니다.")
 	}
 	
 	@PostMapping("/reissue")
 	fun reissue(request: HttpServletRequest): ResponseEntity<String> {
-		val refreshToken = cookieUtil.getCookie(request, jwtTokenProvider.REFRESH_TOKEN_NAME)?.value.toString()
+		println(request.cookies)
+		val refreshToken = request.getHeader("Authorization").substring(7)
 		if (refreshToken.isNullOrEmpty())
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("잘못된 요청 입니다.")
 		val ret = userAuthService.reissue(refreshToken)
 		if (! ret)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("잘못된 요청 입니다.")
 		
-		val userRole = UserRole.ROLE_NOT_PERMITTED.toString()
+		val userRole = UserRole.USER.toString()
 		val email = jwtTokenProvider.getEmail(refreshToken)
 		val accessToken = jwtTokenProvider.generateAccessToken(email, userRole)
 		
-		val accessCookie = cookieUtil.createCookie("AccessToken", accessToken)
-		
 		return ResponseEntity.status(HttpStatus.OK)
-			.header(HttpHeaders.SET_COOKIE, accessCookie.toString())
-			.body("성공적으로 발급 되었습니다.")
+			.body(accessToken)
+	}
+	
+	@PostMapping("/password/change")
+	fun changePassword(@RequestBody loginRequest: LoginRequest): ResponseEntity<String> {
+		val (email, pass) = loginRequest
+		userInfoService.changePassword(email, pass)
+		return ResponseEntity.status(HttpStatus.OK).body("비밀번호가 변경 되었습니다. 다시 로그인 해주시기 바랍니다.")
 	}
 }

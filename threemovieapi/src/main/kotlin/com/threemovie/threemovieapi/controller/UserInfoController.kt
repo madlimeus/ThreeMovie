@@ -2,11 +2,14 @@ package com.threemovie.threemovieapi.controller
 
 import com.threemovie.threemovieapi.Entity.DTO.Request.ChangeNickNameRequest
 import com.threemovie.threemovieapi.Entity.DTO.Request.EmailRequest
-import com.threemovie.threemovieapi.Entity.DTO.Request.LoginRequest
 import com.threemovie.threemovieapi.Entity.DTO.Request.NickNameRequest
+import com.threemovie.threemovieapi.Entity.DTO.Request.UpdateUserInfoRequest
+import com.threemovie.threemovieapi.Entity.UserInfo
 import com.threemovie.threemovieapi.Service.impl.UserAuthServiceimpl
 import com.threemovie.threemovieapi.Service.impl.UserInfoServiceimpl
+import com.threemovie.threemovieapi.Utils.jwt.JwtTokenProvider
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -19,7 +22,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/user")
 class UserInfoController(
 	val userInfoService: UserInfoServiceimpl,
-	val userAuthService: UserAuthServiceimpl
+	val userAuthService: UserAuthServiceimpl,
+	val jwtTokenProvider: JwtTokenProvider
 ) {
 	
 	@PostMapping("/password/reset")
@@ -32,13 +36,6 @@ class UserInfoController(
 		
 		userInfoService.resetPassword(email)
 		return ResponseEntity.status(HttpStatus.OK).body("임시 비밀번호가 전송 되었습니다.")
-	}
-	
-	@PostMapping("/password/change")
-	fun changePassword(@RequestBody loginRequest: LoginRequest): ResponseEntity<String> {
-		val (email, pass) = loginRequest
-		userInfoService.changePassword(email, pass)
-		return ResponseEntity.status(HttpStatus.OK).body("비밀번호가 변경 되었습니다. 다시 로그인 해주시기 바랍니다.")
 	}
 	
 	@PostMapping("/nickname/exists")
@@ -59,4 +56,22 @@ class UserInfoController(
 		return ResponseEntity.status(HttpStatus.OK).body("닉네임이 변경 되었습니다.")
 	}
 	
+	@PostMapping("/mypage")
+	fun getUserInfo(request: HttpServletRequest): ResponseEntity<UserInfo> {
+		println(request)
+		val accessToken = request.getHeader("Authorization").substring(7)
+		val email = jwtTokenProvider.getEmail(accessToken)
+		val res = userInfoService.getUserInfo(email)
+		
+		return ResponseEntity.status(HttpStatus.OK).body(res)
+	}
+	
+	@PostMapping("/info/change")
+	fun updateInfo(@RequestBody updateUserInfoRequest: UpdateUserInfoRequest): ResponseEntity<String> {
+		val ret = userInfoService.updateUserInfo(updateUserInfoRequest)
+		if (! ret) {
+			ResponseEntity.status(HttpStatus.BAD_REQUEST).body("잘못된 요청입니다.")
+		}
+		return ResponseEntity.status(HttpStatus.OK).body("정보가 변경 되었습니다.")
+	}
 }

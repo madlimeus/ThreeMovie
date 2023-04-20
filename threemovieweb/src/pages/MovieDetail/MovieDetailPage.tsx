@@ -21,7 +21,7 @@ const MovieDetailPage = () => {
     const queryData = QueryString.parse(location.search, { ignoreQueryPrefix: true });
     const [{ response, loading, error }, refetch] = useAxios<MovieDetail>({
         method: 'get',
-        url: `/api/movieinfo/moviedetail/${queryData.movie}`,
+        url: `/movieinfo/moviedetail/${queryData.movie}`,
         config: {
             headers: { 'Content-Type': `application/json` },
         },

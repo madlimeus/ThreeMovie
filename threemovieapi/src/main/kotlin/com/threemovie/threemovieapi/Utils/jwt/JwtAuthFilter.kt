@@ -10,8 +10,7 @@ import org.springframework.web.filter.OncePerRequestFilter
 @Component
 class JwtAuthFilter(
 	private val jwtTokenProvider: JwtTokenProvider,
-	private val redisUtil: RedisUtil,
-	private val cookieUtil: CookieUtil
+	private val redisUtil: RedisUtil
 ) : OncePerRequestFilter() {
 	
 	override fun doFilterInternal(
@@ -19,7 +18,9 @@ class JwtAuthFilter(
 		response: HttpServletResponse,
 		filterChain: FilterChain
 	) {
-		val accessToken = cookieUtil.getCookie(request, jwtTokenProvider.ACCESS_TOKEN_NAME)?.value
+		var accessToken = request.getHeader("Authorization")
+		if (accessToken != null)
+			accessToken = accessToken.substring(7)
 		
 		checkAccessToken(accessToken)
 		filterChain.doFilter(request, response)
@@ -27,7 +28,8 @@ class JwtAuthFilter(
 	
 	private fun checkAccessToken(accessToken: String?): Boolean {
 		val isLogout = redisUtil.getData(accessToken.toString())
-		if (! accessToken.isNullOrEmpty() && isLogout.isNullOrEmpty()) {
+		
+		if (! accessToken.isNullOrEmpty() && isLogout == "null") {
 			try {
 				if (jwtTokenProvider.validateToken(accessToken)) {
 					val authentication = jwtTokenProvider.getAuthentication(accessToken)

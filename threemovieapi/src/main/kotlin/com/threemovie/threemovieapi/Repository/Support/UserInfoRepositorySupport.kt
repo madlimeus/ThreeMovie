@@ -1,6 +1,7 @@
 package com.threemovie.threemovieapi.Repository.Support
 
 import com.querydsl.jpa.impl.JPAQueryFactory
+import com.threemovie.threemovieapi.Entity.DTO.Request.UpdateUserInfoRequest
 import com.threemovie.threemovieapi.Entity.QUserInfo
 import com.threemovie.threemovieapi.Entity.UserInfo
 import jakarta.transaction.Transactional
@@ -18,7 +19,7 @@ class UserInfoRepositorySupport(
 			.select(userInfo)
 			.from(userInfo)
 			.where(userInfo.userNickName.eq(nickName))
-			.fetchFirst() != null
+			.fetchOne() != null
 	}
 	
 	@Transactional
@@ -33,6 +34,19 @@ class UserInfoRepositorySupport(
 	}
 	
 	@Transactional
+	fun updateUserInfo(userRequest: UpdateUserInfoRequest) {
+		query.update(userInfo)
+			.set(userInfo.userNickName, userRequest.nickName)
+			.set(userInfo.userSex, userRequest.sex)
+			.set(userInfo.userBirth, userRequest.birth)
+			.where(userInfo.userEmail.eq(userRequest.email))
+			.execute()
+		
+		entityManager?.clear()
+		entityManager?.flush()
+	}
+	
+	@Transactional
 	fun deleteUserInfo(email: String) {
 		query.delete(userInfo)
 			.where(userInfo.userEmail.eq(email))
@@ -40,5 +54,20 @@ class UserInfoRepositorySupport(
 		
 		entityManager?.clear()
 		entityManager?.flush()
+	}
+	
+	fun getNickName(email: String): String {
+		return query
+			.select(userInfo.userNickName)
+			.from(userInfo)
+			.where(userInfo.userEmail.eq(email))
+			.fetchFirst()
+	}
+	
+	fun getUserInfo(email: String): UserInfo {
+		return query
+			.selectFrom(userInfo)
+			.where(userInfo.userEmail.eq(email))
+			.fetchFirst()
 	}
 }

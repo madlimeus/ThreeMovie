@@ -15,7 +15,7 @@ const NavBarPage = () => {
 
             <Box className="coverHeader">
                 <NavHeader />
-                <Divider className="divide" variant="middle" />
+                <Divider className="divide" />
                 <NavMenu />
             </Box>
             <Outlet />

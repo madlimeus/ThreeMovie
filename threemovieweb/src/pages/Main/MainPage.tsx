@@ -15,7 +15,7 @@ const MainPage = () => {
     const setMovieNow = useSetRecoilState(movieNowAtom);
     const [{ response, loading, error }, refetch] = useAxios<Movieinfo[]>({
         method: 'get',
-        url: '/api/movieinfo/movielist',
+        url: '/movieinfo/movielist',
         config: {
             headers: { 'Content-Type': `application/json` },
         },
@@ -26,7 +26,7 @@ const MainPage = () => {
     }, []);
 
     useEffect(() => {
-        if (response && Array.isArray(response)) {
+        if (response && Array.isArray(response) && response[0]) {
             setMovieList(response);
             setMovieNow(response[0].movieId);
         }

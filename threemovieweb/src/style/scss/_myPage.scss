@@ -1,4 +1,4 @@
-.findPassInputCover {
+.myPageInputCover {
 	margin-top: 100px;
 	border: 1px solid black;
 	border-radius: 2px;
@@ -9,36 +9,17 @@
 	flex-direction: column;
 	text-align: center;
 	
-	.findPassTitle {
+	.myPageTitle {
 		font-size: 25px;
 		font-weight: bold;
 	}
 	
-	.findPassBox {
+	.myPageBox {
 		display: flex;
 		align-items: center;
 	}
 	
-	.findPassInput {
-		width: 330px;
-		
-		.Mui-focused {
-			background-color: white;
-			color: black;
-			
-			fieldset {
-				border-color: black;
-			}
-		}
-		
-		&:hover {
-			transition-duration: 0.2s;
-			background-color: #aacafd;
-			border-radius: 5px;
-		}
-	}
-	
-	.findPassInput {
+	.myPageInput {
 		width: 100%;
 		
 		.Mui-focused {
@@ -57,8 +38,8 @@
 		}
 	}
 	
-	.findPassButton {
-		width: 100px;
+	.myPageButton {
+		width: 80px;
 		margin-top: 8px;
 		margin-bottom: 4px;
 		margin-left: 20px;
@@ -73,10 +54,26 @@
 	}
 	
 	.Mui-disabled {
-		color: white !important;
-		background-color: #AD2727 !important;
-		-webkit-text-fill-color: white !important;
-		border-radius: 5px;
+		font-weight: bolder;
+	}
+	
+	.myPageNickNameInput {
+		width: 330px;
+		
+		.Mui-focused {
+			background-color: white;
+			color: black;
+			
+			fieldset {
+				border-color: black;
+			}
+		}
+		
+		&:hover {
+			transition-duration: 0.2s;
+			background-color: #aacafd;
+			border-radius: 5px;
+		}
 	}
 	
 	.divide {
@@ -85,7 +82,7 @@
 		border-color: white;
 	}
 	
-	.findPassBirth {
+	.myPageBirth {
 		margin-top: 20px;
 		margin-bottom: 20px;
 		
@@ -116,7 +113,7 @@
 		}
 	}
 	
-	.findPassConfirmButton {
+	.myPageConfirmButton {
 		color: black;
 		margin-top: 20px;
 		border: 1px solid black;
@@ -131,6 +128,20 @@
 		pointer-events: auto;
 		background-color: white;
 		color: black;
+	}
+	
+	.myPageTextButtonCover {
+		display: flex;
+		margin-left: auto;
+		
+		.myPageTextButton {
+			margin: 10px;
+			
+			&:hover {
+				cursor: pointer;
+				text-decoration: underline;
+			}
+		}
 	}
 }
 

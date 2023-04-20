@@ -5,7 +5,7 @@ import com.threemovie.threemovieapi.Entity.DTO.Request.AccountSignUpRequest
 interface UserAuthService {
 	fun signUpAccount(signUpRequest: AccountSignUpRequest)
 	
-	fun signOutAccount(refreshToken: String)
+	fun signOutAccount(accessToken: String)
 	
 	fun loginAccount(email: String, pass: String): Boolean
 	

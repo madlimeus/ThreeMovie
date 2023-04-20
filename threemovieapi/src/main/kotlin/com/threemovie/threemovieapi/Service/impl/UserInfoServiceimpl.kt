@@ -1,5 +1,7 @@
 package com.threemovie.threemovieapi.Service.impl
 
+import com.threemovie.threemovieapi.Entity.DTO.Request.UpdateUserInfoRequest
+import com.threemovie.threemovieapi.Entity.UserInfo
 import com.threemovie.threemovieapi.Repository.Support.UserInfoRepositorySupport
 import com.threemovie.threemovieapi.Repository.Support.UserLoginRepositorySupport
 import com.threemovie.threemovieapi.Service.UserInfoService
@@ -14,6 +16,20 @@ class UserInfoServiceimpl(
 	val emailService: EmailServiceimpl,
 	val passwordEncoder: BCryptPasswordEncoder,
 ) : UserInfoService {
+	
+	fun updateUserInfo(userInfoRequest: UpdateUserInfoRequest): Boolean {
+		userInfoRepositorySupport.updateUserInfo(userInfoRequest)
+		
+		return true
+	}
+	
+	fun getUserInfo(email: String): UserInfo {
+		return userInfoRepositorySupport.getUserInfo(email)
+	}
+	
+	fun getNickName(email: String): String {
+		return userInfoRepositorySupport.getNickName(email)
+	}
 	
 	override fun resetPassword(email: String) {
 		val pass = RandomKeyString.randomAlphabetNumber(20)
