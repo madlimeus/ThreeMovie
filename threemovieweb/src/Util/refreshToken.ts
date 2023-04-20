@@ -2,6 +2,7 @@ import axios from 'axios';
 import { setCookie } from './cookieUtil';
 
 const onSilentRefresh = () => {
+    console.log('실행됨');
     const refreshToken = localStorage.getItem('RefreshToken');
     axios
         .post('/reissue', {}, { headers: { Authorization: `bearer ${refreshToken}` } })
