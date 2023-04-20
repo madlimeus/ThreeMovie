@@ -5,6 +5,7 @@ import com.threemovie.threemovieapi.Entity.UserInfo
 import com.threemovie.threemovieapi.Repository.Support.UserInfoRepositorySupport
 import com.threemovie.threemovieapi.Repository.Support.UserLoginRepositorySupport
 import com.threemovie.threemovieapi.Service.UserInfoService
+import com.threemovie.threemovieapi.Utils.RandomKeyString
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -30,15 +31,19 @@ class UserInfoServiceimpl(
 		return userInfoRepositorySupport.getNickName(email)
 	}
 	
+	override fun resetPassword(email: String) {
+		val pass = RandomKeyString.randomAlphabetNumber(20)
+		val password = passwordEncoder.encode(pass)
+		emailService.sendMessage(email, "resetpass", pass)
+		
+		userLoginRepositorySupport.updatePass(email, password)
+	}
+	
 	override fun changePassword(email: String, pass: String) {
 		val newPassword = passwordEncoder.encode(pass)
 		emailService.sendMessage(email, "changepass", "changepass")
 		
 		userLoginRepositorySupport.updatePass(email, newPassword)
-	}
-	
-	override fun changeNickName(email: String, nickName: String) {
-		userInfoRepositorySupport.updateNickName(email, nickName)
 	}
 	
 	override fun existsEmail(email: String): Boolean {
