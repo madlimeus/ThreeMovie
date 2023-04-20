@@ -1,6 +1,5 @@
 package com.threemovie.threemovieapi.controller
 
-import com.threemovie.threemovieapi.Entity.DTO.Request.ChangeNickNameRequest
 import com.threemovie.threemovieapi.Entity.DTO.Request.EmailRequest
 import com.threemovie.threemovieapi.Entity.DTO.Request.NickNameRequest
 import com.threemovie.threemovieapi.Entity.DTO.Request.UpdateUserInfoRequest
@@ -46,14 +45,6 @@ class UserInfoController(
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("이미 존재하는 닉네임 입니다.")
 		}
 		return ResponseEntity.status(HttpStatus.OK).body("사용가능한 닉네임 입니다.")
-	}
-	
-	@PostMapping("/nickname/change")
-	fun changeNickName(@RequestBody changeNickNameRequest: ChangeNickNameRequest): ResponseEntity<String> {
-		val (email, nickName) = changeNickNameRequest
-		userInfoService.changeNickName(email, nickName)
-		
-		return ResponseEntity.status(HttpStatus.OK).body("닉네임이 변경 되었습니다.")
 	}
 	
 	@PostMapping("/mypage")
