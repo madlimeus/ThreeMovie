@@ -1,6 +1,6 @@
 package com.threemovie.threemovieapi.Entity
 
-import com.threemovie.threemovieapi.config.UserRole
+import com.threemovie.threemovieapi.Config.UserRole
 import jakarta.persistence.*
 
 @Entity

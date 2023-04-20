@@ -1,5 +1,6 @@
 package com.threemovie.threemovieapi.Service.impl
 
+import com.threemovie.threemovieapi.Config.UserRole
 import com.threemovie.threemovieapi.Entity.DTO.Request.AccountSignUpRequest
 import com.threemovie.threemovieapi.Entity.UserInfo
 import com.threemovie.threemovieapi.Entity.UserLogin
@@ -11,7 +12,6 @@ import com.threemovie.threemovieapi.Repository.UserLoginRepository
 import com.threemovie.threemovieapi.Service.UserAuthService
 import com.threemovie.threemovieapi.Utils.jwt.JwtTokenProvider
 import com.threemovie.threemovieapi.Utils.jwt.RedisUtil
-import com.threemovie.threemovieapi.config.UserRole
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
@@ -54,7 +54,7 @@ class UserAuthServiceimpl(
 	override fun loginAccount(email: String, pass: String): Boolean {
 		val userLogin = userLoginRepositorySupport.getUserLoginByEmail(email)
 		
-		if (! passwordEncoder.matches(pass, userLogin?.userPassword))
+		if (! passwordEncoder.matches(pass, userLogin.userPassword))
 			throw BadCredentialsException("계정 혹은 비밀번호가 틀렸습니다.")
 		
 		return true

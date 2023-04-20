@@ -1,5 +1,6 @@
 package com.threemovie.threemovieapi.Controller
 
+import com.threemovie.threemovieapi.Config.UserRole
 import com.threemovie.threemovieapi.Entity.DTO.Request.AccountSignUpRequest
 import com.threemovie.threemovieapi.Entity.DTO.Request.AuthRequest
 import com.threemovie.threemovieapi.Entity.DTO.Request.EmailRequest
@@ -8,7 +9,6 @@ import com.threemovie.threemovieapi.Service.impl.EmailServiceimpl
 import com.threemovie.threemovieapi.Service.impl.UserAuthServiceimpl
 import com.threemovie.threemovieapi.Service.impl.UserInfoServiceimpl
 import com.threemovie.threemovieapi.Utils.jwt.JwtTokenProvider
-import com.threemovie.threemovieapi.config.UserRole
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus

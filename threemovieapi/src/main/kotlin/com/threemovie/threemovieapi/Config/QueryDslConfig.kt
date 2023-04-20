@@ -1,4 +1,4 @@
-package com.threemovie.threemovieapi.config
+package com.threemovie.threemovieapi.Config
 
 import com.querydsl.jpa.impl.JPAQueryFactory
 import jakarta.persistence.EntityManager
@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class QueryDslConfig{
-
-		@PersistenceContext
-		lateinit var entityManager: EntityManager
-
-		@Bean
-		fun jpaQueryFactory(): JPAQueryFactory {
-			return JPAQueryFactory(entityManager)
-		}
+class QueryDslConfig {
+	
+	@PersistenceContext
+	lateinit var entityManager: EntityManager
+	
+	@Bean
+	fun jpaQueryFactory(): JPAQueryFactory {
+		return JPAQueryFactory(entityManager)
+	}
 }

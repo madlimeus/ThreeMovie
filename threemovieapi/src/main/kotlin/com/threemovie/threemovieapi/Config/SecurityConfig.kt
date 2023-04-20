@@ -1,4 +1,4 @@
-package com.threemovie.threemovieapi.config
+package com.threemovie.threemovieapi.Config
 
 import com.threemovie.threemovieapi.Utils.jwt.JwtAuthFilter
 import org.springframework.context.annotation.Bean

@@ -1,4 +1,4 @@
-package com.threemovie.threemovieapi.config
+package com.threemovie.threemovieapi.Config
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.scheduling.annotation.AsyncConfigurer
@@ -13,7 +13,7 @@ class ScheduleConfig : AsyncConfigurer, SchedulingConfigurer {
 		scheduler.poolSize = Runtime.getRuntime().availableProcessors() * 2
 		scheduler.setThreadNamePrefix("MY-SCHEDULER-")
 		scheduler.initialize()
-
+		
 		return scheduler
 	}
 	
