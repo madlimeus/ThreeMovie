@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/UserInfoService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/UserInfoService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/impl/UserInfoServiceimpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Service/impl/UserInfoServiceimpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/dataSources/01328167-5172-4121-a157-fcdf43c3ad54.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/dataSources/01328167-5172-4121-a157-fcdf43c3ad54.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/JwtTokenProvider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/JwtTokenProvider.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/refreshToken.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/refreshToken.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hook/useAxios.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hook/useAxios.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieweb.iml" beforeDir="false" afterPath="$PROJECT_DIR$/moviethreeweb.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +88,19 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="moviethreeweb" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="moviethreeweb" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="run" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="start" />
@@ -127,7 +149,7 @@
       <workItem from="1681708632053" duration="2999000" />
       <workItem from="1681796836613" duration="620000" />
       <workItem from="1681877867587" duration="42536000" />
-      <workItem from="1681964703794" duration="4899000" />
+      <workItem from="1681964703794" duration="11656000" />
     </task>
     <servers />
   </component>

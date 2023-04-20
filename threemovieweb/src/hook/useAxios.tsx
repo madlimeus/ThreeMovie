@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import { delCookie } from '../Util/cookieUtil';
+import { periodicRefresh } from '../Util/refreshToken';
 
 type AxiosProps = {
     method: 'get' | 'post' | 'put' | 'delete';
@@ -49,8 +51,21 @@ const useAxios = <T,>({
                     setResponse(res);
                 })
                 .catch((err) => {
-                    console.log(err);
-                    if (err.response.data.message) alert(err.response.data.message);
+                    const checkErr = err.response.data;
+                    console.log(checkErr);
+                    if (
+                        (checkErr.status === 500 &&
+                            (checkErr.message === '만료된 토큰 입니다.' ||
+                                checkErr.message === '잘못된 토큰 입니다.')) ||
+                        (checkErr.status === 403 && checkErr.message === 'Access Denied')
+                    ) {
+                        console.log('통과');
+                        delCookie('AccessToken');
+                        delCookie('NickName');
+                        clearTimeout(periodicRefresh());
+                        localStorage.clear();
+                        window.location.href = '/main';
+                    } else if (err.response.data.message) alert(err.response.data.message);
                     else alert(err.response.data);
                     setError(err);
                 })

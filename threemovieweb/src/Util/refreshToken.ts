@@ -7,6 +7,7 @@ const onSilentRefresh = () => {
         .post('/reissue', {}, { headers: { Authorization: `bearer ${refreshToken}` } })
         .then((res) => {
             const accessToken = res.data;
+            console.log(res);
             setCookie('AccessToken', `Bearer ${accessToken}`);
         })
         .catch((error) => {
