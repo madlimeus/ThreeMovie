@@ -15,8 +15,6 @@ V
 &src/pages/MovieDetail/MoviePreview.tsx,6\6\66299b5e4b495ed74609110d5b9185b19d465927
 U
 %src/pages/MovieDetail/MovieReview.tsx,e\5\e51fb0479c5a38f3e982a8734611a61c962be7ef
-<
-package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 L
 src/style/scss/_flexbox.scss,0\e\0e3c5a4464caf3f08cb27a294881d19939ae7ad2
 M
@@ -56,3 +54,19 @@ Q
 .eslintrc.js,d\b\dbc0c31823b8f2e4ed04a397722fed33a67f123f
 T
 $src/pages/BookInfo/BookMovieList.tsx,1\3\13249b523be6db07cb147bcf3b621872eec8e6f3
+L
+src/interfaces/MyPageInfo.ts,f\b\fb32c75d949b9a3cda090b30287e8645d7298c78
+I
+src/Util/checkUserInfo.ts,5\7\579ec90a9d88004c886eef28944c393f147039db
+K
+src/style/scss/_navbar.scss,7\a\7ad9b000798b6c76e8391dd3a8e9a040ec638ea4
+K
+src/style/scss/_signup.scss,1\7\178ae750df1df81ab8842b33b9ec33f8d602f497
+O
+src/pages/NavBar/NavBarPage.tsx,7\b\7b0cb6dff453e9e332b6987b0a3f84efa49ee9d0
+M
+src/style/scss/_findPass.scss,0\b\0b148d39a1156b1f7adeb41aa9c6cf216322df43
+K
+src/style/scss/_myPage.scss,6\c\6c93117aae1f890f6b27fc9ab87ca53a10abb82d
+K
+src/interfaces/Movieinfo.ts,2\e\2eb75bffcc2627774d71af9c126be5bf3673ba52
