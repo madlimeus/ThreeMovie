@@ -20,7 +20,7 @@ class MovieDataController(
 	
 	@GetMapping()
 	@Async
-	@Scheduled(cron = "0 0/10 * * * ?")
+	@Scheduled(cron = "0 0 0/1 * * *")
 	fun getMovieDataFromDaum() {
 		movieDataControlService.truncateAllMovieData()
 		movieDataControlService.GET_MOVIE_INFO_DAUM()

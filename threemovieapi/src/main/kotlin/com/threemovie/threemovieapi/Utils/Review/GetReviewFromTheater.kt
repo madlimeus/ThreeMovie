@@ -221,7 +221,7 @@ class GetReviewFromTheater(
         }
     }
     @Async
-    @Scheduled(cron = "0 0 0/12 * * *")
+    @Scheduled(cron = "0 0 0/1 * * *")
     fun getReview(){
         if (ChkNeedUpdate.chkUpdateTwelveHours(UpdateTimeRepositorySupport.getReviewTime())) {
             movieReviewRepository.truncate()
