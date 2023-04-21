@@ -18,11 +18,13 @@ class JwtAuthFilter(
 		response: HttpServletResponse,
 		filterChain: FilterChain
 	) {
-		var accessToken = request.getHeader("Authorization") ?: ""
-		if (accessToken != "")
+		var accessToken = request.getHeader("Authorization")
+		if (accessToken != null) {
 			accessToken = accessToken.substring(7)
+			
+			checkAccessToken(accessToken)
+		}
 		
-		checkAccessToken(accessToken)
 		filterChain.doFilter(request, response)
 	}
 	
