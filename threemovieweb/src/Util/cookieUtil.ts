@@ -3,7 +3,7 @@ import { Cookies } from 'react-cookie';
 const cookies = new Cookies();
 
 export const setCookie = (name: string, value: string) => {
-    return cookies.set(name, value, { path: '/', httpOnly: true, secure: true });
+    return cookies.set(name, value, { path: '/', secure: true });
 };
 
 export const getCookie = (name: string) => {
