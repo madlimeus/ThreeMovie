@@ -10,7 +10,7 @@ type AxiosProps = {
     config?: AxiosRequestConfig;
 };
 
-axios.defaults.baseURL = 'http://localhost:8080/api';
+axios.defaults.baseURL = 'http://192.168.219.157:8080/api';
 axios.defaults.headers.withCredentials = true;
 
 const useAxios = <T,>({
