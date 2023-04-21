@@ -22,14 +22,16 @@ class JwtAuthFilter(
 		if (accessToken != null)
 			accessToken = accessToken.substring(7)
 		
-		checkAccessToken(accessToken)
+		checkAccessToken(accessToken.toString())
 		filterChain.doFilter(request, response)
 	}
 	
-	private fun checkAccessToken(accessToken: String?): Boolean {
-		val isLogout = redisUtil.getData(accessToken.toString())
+	private fun checkAccessToken(accessToken: String): Boolean {
+		val isLogout = redisUtil.getData(accessToken)
+		val email = jwtTokenProvider.getEmail(accessToken)
+		val refreshToken = redisUtil.getData(email)
 		
-		if (! accessToken.isNullOrEmpty() && isLogout == "null") {
+		if (! accessToken.isNullOrEmpty() && isLogout == "null" && refreshToken != "null") {
 			try {
 				if (jwtTokenProvider.validateToken(accessToken)) {
 					val authentication = jwtTokenProvider.getAuthentication(accessToken)

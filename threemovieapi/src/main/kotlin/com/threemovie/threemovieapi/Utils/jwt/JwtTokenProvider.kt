@@ -52,7 +52,7 @@ class JwtTokenProvider(
 	fun getExpiration(token: String): Long {
 		val expiration = extractAllClaims(token).expiration.time
 		val now = Date().time
-		return expiration - now
+		return (expiration - now) / 1000
 	}
 	
 	fun getUserRole(token: String): String {
@@ -78,6 +78,7 @@ class JwtTokenProvider(
 	
 	fun generateAccessToken(email: String, userRole: String): String {
 		val now = LocalDateTime.now().plusSeconds(ACCESS_TOKEN_EXPIRE_TIME.toLong())
+		println(now)
 		val accessToken = Jwts.builder()
 			.setSubject(email)
 			.claim("role", userRole)
@@ -91,6 +92,7 @@ class JwtTokenProvider(
 	fun generateRefreshToken(email: String): String {
 		val now = LocalDateTime.now().plusSeconds(REFRESH_TOKEN_EXPIRE_TIME.toLong())
 		val refreshToken = Jwts.builder()
+			.setSubject(email)
 			.setExpiration(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()))
 			.signWith(key, signatureAlgorithm)
 			.compact()

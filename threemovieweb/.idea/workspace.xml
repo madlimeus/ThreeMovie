@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/0/7030d0b2f71b999ff89a343de08c414af32fc93a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/JwtTokenProvider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/jwt/JwtTokenProvider.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +128,8 @@
       <workItem from="1681796836613" duration="620000" />
       <workItem from="1681877867587" duration="42536000" />
       <workItem from="1681964703794" duration="12894000" />
-      <workItem from="1682005871488" duration="2341000" />
+      <workItem from="1682005871488" duration="2737000" />
+      <workItem from="1682052824905" duration="887000" />
     </task>
     <servers />
   </component>
