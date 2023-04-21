@@ -26,6 +26,5 @@ data class UserInfo(
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ID")
 	var id: Long = 0L,
 )
