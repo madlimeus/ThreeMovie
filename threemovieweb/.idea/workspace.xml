@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/3/03346743ad8f8161c788f9c04e919f6e351f7b49" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/7/178a5b5c35b7cab370dbf6199a80849c0ee7ab2a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/e/3ebab0af4f32a3debb054735a8a4af1ed62f7efa" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/9/790594007148436f3dcdef212008991b758bd5c1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/c/7c8ac9d68ae6f8303d2527f7f70402662a1d4659" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,6 +134,7 @@
       <workItem from="1681964703794" duration="12894000" />
       <workItem from="1682005871488" duration="2737000" />
       <workItem from="1682052824905" duration="2103000" />
+      <workItem from="1682070496699" duration="152000" />
     </task>
     <servers />
   </component>
