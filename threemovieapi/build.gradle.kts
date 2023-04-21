@@ -50,6 +50,7 @@ dependencies {
 
 tasks.withType<Jar> {
 	duplicatesStrategy = DuplicatesStrategy.INCLUDE
+	enabled = false
 }
 
 tasks.withType<KotlinCompile> {
