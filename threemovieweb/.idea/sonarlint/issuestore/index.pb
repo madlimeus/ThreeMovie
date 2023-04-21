@@ -70,8 +70,6 @@ K
 src/style/scss/_myPage.scss,6\c\6c93117aae1f890f6b27fc9ab87ca53a10abb82d
 K
 src/interfaces/Movieinfo.ts,2\e\2eb75bffcc2627774d71af9c126be5bf3673ba52
-F
-src/Util/cookieUtil.ts,c\c\cc41aabb0a9d451955f6484aad1649447f777085
 <
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 T
