@@ -80,3 +80,9 @@ R
 	yarn.lock,5\3\53585a096fe3a3b96321113856ae62602995a33b
 H
 src/Util/refreshToken.ts,3\e\3ebab0af4f32a3debb054735a8a4af1ed62f7efa
+C
+src/apollo/cache.ts,5\b\5ba446ccbe0dfa45cdf3c158f2eb9e5070603475
+T
+$src/pages/User/Find/FindPassPage.tsx,0\3\03346743ad8f8161c788f9c04e919f6e351f7b49
+N
+src/pages/NavBar/NavHeader.tsx,1\7\178a5b5c35b7cab370dbf6199a80849c0ee7ab2a

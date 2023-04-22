@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Util/cookieUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/cookieUtil.ts" afterDir="false" />
-    </list>
+    <list default="true" id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -131,7 +129,7 @@
       <workItem from="1682052824905" duration="2103000" />
       <workItem from="1682070496699" duration="152000" />
       <workItem from="1682071059410" duration="4534000" />
-      <workItem from="1682081841612" duration="5327000" />
+      <workItem from="1682081841612" duration="5927000" />
     </task>
     <servers />
   </component>
