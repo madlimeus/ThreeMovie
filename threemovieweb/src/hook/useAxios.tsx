@@ -10,7 +10,7 @@ type AxiosProps = {
     config?: AxiosRequestConfig;
 };
 
-axios.defaults.baseURL = 'http://moviethree.synologe.me/api';
+axios.defaults.baseURL = 'https://moviethree.synologe.me/api';
 axios.defaults.headers.withCredentials = true;
 
 const useAxios = <T,>({
