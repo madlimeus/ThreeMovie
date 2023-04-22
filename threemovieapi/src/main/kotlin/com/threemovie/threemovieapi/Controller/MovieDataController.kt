@@ -29,9 +29,7 @@ class MovieDataController(
 	
 	@GetMapping("/movielist")
 	fun getMovieList(): List<MovieListDTO> {
-		val ret = movieInfoService.getMovieList()
-		println(ret)
-		return ret
+		return movieInfoService.getMovieList()
 	}
 	
 	@GetMapping("/moviedetail/{movieId}")

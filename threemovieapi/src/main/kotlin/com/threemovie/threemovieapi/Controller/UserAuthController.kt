@@ -9,6 +9,7 @@ import com.threemovie.threemovieapi.Service.impl.EmailServiceimpl
 import com.threemovie.threemovieapi.Service.impl.UserAuthServiceimpl
 import com.threemovie.threemovieapi.Service.impl.UserInfoServiceimpl
 import com.threemovie.threemovieapi.Utils.jwt.JwtTokenProvider
+import com.threemovie.threemovieapi.Utils.jwt.RedisUtil
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
@@ -23,7 +24,8 @@ class UserAuthController(
 	val emailService: EmailServiceimpl,
 	val userAuthService: UserAuthServiceimpl,
 	val userInfoService: UserInfoServiceimpl,
-	val jwtTokenProvider: JwtTokenProvider
+	val jwtTokenProvider: JwtTokenProvider,
+	val redisUtil: RedisUtil
 ) {
 	
 	@PostMapping("/mail")
@@ -63,6 +65,8 @@ class UserAuthController(
 		val nickName = userInfoService.getNickName(email)
 		val userRole = UserRole.USER.toString()
 		val retToken = jwtTokenProvider.createAllToken(email, userRole, nickName)
+		
+		redisUtil.setDataExpire(email, retToken.refreshToken, jwtTokenProvider.REFRESH_TOKEN_EXPIRE_TIME.toLong())
 		
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(retToken)
