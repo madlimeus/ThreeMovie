@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/7/579ec90a9d88004c886eef28944c393f147039db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/b/5ba446ccbe0dfa45cdf3c158f2eb9e5070603475" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/0/7030d0b2f71b999ff89a343de08c414af32fc93a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/b/dbc0c31823b8f2e4ed04a397722fed33a67f123f" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/cookieUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/cookieUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apollo/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/apollo/client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hook/useAxios.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hook/useAxios.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +28,31 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="release-1.1.0" />
+                    <option name="lastUsedInstant" value="1682587307" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1682587306" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$/.." />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="KotlinCodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
@@ -137,7 +168,11 @@
       <workItem from="1682145953830" duration="5283000" />
       <workItem from="1682184428716" duration="833000" />
       <workItem from="1682186317914" duration="1309000" />
-      <workItem from="1682187740077" duration="11000" />
+      <workItem from="1682187740077" duration="29000" />
+      <workItem from="1682188288438" duration="285000" />
+      <workItem from="1682271594204" duration="1318000" />
+      <workItem from="1682324493168" duration="18000" />
+      <workItem from="1682586404888" duration="1285000" />
     </task>
     <servers />
   </component>

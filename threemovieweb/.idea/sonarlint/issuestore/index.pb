@@ -27,8 +27,6 @@ J
 src/interfaces/BookBrch.ts,9\3\934a2ab7fd91db22be8e4d826e0e678ae4d03e40
 J
 src/interfaces/BookDate.ts,6\2\6297aac72196b95cf3c57bc25a827872e1efc49e
-G
-src/gql/showtime.gql.ts,c\1\c18b55feffe6cc3900b86cebc1811f5c3f8cbc13
 F
 src/style/typotheme.ts,d\2\d2051fb287f551284c6686b74470f025e6e6d37d
 U
@@ -50,14 +48,10 @@ O
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 Q
 !src/Routes/User/Find/FindPass.tsx,a\f\af7f1d91166825c0b4759e36b520654cbed4b822
-<
-.eslintrc.js,d\b\dbc0c31823b8f2e4ed04a397722fed33a67f123f
 T
 $src/pages/BookInfo/BookMovieList.tsx,1\3\13249b523be6db07cb147bcf3b621872eec8e6f3
 L
 src/interfaces/MyPageInfo.ts,f\b\fb32c75d949b9a3cda090b30287e8645d7298c78
-I
-src/Util/checkUserInfo.ts,5\7\579ec90a9d88004c886eef28944c393f147039db
 K
 src/style/scss/_navbar.scss,7\a\7ad9b000798b6c76e8391dd3a8e9a040ec638ea4
 K
@@ -70,8 +64,6 @@ K
 src/style/scss/_myPage.scss,6\c\6c93117aae1f890f6b27fc9ab87ca53a10abb82d
 K
 src/interfaces/Movieinfo.ts,2\e\2eb75bffcc2627774d71af9c126be5bf3673ba52
-<
-package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 T
 $src/pages/User/SignUp/SignUpPage.tsx,d\7\d7697fde3f3afdbfb6cf3556bd9a71957aa08de0
 R
@@ -80,9 +72,13 @@ R
 	yarn.lock,5\3\53585a096fe3a3b96321113856ae62602995a33b
 H
 src/Util/refreshToken.ts,3\e\3ebab0af4f32a3debb054735a8a4af1ed62f7efa
-C
-src/apollo/cache.ts,5\b\5ba446ccbe0dfa45cdf3c158f2eb9e5070603475
 T
 $src/pages/User/Find/FindPassPage.tsx,0\3\03346743ad8f8161c788f9c04e919f6e351f7b49
 N
 src/pages/NavBar/NavHeader.tsx,1\7\178a5b5c35b7cab370dbf6199a80849c0ee7ab2a
+T
+$src/pages/User/MyInfo/MyInfoPage.tsx,7\c\7c8ac9d68ae6f8303d2527f7f70402662a1d4659
+G
+src/gql/showtime.gql.ts,c\1\c18b55feffe6cc3900b86cebc1811f5c3f8cbc13
+=
+tsconfig.json,6\1\61ebb9fd6e8cf9082658121d5d81e297791dacd0
