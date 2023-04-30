@@ -1,0 +1,74 @@
+.movieProfileBox {
+	text-align: center;
+	
+	.movieProfilePosterInfo {
+		height: 250px;
+		width: 180px;
+		position: relative;
+		margin: auto;
+		
+		img {
+			
+			display: block;
+			border-radius: 7px;
+			
+			height: 250px;
+			width: 180px;
+			
+			object-fit: fill;
+			vertical-align: top;
+		}
+		
+		.movieProfileRank {
+			position: absolute;
+			top: 2%;
+			left: 10%;
+			font-size: 30px;
+			color: white;
+			-webkit-text-stroke: 0.4px black;
+		}
+	}
+	
+	.movieProfileButtonGroup {
+		visibility: hidden;
+		position: absolute;
+		top: 120px;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		
+		Button {
+			width: 150px;
+			margin-bottom: 10px;
+			border: 2px solid white;
+			color: #aacafd;
+			
+			&:hover {
+				color: #87A0C9;
+				filter: brightness(70%);
+			}
+		}
+	}
+	
+	&:hover {
+		img {
+			transition-duration: 0.25s;
+			filter: brightness(40%);
+		}
+		
+		.movieProfileButtonGroup {
+			visibility: visible;
+		}
+	}
+	
+	.movieProfileInfo {
+		display: flex;
+		flex-direction: column;
+		
+		
+		.movieProfileRankInfo {
+			text-align: center;
+			display: flex;
+			justify-content: center;
+		}
+	}
+}

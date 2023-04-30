@@ -8,13 +8,14 @@ import '../../../style/scss/_myPage.scss';
 import { delCookie, getCookie, setCookie } from '../../../Util/cookieUtil';
 import { periodicRefresh } from '../../../Util/refreshToken';
 import MyPageInfo from '../../../interfaces/MyPageInfo';
+import { locateFindPass } from '../../../Util/locateUtil';
 
 const MyInfoPage = () => {
     const [email, setEmail] = useState<string>('');
     const [existNickName, setExistNickName] = useState<boolean>(false);
     const [nickName, setNickName] = useState<string>('');
     const originNickName = getCookie('NickName');
-    const [sex, setSex] = useState<boolean>(true);
+    const [sex, setSex] = useState<boolean | undefined>(true);
     const [birth, setBirth] = useState<Dayjs | null>(dayjs('2023-04-04'));
     const accessToken = getCookie('AccessToken');
 
@@ -30,17 +31,13 @@ const MyInfoPage = () => {
 
     useEffect(() => {
         if (getMyPage[0].response) {
-            const res = getMyPage[0].response.data;
+            const res = getMyPage[0].response;
             setEmail(res.userEmail);
             setNickName(res.userNickName);
             setSex(res.userSex);
             setBirth(dayjs(res.userBirth));
         }
     }, [getMyPage[0].response]);
-
-    const onClickPasswordChange = () => {
-        document.location.href = '/user/find/pass';
-    };
 
     const refetchExistName = useAxios({
         method: 'post',
@@ -189,7 +186,7 @@ const MyInfoPage = () => {
                     회원탈퇴
                 </Typography>
                 <Divider className="divide" orientation="vertical" flexItem />
-                <Typography className="myPageTextButton" onClick={onClickPasswordChange}>
+                <Typography className="myPageTextButton" onClick={locateFindPass}>
                     비밀번호 변경
                 </Typography>
             </Box>

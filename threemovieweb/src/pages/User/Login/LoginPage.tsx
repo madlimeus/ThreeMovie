@@ -17,13 +17,15 @@ import useAxios from '../../../hook/useAxios';
 import { checkEmail, checkPass } from '../../../Util/checkUserInfo';
 import { periodicRefresh } from '../../../Util/refreshToken';
 import { setCookie } from '../../../Util/cookieUtil';
+import { locateFindPass, locateSignUp } from '../../../Util/locateUtil';
+import LoginResponse from '../../../interfaces/LoginResponse';
 
 const LoginPage = () => {
     const [email, setEmail] = useState<string>('');
     const [pass, setPass] = useState<string>('');
     const [autoLogin, setAutoLogin] = useState<boolean>(false);
 
-    const fetch = useAxios({
+    const fetch = useAxios<LoginResponse>({
         method: 'post',
         url: '/auth/login',
         data: {
@@ -44,7 +46,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         if (fetch[0].response) {
-            const { accessToken, refreshToken, nickName } = fetch[0].response.data;
+            const { accessToken, refreshToken, nickName } = fetch[0].response;
             setCookie('AccessToken', `Bearer ${accessToken}`);
             setCookie('NickName', nickName);
             if (autoLogin) {
@@ -57,14 +59,6 @@ const LoginPage = () => {
 
     const onClickAutoLogin = () => {
         setAutoLogin(!autoLogin);
-    };
-
-    const onClickSignUp = () => {
-        document.location.href = '/user/signup';
-    };
-
-    const onClickPasswordFind = () => {
-        document.location.href = '/user/find/pass';
     };
 
     const onEmailChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -131,11 +125,11 @@ const LoginPage = () => {
                                 label="자동 로그인"
                             />
                         </FormGroup>
-                        <Typography className="menuButton" onClick={() => onClickSignUp()}>
+                        <Typography className="menuButton" onClick={locateSignUp}>
                             회원가입
                         </Typography>
                         <Divider className="divide" orientation="vertical" variant="middle" flexItem />
-                        <Typography className="menuButton" onClick={() => onClickPasswordFind()}>
+                        <Typography className="menuButton" onClick={locateFindPass}>
                             PW 찾기
                         </Typography>
                     </Box>

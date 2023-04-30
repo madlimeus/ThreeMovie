@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -6,19 +6,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
-
-import moviePlaceHolder from '../../assets/images/MoviePlaceHolder.jpg';
 import movieInfoSelector from '../../Recoil/Selector/movieInfoSelector';
+import { onErrorImg } from '../../Util/onErrorImg';
 
 const MainPreview = () => {
     const [steelcuts, setSteelcuts] = useState<string[]>();
     const [trailer, setTrailer] = useState<string[]>();
     const movieinfo = useRecoilValue(movieInfoSelector);
     SwiperCore.use([Navigation, Pagination]);
-
-    const onErrorImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-        e.currentTarget.src = `${moviePlaceHolder}`;
-    };
 
     const stringToArray = (str: string | null) => {
         if (!str) return undefined;

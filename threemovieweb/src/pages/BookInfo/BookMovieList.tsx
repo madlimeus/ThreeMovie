@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Input, InputAdornment, Typography } from '@mui/material';
 import { useQuery } from '@apollo/react-hooks';
 import { useRecoilState } from 'recoil';
@@ -7,17 +7,13 @@ import { GET_MOVIE_LIST } from '../../gql/showtime.gql';
 import Loading from '../Loading';
 import bookMovieFilterAtom from '../../Recoil/Atom/bookMovieFilterAtom';
 import BookMovie from '../../interfaces/BookMovie';
-import moviePlaceHolder from '../../assets/images/MoviePlaceHolder.jpg';
+import { onErrorImg } from '../../Util/onErrorImg';
 
 const BookMovieList = () => {
     const [search, setSearch] = useState<string>('');
     const [movieList, setMovieList] = useState<BookMovie[]>([]);
     const [movieFilter, setMovieFilter] = useRecoilState<string[]>(bookMovieFilterAtom);
     const { loading, error, data } = useQuery(GET_MOVIE_LIST);
-
-    const onErrorImg = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-        e.currentTarget.src = `${moviePlaceHolder}`;
-    };
 
     const onSearch = (movie: BookMovie) => {
         if (movie.movieKR.toUpperCase().search(search.toUpperCase()) !== -1) return true;

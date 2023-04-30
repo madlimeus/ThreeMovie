@@ -10,7 +10,7 @@ type AxiosProps = {
     config?: AxiosRequestConfig;
 };
 
-axios.defaults.baseURL = 'https://moviethree.synology.me/api';
+axios.defaults.baseURL = 'http://localhost:8080/api';
 axios.defaults.headers.withCredentials = true;
 
 const useAxios = <T,>({
@@ -20,13 +20,13 @@ const useAxios = <T,>({
     config,
 }: AxiosProps): [
     {
-        response: any;
+        response: T | undefined;
         error: string | AxiosError;
         loading: boolean;
     },
     () => void,
 ] => {
-    const [response, setResponse] = useState<any>();
+    const [response, setResponse] = useState<T | undefined>();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
 
@@ -48,7 +48,7 @@ const useAxios = <T,>({
         } else {
             axios[method](url, data, config)
                 .then((res) => {
-                    setResponse(res);
+                    setResponse(res.data);
                 })
                 .catch((err) => {
                     const checkErr = err.response.data;

@@ -1,30 +1,20 @@
 import React from 'react';
 import { Box, Button, Divider, Typography } from '@mui/material';
+import { locateBookInfo, locateMain, locateMovie } from '../../Util/locateUtil';
 
 const NavMenu = () => {
-    const onClickMain = () => {
-        document.location.href = `/main`;
-    };
-
-    const onClickMovieList = () => {
-        document.location.href = `/main`;
-    };
-
     const onClickTheaterList = () => {
         document.location.href = `/main`;
     };
 
-    const onClickBookinfo = () => {
-        document.location.href = `/bookinfo`;
-    };
     return (
         <Box className="navMenu">
-            <Button onClick={onClickMain}>
+            <Button onClick={locateMain}>
                 <Typography>메인</Typography>
             </Button>
             <Divider className="divide" orientation="vertical" variant="middle" flexItem />
 
-            <Button onClick={onClickMovieList}>
+            <Button onClick={() => locateMovie()}>
                 <Typography>영화 목록</Typography>
             </Button>
             <Divider className="divide" orientation="vertical" variant="middle" flexItem />
@@ -34,7 +24,7 @@ const NavMenu = () => {
             </Button>
             <Divider className="divide" orientation="vertical" variant="middle" flexItem />
 
-            <Button onClick={onClickBookinfo}>
+            <Button onClick={() => locateBookInfo()}>
                 <Typography>예약하기</Typography>
             </Button>
         </Box>
