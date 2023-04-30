@@ -64,6 +64,31 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="release-1.1.0" />
+                    <option name="lastUsedInstant" value="1682587307" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1682587306" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$/.." />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
   <component name="KotlinCodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
@@ -178,9 +203,11 @@
       <workItem from="1682145953830" duration="5283000" />
       <workItem from="1682184428716" duration="833000" />
       <workItem from="1682186317914" duration="1309000" />
-      <workItem from="1682187740077" duration="11000" />
-      <workItem from="1682684463670" duration="2404000" />
-      <workItem from="1682850404700" duration="9248000" />
+      <workItem from="1682187740077" duration="29000" />
+      <workItem from="1682188288438" duration="285000" />
+      <workItem from="1682271594204" duration="1318000" />
+      <workItem from="1682324493168" duration="18000" />
+      <workItem from="1682586404888" duration="1285000" />
     </task>
     <servers />
   </component>
