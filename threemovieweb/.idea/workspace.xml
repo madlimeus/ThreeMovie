@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Routes/Movie/Movie.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Util/locateUtil.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Util/onErrorImg.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interfaces/LoginResponse.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layout/MovieProfile.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layout/TextButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Movie/MoviePage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/style/scss/_moviePage.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/style/scss/_movieProfile.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/Scheduler/MovieDataScheduler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/Scheduler/ShowTimeScheduler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/Utils/Scheduler/TheaterDataScheduler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/c/0cddbd788075e496d25bf71a401cc937c5837b0a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/3/13249b523be6db07cb147bcf3b621872eec8e6f3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/7/178a5b5c35b7cab370dbf6199a80849c0ee7ab2a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/6/461431c53d0b54f6073d79479833f973a0bb626f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/6/66299b5e4b495ed74609110d5b9185b19d465927" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/b/6bb84330abaa8907b984493f54281b680fbac4ec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/b/7b0cb6dff453e9e332b6987b0a3f84efa49ee9d0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/e/9e6179ceeb558899189015a1b4e9653273d60f38" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/7/c758ffaa3863c5e0b8721cbc92fede56e08136d7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/0/d02c5534eea1201c9513db9943359882d6cacf39" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/5/d5b0ce7f3816b3024d5043a7cf7f5bcdf3da8b2f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/d/dd63d3c3f12addc61fe84ff242e00137d744c233" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/b/fb32c75d949b9a3cda090b30287e8645d7298c78" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/f/ff7699c9672986e96091f45139a489d3434ced91" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/AppRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/AppRouter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apollo/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/apollo/client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hook/useAxios.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hook/useAxios.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/BookInfo/BookMovieList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/BookInfo/BookMovieList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main/MainMovieList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/MainMovieList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main/MainPreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/MainPreview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MovieDetail/MovieCreator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MovieDetail/MovieCreator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MovieDetail/MovieHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MovieDetail/MovieHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MovieDetail/MoviePreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MovieDetail/MoviePreview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/NavBar/NavHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/NavBar/NavHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/NavBar/NavMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/NavBar/NavMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/User/Find/FindPassPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/User/Find/FindPassPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/User/Login/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/User/Login/LoginPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/User/MyInfo/MyInfoPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/User/MyInfo/MyInfoPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/User/SignUp/SignUpPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/User/SignUp/SignUpPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/scss/_mainpage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/scss/_mainpage.scss" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="release-1.1.0" />
+                    <option name="lastUsedInstant" value="1682587307" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1682587306" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$/.." />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="KotlinCodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectId" id="2NBQyvHmaeOB03K1H0nQcxrKhV9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "code.cleanup.on.save": "true",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "Y:/ThreeMovie/threemovieweb/src/pages/Movie",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\eslint",
+    "node.js.selected.package.standard": "",
+    "nodejs_package_manager_path": "yarn",
+    "prettierjs.PrettierConfiguration.Package": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\prettier",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "preferences.general",
+    "ts.external.directory.path": "Y:\\ThreeMovie\\threemovieweb\\node_modules\\typescript\\lib",
+    "typescript.add.unambiguous.imports.on.the.fly": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="Y:\ThreeMovie\threemovieweb\src\pages\Movie" />
+      <recent name="Y:\ThreeMovie\threemovieweb\src\interfaces" />
+      <recent name="Y:\ThreeMovie\threemovieweb\src\style\scss" />
+      <recent name="Y:\ThreeMovie\threemovieweb\src\pages\User" />
+      <recent name="Y:\ThreeMovie\threemovieweb\src\Routes\User\MyInfo" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="Y:\ThreeMovie\threemovieweb\src" />
+      <recent name="Y:\ThreeMovie\threemovieweb\src\Util" />
+      <recent name="Y:\ThreeMovie\threemovieweb\src\pages" />
+      <recent name="Y:\ThreeMovie\threemovieweb\src\interfaces" />
+      <recent name="Y:\ThreeMovie\threemovieweb\src\assets\images" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="run" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="start" />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f4eb3f07-596e-4642-89f4-036e14488e5b" name="Changes" comment="" />
+      <created>1679135253255</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679135253255</updated>
+      <workItem from="1679135254852" duration="3648000" />
+      <workItem from="1679378022444" duration="8621000" />
+      <workItem from="1679467713690" duration="4923000" />
+      <workItem from="1679549208026" duration="14626000" />
+      <workItem from="1679629009383" duration="4197000" />
+      <workItem from="1679688713649" duration="25118000" />
+      <workItem from="1679802094999" duration="17313000" />
+      <workItem from="1679893618635" duration="19973000" />
+      <workItem from="1679973582635" duration="34765000" />
+      <workItem from="1680062114358" duration="6117000" />
+      <workItem from="1680150761494" duration="4141000" />
+      <workItem from="1680157879355" duration="126000" />
+      <workItem from="1680158012444" duration="1263000" />
+      <workItem from="1680182589133" duration="3483000" />
+      <workItem from="1680190752919" duration="6277000" />
+      <workItem from="1680230834096" duration="4458000" />
+      <workItem from="1680687571507" duration="14835000" />
+      <workItem from="1680756163151" duration="40370000" />
+      <workItem from="1680842354380" duration="36182000" />
+      <workItem from="1680957469588" duration="7298000" />
+      <workItem from="1681007055275" duration="3129000" />
+      <workItem from="1681037403347" duration="2564000" />
+      <workItem from="1681102307027" duration="2734000" />
+      <workItem from="1681371019690" duration="3292000" />
+      <workItem from="1681446385717" duration="20598000" />
+      <workItem from="1681490471611" duration="9051000" />
+      <workItem from="1681539116567" duration="14209000" />
+      <workItem from="1681571487874" duration="9665000" />
+      <workItem from="1681625067109" duration="2490000" />
+      <workItem from="1681708632053" duration="2999000" />
+      <workItem from="1681796836613" duration="620000" />
+      <workItem from="1681877867587" duration="42536000" />
+      <workItem from="1681964703794" duration="12894000" />
+      <workItem from="1682005871488" duration="2737000" />
+      <workItem from="1682052824905" duration="2103000" />
+      <workItem from="1682070496699" duration="152000" />
+      <workItem from="1682071059410" duration="4534000" />
+      <workItem from="1682081841612" duration="5927000" />
+      <workItem from="1682145953830" duration="5283000" />
+      <workItem from="1682184428716" duration="833000" />
+      <workItem from="1682186317914" duration="1309000" />
+      <workItem from="1682187740077" duration="29000" />
+      <workItem from="1682188288438" duration="285000" />
+      <workItem from="1682271594204" duration="1318000" />
+      <workItem from="1682324493168" duration="18000" />
+      <workItem from="1682586404888" duration="1285000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/Recoil/Atom/movieLIstAtom.ts</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

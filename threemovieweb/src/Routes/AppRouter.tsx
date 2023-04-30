@@ -10,6 +10,7 @@ import Login from './User/Login/Login';
 import SignUp from './User/SignUp/SignUp';
 import FindPass from './User/Find/FindPass';
 import MyInfo from './User/MyInfo/MyInfo';
+import Movie from './Movie/Movie';
 
 const AppRouter = () => {
     return (
@@ -27,6 +28,7 @@ const AppRouter = () => {
                         <Route path="/user/signup/*" element={<SignUp />} />
                         <Route path="/user/find/pass" element={<FindPass />} />
                         <Route path="/user/mypage/*" element={<MyInfo />} />
+                        <Route path="movie/*" element={<Movie />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

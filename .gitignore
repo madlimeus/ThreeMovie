@@ -4,3 +4,7 @@ threemovieapi/src/main/resources/application-jwt-config.properties
 threemovieapi/src/main/resources/application-security-config.properties
 threemovieweb/src/apollo/client.ts
 threemovieweb/src/hook/useAxios.tsx
+threemovieweb/.idea
+threemovieapi/.idea
+.idea/
+

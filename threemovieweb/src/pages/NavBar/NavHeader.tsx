@@ -5,6 +5,7 @@ import Logo from '../../assets/images/MTLogo.png';
 import { periodicRefresh } from '../../Util/refreshToken';
 import useAxios from '../../hook/useAxios';
 import { delCookie, getCookie } from '../../Util/cookieUtil';
+import { locateLogin, locateMain, locateMyPage } from '../../Util/locateUtil';
 
 const NavHeader = () => {
     const [onSearch, setOnSearch] = useState<boolean>(false);
@@ -18,18 +19,6 @@ const NavHeader = () => {
         config: { headers: { Authorization: `${accessToken}` } },
     });
 
-    const onClickMain = () => {
-        document.location.href = `/main`;
-    };
-
-    const onClickLogin = () => {
-        document.location.href = `/user/login`;
-    };
-
-    const onClickMyPage = () => {
-        document.location.href = `/user/mypage`;
-    };
-
     const onClickLogout = () => {
         fetchLogOut[1]();
         console.log(localStorage.get('RefreshToken'));
@@ -42,7 +31,7 @@ const NavHeader = () => {
             clearTimeout(periodicRefresh());
             localStorage.clear();
 
-            if (window.location.href.includes('mypage')) window.location.href = '/main';
+            if (window.location.href.includes('mypage')) locateMain();
             else window.location.reload();
         }
     }, [fetchLogOut[0].response]);
@@ -82,7 +71,7 @@ const NavHeader = () => {
                     onKeyDown={handleOnKeyPress}
                 />
             </Box>
-            <Button className="logo" onClick={onClickMain} disableElevation disableRipple>
+            <Button className="logo" onClick={locateMain} disableElevation disableRipple>
                 <img src={Logo} alt="" />
             </Button>
 
@@ -90,7 +79,7 @@ const NavHeader = () => {
                 <Box className="loginHeader">
                     <Typography className="nickName">{nickName}님</Typography>
                     <Box className="loginMenu">
-                        <Typography className="menuButton" onClick={() => onClickMyPage()}>
+                        <Typography className="menuButton" onClick={locateMyPage}>
                             마이페이지
                         </Typography>
 
@@ -101,7 +90,7 @@ const NavHeader = () => {
                     </Box>
                 </Box>
             ) : (
-                <Button className="account" onClick={onClickLogin}>
+                <Button className="account" onClick={locateLogin}>
                     <Typography>로그인</Typography>
                 </Button>
             )}
