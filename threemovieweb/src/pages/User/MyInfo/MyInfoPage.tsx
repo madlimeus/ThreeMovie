@@ -85,7 +85,7 @@ const MyInfoPage = () => {
             sex,
             birth,
         },
-        url: '/user/info/change',
+        url: '/user/data/change',
     });
 
     const onClickChangeUserInfo = () => {

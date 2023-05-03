@@ -5,9 +5,9 @@ import com.threemovie.threemovieapi.Entity.DTO.Request.AccountSignUpRequest
 import com.threemovie.threemovieapi.Entity.DTO.Request.AuthRequest
 import com.threemovie.threemovieapi.Entity.DTO.Request.EmailRequest
 import com.threemovie.threemovieapi.Entity.DTO.Request.LoginRequest
-import com.threemovie.threemovieapi.Service.impl.EmailServiceimpl
-import com.threemovie.threemovieapi.Service.impl.UserAuthServiceimpl
-import com.threemovie.threemovieapi.Service.impl.UserDataServiceimpl
+import com.threemovie.threemovieapi.Service.EmailService
+import com.threemovie.threemovieapi.Service.UserAuthService
+import com.threemovie.threemovieapi.Service.UserDataService
 import com.threemovie.threemovieapi.Utils.jwt.JwtTokenProvider
 import com.threemovie.threemovieapi.Utils.jwt.RedisUtil
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.*
 @CrossOrigin(origins = ["http://localhost:3000"])
 @RequestMapping("/api/auth")
 class UserAuthController(
-	val emailService: EmailServiceimpl,
-	val userAuthService: UserAuthServiceimpl,
-	val userDataService: UserDataServiceimpl,
+	val emailService: EmailService,
+	val userAuthService: UserAuthService,
+	val userDataService: UserDataService,
 	val jwtTokenProvider: JwtTokenProvider,
 	val redisUtil: RedisUtil
 ) {

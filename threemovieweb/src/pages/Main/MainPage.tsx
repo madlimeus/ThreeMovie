@@ -15,7 +15,7 @@ const MainPage = () => {
     const setMovieNow = useSetRecoilState(movieNowAtom);
     const [{ response, loading, error }, refetch] = useAxios<MovieData[]>({
         method: 'get',
-        url: '/movieinfo/movielist',
+        url: '/movie/movielist',
         config: {
             headers: { 'Content-Type': `application/json` },
         },

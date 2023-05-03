@@ -3,7 +3,7 @@ package com.threemovie.threemovieapi.Utils.Review
 import com.threemovie.threemovieapi.Entity.MovieReview
 import com.threemovie.threemovieapi.Repository.MovieReviewRepository
 import com.threemovie.threemovieapi.Repository.Support.UpdateTimeRepositorySupport
-import com.threemovie.threemovieapi.Service.impl.MovieDataServiceimpl
+import com.threemovie.threemovieapi.Service.MovieDataService
 import com.threemovie.threemovieapi.Utils.CalcSimilarity.Companion.calcSimilarity
 import com.threemovie.threemovieapi.Utils.ChkNeedUpdate
 import org.json.JSONArray
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class GetReviewFromTheater(
-	val movieDataService: MovieDataServiceimpl,
+	val movieDataService: MovieDataService,
 	val movieReviewRepository: MovieReviewRepository,
 	val UpdateTimeRepositorySupport: UpdateTimeRepositorySupport,
 ) {

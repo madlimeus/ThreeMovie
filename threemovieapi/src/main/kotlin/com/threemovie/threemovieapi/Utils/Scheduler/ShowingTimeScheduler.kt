@@ -1,12 +1,12 @@
 package com.threemovie.threemovieapi.Utils.Scheduler
 
 import com.threemovie.threemovieapi.Entity.DTO.ShowTimeBranchDTO
-import com.threemovie.threemovieapi.Entity.MovieNameInfo
+import com.threemovie.threemovieapi.Entity.MovieNameData
 import com.threemovie.threemovieapi.Entity.TheaterData
 import com.threemovie.threemovieapi.Entity.TmpShowTime
-import com.threemovie.threemovieapi.Entity.VO.MovieNameInfoVO
+import com.threemovie.threemovieapi.Entity.VO.MovieNameDataVO
 import com.threemovie.threemovieapi.Entity.VO.ShowTimeVO
-import com.threemovie.threemovieapi.Repository.Support.MovieInfoRepositorySupport
+import com.threemovie.threemovieapi.Repository.Support.MovieDataRepositorySupport
 import com.threemovie.threemovieapi.Repository.Support.TheaterDataRepositorySupport
 import com.threemovie.threemovieapi.Repository.Support.UpdateTimeRepositorySupport
 import com.threemovie.threemovieapi.Repository.TmpShowTimeRepository
@@ -26,15 +26,15 @@ class ShowingTimeScheduler(
 	val updateTimeRepositorySupport: UpdateTimeRepositorySupport,
 	val theaterDataRepositorySupport: TheaterDataRepositorySupport,
 	val tmpShowTimeRepository: TmpShowTimeRepository,
-	val movieInfoRepositorySupport: MovieInfoRepositorySupport,
+	val movieDataRepositorySupport: MovieDataRepositorySupport,
 ) {
 	val userAgent: String =
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
 	val CGVurl = "http://www.cgv.co.kr"
 	val LCurl = "http://www.lottecinema.co.kr"
 	val mburl = "https://www.megabox.co.kr"
-	val nameMap = HashMap<String, MovieNameInfoVO>()
-	lateinit var movieNameInfo: List<MovieNameInfo>
+	val nameMap = HashMap<String, MovieNameDataVO>()
+	lateinit var movieNameInfo: List<MovieNameData>
 	val square = "\\[[^)]*\\]".toRegex()
 	
 	@Async
@@ -42,7 +42,7 @@ class ShowingTimeScheduler(
 	fun ChkMovieShowingTime() {
 		if (ChkNeedUpdate.chkUpdateTenMinute(updateTimeRepositorySupport.getShowTime())) {
 			tmpShowTimeRepository.truncateTmpShowTime()
-			movieNameInfo = movieInfoRepositorySupport.getMovieNameInfo()
+			movieNameInfo = movieDataRepositorySupport.getMovieNameData()
 			
 			val mbTheaters = theaterDataRepositorySupport.getTheaterData("MB")
 			val lcTheaters = theaterDataRepositorySupport.getTheaterData("LC")
@@ -474,7 +474,7 @@ class ShowingTimeScheduler(
 			movieKR = movieKR.replace(square, "").trim()
 			
 			if (nameMap[movieKR] == null) {
-				var movieName = MovieNameInfoVO()
+				var movieName = MovieNameDataVO()
 				for (nameInfo in movieNameInfo) {
 					val similarity = CalcSimilarity.calcSimilarity(nameInfo.nameKR, movieKR)
 					

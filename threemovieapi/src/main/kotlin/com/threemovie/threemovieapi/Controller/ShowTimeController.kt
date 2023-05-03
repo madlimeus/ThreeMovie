@@ -5,13 +5,13 @@ import com.threemovie.threemovieapi.Entity.DTO.Response.ShowTheaterResponse
 import com.threemovie.threemovieapi.Entity.DTO.Response.ShowTimeResponse
 import com.threemovie.threemovieapi.Entity.DTO.ShowDateDTO
 import com.threemovie.threemovieapi.Entity.DTO.ShowMovieDTO
-import com.threemovie.threemovieapi.Service.impl.ShowTimeServiceImpl
+import com.threemovie.threemovieapi.Service.ShowTimeService
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class ShowTimeController(val service: ShowTimeServiceImpl) {
+class ShowTimeController(val service: ShowTimeService) {
 	@QueryMapping
 	fun getMovieList(): List<ShowMovieDTO> = service.getMovieList()
 	

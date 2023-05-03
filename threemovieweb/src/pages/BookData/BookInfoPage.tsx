@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
 import QueryString from 'qs';
 import { useLocation } from 'react-router-dom';
-import '../../style/scss/_bookinfo.scss';
+import '../../style/scss/_bookdata.scss';
 import { useRecoilState } from 'recoil';
 import bookMovieFilterAtom from '../../Recoil/Atom/bookMovieFilterAtom';
 import bookMovieTheaterFilterAtom from '../../Recoil/Atom/bookMovieTheaterFilterAtom';

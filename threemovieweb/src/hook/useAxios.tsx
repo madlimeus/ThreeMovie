@@ -52,21 +52,18 @@ const useAxios = <T,>({
                 })
                 .catch((err) => {
                     const checkErr = err.response.data;
-                    console.log(checkErr);
                     if (
                         (checkErr.status === 500 &&
                             (checkErr.message === '만료된 토큰 입니다.' ||
                                 checkErr.message === '잘못된 토큰 입니다.')) ||
                         (checkErr.status === 403 && checkErr.message === 'Access Denied')
                     ) {
-                        console.log('통과');
                         delCookie('AccessToken');
                         delCookie('NickName');
                         clearTimeout(periodicRefresh());
                         localStorage.clear();
                         window.location.href = '/main';
-                    } else if (err.response.data.message) alert(err.response.data.message);
-                    else alert(err.response.data);
+                    } else if (typeof err.response.data === 'string') alert(err.response.data);
                     setError(err);
                 })
                 .finally(() => {

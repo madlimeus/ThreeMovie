@@ -4,8 +4,8 @@ import com.threemovie.threemovieapi.Entity.DTO.Request.EmailRequest
 import com.threemovie.threemovieapi.Entity.DTO.Request.NickNameRequest
 import com.threemovie.threemovieapi.Entity.DTO.Request.UpdateUserDataRequest
 import com.threemovie.threemovieapi.Entity.UserData
-import com.threemovie.threemovieapi.Service.impl.UserAuthServiceimpl
-import com.threemovie.threemovieapi.Service.impl.UserDataServiceimpl
+import com.threemovie.threemovieapi.Service.UserAuthService
+import com.threemovie.threemovieapi.Service.UserDataService
 import com.threemovie.threemovieapi.Utils.jwt.JwtTokenProvider
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.servlet.http.HttpServletRequest
@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/user")
 class UserDataController(
-	val userDataService: UserDataServiceimpl,
-	val userAuthService: UserAuthServiceimpl,
+	val userDataService: UserDataService,
+	val userAuthService: UserAuthService,
 	val jwtTokenProvider: JwtTokenProvider
 ) {
 	
