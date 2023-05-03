@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
 import { useSetRecoilState } from 'recoil';
 import useAxios from '../../hook/useAxios';
-import Movieinfo from '../../interfaces/Movieinfo';
+import MovieData from '../../interfaces/MovieData';
 import movieListAtom from '../../Recoil/Atom/movieLIstAtom';
 import movieNowAtom from '../../Recoil/Atom/movieNowAtom';
 import '../../style/scss/_mainpage.scss';
@@ -13,7 +13,7 @@ import MainPreview from './MainPreview';
 const MainPage = () => {
     const setMovieList = useSetRecoilState(movieListAtom);
     const setMovieNow = useSetRecoilState(movieNowAtom);
-    const [{ response, loading, error }, refetch] = useAxios<Movieinfo[]>({
+    const [{ response, loading, error }, refetch] = useAxios<MovieData[]>({
         method: 'get',
         url: '/movieinfo/movielist',
         config: {

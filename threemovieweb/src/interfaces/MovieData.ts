@@ -1,4 +1,4 @@
-interface Movieinfo {
+interface MovieData {
     movieId: string;
     netizenAvgRate: number;
     reservationRate: number;
@@ -10,4 +10,4 @@ interface Movieinfo {
     trailer: string | null;
 }
 
-export default Movieinfo;
+export default MovieData;

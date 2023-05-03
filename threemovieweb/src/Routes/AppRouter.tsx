@@ -5,7 +5,6 @@ import GlobalStyles from '../style/global';
 import Main from './Main/Main';
 import BookInfo from './Detail/BookInfo/BookInfo';
 import MovieDetail from './Detail/MovieDetail';
-import SearchResult from './SearchResult/SearchResult';
 import Login from './User/Login/Login';
 import SignUp from './User/SignUp/SignUp';
 import FindPass from './User/Find/FindPass';
@@ -21,14 +20,13 @@ const AppRouter = () => {
                     <Route element={<NavBarPage />}>
                         <Route path="/" element={<Navigate replace to="/main" />} />
                         <Route path="/main/*" element={<Main />} />
-                        <Route path="/bookInfo/*" element={<BookInfo />} />
-                        <Route path="/moviedetail/*" element={<MovieDetail />} />
-                        <Route path="/searchresult/*" element={<SearchResult />} />
+                        <Route path="/book/*" element={<BookInfo />} />
+                        <Route path="/detail/movie/*" element={<MovieDetail />} />
                         <Route path="/user/login/*" element={<Login />} />
                         <Route path="/user/signup/*" element={<SignUp />} />
                         <Route path="/user/find/pass" element={<FindPass />} />
                         <Route path="/user/mypage/*" element={<MyInfo />} />
-                        <Route path="movie/*" element={<Movie />} />
+                        <Route path="/movie/*" element={<Movie />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

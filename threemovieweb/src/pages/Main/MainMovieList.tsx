@@ -42,14 +42,14 @@ const MainMovieList = () => {
             modules={[Navigation]}
             centeredSlides
         >
-            {movieList.map((movieinfo, index) => (
-                <SwiperSlide key={movieinfo.movieId}>
+            {movieList.map((movieData, index) => (
+                <SwiperSlide key={movieData.movieId}>
                     <MovieProfile
-                        movieId={movieinfo.movieId}
-                        poster={movieinfo.poster}
-                        nameKR={movieinfo.nameKR}
-                        reservationRate={movieinfo.reservationRate}
-                        netizenAvgRate={movieinfo.netizenAvgRate}
+                        movieId={movieData.movieId}
+                        poster={movieData.poster}
+                        nameKR={movieData.nameKR}
+                        reservationRate={movieData.reservationRate}
+                        netizenAvgRate={movieData.netizenAvgRate}
                         index={index}
                     />
                 </SwiperSlide>

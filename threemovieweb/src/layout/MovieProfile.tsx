@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { Star } from '@mui/icons-material';
-import { locateBookInfo, locateDetail } from '../Util/locateUtil';
+import { locateBookData, locateDetail } from '../Util/locateUtil';
 import { onErrorImg } from '../Util/onErrorImg';
 import '../style/scss/_movieProfile.scss';
 
@@ -23,7 +23,7 @@ const MovieProfile = ({ movieId, poster, nameKR, reservationRate, netizenAvgRate
 
                 <Box className="movieProfileButtonGroup">
                     <Button onClick={() => locateDetail(movieId)}>상세 정보</Button>
-                    <Button onClick={() => locateBookInfo(movieId)}>시간표 정보</Button>
+                    <Button onClick={() => locateBookData(movieId)}>시간표 정보</Button>
                 </Box>
             </Box>
 

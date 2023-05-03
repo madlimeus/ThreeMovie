@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
-import Movieinfo from '../../interfaces/Movieinfo';
+import MovieData from '../../interfaces/MovieData';
 
-const movieListAtom = atom<Movieinfo[]>({
+const movieListAtom = atom<MovieData[]>({
     key: 'movieList',
     default: [],
 });
