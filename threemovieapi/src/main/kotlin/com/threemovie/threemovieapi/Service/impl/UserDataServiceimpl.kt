@@ -1,34 +1,34 @@
 package com.threemovie.threemovieapi.Service.impl
 
-import com.threemovie.threemovieapi.Entity.DTO.Request.UpdateUserInfoRequest
-import com.threemovie.threemovieapi.Entity.UserInfo
-import com.threemovie.threemovieapi.Repository.Support.UserInfoRepositorySupport
+import com.threemovie.threemovieapi.Entity.DTO.Request.UpdateUserDataRequest
+import com.threemovie.threemovieapi.Entity.UserData
+import com.threemovie.threemovieapi.Repository.Support.UserDataRepositorySupport
 import com.threemovie.threemovieapi.Repository.Support.UserLoginRepositorySupport
-import com.threemovie.threemovieapi.Service.UserInfoService
+import com.threemovie.threemovieapi.Service.UserDataService
 import com.threemovie.threemovieapi.Utils.RandomKeyString
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class UserInfoServiceimpl(
+class UserDataServiceimpl(
 	val userLoginRepositorySupport: UserLoginRepositorySupport,
-	val userInfoRepositorySupport: UserInfoRepositorySupport,
+	val userdataRepositorySupport: UserDataRepositorySupport,
 	val emailService: EmailServiceimpl,
 	val passwordEncoder: BCryptPasswordEncoder,
-) : UserInfoService {
+) : UserDataService {
 	
-	fun updateUserInfo(userInfoRequest: UpdateUserInfoRequest): Boolean {
-		userInfoRepositorySupport.updateUserInfo(userInfoRequest)
+	fun updateUserdata(userDataRequest: UpdateUserDataRequest): Boolean {
+		userdataRepositorySupport.updateUserData(userDataRequest)
 		
 		return true
 	}
 	
-	fun getUserInfo(email: String): UserInfo {
-		return userInfoRepositorySupport.getUserInfo(email)
+	fun getUserData(email: String): UserData {
+		return userdataRepositorySupport.getUserData(email)
 	}
 	
 	fun getNickName(email: String): String {
-		return userInfoRepositorySupport.getNickName(email)
+		return userdataRepositorySupport.getNickName(email)
 	}
 	
 	override fun resetPassword(email: String) {
@@ -51,6 +51,6 @@ class UserInfoServiceimpl(
 	}
 	
 	override fun existsNickName(nickName: String): Boolean {
-		return userInfoRepositorySupport.existsNickName(nickName)
+		return userdataRepositorySupport.existsNickName(nickName)
 	}
 }

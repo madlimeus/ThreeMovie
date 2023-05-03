@@ -1,6 +1,6 @@
 package com.threemovie.threemovieapi.Entity.VO
 
-data class MovieNameInfoVO(
+data class MovieNameDataVO(
 	var movieId: String? = null,
 	
 	var nameKR: String? = null,

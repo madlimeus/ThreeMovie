@@ -7,7 +7,7 @@ import com.threemovie.threemovieapi.Entity.DTO.Request.EmailRequest
 import com.threemovie.threemovieapi.Entity.DTO.Request.LoginRequest
 import com.threemovie.threemovieapi.Service.impl.EmailServiceimpl
 import com.threemovie.threemovieapi.Service.impl.UserAuthServiceimpl
-import com.threemovie.threemovieapi.Service.impl.UserInfoServiceimpl
+import com.threemovie.threemovieapi.Service.impl.UserDataServiceimpl
 import com.threemovie.threemovieapi.Utils.jwt.JwtTokenProvider
 import com.threemovie.threemovieapi.Utils.jwt.RedisUtil
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*
 class UserAuthController(
 	val emailService: EmailServiceimpl,
 	val userAuthService: UserAuthServiceimpl,
-	val userInfoService: UserInfoServiceimpl,
+	val userDataService: UserDataServiceimpl,
 	val jwtTokenProvider: JwtTokenProvider,
 	val redisUtil: RedisUtil
 ) {
@@ -32,7 +32,7 @@ class UserAuthController(
 	fun sendAuthEmail(@RequestBody emailRequest: EmailRequest): ResponseEntity<String> {
 		val (email, isSignUp) = emailRequest
 		println(emailRequest)
-		val ret = userInfoService.existsEmail(email)
+		val ret = userDataService.existsEmail(email)
 		if (ret && isSignUp)
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 가입된 이메일 입니다.")
 		emailService.sendAuthMail(email)
@@ -53,7 +53,7 @@ class UserAuthController(
 	@PostMapping("/login")
 	fun loginAccount(@RequestBody loginRequest: LoginRequest): ResponseEntity<Any> {
 		val (email, pass) = loginRequest
-		var ret = userInfoService.existsEmail(email)
+		var ret = userDataService.existsEmail(email)
 		if (! ret)
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("가입되지 않은 메일이거나 비밀번호가 틀렸습니다.")
 		
@@ -62,7 +62,7 @@ class UserAuthController(
 		if (! ret) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("가입되지 않은 메일이거나 비밀번호가 틀렸습니다.")
 		}
-		val nickName = userInfoService.getNickName(email)
+		val nickName = userDataService.getNickName(email)
 		val userRole = UserRole.USER.toString()
 		val retToken = jwtTokenProvider.createAllToken(email, userRole, nickName)
 		
@@ -90,12 +90,12 @@ class UserAuthController(
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("이메일 인증을 진행 해주세요.")
 		}
 		
-		ret = userInfoService.existsEmail(account.email)
+		ret = userDataService.existsEmail(account.email)
 		if (ret) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("이미 가입 된 이메일 입니다.")
 		}
 		
-		ret = userInfoService.existsNickName(account.nickName)
+		ret = userDataService.existsNickName(account.nickName)
 		if (ret) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("이미 존재하는 별명입니다.")
 		}
@@ -133,7 +133,7 @@ class UserAuthController(
 	@PostMapping("/password/change")
 	fun changePassword(@RequestBody loginRequest: LoginRequest): ResponseEntity<String> {
 		val (email, pass) = loginRequest
-		userInfoService.changePassword(email, pass)
+		userDataService.changePassword(email, pass)
 		return ResponseEntity.status(HttpStatus.OK).body("비밀번호가 변경 되었습니다. 다시 로그인 해주시기 바랍니다.")
 	}
 }
