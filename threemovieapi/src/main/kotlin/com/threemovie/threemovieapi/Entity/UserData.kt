@@ -4,8 +4,8 @@ import jakarta.persistence.*
 import java.time.LocalDate
 
 @Entity
-@Table(name = "UserInfo")
-data class UserInfo(
+@Table(name = "UserData")
+data class UserData(
 	@Column(name = "UserEmail", length = 50)
 	val userEmail: String = "",
 	
@@ -25,6 +25,6 @@ data class UserInfo(
 	val userBrch: String = "",
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	var id: Long = 0L,
 )

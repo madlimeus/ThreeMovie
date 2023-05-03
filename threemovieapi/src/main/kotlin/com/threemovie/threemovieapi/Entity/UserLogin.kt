@@ -17,6 +17,6 @@ data class UserLogin(
 	var userRole: UserRole = UserRole.NOT_PERMITTED,
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	var id: Long = 0L,
 )

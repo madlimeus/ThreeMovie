@@ -2,12 +2,12 @@ package com.threemovie.threemovieapi.Service.impl
 
 import com.threemovie.threemovieapi.Config.UserRole
 import com.threemovie.threemovieapi.Entity.DTO.Request.AccountSignUpRequest
-import com.threemovie.threemovieapi.Entity.UserInfo
+import com.threemovie.threemovieapi.Entity.UserData
 import com.threemovie.threemovieapi.Entity.UserLogin
-import com.threemovie.threemovieapi.Repository.Support.UserInfoRepositorySupport
+import com.threemovie.threemovieapi.Repository.Support.UserDataRepositorySupport
 import com.threemovie.threemovieapi.Repository.Support.UserLoginRepositorySupport
 import com.threemovie.threemovieapi.Repository.Support.UserSignUpRepositorySupport
-import com.threemovie.threemovieapi.Repository.UserInfoRepository
+import com.threemovie.threemovieapi.Repository.UserDataRepository
 import com.threemovie.threemovieapi.Repository.UserLoginRepository
 import com.threemovie.threemovieapi.Service.UserAuthService
 import com.threemovie.threemovieapi.Utils.jwt.JwtTokenProvider
@@ -21,8 +21,8 @@ class UserAuthServiceimpl(
 	val userSignUpRepositorySupport: UserSignUpRepositorySupport,
 	val userLoginRepositorySupport: UserLoginRepositorySupport,
 	val userLoginRepository: UserLoginRepository,
-	val userInfoRepositorySupport: UserInfoRepositorySupport,
-	val userInfoRepository: UserInfoRepository,
+	val userdataRepositorySupport: UserDataRepositorySupport,
+	val userdataRepository: UserDataRepository,
 	val jwtTokenProvider: JwtTokenProvider,
 	val passwordEncoder: BCryptPasswordEncoder,
 	val redisUtil: RedisUtil
@@ -32,9 +32,9 @@ class UserAuthServiceimpl(
 		val encodePass = passwordEncoder.encode(pass)
 		
 		val userLogin = UserLogin(email, encodePass, UserRole.USER)
-		val userInfo = UserInfo(email, nickName, sex, birth)
+		val userdata = UserData(email, nickName, sex, birth)
 		userLoginRepository.save(userLogin)
-		userInfoRepository.save(userInfo)
+		userdataRepository.save(userdata)
 		deletePrevAuth(email)
 	}
 	
@@ -43,7 +43,7 @@ class UserAuthServiceimpl(
 			val email = jwtTokenProvider.getEmail(accessToken)
 			
 			userLoginRepositorySupport.deleteUserLogin(email)
-			userInfoRepositorySupport.deleteUserInfo(email)
+			userdataRepositorySupport.deleteUserData(email)
 			redisUtil.deleteData(email)
 		} catch (e: Exception) {
 			return

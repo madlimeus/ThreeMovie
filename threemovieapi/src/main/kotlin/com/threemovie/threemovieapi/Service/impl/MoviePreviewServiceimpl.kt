@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service
 class MoviePreviewServiceimpl(
 	val MoviePreviewRepository: MoviePreviewRepository
 ) : MoviePreviewService {
-	override fun save_MoviePreview(One_movie_Info: JSONObject, url_Daum_Main: String) {
-		val api_steelcut_screening = "api/movie/" + One_movie_Info.get("id").toString() + "/photoList"
+	override fun save_MoviePreview(One_movie_data: JSONObject, url_Daum_Main: String) {
+		val api_steelcut_screening = "api/movie/" + One_movie_data.get("id").toString() + "/photoList"
 		
 		var tmp_data_steelcut = GET_DATA_USE_DAUM_API(url_Daum_Main + api_steelcut_screening)
 		val steelcut_Array = JSONObject(tmp_data_steelcut).getJSONArray("contents")
 		val movie_releaseDate =
-			JSONObject(One_movie_Info.get("countryMovieInformation").toString()).get("releaseDate").toString()
+			JSONObject(One_movie_data.get("countryMoviedatarmation").toString()).get("releaseDate").toString()
 		
 		val imageUrl_list: ArrayList<String> = arrayListOf<String>()
 		var index: Int = 0
@@ -29,7 +29,7 @@ class MoviePreviewServiceimpl(
 			index += 1
 		}
 		
-		val api_preview_screening = "api/video/list/movie/" + One_movie_Info.get("id").toString() + "?page=1&size=20"
+		val api_preview_screening = "api/video/list/movie/" + One_movie_data.get("id").toString() + "?page=1&size=20"
 		
 		var tmp_data_preview = GET_DATA_USE_DAUM_API(url_Daum_Main + api_preview_screening)
 		val preview_Array = JSONObject(tmp_data_preview).getJSONArray("contents")
@@ -64,7 +64,7 @@ class MoviePreviewServiceimpl(
 		}
 		
 		val member_MoviePreview = MoviePreview(
-			One_movie_Info.get("titleKorean").toString() + "_" + movie_releaseDate,
+			One_movie_data.get("titleKorean").toString() + "_" + movie_releaseDate,
 			str_imageUrl_list,
 			str_videoUrl_list
 		)

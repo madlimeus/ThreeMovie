@@ -8,7 +8,7 @@ import com.threemovie.threemovieapi.Entity.DTO.ShowDateDTO
 import com.threemovie.threemovieapi.Entity.DTO.ShowMovieDTO
 import com.threemovie.threemovieapi.Entity.DTO.ShowTheaterDTO
 import com.threemovie.threemovieapi.Entity.DTO.ShowTimeItemDTO
-import com.threemovie.threemovieapi.Entity.QMovieInfo
+import com.threemovie.threemovieapi.Entity.QMovieData
 import com.threemovie.threemovieapi.Entity.QShowTime
 import com.threemovie.threemovieapi.Entity.QTheaterData
 import com.threemovie.threemovieapi.Entity.ShowTime
@@ -19,9 +19,9 @@ import org.springframework.stereotype.Repository
 class ShowTimeRepositorySupport(
 	val query: JPAQueryFactory
 ) : QuerydslRepositorySupport(ShowTime::class.java) {
-	val movieInfo: QMovieInfo = QMovieInfo.movieInfo
+	val movieData: QMovieData = QMovieData.movieData
 	val showTime: QShowTime = QShowTime.showTime
-	val theaterInfo: QTheaterData = QTheaterData.theaterData
+	val theaterData: QTheaterData = QTheaterData.theaterData
 	
 	fun getMovieList(): List<ShowMovieDTO> {
 		
@@ -32,19 +32,19 @@ class ShowTimeRepositorySupport(
 					showTime.movieId,
 					showTime.movieKR,
 					showTime.movieEN,
-					movieInfo.category,
-					movieInfo.runningTime,
-					movieInfo.country,
-					movieInfo.poster,
-					movieInfo.reservationRank
+					movieData.category,
+					movieData.runningTime,
+					movieData.country,
+					movieData.poster,
+					movieData.reservationRank
 				)
 			)
 			.from(showTime)
-			.leftJoin(movieInfo)
+			.leftJoin(movieData)
 			.fetchJoin()
-			.on(showTime.movieId.eq(movieInfo.movieId))
+			.on(showTime.movieId.eq(movieData.movieId))
 			.orderBy(
-				movieInfo.reservationRate.desc()
+				movieData.reservationRate.desc()
 			)
 			.distinct()
 			.fetch()
@@ -59,16 +59,16 @@ class ShowTimeRepositorySupport(
 					showTime.movieTheater,
 					showTime.brchKR,
 					showTime.brchEN,
-					theaterInfo.city,
-					theaterInfo.addrKR,
-					theaterInfo.addrEN
+					theaterData.city,
+					theaterData.addrKR,
+					theaterData.addrEN
 				)
 			)
 			.from(showTime)
-			.leftJoin(theaterInfo)
+			.leftJoin(theaterData)
 			.fetchJoin()
 			.where(movieIn(movieFilter), dateIn(dateFilter))
-			.on(showTime.movieTheater.eq(theaterInfo.movieTheater), showTime.brchKR.eq(theaterInfo.brchKR))
+			.on(showTime.movieTheater.eq(theaterData.movieTheater), showTime.brchKR.eq(theaterData.brchKR))
 			.distinct()
 			.orderBy(showTime.brchKR.asc())
 			.fetch()
@@ -107,16 +107,16 @@ class ShowTimeRepositorySupport(
 					showTime.playKind,
 					showTime.screenKR,
 					showTime.screenEN,
-					theaterInfo.addrKR,
-					theaterInfo.addrEN,
+					theaterData.addrKR,
+					theaterData.addrEN,
 					showTime.items
 				)
 			)
 			.from(showTime)
 			.orderBy(showTime.date.asc())
-			.leftJoin(theaterInfo)
+			.leftJoin(theaterData)
 			.fetchJoin()
-			.on(showTime.brchKR.eq(theaterInfo.brchKR), showTime.movieTheater.eq(theaterInfo.movieTheater))
+			.on(showTime.brchKR.eq(theaterData.brchKR), showTime.movieTheater.eq(theaterData.movieTheater))
 			.where(movieIn(movieFilter), theaterIn(theaterFilter), dateIn(dateFilter))
 			.distinct()
 			.fetch()

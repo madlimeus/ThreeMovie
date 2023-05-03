@@ -1,6 +1,6 @@
 package com.threemovie.threemovieapi.Service
 
-interface UserInfoService {
+interface UserDataService {
 	fun resetPassword(email: String)
 	
 	fun changePassword(email: String, pass: String)

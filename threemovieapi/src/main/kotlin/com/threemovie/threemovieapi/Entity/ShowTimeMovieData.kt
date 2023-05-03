@@ -6,15 +6,12 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "MovieInfo")
-data class MovieNameInfo(
+@Table(name = "ShowTimes")
+data class ShowTimeMovieData(
 	@Id
 	@Column(name = "MovieId")
 	val movieId: String = "",
-
-	@Column(name = "NameKR")
-	val nameKR: String? = "",
-
-	@Column(name = "NameEN")
-	val nameEN: String? = "",
+	
+	@Column(name = "MovieKR")
+	val movieKR: String = "",
 )

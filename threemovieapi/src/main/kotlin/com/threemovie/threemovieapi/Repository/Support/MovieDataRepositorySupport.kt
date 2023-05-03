@@ -9,16 +9,17 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 
 @Repository
-class MovieInfoRepositorySupport(
+class MovieDataRepositorySupport(
 	val query: JPAQueryFactory
-) : QuerydslRepositorySupport(MovieInfo::class.java) {
+) : QuerydslRepositorySupport(MovieData::class.java) {
 	val moviePreview: QMoviePreview = QMoviePreview.moviePreview
-	val movieInfo: QMovieInfo = QMovieInfo.movieInfo
+	val movieData: QMovieData = QMovieData.movieData
 	val movieCreator: QMovieCreator = QMovieCreator.movieCreator
+	val movieNameData: QMovieNameData = QMovieNameData.movieNameData
 	
-	fun getMovieNameInfo(): List<MovieNameInfo> =
+	fun getMovieNameData(): List<MovieNameData> =
 		query
-			.selectFrom(QMovieNameInfo.movieNameInfo)
+			.selectFrom(movieNameData)
 			.fetch()
 	
 	fun getMovieList(): List<MovieListDTO> {
@@ -27,24 +28,24 @@ class MovieInfoRepositorySupport(
 			.select(
 				Projections.fields(
 					MovieListDTO::class.java,
-					movieInfo.movieId,
-					movieInfo.netizenAvgRate,
-					movieInfo.reservationRate,
-					movieInfo.nameKR,
-					movieInfo.nameEN,
-					movieInfo.poster,
-					movieInfo.category,
+					movieData.movieId,
+					movieData.netizenAvgRate,
+					movieData.reservationRate,
+					movieData.nameKR,
+					movieData.nameEN,
+					movieData.poster,
+					movieData.category,
 					moviePreview.steelcuts,
 					moviePreview.trailer
 				)
 			)
-			.from(movieInfo)
+			.from(movieData)
 			.leftJoin(moviePreview)
 			.fetchJoin()
-			.on(movieInfo.movieId.eq(moviePreview.movieId))
+			.on(movieData.movieId.eq(moviePreview.movieId))
 			.orderBy(
-				movieInfo.reservationRate.desc(),
-				movieInfo.netizenAvgRate.desc()
+				movieData.reservationRate.desc(),
+				movieData.netizenAvgRate.desc()
 			)
 			.fetch()
 	}
@@ -55,29 +56,29 @@ class MovieInfoRepositorySupport(
 			.select(
 				Projections.fields(
 					MovieDetailDTO::class.java,
-					movieInfo.movieId,
-					movieInfo.netizenAvgRate,
-					movieInfo.reservationRate,
-					movieInfo.summary,
-					movieInfo.nameKR,
-					movieInfo.nameEN,
-					movieInfo.makingNote,
-					movieInfo.releaseDate,
-					movieInfo.poster,
-					movieInfo.category,
+					movieData.movieId,
+					movieData.netizenAvgRate,
+					movieData.reservationRate,
+					movieData.summary,
+					movieData.nameKR,
+					movieData.nameEN,
+					movieData.makingNote,
+					movieData.releaseDate,
+					movieData.poster,
+					movieData.category,
 					moviePreview.steelcuts,
 					moviePreview.trailer,
 					movieCreator.items
 				)
 			)
-			.from(movieInfo)
-			.where(movieInfo.movieId.eq(movieId))
+			.from(movieData)
+			.where(movieData.movieId.eq(movieId))
 			.join(moviePreview)
 			.fetchJoin()
-			.on(movieInfo.movieId.eq(moviePreview.movieId))
+			.on(movieData.movieId.eq(moviePreview.movieId))
 			.join(movieCreator)
 			.fetchJoin()
-			.on(movieInfo.movieId.eq(movieCreator.movieId))
+			.on(movieData.movieId.eq(movieCreator.movieId))
 			.fetchOne()
 			?: throw NoSuchElementException()
 	}
