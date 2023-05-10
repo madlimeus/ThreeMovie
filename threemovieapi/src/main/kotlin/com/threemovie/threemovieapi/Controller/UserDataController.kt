@@ -34,7 +34,7 @@ class UserDataController(
 		}
 		
 		userDataService.resetPassword(email)
-		return ResponseEntity.status(HttpStatus.OK).body("임시 비밀번호가 전송 되었습니다.")
+		return ResponseEntity.ok("임시 비밀번호가 전송 되었습니다.")
 	}
 	
 	@PostMapping("/nickname/exists")

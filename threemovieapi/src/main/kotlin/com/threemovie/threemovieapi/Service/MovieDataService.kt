@@ -14,15 +14,19 @@ class MovieDataService(
 	val movieDataRepository: MovieDataRepository,
 	val movieDataRepositorySupport: MovieDataRepositorySupport,
 ) {
-	fun getMovieDetail(movieId: String): MovieDetailDTO {
-		return movieDataRepositorySupport.getMovieDetail(movieId)
+	fun getMovieDetail(movieId: String): MovieDetailDTO? {
+		return try {
+			movieDataRepositorySupport.getMovieDetail(movieId)
+		} catch (e: Exception) {
+			null
+		}
 	}
 	
 	fun getMovieList(): List<MovieListDTO> {
 		return movieDataRepositorySupport.getMovieList()
 	}
 	
-	fun getMoviedata(): List<MovieData> {
+	fun getMovieData(): List<MovieData> {
 		return movieDataRepository.findAll()
 	}
 	

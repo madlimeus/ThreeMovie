@@ -47,10 +47,11 @@ class MovieDataRepositorySupport(
 				movieData.reservationRate.desc(),
 				movieData.netizenAvgRate.desc()
 			)
+			.limit(30)
 			.fetch()
 	}
 	
-	fun getMovieDetail(movieId: String): MovieDetailDTO {
+	fun getMovieDetail(movieId: String): MovieDetailDTO? {
 		
 		return query
 			.select(

@@ -13,7 +13,12 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class ShowTimeController(val service: ShowTimeService) {
 	@QueryMapping
-	fun getMovieList(): List<ShowMovieDTO> = service.getMovieList()
+	fun getMovieList(): List<ShowMovieDTO> {
+		val ret = service.getMovieList()
+		println(ret)
+		
+		return ret
+	}
 	
 	@QueryMapping
 	fun getTheaterList(@Argument filter: FilterRequest?): List<ShowTheaterResponse> = service.getTheaterList(filter)

@@ -39,14 +39,15 @@ class ShowTimeRepositorySupport(
 					movieData.reservationRank
 				)
 			)
+			.distinct()
 			.from(showTime)
 			.leftJoin(movieData)
 			.fetchJoin()
 			.on(showTime.movieId.eq(movieData.movieId))
+			.groupBy(showTime.movieId)
 			.orderBy(
 				movieData.reservationRate.desc()
 			)
-			.distinct()
 			.fetch()
 	}
 	

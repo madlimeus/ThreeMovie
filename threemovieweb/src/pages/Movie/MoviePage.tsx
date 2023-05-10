@@ -23,7 +23,7 @@ const MainMovieList = () => {
         <Box className="moviePageBox">
             {response &&
                 response.map((movieData, index) => (
-                    <Box className="moviePageProfileBox">
+                    <Box className="moviePageProfileBox" key={movieData.movieId}>
                         <MovieProfile
                             movieId={movieData.movieId}
                             poster={movieData.poster}

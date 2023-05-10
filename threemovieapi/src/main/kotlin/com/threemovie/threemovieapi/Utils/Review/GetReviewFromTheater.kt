@@ -26,7 +26,7 @@ class GetReviewFromTheater(
 	var movieList = HashMap<String, String?>()
 	
 	fun getMovieListDB(): HashMap<String, String?> {
-		val movieList = movieDataService.getMoviedata()
+		val movieList = movieDataService.getMovieData()
 		var resultHashMap = HashMap<String, String?>()
 		for (oneMovie in movieList) {
 			resultHashMap[oneMovie.movieId] = oneMovie.nameKR
