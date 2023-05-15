@@ -11,6 +11,7 @@ import com.threemovie.threemovieapi.Repository.UserDataRepository
 import com.threemovie.threemovieapi.Repository.UserLoginRepository
 import com.threemovie.threemovieapi.Utils.jwt.JwtTokenProvider
 import com.threemovie.threemovieapi.Utils.jwt.RedisUtil
+import com.threemovie.threemovieapi.exception.*
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -50,21 +51,20 @@ class UserAuthService(
 	}
 	
 	fun loginAccount(email: String, pass: String): Boolean {
-		try {
-			val userLogin = userLoginRepositorySupport.getUserLoginByEmail(email)
-			
-			if (! passwordEncoder.matches(pass, userLogin.userPassword))
-				return false
-		} catch (e: NullPointerException) {
-			return false
-		}
+		val userLogin = userLoginRepositorySupport.getUserLoginByEmail(email) ?: throw AccountNotFoundException()
+		if (! passwordEncoder.matches(
+				pass,
+				userLogin.userPassword
+			)
+		)
+			throw AccountPasswordMissMatchException()
 		
 		return true
 	}
 	
-	fun logoutAccount(accessToken: String): Boolean {
+	fun logoutAccount(accessToken: String) {
 		if (! jwtTokenProvider.validateToken(accessToken))
-			throw IllegalArgumentException("잘못된 요청 입니다.")
+			throw IllegalTokenException()
 		
 		val email = jwtTokenProvider.getEmail(accessToken)
 		if (! redisUtil.getData(email).isNullOrEmpty())
@@ -72,26 +72,27 @@ class UserAuthService(
 		
 		val expiration = jwtTokenProvider.getExpiration(accessToken)
 		redisUtil.setDataExpire(accessToken, "logout", expiration)
-		
-		
-		return true
 	}
 	
 	fun reissue(refreshToken: String): Boolean {
-		if (! jwtTokenProvider.validateToken(refreshToken))
-			return false
+		if (refreshToken.isNullOrEmpty() || ! jwtTokenProvider.validateToken(refreshToken))
+			throw IllegalTokenException()
 		return true
 	}
 	
 	fun existsAuth(email: String): Boolean {
-		return userSignUpRepositorySupport.existsSuccessCode(email)
+		val ret = userSignUpRepositorySupport.existsSuccessCode(email)
+		if (! ret)
+			throw AuthNotFoundException()
+		return true
 	}
 	
-	fun checkAuth(email: String, authCode: String): Boolean {
+	fun checkAuth(email: String, authCode: String) {
 		val ret = userSignUpRepositorySupport.checkAuthCode(email, authCode)
 		if (ret)
 			updateAuth(email)
-		return ret
+		else
+			throw AuthCodeMissMatchException()
 	}
 	
 	fun updateAuth(email: String) {

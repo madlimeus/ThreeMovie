@@ -1,9 +1,7 @@
 package com.threemovie.threemovieapi.Service
 
 import com.threemovie.threemovieapi.Entity.DTO.Request.FilterRequest
-import com.threemovie.threemovieapi.Entity.DTO.Response.ShowTheaterItems
 import com.threemovie.threemovieapi.Entity.DTO.Response.ShowTheaterResponse
-import com.threemovie.threemovieapi.Entity.DTO.Response.ShowTimeItems
 import com.threemovie.threemovieapi.Entity.DTO.Response.ShowTimeResponse
 import com.threemovie.threemovieapi.Entity.DTO.ShowDateDTO
 import com.threemovie.threemovieapi.Entity.DTO.ShowMovieDTO
@@ -25,12 +23,18 @@ class ShowTimeService(
 			filter?.dateFilter
 		)
 		
-		val cityMap = HashMap<String, ArrayList<ShowTheaterItems>>()
+		val cityMap = HashMap<String, ArrayList<ShowTheaterResponse.ShowTheaterItems>>()
 		
 		for (item in dtolist) {
-			val tmpItem = ShowTheaterItems(item.movieTheater, item.brchKR, item.brchEN, item.addrKR, item.addrEN)
+			val tmpItem = ShowTheaterResponse.ShowTheaterItems(
+				item.movieTheater,
+				item.brchKR,
+				item.brchEN,
+				item.addrKR,
+				item.addrEN
+			)
 			if (cityMap[item.city] == null) {
-				cityMap[item.city] = ArrayList<ShowTheaterItems>()
+				cityMap[item.city] = ArrayList()
 			}
 			cityMap[item.city]?.add(tmpItem)
 			
@@ -43,17 +47,16 @@ class ShowTimeService(
 		}
 		
 		val comparator: Comparator<ShowTheaterResponse> = compareBy { it.items?.size }
-		val orderRet = ret.sortedWith(comparator).reversed()
 		
-		return orderRet
+		return ret.sortedWith(comparator).reversed()
 	}
 	
-	fun getDateList(filter: FilterRequest?): List<ShowDateDTO> {
+	fun getDateList(filter: FilterRequest): List<ShowDateDTO> {
 		val theaterFilter = makeTheaterList(
-			filter?.movieTheaterFilter,
-			filter?.brchFilter
+			filter.movieTheaterFilter,
+			filter.brchFilter
 		)
-		return showTimeRepositorySupport.getDateList(filter?.movieFilter, theaterFilter)
+		return showTimeRepositorySupport.getDateList(filter.movieFilter, theaterFilter)
 	}
 	
 	fun getShowTimeList(filter: FilterRequest?): List<ShowTimeResponse> {
@@ -73,12 +76,12 @@ class ShowTimeService(
 		val ret = ArrayList<ShowTimeResponse>()
 		
 		for (showtime in dtolist) {
-			val items = ArrayList<ShowTimeItems>()
+			val items = ArrayList<ShowTimeResponse.ShowTimeItems>()
 			val jsonArr = JSONArray(showtime.items)
 			
 			for (i in 0 until jsonArr.length()) {
 				val item = jsonArr.getJSONObject(i)
-				val tmpItem = ShowTimeItems(
+				val tmpItem = ShowTimeResponse.ShowTimeItems(
 					item["TicketPage"].toString(),
 					item["StartTime"].toString(),
 					item["EndTime"].toString(),

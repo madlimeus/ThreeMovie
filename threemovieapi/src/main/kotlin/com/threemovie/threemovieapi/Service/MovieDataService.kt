@@ -6,6 +6,8 @@ import com.threemovie.threemovieapi.Entity.MovieData
 import com.threemovie.threemovieapi.Repository.MovieDataRepository
 import com.threemovie.threemovieapi.Repository.Support.MovieDataRepositorySupport
 import com.threemovie.threemovieapi.Utils.GET_DATA_USE_DAUM_API.Companion.GET_DATA_USE_DAUM_API
+import com.threemovie.threemovieapi.exception.MovieNotFoundException
+import com.threemovie.threemovieapi.exception.MovieNullException
 import org.json.JSONObject
 import org.springframework.stereotype.Service
 
@@ -15,15 +17,11 @@ class MovieDataService(
 	val movieDataRepositorySupport: MovieDataRepositorySupport,
 ) {
 	fun getMovieDetail(movieId: String): MovieDetailDTO? {
-		return try {
-			movieDataRepositorySupport.getMovieDetail(movieId)
-		} catch (e: Exception) {
-			null
-		}
+		return movieDataRepositorySupport.getMovieDetail(movieId) ?: throw MovieNotFoundException()
 	}
 	
 	fun getMovieList(): List<MovieListDTO> {
-		return movieDataRepositorySupport.getMovieList()
+		return movieDataRepositorySupport.getMovieList() ?: throw MovieNullException()
 	}
 	
 	fun getMovieData(): List<MovieData> {

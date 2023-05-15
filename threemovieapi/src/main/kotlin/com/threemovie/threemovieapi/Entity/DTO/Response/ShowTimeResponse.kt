@@ -24,11 +24,14 @@ data class ShowTimeResponse(
 	val addrEN: String? = null,
 	
 	val items: List<ShowTimeItems>? = null,
-)
-
-data class ShowTimeItems(
-	val ticketPage: String,
-	val startTime: String,
-	val endTime: String,
-	val restSeat: String
-)
+) {
+	data class ShowTimeItems(
+		val ticketPage: String,
+		
+		val startTime: String,
+		
+		val endTime: String,
+		
+		val restSeat: String
+	)
+}

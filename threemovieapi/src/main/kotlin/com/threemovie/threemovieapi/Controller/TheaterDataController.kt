@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/theaterdata")
+@RequestMapping("/api/theater")
 class TheaterDataController(val service: TheaterDataService) {
 	@GetMapping("/{MovieTheater}")
 	fun getTheaterData(@PathVariable MovieTheater: String): List<TheaterData> = service.getTheaterData(MovieTheater)

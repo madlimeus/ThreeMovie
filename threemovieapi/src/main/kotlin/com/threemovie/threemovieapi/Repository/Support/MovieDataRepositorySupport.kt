@@ -22,7 +22,7 @@ class MovieDataRepositorySupport(
 			.selectFrom(movieNameData)
 			.fetch()
 	
-	fun getMovieList(): List<MovieListDTO> {
+	fun getMovieList(): List<MovieListDTO>? {
 		
 		return query
 			.select(
@@ -81,6 +81,5 @@ class MovieDataRepositorySupport(
 			.fetchJoin()
 			.on(movieData.movieId.eq(movieCreator.movieId))
 			.fetchOne()
-			?: throw NoSuchElementException()
 	}
 }

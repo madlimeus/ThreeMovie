@@ -23,11 +23,11 @@ class UserLoginRepositorySupport(
 			.fetchOne() != null
 	}
 	
-	fun getUserLoginByEmail(email: String): UserLogin {
+	fun getUserLoginByEmail(email: String): UserLogin? {
 		return query
 			.selectFrom(userLogin)
 			.where(userLogin.userEmail.eq(email))
-			.fetchFirst()
+			.fetchOne()
 	}
 	
 	@Transactional

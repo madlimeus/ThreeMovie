@@ -11,10 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @Tag(name = "UserController", description = "인증 메일 혹은 알림 메일 보내는 컨트롤러")
 @RestController
@@ -40,16 +37,13 @@ class UserDataController(
 	@PostMapping("/nickname/exists")
 	fun checkDuplicatedNickName(@RequestBody nickNameRequest: NickNameRequest): ResponseEntity<String> {
 		val (nickName) = nickNameRequest
-		val ret = userDataService.existsNickName(nickName)
-		if (ret) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("이미 존재하는 닉네임 입니다.")
-		}
+		userDataService.existsNickName(nickName)
+		
 		return ResponseEntity.status(HttpStatus.OK).body("사용가능한 닉네임 입니다.")
 	}
 	
 	@PostMapping("/mypage")
 	fun getUserData(request: HttpServletRequest): ResponseEntity<UserData> {
-		println(request)
 		val accessToken = request.getHeader("Authorization").substring(7)
 		val email = jwtTokenProvider.getEmail(accessToken)
 		val res = userDataService.getUserData(email)
@@ -57,12 +51,11 @@ class UserDataController(
 		return ResponseEntity.status(HttpStatus.OK).body(res)
 	}
 	
-	@PostMapping("/data/change")
-	fun updatedata(@RequestBody updateUserdataRequest: UpdateUserDataRequest): ResponseEntity<String> {
-		val ret = userDataService.updateUserdata(updateUserdataRequest)
-		if (! ret) {
-			ResponseEntity.status(HttpStatus.BAD_REQUEST).body("잘못된 요청입니다.")
-		}
+	@PatchMapping("/data/change")
+	fun updateUserData(@RequestBody updateUserdataRequest: UpdateUserDataRequest): ResponseEntity<String> {
+		val (email, nickName, sex, birth) = updateUserdataRequest
+		userDataService.updateUserdata(email, nickName, sex, birth)
+		
 		return ResponseEntity.status(HttpStatus.OK).body("정보가 변경 되었습니다.")
 	}
 }
