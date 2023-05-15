@@ -6,6 +6,7 @@ import { DatePicker } from '@mui/x-date-pickers';
 import { checkAuthCode, checkEmail, checkNickName, checkPass, checkPassConfirm } from '../../../Util/checkUserInfo';
 import useAxios from '../../../hook/useAxios';
 import timeFormat from '../../../Util/timeFormat';
+import { locateLogin } from '../../../Util/locateUtil';
 
 const SignUpPage = () => {
     const [email, setEmail] = useState<string>('');
@@ -128,7 +129,7 @@ const SignUpPage = () => {
     };
 
     useEffect(() => {
-        if (refetchSignUp[0].response) document.location.href = '/user/login';
+        if (refetchSignUp[0].response) locateLogin();
     }, [refetchSignUp[0].response]);
 
     return (

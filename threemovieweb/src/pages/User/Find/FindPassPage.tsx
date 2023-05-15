@@ -6,6 +6,7 @@ import timeFormat from '../../../Util/timeFormat';
 import '../../../style/scss/_findPass.scss';
 import { delCookie } from '../../../Util/cookieUtil';
 import { periodicRefresh } from '../../../Util/refreshToken';
+import { locateLogin } from '../../../Util/locateUtil';
 
 const FindPassPage = () => {
     const [email, setEmail] = useState<string>('');
@@ -105,7 +106,7 @@ const FindPassPage = () => {
             delCookie('nickName');
             clearTimeout(periodicRefresh());
             localStorage.clear();
-            document.location.href = '/user/login';
+            locateLogin();
         }
     }, [refetchPassChange[0].response]);
 

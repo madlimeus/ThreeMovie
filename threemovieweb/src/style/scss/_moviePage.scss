@@ -1,0 +1,13 @@
+.moviePageBox {
+	width: 80vw;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin: auto;
+	justify-content: center;
+	
+	.moviePageProfileBox {
+		width: 200px;
+		margin: 20px;
+	}
+}
