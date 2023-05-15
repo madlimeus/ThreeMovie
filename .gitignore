@@ -5,4 +5,5 @@ threemovieapi/src/main/resources/application-security-config.properties
 threemovieweb/src/apollo/client.ts
 threemovieweb/src/hook/useAxios.tsx
 threemovieweb/.idea
+threemovieweb/.threemovieweb.iml
 threemovieapi/.idea
