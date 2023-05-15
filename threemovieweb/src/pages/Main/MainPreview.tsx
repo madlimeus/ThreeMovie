@@ -12,7 +12,7 @@ import { onErrorImg } from '../../Util/onErrorImg';
 const MainPreview = () => {
     const [steelcuts, setSteelcuts] = useState<string[]>();
     const [trailer, setTrailer] = useState<string[]>();
-    const movieinfo = useRecoilValue(movieInfoSelector);
+    const movieData = useRecoilValue(movieInfoSelector);
     SwiperCore.use([Navigation, Pagination]);
 
     const stringToArray = (str: string | null) => {
@@ -22,13 +22,13 @@ const MainPreview = () => {
     };
 
     useEffect(() => {
-        if (movieinfo) {
-            const steelcuts = stringToArray(movieinfo.steelcuts);
+        if (movieData) {
+            const steelcuts = stringToArray(movieData.steelcuts);
             setSteelcuts(steelcuts);
-            const trailer = stringToArray(movieinfo.trailer);
+            const trailer = stringToArray(movieData.trailer);
             setTrailer(trailer);
         }
-    }, [movieinfo]);
+    }, [movieData]);
 
     return (
         <Swiper
@@ -40,9 +40,9 @@ const MainPreview = () => {
             modules={[Pagination, Navigation]}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
         >
-            {movieinfo && !steelcuts && !trailer && (
+            {movieData && !steelcuts && !trailer && (
                 <SwiperSlide>
-                    <img src={movieinfo.poster || ''} onError={onErrorImg} alt="" />
+                    <img src={movieData.poster || ''} onError={onErrorImg} alt="" />
                 </SwiperSlide>
             )}
             {steelcuts &&
@@ -55,7 +55,7 @@ const MainPreview = () => {
                 trailer.map((teaser) => (
                     <SwiperSlide key={teaser}>
                         <iframe
-                            title={movieinfo.nameKR}
+                            title={movieData.nameKR}
                             width="100%"
                             height="100%"
                             src={`${teaser}?service=player_share`}

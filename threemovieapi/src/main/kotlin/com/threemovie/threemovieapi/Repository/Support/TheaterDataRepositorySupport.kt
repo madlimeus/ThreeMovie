@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository
 class TheaterDataRepositorySupport(
 	val query: JPAQueryFactory
 ) : QuerydslRepositorySupport(TheaterData::class.java) {
-	fun getTheaterDataAll(): List<TheaterData> = query
+	fun getTheaterDataAll(): List<TheaterData>? = query
 		.selectFrom(QTheaterData.theaterData)
 		.fetch()
 	

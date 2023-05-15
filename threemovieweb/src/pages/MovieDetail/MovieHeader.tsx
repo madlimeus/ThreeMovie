@@ -1,7 +1,7 @@
 import React from 'react';
 import { Star } from '@mui/icons-material';
 import { Box, Button, Typography } from '@mui/material';
-import { locateBookInfo } from '../../Util/locateUtil';
+import { locateBookData } from '../../Util/locateUtil';
 import { onErrorImg } from '../../Util/onErrorImg';
 
 interface headerProps {
@@ -107,7 +107,7 @@ const MovieHeader = ({
                         </Box>
                     )}
                 </Box>
-                <Button onClick={() => locateBookInfo(movieId)} className="bookButton">
+                <Button onClick={() => locateBookData(movieId)} className="bookButton">
                     예약하기
                 </Button>
             </Box>

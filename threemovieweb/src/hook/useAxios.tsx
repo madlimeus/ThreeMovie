@@ -10,7 +10,7 @@ type AxiosProps = {
     config?: AxiosRequestConfig;
 };
 
-axios.defaults.baseURL = 'https://moviethree.synology.me/api';
+axios.defaults.baseURL = 'https://moviethree.synology.me:8080/api';
 axios.defaults.headers.withCredentials = true;
 
 const useAxios = <T,>({
@@ -20,13 +20,13 @@ const useAxios = <T,>({
     config,
 }: AxiosProps): [
     {
-        response: any;
+        response: T | undefined;
         error: string | AxiosError;
         loading: boolean;
     },
     () => void,
 ] => {
-    const [response, setResponse] = useState<any>();
+    const [response, setResponse] = useState<T | undefined>();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
 
@@ -48,25 +48,22 @@ const useAxios = <T,>({
         } else {
             axios[method](url, data, config)
                 .then((res) => {
-                    setResponse(res);
+                    setResponse(res.data);
                 })
                 .catch((err) => {
                     const checkErr = err.response.data;
-                    console.log(checkErr);
                     if (
                         (checkErr.status === 500 &&
                             (checkErr.message === '만료된 토큰 입니다.' ||
                                 checkErr.message === '잘못된 토큰 입니다.')) ||
                         (checkErr.status === 403 && checkErr.message === 'Access Denied')
                     ) {
-                        console.log('통과');
                         delCookie('AccessToken');
                         delCookie('NickName');
                         clearTimeout(periodicRefresh());
                         localStorage.clear();
                         window.location.href = '/main';
-                    } else if (err.response.data.message) alert(err.response.data.message);
-                    else alert(err.response.data);
+                    } else if (typeof err.response.data === 'string') alert(err.response.data);
                     setError(err);
                 })
                 .finally(() => {

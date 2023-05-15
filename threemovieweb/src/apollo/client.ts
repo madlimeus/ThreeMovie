@@ -2,7 +2,7 @@ import { ApolloClient, createHttpLink } from '@apollo/client';
 import { cache } from './cache';
 
 const httpLink = createHttpLink({
-    uri: 'https://moviethree.synology.me/api/graphql',
+    uri: 'https://moviethree.synology.me:8080/api/graphql',
 });
 
 export const client = new ApolloClient({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, Divider, Typography } from '@mui/material';
-import { locateBookInfo, locateMain, locateMovie } from '../../Util/locateUtil';
+import { locateBookData, locateMain, locateMovie } from '../../Util/locateUtil';
 
 const NavMenu = () => {
     const onClickTheaterList = () => {
@@ -24,7 +24,7 @@ const NavMenu = () => {
             </Button>
             <Divider className="divide" orientation="vertical" variant="middle" flexItem />
 
-            <Button onClick={() => locateBookInfo()}>
+            <Button onClick={() => locateBookData()}>
                 <Typography>예약하기</Typography>
             </Button>
         </Box>

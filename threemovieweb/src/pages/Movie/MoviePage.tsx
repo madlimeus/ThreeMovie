@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
 
 import useAxios from '../../hook/useAxios';
-import Movieinfo from '../../interfaces/Movieinfo';
+import MovieData from '../../interfaces/MovieData';
 import MovieProfile from '../../layout/MovieProfile';
 import '../../style/scss/_moviePage.scss';
 
 const MainMovieList = () => {
-    const [{ response, loading, error }, refetch] = useAxios<Movieinfo[]>({
+    const [{ response, loading, error }, refetch] = useAxios<MovieData[]>({
         method: 'get',
-        url: '/movieinfo/movielist',
+        url: '/movie/movielist',
         config: {
             headers: { 'Content-Type': `application/json` },
         },
@@ -22,14 +22,14 @@ const MainMovieList = () => {
     return (
         <Box className="moviePageBox">
             {response &&
-                response.map((movieinfo, index) => (
-                    <Box className="moviePageProfileBox">
+                response.map((movieData, index) => (
+                    <Box className="moviePageProfileBox" key={movieData.movieId}>
                         <MovieProfile
-                            movieId={movieinfo.movieId}
-                            poster={movieinfo.poster}
-                            nameKR={movieinfo.nameKR}
-                            reservationRate={movieinfo.reservationRate}
-                            netizenAvgRate={movieinfo.netizenAvgRate}
+                            movieId={movieData.movieId}
+                            poster={movieData.poster}
+                            nameKR={movieData.nameKR}
+                            reservationRate={movieData.reservationRate}
+                            netizenAvgRate={movieData.netizenAvgRate}
                             index={index}
                         />
                     </Box>
