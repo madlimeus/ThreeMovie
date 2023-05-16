@@ -4,7 +4,7 @@ import { RecoilRoot } from 'recoil';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { koKR, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import ko from 'dayjs/locale/ko';
+import 'dayjs/locale/ko';
 import { CookiesProvider } from 'react-cookie';
 import App from './App';
 import { client } from './apollo/client';
@@ -15,7 +15,7 @@ root.render(
         <ApolloProvider client={client}>
             <LocalizationProvider
                 dateAdapter={AdapterDayjs}
-                adapterLocale={ko}
+                adapterLocale="ko"
                 localeText={koKR.components.MuiLocalizationProvider.defaultProps.localeText}
             >
                 <RecoilRoot>
