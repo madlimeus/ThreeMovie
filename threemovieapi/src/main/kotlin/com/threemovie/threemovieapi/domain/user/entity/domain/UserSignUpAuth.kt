@@ -1,0 +1,24 @@
+package com.threemovie.threemovieapi.domain.user.entity.domain
+
+import jakarta.persistence.*
+import java.time.LocalDateTime
+
+@Entity
+@Table(name = "UserSignUpAuth")
+data class UserSignUpAuth(
+	@Column(name = "UserEmail", length = 50)
+	var userEmail: String = "",
+	
+	@Column(name = "AuthCode", length = 8)
+	var authCode: String = "",
+	
+	@Column(name = "ExpiredDate")
+	var expiredDate: LocalDateTime = LocalDateTime.now(),
+	
+	@Column(name = "AuthSuccess")
+	var authSuccess: Boolean = false,
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	var id: Long = 0L,
+)
