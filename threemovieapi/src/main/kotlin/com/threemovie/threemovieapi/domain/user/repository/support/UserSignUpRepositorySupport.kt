@@ -1,7 +1,7 @@
 package com.threemovie.threemovieapi.domain.user.repository.support
 
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.threemovie.threemovieapi.Entity.QUserSignUpAuth
+import com.threemovie.threemovieapi.domain.user.entity.domain.QUserSignUpAuth
 import com.threemovie.threemovieapi.domain.user.entity.domain.UserSignUpAuth
 import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport

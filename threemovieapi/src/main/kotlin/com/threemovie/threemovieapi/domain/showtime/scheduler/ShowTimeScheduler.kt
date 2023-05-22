@@ -1,17 +1,17 @@
 package com.threemovie.threemovieapi.domain.showtime.scheduler
 
-import com.threemovie.threemovieapi.domain.movie.repository.support.MovieDataRepositorySupport
-import com.threemovie.threemovieapi.domain.theater.repository.support.TheaterDataRepositorySupport
-import com.threemovie.threemovieapi.global.repository.support.UpdateTimeRepositorySupport
-import com.threemovie.threemovieapi.domain.showtime.repository.TmpShowTimeRepository
-import com.threemovie.threemovieapi.global.service.CalcSimilarity
-import com.threemovie.threemovieapi.global.service.ChkNeedUpdate
 import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieNameData
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieNameInfoVO
+import com.threemovie.threemovieapi.domain.movie.repository.support.MovieDataRepositorySupport
 import com.threemovie.threemovieapi.domain.showtime.entity.domain.TmpShowTime
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeBranchDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeVO
-import com.threemovie.threemovieapi.domain.theater.entity.domain.TheaterData
+import com.threemovie.threemovieapi.domain.showtime.repository.TmpShowTimeRepository
+import com.threemovie.threemovieapi.domain.theater.entity.domain.Theater
+import com.threemovie.threemovieapi.domain.theater.repository.support.TheaterDataRepositorySupport
+import com.threemovie.threemovieapi.global.repository.support.LastUpdateTimeRepositorySupport
+import com.threemovie.threemovieapi.global.service.CalcSimilarity
+import com.threemovie.threemovieapi.global.service.ChkNeedUpdate
 import org.json.JSONArray
 import org.json.JSONObject
 import org.jsoup.Jsoup
@@ -23,7 +23,7 @@ import java.util.regex.Pattern
 
 @Component
 class ShowTimeScheduler(
-	val updateTimeRepositorySupport: UpdateTimeRepositorySupport,
+	val lastUpdateTimeRepositorySupport: LastUpdateTimeRepositorySupport,
 	val theaterDataRepositorySupport: TheaterDataRepositorySupport,
 	val tmpShowTimeRepository: TmpShowTimeRepository,
 	val movieDataRepositorySupport: MovieDataRepositorySupport,
@@ -40,7 +40,7 @@ class ShowTimeScheduler(
 	@Async
 	@Scheduled(cron = "0 0/10 * * * ?")
 	fun ChkMovieShowingTime() {
-		if (ChkNeedUpdate.chkUpdateTenMinute(updateTimeRepositorySupport.getShowTime())) {
+		if (ChkNeedUpdate.chkUpdateTenMinute(lastUpdateTimeRepositorySupport.getLastShowTime())) {
 			tmpShowTimeRepository.truncateTmpShowTime()
 			movieNameInfo = movieDataRepositorySupport.getMovieNameData()
 			
@@ -56,7 +56,7 @@ class ShowTimeScheduler(
 			tmpShowTimeRepository.saveAll(showTimeList)
 			tmpShowTimeRepository.chgShowTimeTable()
 			tmpShowTimeRepository.truncateTmpShowTime()
-			updateTimeRepositorySupport.updateShowTime(ChkNeedUpdate.retFormatterTime())
+			lastUpdateTimeRepositorySupport.updateLastShowTime(ChkNeedUpdate.retFormatterTime())
 		}
 	}
 	
@@ -91,7 +91,7 @@ class ShowTimeScheduler(
 	}
 	
 	fun updateMBShowtimes(
-		theaters: List<TheaterData>
+		theaters: List<Theater>
 	): List<TmpShowTime> {
 		var showTimeList = ArrayList<TmpShowTime>()
 		var showTimeBranch = ShowTimeBranchDTO("MB")
@@ -211,7 +211,7 @@ class ShowTimeScheduler(
 	}
 	
 	fun updateLCShowtimes(
-		theaters: List<TheaterData>
+		theaters: List<Theater>
 	): List<TmpShowTime> {
 		var showTimeBranch = ShowTimeBranchDTO("LC")
 		var showTimeList = ArrayList<TmpShowTime>()
@@ -362,7 +362,7 @@ class ShowTimeScheduler(
 	}
 	
 	fun updateCGVShowtimes(
-		theaters: List<TheaterData>
+		theaters: List<Theater>
 	): List<TmpShowTime> {
 		var showTimeBranch = ShowTimeBranchDTO("CGV")
 		var showTimeList = ArrayList<TmpShowTime>()

@@ -1,24 +1,27 @@
 package com.threemovie.threemovieapi.domain.user.entity.domain
 
-import jakarta.persistence.*
+import com.threemovie.threemovieapi.global.repository.PrimaryKeyEntity
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.Table
+import org.jetbrains.annotations.NotNull
 import java.time.LocalDateTime
 
 @Entity
 @Table(name = "UserSignUpAuth")
-data class UserSignUpAuth(
-	@Column(name = "UserEmail", length = 50)
+class UserSignUpAuth(
+	@Column(length = 50)
+	@NotNull
 	var userEmail: String = "",
 	
-	@Column(name = "AuthCode", length = 8)
+	@Column(length = 8)
+	@NotNull
 	var authCode: String = "",
 	
-	@Column(name = "ExpiredDate")
+	@NotNull
 	var expiredDate: LocalDateTime = LocalDateTime.now(),
 	
-	@Column(name = "AuthSuccess")
+	@NotNull
 	var authSuccess: Boolean = false,
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	var id: Long = 0L,
-)
+	) : PrimaryKeyEntity()

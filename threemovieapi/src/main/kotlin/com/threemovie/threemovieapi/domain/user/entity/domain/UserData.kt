@@ -1,30 +1,31 @@
 package com.threemovie.threemovieapi.domain.user.entity.domain
 
-import jakarta.persistence.*
+import com.threemovie.threemovieapi.global.repository.PrimaryKeyEntity
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.Table
+import org.jetbrains.annotations.NotNull
 import java.time.LocalDate
 
 @Entity
 @Table(name = "UserData")
-data class UserData(
-	@Column(name = "UserEmail", length = 50)
+class UserData(
+	@Column(length = 50)
+	@NotNull
 	val userEmail: String = "",
 	
-	@Column(name = "UserNickName", length = 20)
+	@Column(length = 20)
+	@NotNull
 	val userNickName: String = "",
 	
-	@Column(name = "UserSex")
 	val userSex: Boolean? = false,
 	
-	@Column(name = "UserBirth")
 	val userBirth: LocalDate? = LocalDate.now(),
 	
-	@Column(name = "UserCategories")
+	@NotNull
 	val userCategories: String = "",
 	
-	@Column(name = "UserBrch")
+	@NotNull
 	val userBrch: String = "",
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	var id: Long = 0L,
-)
+	) : PrimaryKeyEntity()

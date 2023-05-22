@@ -1,54 +1,48 @@
 package com.threemovie.threemovieapi.domain.showtime.entity.domain
 
-import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimePK
-import jakarta.persistence.*
+import com.threemovie.threemovieapi.global.repository.PrimaryKeyEntity
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.Table
+import org.jetbrains.annotations.NotNull
 
 @Entity
-@IdClass(ShowTimePK::class)
-@Table(name = "TmpShowTimes")
-data class TmpShowTime(
-	@Column(name = "MovieId")
+@Table(name = "TmpShowTime")
+class TmpShowTime(
+	@NotNull
 	val movieId: String = "",
 	
-	@Id
-	@Column(name = "MovieTheater")
+	@NotNull
 	val movieTheater: String = "",
 	
-	@Column(name = "City")
+	@NotNull
 	val city: String = "서울",
 	
-	@Id
-	@Column(name = "BrchKR")
+	@NotNull
 	val brchKR: String = "",
 	
-	@Column(name = "BrchEN")
-	val brchEN: String = "",
+	val brchEN: String? = "",
 	
-	@Id
-	@Column(name = "MovieKR")
+	@NotNull
 	val movieKR: String = "",
 	
-	@Column(name = "MovieEN")
-	val movieEN: String = "",
+	val movieEN: String? = "",
 	
-	@Id
-	@Column(name = "ScreenKR")
+	@NotNull
 	val screenKR: String = "",
 	
-	@Column(name = "ScreenEN")
+	@NotNull
 	val screenEN: String = "",
 	
-	@Id
-	@Column(name = "Date")
+	@NotNull
 	val date: String = "",
 	
-	@Column(name = "TotalSeat")
+	@NotNull
 	val totalSeat: Int = 200,
 	
-	@Id
-	@Column(name = "PlayKind")
+	@NotNull
 	val playKind: String = "",
 	
 	@Column(name = "Items", columnDefinition = "json")
 	val items: String = "",
-)
+) : PrimaryKeyEntity()

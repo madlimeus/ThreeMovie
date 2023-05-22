@@ -1,8 +1,8 @@
 package com.threemovie.threemovieapi.domain.user.repository.support
 
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.threemovie.threemovieapi.Entity.QUserData
-import com.threemovie.threemovieapi.Entity.QUserData.userData
+import com.threemovie.threemovieapi.domain.user.entity.domain.QUserData
+import com.threemovie.threemovieapi.domain.user.entity.domain.QUserData.userData
 import com.threemovie.threemovieapi.domain.user.entity.domain.UserData
 import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport

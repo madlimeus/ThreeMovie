@@ -2,9 +2,7 @@ package com.threemovie.threemovieapi.domain.movie.repository.support
 
 import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.threemovie.threemovieapi.Entity.*
-import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
-import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieNameData
+import com.threemovie.threemovieapi.domain.movie.entity.domain.*
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieDetailDTO
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieListDTO
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport

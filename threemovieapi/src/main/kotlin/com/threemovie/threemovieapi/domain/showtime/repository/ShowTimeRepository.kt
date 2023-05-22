@@ -1,15 +1,15 @@
 package com.threemovie.threemovieapi.domain.showtime.repository
 
-import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimePK
 import com.threemovie.threemovieapi.domain.showtime.entity.domain.ShowTime
 import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
+import java.util.*
 
-interface ShowTimeRepository : JpaRepository<ShowTime, ShowTimePK> {
+interface ShowTimeRepository : JpaRepository<ShowTime, UUID> {
 	@Transactional
 	@Modifying
-	@Query(value = "truncate ShowTimes", nativeQuery = true)
+	@Query(value = "truncate ShowTime", nativeQuery = true)
 	fun truncateShowTime()
 }

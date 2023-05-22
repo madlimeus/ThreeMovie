@@ -1,57 +1,43 @@
 package com.threemovie.threemovieapi.domain.movie.entity.domain
 
-import jakarta.persistence.Column
+import com.threemovie.threemovieapi.global.repository.PrimaryKeyEntity
 import jakarta.persistence.Entity
-import jakarta.persistence.Id
 import jakarta.persistence.Table
+import org.jetbrains.annotations.NotNull
 
 @Entity
 @Table(name = "MovieData")
-data class MovieData(
-	@Id
-	@Column(name = "MovieId")
+class MovieData(
+	@NotNull
 	val movieId: String = "",
 	
-	@Column(name = "NetizenAvgRate")
 	val netizenAvgRate: Double? = 0.0,
 	
-	@Column(name = "ReservationRate")
 	val reservationRate: Double? = 0.0,
 	
-	@Column(name = "Summary")
 	val summary: String? = "",
 	
-	@Column(name = "NameKR")
 	val nameKR: String? = "",
 	
-	@Column(name = "NameEN")
 	val nameEN: String? = "",
 	
-	@Column(name = "ReleaseDate")
+	@NotNull
 	val releaseDate: String = "",
 	
-	@Column(name = "Poster")
 	val poster: String? = "",
 	
-	@Column(name = "Category")
 	val category: String? = "",
 	
-	@Column(name = "MakingNote")
 	val makingNote: String? = "",
 	
-	@Column(name = "RunningTime")
 	val runningTime: String? = "",
 	
-	@Column(name = "AdmissionCode")
 	val admissionCode: String? = "",
 	
-	@Column(name = "Country")
 	val country: String? = "",
 	
-	@Column(name = "ReservationRank")
 	val reservationRank: String? = "",
 	
-	@Column(name = "TotalAudience")
 	val totalAudience: String? = "",
 	
-	)
+	) : PrimaryKeyEntity()
