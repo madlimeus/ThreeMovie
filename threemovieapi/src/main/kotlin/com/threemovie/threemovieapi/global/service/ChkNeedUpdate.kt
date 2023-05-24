@@ -12,32 +12,28 @@ class ChkNeedUpdate {
 			return LocalDateTime.now().format(formatter).toLong()
 		}
 		
-		fun chkUpdateOneMinute(time: Long?): Boolean {
-			if (time == null) {
-				return true
-			}
+		fun chkUpdateOneMinute(time: Long): Boolean {
 			val current = LocalDateTime.now()
 			val formatted = LocalDateTime.parse(time.toString(), formatter)
 			
 			return between(formatted, current).seconds >= 60
 		}
 		
-		fun chkUpdateTenMinute(time: Long?): Boolean {
-			if (time == null) {
-				return true
-			}
-			
+		fun chkUpdateTenMinute(time: Long): Boolean {
 			val current = LocalDateTime.now()
 			val formatted = LocalDateTime.parse(time.toString(), formatter)
 			
 			return between(formatted, current).seconds >= 60 * 10
 		}
 		
-		fun chkUpdateTwelveHours(time: Long?): Boolean {
-			if (time == null) {
-				return true
-			}
+		fun chkUpdateOneHour(time: Long): Boolean {
+			val current = LocalDateTime.now()
+			val formatted = LocalDateTime.parse(time.toString(), formatter)
 			
+			return between(formatted, current).seconds >= 60 * 60 * 1
+		}
+		
+		fun chkUpdateTwelveHours(time: Long): Boolean {
 			val current = LocalDateTime.now()
 			val formatted = LocalDateTime.parse(time.toString(), formatter)
 			

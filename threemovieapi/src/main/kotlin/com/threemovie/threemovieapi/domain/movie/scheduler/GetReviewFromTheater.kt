@@ -3,6 +3,8 @@ package com.threemovie.threemovieapi.domain.movie.scheduler
 import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieReview
 import com.threemovie.threemovieapi.domain.movie.repository.MovieReviewRepository
 import com.threemovie.threemovieapi.domain.movie.service.MovieDataService
+import com.threemovie.threemovieapi.global.entity.LastUpdateTime
+import com.threemovie.threemovieapi.global.repository.LastUpdateTimeRepository
 import com.threemovie.threemovieapi.global.repository.support.LastUpdateTimeRepositorySupport
 import com.threemovie.threemovieapi.global.service.CalcSimilarity.Companion.calcSimilarity
 import com.threemovie.threemovieapi.global.service.ChkNeedUpdate
@@ -17,9 +19,11 @@ import org.springframework.stereotype.Component
 class GetReviewFromTheater(
 	val movieDataService: MovieDataService,
 	val movieReviewRepository: MovieReviewRepository,
+	val lastUpdateTimeRepository: LastUpdateTimeRepository,
 	val LastUpdateTimeRepositorySupport: LastUpdateTimeRepositorySupport,
 ) {
 	//MB 에서 MovieList 뽑아 오는 과정에서 줄거리에 " 가 들어 가서 JSON 으로 파싱이 안되는 문제 : getMovieListMB
+	private val code = "review"
 	val userAgent: String =
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
 	
@@ -227,12 +231,18 @@ class GetReviewFromTheater(
 	@Async
 	@Scheduled(cron = "0 0 0/1 * * *")
 	fun getReview() {
-		if (ChkNeedUpdate.chkUpdateTwelveHours(LastUpdateTimeRepositorySupport.getLastReview())) {
+		var time = LastUpdateTimeRepositorySupport.getLastTime(code)
+		if (time == null) {
+			lastUpdateTimeRepository.save(LastUpdateTime(code, 202302110107))
+			time = 202302110107
+		}
+		
+		if (ChkNeedUpdate.chkUpdateTwelveHours(time)) {
 			movieReviewRepository.truncate()
 			movieList = getMovieListDB()
 			getReviewLT()
 			getReviewMB()
-			LastUpdateTimeRepositorySupport.updateLastReview(ChkNeedUpdate.retFormatterTime())
+			LastUpdateTimeRepositorySupport.updateLastTime(ChkNeedUpdate.retFormatterTime(), code)
 		}
 	}
 	

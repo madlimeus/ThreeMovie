@@ -10,7 +10,7 @@ import java.util.*
 interface MovieCreatorRepository : JpaRepository<MovieCreator, UUID> {
 	@Transactional
 	@Modifying
-	@Query(value = "truncate MovieCreator", nativeQuery = true)
+	@Query(value = "truncate movie_creator", nativeQuery = true)
 	fun truncate()
 	
 }

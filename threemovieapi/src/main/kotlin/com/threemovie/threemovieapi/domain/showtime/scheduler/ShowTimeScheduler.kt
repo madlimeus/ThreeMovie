@@ -7,8 +7,11 @@ import com.threemovie.threemovieapi.domain.showtime.entity.domain.TmpShowTime
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeBranchDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeVO
 import com.threemovie.threemovieapi.domain.showtime.repository.TmpShowTimeRepository
+import com.threemovie.threemovieapi.domain.showtime.repository.TmpShowTimeRepositorySaveAll
 import com.threemovie.threemovieapi.domain.theater.entity.domain.Theater
 import com.threemovie.threemovieapi.domain.theater.repository.support.TheaterDataRepositorySupport
+import com.threemovie.threemovieapi.global.entity.LastUpdateTime
+import com.threemovie.threemovieapi.global.repository.LastUpdateTimeRepository
 import com.threemovie.threemovieapi.global.repository.support.LastUpdateTimeRepositorySupport
 import com.threemovie.threemovieapi.global.service.CalcSimilarity
 import com.threemovie.threemovieapi.global.service.ChkNeedUpdate
@@ -27,6 +30,8 @@ class ShowTimeScheduler(
 	val theaterDataRepositorySupport: TheaterDataRepositorySupport,
 	val tmpShowTimeRepository: TmpShowTimeRepository,
 	val movieDataRepositorySupport: MovieDataRepositorySupport,
+	val lastUpdateTimeRepository: LastUpdateTimeRepository,
+	val tmpShowTimeRepositorySaveAll: TmpShowTimeRepositorySaveAll
 ) {
 	val userAgent: String =
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
@@ -36,11 +41,18 @@ class ShowTimeScheduler(
 	val nameMap = HashMap<String, MovieNameInfoVO>()
 	lateinit var movieNameInfo: List<MovieNameData>
 	val square = "\\[[^)]*\\]".toRegex()
+	val code = "showtime"
 	
 	@Async
-	@Scheduled(cron = "0 0/10 * * * ?")
-	fun ChkMovieShowingTime() {
-		if (ChkNeedUpdate.chkUpdateTenMinute(lastUpdateTimeRepositorySupport.getLastShowTime())) {
+	@Scheduled(cron = "0 0/1 * * * ?")
+	fun chkMovieShowingTime() {
+		var time = lastUpdateTimeRepositorySupport.getLastTime(code)
+		if (time == null) {
+			lastUpdateTimeRepository.save(LastUpdateTime(code, 202302110107))
+			time = 202302110107
+		}
+		if (ChkNeedUpdate.chkUpdateTenMinute(time)) {
+			lastUpdateTimeRepositorySupport.updateLastTime(ChkNeedUpdate.retFormatterTime(), code)
 			tmpShowTimeRepository.truncateTmpShowTime()
 			movieNameInfo = movieDataRepositorySupport.getMovieNameData()
 			
@@ -53,10 +65,10 @@ class ShowTimeScheduler(
 			showTimeList += updateCGVShowtimes(cgvTheaters)
 			
 			
-			tmpShowTimeRepository.saveAll(showTimeList)
+			tmpShowTimeRepositorySaveAll.saveAll(showTimeList)
 			tmpShowTimeRepository.chgShowTimeTable()
 			tmpShowTimeRepository.truncateTmpShowTime()
-			lastUpdateTimeRepositorySupport.updateLastShowTime(ChkNeedUpdate.retFormatterTime())
+			
 		}
 	}
 	

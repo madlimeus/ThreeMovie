@@ -1,8 +1,10 @@
-package com.threemovie.threemovieapi.global.repository
+package com.threemovie.threemovieapi.global.entity
 
 import com.github.f4b6a3.ulid.UlidCreator
 import jakarta.persistence.*
+import org.hibernate.annotations.JdbcTypeCode
 import org.hibernate.proxy.HibernateProxy
+import org.hibernate.type.SqlTypes
 import org.springframework.data.domain.Persistable
 import java.io.Serializable
 import java.util.*
@@ -12,6 +14,7 @@ import kotlin.jvm.Transient
 abstract class PrimaryKeyEntity : Persistable<UUID> {
 	@Id
 	@Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+	@JdbcTypeCode(SqlTypes.VARCHAR)
 	private val id: UUID = UlidCreator.getMonotonicUlid().toUuid()
 	
 	@Transient

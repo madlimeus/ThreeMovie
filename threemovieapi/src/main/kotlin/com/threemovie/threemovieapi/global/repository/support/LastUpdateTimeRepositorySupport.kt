@@ -13,63 +13,18 @@ class LastUpdateTimeRepositorySupport(
 ) : QuerydslRepositorySupport(LastUpdateTime::class.java) {
 	val updateTime: QLastUpdateTime = QLastUpdateTime.lastUpdateTime
 	
-	fun getLastShowTime(): Long? = query
+	fun getLastTime(code: String): Long? = query
 		.select(updateTime.time)
 		.from(updateTime)
-		.where(updateTime.code.eq("showtime"))
-		.fetchOne()
-	
-	fun getLastReview(): Long? = query
-		.select(updateTime.time)
-		.from(updateTime)
-		.where(updateTime.code.eq("review"))
-		.fetchOne()
-	
-	fun getLastTheater(): Long? = query
-		.select(updateTime.time)
-		.from(updateTime)
-		.where(updateTime.code.eq("theater"))
-		.fetchOne()
-	
-	fun getLastMovie(): Long? = query
-		.select(updateTime.time)
-		.from(updateTime)
-		.where(updateTime.code.eq("movie"))
+		.where(updateTime.code.eq(code))
 		.fetchOne()
 	
 	@Transactional
-	fun updateLastShowTime(newTime: Long): Unit {
+	fun updateLastTime(newTime: Long, code: String) {
 		query
 			.update(updateTime)
 			.set(updateTime.time, newTime)
-			.where(updateTime.code.eq("showtime"))
-			.execute()
-	}
-	
-	@Transactional
-	fun updateLastReview(newTime: Long): Unit {
-		query
-			.update(updateTime)
-			.set(updateTime.time, newTime)
-			.where(updateTime.code.eq("review"))
-			.execute()
-	}
-	
-	@Transactional
-	fun updateLastTheater(newTime: Long): Unit {
-		query
-			.update(updateTime)
-			.set(updateTime.time, newTime)
-			.where(updateTime.code.eq("theater"))
-			.execute()
-	}
-	
-	@Transactional
-	fun updateLastMovie(newTime: Long): Unit {
-		query
-			.update(updateTime)
-			.set(updateTime.time, newTime)
-			.where(updateTime.code.eq("movie"))
+			.where(updateTime.code.eq(code))
 			.execute()
 	}
 }

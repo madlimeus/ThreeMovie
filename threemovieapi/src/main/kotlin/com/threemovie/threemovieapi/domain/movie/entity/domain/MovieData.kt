@@ -1,6 +1,6 @@
 package com.threemovie.threemovieapi.domain.movie.entity.domain
 
-import com.threemovie.threemovieapi.global.repository.PrimaryKeyEntity
+import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
 import org.jetbrains.annotations.NotNull

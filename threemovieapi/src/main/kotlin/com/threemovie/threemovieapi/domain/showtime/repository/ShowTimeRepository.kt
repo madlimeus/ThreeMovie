@@ -10,6 +10,6 @@ import java.util.*
 interface ShowTimeRepository : JpaRepository<ShowTime, UUID> {
 	@Transactional
 	@Modifying
-	@Query(value = "truncate ShowTime", nativeQuery = true)
+	@Query(value = "truncate show_time", nativeQuery = true)
 	fun truncateShowTime()
 }

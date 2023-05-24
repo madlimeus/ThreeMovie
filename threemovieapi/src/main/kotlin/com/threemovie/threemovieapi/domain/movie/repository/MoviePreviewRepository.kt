@@ -10,7 +10,7 @@ import java.util.*
 interface MoviePreviewRepository : JpaRepository<MoviePreview, UUID> {
 	@Transactional
 	@Modifying
-	@Query(value = "truncate MoviePreview", nativeQuery = true)
+	@Query(value = "truncate movie_preview", nativeQuery = true)
 	fun truncate()
 	
 }

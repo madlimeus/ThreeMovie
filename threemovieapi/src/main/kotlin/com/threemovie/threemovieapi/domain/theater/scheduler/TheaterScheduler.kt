@@ -2,6 +2,8 @@ package com.threemovie.threemovieapi.domain.theater.scheduler
 
 import com.threemovie.threemovieapi.domain.theater.entity.domain.Theater
 import com.threemovie.threemovieapi.domain.theater.repository.TheaterDataRepository
+import com.threemovie.threemovieapi.global.entity.LastUpdateTime
+import com.threemovie.threemovieapi.global.repository.LastUpdateTimeRepository
 import com.threemovie.threemovieapi.global.repository.support.LastUpdateTimeRepositorySupport
 import com.threemovie.threemovieapi.global.service.ChkNeedUpdate
 import org.json.JSONArray
@@ -16,6 +18,7 @@ import java.util.regex.Pattern
 @Component
 class TheaterScheduler(
 	val lastUpdateTimeRepositorySupport: LastUpdateTimeRepositorySupport,
+	val lastUpdateTimeRepository: LastUpdateTimeRepository,
 	val theaterDataRepository: TheaterDataRepository,
 ) {
 	val userAgent: String =
@@ -23,11 +26,17 @@ class TheaterScheduler(
 	val CGVurl = "http://www.cgv.co.kr"
 	val LCurl = "http://www.lottecinema.co.kr"
 	val mburl = "https://www.megabox.co.kr"
+	private val code = "theater"
 	
 	@Async
 	@Scheduled(cron = "0 0 0/1 * * ?")
 	fun updateTheaterData() {
-		if (ChkNeedUpdate.chkUpdateOneMinute(lastUpdateTimeRepositorySupport.getLastTheater())) {
+		var time = lastUpdateTimeRepositorySupport.getLastTime(code)
+		if (time == null) {
+			lastUpdateTimeRepository.save(LastUpdateTime(code, 202302110107))
+			time = 202302110107
+		}
+		if (ChkNeedUpdate.chkUpdateTwelveHours(time)) {
 			var cgv = getCGVTheaters()
 			var mb = getMBTheaters()
 			var lc = getLCTheaters()
@@ -35,7 +44,7 @@ class TheaterScheduler(
 			theaterDataRepository.saveAll(cgv)
 			theaterDataRepository.saveAll(mb)
 			theaterDataRepository.saveAll(lc)
-			lastUpdateTimeRepositorySupport.updateLastTheater(ChkNeedUpdate.retFormatterTime())
+			lastUpdateTimeRepositorySupport.updateLastTime(ChkNeedUpdate.retFormatterTime(), code)
 		}
 	}
 	

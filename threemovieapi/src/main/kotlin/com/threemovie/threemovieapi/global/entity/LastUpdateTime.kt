@@ -1,6 +1,5 @@
 package com.threemovie.threemovieapi.global.entity
 
-import com.threemovie.threemovieapi.global.repository.PrimaryKeyEntity
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
 

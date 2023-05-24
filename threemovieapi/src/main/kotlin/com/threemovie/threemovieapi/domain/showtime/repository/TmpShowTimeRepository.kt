@@ -10,13 +10,13 @@ import java.util.*
 interface TmpShowTimeRepository : JpaRepository<TmpShowTime, UUID> {
 	@Transactional
 	@Modifying
-	@Query(value = "truncate TmpShowTime", nativeQuery = true)
+	@Query(value = "truncate tmp_show_time", nativeQuery = true)
 	fun truncateTmpShowTime()
 	
 	@Transactional
 	@Modifying
 	@Query(
-		value = "RENAME TABLE ShowTime TO BeforeShowTime, TmpShowTime TO ShowTime, BeforeShowTime TO TmpShowTime",
+		value = "RENAME TABLE show_time TO before_show_time, tmp_show_time TO show_time, before_show_time TO tmp_show_time",
 		nativeQuery = true
 	)
 	fun chgShowTimeTable()

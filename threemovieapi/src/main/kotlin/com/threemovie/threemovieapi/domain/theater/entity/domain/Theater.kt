@@ -1,6 +1,6 @@
 package com.threemovie.threemovieapi.domain.theater.entity.domain
 
-import com.threemovie.threemovieapi.global.repository.PrimaryKeyEntity
+import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
 import org.hibernate.annotations.SQLInsert
@@ -9,8 +9,8 @@ import org.jetbrains.annotations.NotNull
 @Entity
 @Table(name = "Theater")
 @SQLInsert(
-	sql = "INSERT IGNORE INTO Theater(AddrEN, AddrKR, BrchEN, BrchKR, City, MovieTheater, TheaterCode)" +
-			"VALUES(?,?,?,?,?,?,?) "
+	sql = "INSERT IGNORE INTO theater(addren, addrkr, brchen, brchkr, city, movie_theater, theater_code, id)" +
+			"VALUES(?,?,?,?,?,?,?,?) "
 )
 class Theater(
 	@NotNull
