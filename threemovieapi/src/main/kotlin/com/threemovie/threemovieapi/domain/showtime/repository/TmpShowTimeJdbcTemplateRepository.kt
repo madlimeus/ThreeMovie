@@ -9,13 +9,12 @@ import org.springframework.stereotype.Repository
 import java.sql.PreparedStatement
 
 @Repository
-class TmpShowTimeRepositorySaveAll {
+class TmpShowTimeJdbcTemplateRepository {
 	@Autowired
 	lateinit var jdbcTemplate: JdbcTemplate
 	
 	@Transactional
 	fun saveAll(tmpShowTimes: List<TmpShowTime>) {
-		println("start")
 		var tmpShowTimeArray = ArrayList<TmpShowTime>()
 		for (i: Int in tmpShowTimes.indices) {
 			tmpShowTimeArray.add(tmpShowTimes[i])
@@ -30,7 +29,6 @@ class TmpShowTimeRepositorySaveAll {
 	}
 	
 	private fun batchInsert(tmpShowTimes: List<TmpShowTime>) {
-		println("왜이래 ㅆㅂ")
 		val sql =
 			"INSERT IGNORE INTO tmp_show_time(brchen, brchkr, city, date, items, movieen, movie_id, moviekr, movie_theater, play_kind, screenen, screenkr, total_seat, id)" +
 					"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
