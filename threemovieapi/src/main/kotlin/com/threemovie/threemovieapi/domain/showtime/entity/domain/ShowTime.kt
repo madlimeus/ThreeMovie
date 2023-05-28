@@ -19,23 +19,23 @@ class ShowTime(
 	val city: String = "서울",
 	
 	@NotNull
-	val brchKR: String = "",
+	val brchKr: String = "",
 	
-	val brchEN: String? = "",
-	
-	@NotNull
-	val movieKR: String = "",
-	
-	val movieEN: String? = "",
+	val brchEn: String? = "",
 	
 	@NotNull
-	val screenKR: String = "",
+	val movieKr: String = "",
+	
+	val movieEn: String? = "",
 	
 	@NotNull
-	val screenEN: String = "",
+	val screenKr: String = "",
 	
 	@NotNull
-	val date: String = "",
+	val screenEn: String = "",
+	
+	@NotNull
+	val showYmd: String = "",
 	
 	@NotNull
 	val totalSeat: Int = 200,

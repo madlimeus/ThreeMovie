@@ -8,7 +8,7 @@ import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeBranchDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeVO
 import com.threemovie.threemovieapi.domain.showtime.repository.TmpShowTimeJdbcTemplateRepository
 import com.threemovie.threemovieapi.domain.showtime.repository.TmpShowTimeRepository
-import com.threemovie.threemovieapi.domain.theater.entity.domain.Theater
+import com.threemovie.threemovieapi.domain.theater.entity.domain.TheaterData
 import com.threemovie.threemovieapi.domain.theater.repository.support.TheaterDataRepositorySupport
 import com.threemovie.threemovieapi.global.entity.LastUpdateTime
 import com.threemovie.threemovieapi.global.repository.LastUpdateTimeRepository
@@ -45,14 +45,14 @@ class ShowTimeScheduler(
 	val code = "showtime"
 	
 	@Async
-	@Scheduled(cron = "0 0/1 * * * ?")
+	@Scheduled(cron = "0 0/5 * * * ?")
 	fun chkMovieShowingTime() {
 		var time = lastUpdateTimeRepositorySupport.getLastTime(code)
 		if (time == null) {
 			lastUpdateTimeRepository.save(LastUpdateTime(code, 202302110107))
 			time = 202302110107
 		}
-		if (ChkNeedUpdate.chkUpdateOneHour(time)) {
+		if (ChkNeedUpdate.chkUpdateFiveMinute(time)) {
 			lastUpdateTimeRepositorySupport.updateLastTime(ChkNeedUpdate.retFormatterTime(), code)
 			tmpShowTimeRepository.truncateTmpShowTime()
 			movieNameInfo = movieDataRepositorySupport.getMovieNameData()
@@ -82,7 +82,6 @@ class ShowTimeScheduler(
 					showTimeList.addAll(showTimeDeferred.await())
 				}
 			}
-			
 			
 			tmpShowTimeJdbcTemplateRepository.saveAll(showTimeList)
 			tmpShowTimeRepository.chgShowTimeTable()
@@ -122,21 +121,21 @@ class ShowTimeScheduler(
 	}
 	
 	fun updateMBShowtimes(
-		theater: Theater
+		theaterData: TheaterData
 	): List<TmpShowTime> {
 		
 		var showTimeList = ArrayList<TmpShowTime>()
 		var showTimeBranch = ShowTimeBranchDTO("MB")
 		val url = mburl + "/on/oh/ohc/Brch/schedulePage.do"
-		val brchKR = theater.brchKR
-		val brchEN = theater.brchEN
-		val city = theater.city
+		val brchKR = theaterData.brchKr
+		val brchEN = theaterData.brchEn
+		val city = theaterData.city
 		
 		showTimeBranch.brchKR = brchKR
 		showTimeBranch.brchEN = brchEN
 		showTimeBranch.city = city
 		
-		val brchNo = theater.theaterCode
+		val brchNo = theaterData.theaterCode
 		
 		val dates = getMBDates(brchNo, brchKR)
 		
@@ -241,14 +240,14 @@ class ShowTimeScheduler(
 	}
 	
 	fun updateLCShowtimes(
-		theater: Theater
+		theaterData: TheaterData
 	): List<TmpShowTime> {
 		var showTimeBranch = ShowTimeBranchDTO("LC")
 		var showTimeList = ArrayList<TmpShowTime>()
-		val brchKR = theater.brchKR
-		val brchEN = theater.brchEN
-		val city = theater.city
-		val cinemaCode = theater.theaterCode
+		val brchKR = theaterData.brchKr
+		val brchEN = theaterData.brchEn
+		val city = theaterData.city
+		val cinemaCode = theaterData.theaterCode
 		val datelist = getLCDates(cinemaCode)
 		
 		showTimeBranch.city = city
@@ -390,15 +389,15 @@ class ShowTimeScheduler(
 	}
 	
 	fun updateCGVShowtimes(
-		theater: Theater
+		theaterData: TheaterData
 	): List<TmpShowTime> {
 		var showTimeBranch = ShowTimeBranchDTO("CGV")
 		var showTimeList = ArrayList<TmpShowTime>()
 		
-		val theaterCode = theater.theaterCode
-		val brchKR = theater.brchKR
-		val brchEN = theater.brchEN
-		val city = theater.city
+		val theaterCode = theaterData.theaterCode
+		val brchKR = theaterData.brchKr
+		val brchEN = theaterData.brchEn
+		val city = theaterData.city
 		val datelist = getCGVDates(theaterCode)
 		
 		showTimeBranch.city = city

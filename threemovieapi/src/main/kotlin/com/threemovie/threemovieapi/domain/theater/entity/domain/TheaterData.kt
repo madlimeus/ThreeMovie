@@ -7,12 +7,12 @@ import org.hibernate.annotations.SQLInsert
 import org.jetbrains.annotations.NotNull
 
 @Entity
-@Table(name = "Theater")
+@Table(name = "TheaterData")
 @SQLInsert(
-	sql = "INSERT IGNORE INTO theater(addren, addrkr, brchen, brchkr, city, movie_theater, theater_code, id)" +
+	sql = "INSERT IGNORE INTO theater_data(addr_en, addr_kr, brch_en, brch_kr, city, movie_theater, theater_code, id)" +
 			"VALUES(?,?,?,?,?,?,?,?) "
 )
-class Theater(
+class TheaterData(
 	@NotNull
 	val movieTheater: String = "MT",
 	
@@ -20,15 +20,15 @@ class Theater(
 	val city: String = "서울",
 	
 	@NotNull
-	val brchKR: String = "",
+	val brchKr: String = "",
 	
 	@NotNull
-	val brchEN: String = "",
+	val brchEn: String = "",
 	
 	@NotNull
-	val addrKR: String = "",
+	val addrKr: String = "",
 	
-	val addrEN: String? = null,
+	val addrEn: String? = null,
 	
 	@NotNull
 	val theaterCode: String = "1234",

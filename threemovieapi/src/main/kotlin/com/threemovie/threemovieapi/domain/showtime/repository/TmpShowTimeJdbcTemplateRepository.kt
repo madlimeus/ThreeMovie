@@ -30,23 +30,23 @@ class TmpShowTimeJdbcTemplateRepository {
 	
 	private fun batchInsert(tmpShowTimes: List<TmpShowTime>) {
 		val sql =
-			"INSERT IGNORE INTO tmp_show_time(brchen, brchkr, city, date, items, movieen, movie_id, moviekr, movie_theater, play_kind, screenen, screenkr, total_seat, id)" +
+			"INSERT INTO tmp_show_time(brch_en, brch_kr, city, show_ymd, items, movie_en, movie_id, movie_kr, movie_theater, play_kind, screen_en, screen_kr, total_seat, id)" +
 					"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 		jdbcTemplate.batchUpdate(sql,
 			object : BatchPreparedStatementSetter {
 				override fun setValues(ps: PreparedStatement, i: Int) {
-					ps.setString(1, tmpShowTimes[i].brchEN)
-					ps.setString(2, tmpShowTimes[i].brchKR)
+					ps.setString(1, tmpShowTimes[i].brchEn)
+					ps.setString(2, tmpShowTimes[i].brchKr)
 					ps.setString(3, tmpShowTimes[i].city)
-					ps.setString(4, tmpShowTimes[i].date)
+					ps.setString(4, tmpShowTimes[i].showYmd)
 					ps.setString(5, tmpShowTimes[i].items)
-					ps.setString(6, tmpShowTimes[i].movieEN)
+					ps.setString(6, tmpShowTimes[i].movieEn)
 					ps.setString(7, tmpShowTimes[i].movieId)
-					ps.setString(8, tmpShowTimes[i].movieKR)
+					ps.setString(8, tmpShowTimes[i].movieKr)
 					ps.setString(9, tmpShowTimes[i].movieTheater)
 					ps.setString(10, tmpShowTimes[i].playKind)
-					ps.setString(11, tmpShowTimes[i].screenEN)
-					ps.setString(12, tmpShowTimes[i].screenKR)
+					ps.setString(11, tmpShowTimes[i].screenEn)
+					ps.setString(12, tmpShowTimes[i].screenKr)
 					ps.setInt(13, tmpShowTimes[i].totalSeat)
 					ps.setString(14, tmpShowTimes[i].id.toString())
 				}

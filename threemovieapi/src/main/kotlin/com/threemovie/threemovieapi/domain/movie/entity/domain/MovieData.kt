@@ -1,6 +1,7 @@
 package com.threemovie.threemovieapi.domain.movie.entity.domain
 
 import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
 import org.jetbrains.annotations.NotNull
@@ -15,6 +16,7 @@ class MovieData(
 	
 	val reservationRate: Double? = 0.0,
 	
+	@Column(columnDefinition = "longtext")
 	val summary: String? = "",
 	
 	val nameKR: String? = "",
@@ -28,6 +30,7 @@ class MovieData(
 	
 	val category: String? = "",
 	
+	@Column(columnDefinition = "longtext")
 	val makingNote: String? = "",
 	
 	val runningTime: String? = "",
