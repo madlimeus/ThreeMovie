@@ -45,14 +45,14 @@ class ShowTimeScheduler(
 	val code = "showtime"
 	
 	@Async
-	@Scheduled(cron = "0 0/5 * * * ?")
+	@Scheduled(cron = "0 0/10 * * * ?")
 	fun chkMovieShowingTime() {
 		var time = lastUpdateTimeRepositorySupport.getLastTime(code)
 		if (time == null) {
 			lastUpdateTimeRepository.save(LastUpdateTime(code, 202302110107))
 			time = 202302110107
 		}
-		if (ChkNeedUpdate.chkUpdateFiveMinute(time)) {
+		if (ChkNeedUpdate.chkUpdateTenMinute(time)) {
 			lastUpdateTimeRepositorySupport.updateLastTime(ChkNeedUpdate.retFormatterTime(), code)
 			tmpShowTimeRepository.truncateTmpShowTime()
 			movieNameInfo = movieDataRepositorySupport.getMovieNameData()

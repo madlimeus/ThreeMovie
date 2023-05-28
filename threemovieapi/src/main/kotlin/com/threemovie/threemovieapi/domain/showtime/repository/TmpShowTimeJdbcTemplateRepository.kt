@@ -18,7 +18,7 @@ class TmpShowTimeJdbcTemplateRepository {
 		var tmpShowTimeArray = ArrayList<TmpShowTime>()
 		for (i: Int in tmpShowTimes.indices) {
 			tmpShowTimeArray.add(tmpShowTimes[i])
-			if ((i + 1) % 1000 == 0) {
+			if ((i + 1) % 500 == 0) {
 				batchInsert(tmpShowTimeArray)
 				tmpShowTimeArray.clear()
 			} else if (i == tmpShowTimes.size - 1) {
