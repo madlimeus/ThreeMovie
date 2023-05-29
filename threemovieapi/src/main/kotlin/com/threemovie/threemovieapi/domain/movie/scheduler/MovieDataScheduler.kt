@@ -28,7 +28,6 @@ class MovieDataScheduler(
 		
 		if (ChkNeedUpdate.chkUpdateTwelveHours(time)) {
 			movieDataControlService.truncateAllMovieData()
-			movieDataControlService.GET_MOVIE_DATA_DAUM()
 			movieDataControlService.GET_MOVIE_DATA_DAUM_for_upcoming()
 			lastUpdateTimeRepositorySupport.updateLastTime(ChkNeedUpdate.retFormatterTime(), code)
 		}
