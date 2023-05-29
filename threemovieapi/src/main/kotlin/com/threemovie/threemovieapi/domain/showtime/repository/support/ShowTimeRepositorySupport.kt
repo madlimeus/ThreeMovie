@@ -4,14 +4,14 @@ import com.querydsl.core.BooleanBuilder
 import com.querydsl.core.types.Projections
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
+import com.threemovie.threemovieapi.domain.movie.entity.domain.QMovieData
+import com.threemovie.threemovieapi.domain.showtime.entity.domain.QShowTime
+import com.threemovie.threemovieapi.domain.showtime.entity.domain.ShowTime
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowDateDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowMovieDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTheaterDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeItemDTO
-import com.threemovie.threemovieapi.Entity.QMovieData
-import com.threemovie.threemovieapi.Entity.QShowTime
-import com.threemovie.threemovieapi.Entity.QTheaterData
-import com.threemovie.threemovieapi.domain.showtime.entity.domain.ShowTime
+import com.threemovie.threemovieapi.domain.theater.entity.domain.QTheater
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 
@@ -21,7 +21,7 @@ class ShowTimeRepositorySupport(
 ) : QuerydslRepositorySupport(ShowTime::class.java) {
 	val movieData: QMovieData = QMovieData.movieData
 	val showTime: QShowTime = QShowTime.showTime
-	val theaterData: QTheaterData = QTheaterData.theaterData
+	val theaterData: QTheater = QTheater.theater
 	
 	fun getMovieList(): List<ShowMovieDTO> {
 		

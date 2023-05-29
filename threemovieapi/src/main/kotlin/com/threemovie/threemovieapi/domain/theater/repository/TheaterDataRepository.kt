@@ -1,8 +1,7 @@
 package com.threemovie.threemovieapi.domain.theater.repository
 
-import com.threemovie.threemovieapi.domain.theater.entity.dto.TheaterDataPK
-import com.threemovie.threemovieapi.domain.theater.entity.domain.TheaterData
+import com.threemovie.threemovieapi.domain.theater.entity.domain.Theater
 import org.springframework.data.jpa.repository.JpaRepository
+import java.util.*
 
-interface TheaterDataRepository : JpaRepository<TheaterData, TheaterDataPK> {
-}
+interface TheaterDataRepository : JpaRepository<Theater, UUID>

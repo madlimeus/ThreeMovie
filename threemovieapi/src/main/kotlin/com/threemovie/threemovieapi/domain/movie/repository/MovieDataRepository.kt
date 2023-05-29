@@ -5,10 +5,11 @@ import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
+import java.util.*
 
-interface MovieDataRepository : JpaRepository<MovieData, String> {
+interface MovieDataRepository : JpaRepository<MovieData, UUID> {
 	@Transactional
 	@Modifying
-	@Query(value = "truncate Moviedata", nativeQuery = true)
+	@Query(value = "truncate movie_data", nativeQuery = true)
 	fun truncate()
 }

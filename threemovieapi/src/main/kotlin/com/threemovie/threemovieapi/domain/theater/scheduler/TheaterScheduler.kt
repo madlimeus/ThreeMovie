@@ -1,8 +1,10 @@
 package com.threemovie.threemovieapi.domain.theater.scheduler
 
-import com.threemovie.threemovieapi.domain.theater.entity.domain.TheaterData
-import com.threemovie.threemovieapi.global.repository.support.UpdateTimeRepositorySupport
+import com.threemovie.threemovieapi.domain.theater.entity.domain.Theater
 import com.threemovie.threemovieapi.domain.theater.repository.TheaterDataRepository
+import com.threemovie.threemovieapi.global.entity.LastUpdateTime
+import com.threemovie.threemovieapi.global.repository.LastUpdateTimeRepository
+import com.threemovie.threemovieapi.global.repository.support.LastUpdateTimeRepositorySupport
 import com.threemovie.threemovieapi.global.service.ChkNeedUpdate
 import org.json.JSONArray
 import org.json.JSONObject
@@ -15,7 +17,8 @@ import java.util.regex.Pattern
 
 @Component
 class TheaterScheduler(
-	val updateTimeRepositorySupport: UpdateTimeRepositorySupport,
+	val lastUpdateTimeRepositorySupport: LastUpdateTimeRepositorySupport,
+	val lastUpdateTimeRepository: LastUpdateTimeRepository,
 	val theaterDataRepository: TheaterDataRepository,
 ) {
 	val userAgent: String =
@@ -23,11 +26,17 @@ class TheaterScheduler(
 	val CGVurl = "http://www.cgv.co.kr"
 	val LCurl = "http://www.lottecinema.co.kr"
 	val mburl = "https://www.megabox.co.kr"
+	private val code = "theater"
 	
 	@Async
 	@Scheduled(cron = "0 0 0/1 * * ?")
 	fun updateTheaterData() {
-		if (ChkNeedUpdate.chkUpdateOneMinute(updateTimeRepositorySupport.getTheaterData())) {
+		var time = lastUpdateTimeRepositorySupport.getLastTime(code)
+		if (time == null) {
+			lastUpdateTimeRepository.save(LastUpdateTime(code, 202302110107))
+			time = 202302110107
+		}
+		if (ChkNeedUpdate.chkUpdateTwelveHours(time)) {
 			var cgv = getCGVTheaters()
 			var mb = getMBTheaters()
 			var lc = getLCTheaters()
@@ -35,7 +44,7 @@ class TheaterScheduler(
 			theaterDataRepository.saveAll(cgv)
 			theaterDataRepository.saveAll(mb)
 			theaterDataRepository.saveAll(lc)
-			updateTimeRepositorySupport.updateTheaterData(ChkNeedUpdate.retFormatterTime())
+			lastUpdateTimeRepositorySupport.updateLastTime(ChkNeedUpdate.retFormatterTime(), code)
 		}
 	}
 	
@@ -64,8 +73,8 @@ class TheaterScheduler(
 		return Triple(addr, addrEN, brchEN)
 	}
 	
-	fun getMBTheaters(): ArrayList<TheaterData> {
-		val theaterlist = ArrayList<TheaterData>()
+	fun getMBTheaters(): ArrayList<Theater> {
+		val theaterlist = ArrayList<Theater>()
 		val url = mburl + "/theater/list"
 		
 		val conn = Jsoup.connect(url)
@@ -89,7 +98,7 @@ class TheaterScheduler(
 				val (addr, addrEN, brchEN) = getMBAddr(brchNo, brchKR)
 				val city = addr.substring(0..1)
 				
-				val theater = TheaterData("MB", city, brchKR, brchEN, addr, addrEN, brchNo)
+				val theater = Theater("MB", city, brchKR, brchEN, addr, addrEN, brchNo)
 				theaterlist.add(theater)
 			}
 		}
@@ -153,8 +162,8 @@ class TheaterScheduler(
 		return addr.trim()
 	}
 	
-	fun getCGVTheaters(): ArrayList<TheaterData> {
-		val theaterlist = ArrayList<TheaterData>()
+	fun getCGVTheaters(): ArrayList<Theater> {
+		val theaterlist = ArrayList<Theater>()
 		val brchsEN = getCGVBrchsEN()
 		if (brchsEN.isEmpty())
 			return theaterlist
@@ -197,7 +206,7 @@ class TheaterScheduler(
 				if ("CINE de CHEF" in brchKR)
 					continue
 				
-				val theater = TheaterData("CGV", city, brchKR, brchEN, addr, null, theaterCode)
+				val theater = Theater("CGV", city, brchKR, brchEN, addr, null, theaterCode)
 				
 				theaterlist.add(theater)
 			}
@@ -230,8 +239,8 @@ class TheaterScheduler(
 		return addr
 	}
 	
-	fun getLCTheaters(): ArrayList<TheaterData> {
-		val theaterlist = ArrayList<TheaterData>()
+	fun getLCTheaters(): ArrayList<Theater> {
+		val theaterlist = ArrayList<Theater>()
 		val url: String =
 			LCurl + "/LCWS/Cinema/CinemaData.aspx"
 		
@@ -266,7 +275,7 @@ class TheaterScheduler(
 				addr = "강원도 춘천시 중앙로67번길 18 (죽림동)"
 			val city = addr.substring(0..1)
 			
-			val theater = TheaterData("LC", city, brchKR, brchEN, addr, null, cinemaCode)
+			val theater = Theater("LC", city, brchKR, brchEN, addr, null, cinemaCode)
 			
 			theaterlist.add(theater)
 		}

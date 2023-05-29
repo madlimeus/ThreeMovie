@@ -1,17 +1,21 @@
 package com.threemovie.threemovieapi.domain.showtime.scheduler
 
-import com.threemovie.threemovieapi.domain.movie.repository.support.MovieDataRepositorySupport
-import com.threemovie.threemovieapi.domain.theater.repository.support.TheaterDataRepositorySupport
-import com.threemovie.threemovieapi.global.repository.support.UpdateTimeRepositorySupport
-import com.threemovie.threemovieapi.domain.showtime.repository.TmpShowTimeRepository
-import com.threemovie.threemovieapi.global.service.CalcSimilarity
-import com.threemovie.threemovieapi.global.service.ChkNeedUpdate
 import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieNameData
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieNameInfoVO
+import com.threemovie.threemovieapi.domain.movie.repository.support.MovieDataRepositorySupport
 import com.threemovie.threemovieapi.domain.showtime.entity.domain.TmpShowTime
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeBranchDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeVO
-import com.threemovie.threemovieapi.domain.theater.entity.domain.TheaterData
+import com.threemovie.threemovieapi.domain.showtime.repository.TmpShowTimeJdbcTemplateRepository
+import com.threemovie.threemovieapi.domain.showtime.repository.TmpShowTimeRepository
+import com.threemovie.threemovieapi.domain.theater.entity.domain.Theater
+import com.threemovie.threemovieapi.domain.theater.repository.support.TheaterDataRepositorySupport
+import com.threemovie.threemovieapi.global.entity.LastUpdateTime
+import com.threemovie.threemovieapi.global.repository.LastUpdateTimeRepository
+import com.threemovie.threemovieapi.global.repository.support.LastUpdateTimeRepositorySupport
+import com.threemovie.threemovieapi.global.service.CalcSimilarity
+import com.threemovie.threemovieapi.global.service.ChkNeedUpdate
+import kotlinx.coroutines.*
 import org.json.JSONArray
 import org.json.JSONObject
 import org.jsoup.Jsoup
@@ -23,10 +27,12 @@ import java.util.regex.Pattern
 
 @Component
 class ShowTimeScheduler(
-	val updateTimeRepositorySupport: UpdateTimeRepositorySupport,
+	val lastUpdateTimeRepositorySupport: LastUpdateTimeRepositorySupport,
 	val theaterDataRepositorySupport: TheaterDataRepositorySupport,
 	val tmpShowTimeRepository: TmpShowTimeRepository,
 	val movieDataRepositorySupport: MovieDataRepositorySupport,
+	val lastUpdateTimeRepository: LastUpdateTimeRepository,
+	val tmpShowTimeJdbcTemplateRepository: TmpShowTimeJdbcTemplateRepository
 ) {
 	val userAgent: String =
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
@@ -36,11 +42,18 @@ class ShowTimeScheduler(
 	val nameMap = HashMap<String, MovieNameInfoVO>()
 	lateinit var movieNameInfo: List<MovieNameData>
 	val square = "\\[[^)]*\\]".toRegex()
+	val code = "showtime"
 	
 	@Async
-	@Scheduled(cron = "0 0/10 * * * ?")
-	fun ChkMovieShowingTime() {
-		if (ChkNeedUpdate.chkUpdateTenMinute(updateTimeRepositorySupport.getShowTime())) {
+	@Scheduled(cron = "0 0/1 * * * ?")
+	fun chkMovieShowingTime() {
+		var time = lastUpdateTimeRepositorySupport.getLastTime(code)
+		if (time == null) {
+			lastUpdateTimeRepository.save(LastUpdateTime(code, 202302110107))
+			time = 202302110107
+		}
+		if (ChkNeedUpdate.chkUpdateOneHour(time)) {
+			lastUpdateTimeRepositorySupport.updateLastTime(ChkNeedUpdate.retFormatterTime(), code)
 			tmpShowTimeRepository.truncateTmpShowTime()
 			movieNameInfo = movieDataRepositorySupport.getMovieNameData()
 			
@@ -48,15 +61,33 @@ class ShowTimeScheduler(
 			val lcTheaters = theaterDataRepositorySupport.getTheaterData("LC")
 			val cgvTheaters = theaterDataRepositorySupport.getTheaterData("CGV")
 			
-			var showTimeList = updateMBShowtimes(mbTheaters)
-			showTimeList += updateLCShowtimes(lcTheaters)
-			showTimeList += updateCGVShowtimes(cgvTheaters)
+			val showTimeList: MutableList<TmpShowTime> = ArrayList()
+			val showTimeAsync: MutableList<Deferred<List<TmpShowTime>>> = ArrayList()
 			
 			
-			tmpShowTimeRepository.saveAll(showTimeList)
+			runBlocking {
+				for (mbTheater in mbTheaters) {
+					CoroutineScope(Dispatchers.IO).async { updateMBShowtimes(mbTheater) }
+						.also { showTimeAsync.add(it) }
+				}
+				for (lcTheater in lcTheaters) {
+					CoroutineScope(Dispatchers.IO).async { updateLCShowtimes(lcTheater) }
+						.also { showTimeAsync.add(it) }
+				}
+				for (cgvTheater in cgvTheaters) {
+					CoroutineScope(Dispatchers.IO).async { updateCGVShowtimes(cgvTheater) }
+						.also { showTimeAsync.add(it) }
+				}
+				for (showTimeDeferred in showTimeAsync) {
+					showTimeList.addAll(showTimeDeferred.await())
+				}
+			}
+			
+			
+			tmpShowTimeJdbcTemplateRepository.saveAll(showTimeList)
 			tmpShowTimeRepository.chgShowTimeTable()
 			tmpShowTimeRepository.truncateTmpShowTime()
-			updateTimeRepositorySupport.updateShowTime(ChkNeedUpdate.retFormatterTime())
+			
 		}
 	}
 	
@@ -91,82 +122,81 @@ class ShowTimeScheduler(
 	}
 	
 	fun updateMBShowtimes(
-		theaters: List<TheaterData>
+		theater: Theater
 	): List<TmpShowTime> {
+		
 		var showTimeList = ArrayList<TmpShowTime>()
 		var showTimeBranch = ShowTimeBranchDTO("MB")
 		val url = mburl + "/on/oh/ohc/Brch/schedulePage.do"
-		for (theater in theaters) {
-			val brchKR = theater.brchKR
-			val brchEN = theater.brchEN
-			val city = theater.city
+		val brchKR = theater.brchKR
+		val brchEN = theater.brchEN
+		val city = theater.city
+		
+		showTimeBranch.brchKR = brchKR
+		showTimeBranch.brchEN = brchEN
+		showTimeBranch.city = city
+		
+		val brchNo = theater.theaterCode
+		
+		val dates = getMBDates(brchNo, brchKR)
+		
+		for (date in dates) {
+			val datestr = chgStrtoDatestr(date)
+			showTimeBranch.date = datestr
+			val paramlist = HashMap<String, String>()
+			paramlist["brchNm"] = brchKR
+			paramlist["brchNo"] = brchNo
+			paramlist["brchNo1"] = brchNo
+			paramlist["masterType"] = "brch"
+			paramlist["playDe"] = date
+			paramlist["firstAt"] = "N"
+			val conn = Jsoup.connect(url)
+				.userAgent(userAgent)
+				.data(paramlist)
+				.ignoreContentType(true)//에러나면 추가
+			val doc = conn.post().body().text()
+			val showtimes = JSONObject(doc).getJSONObject("megaMap").getJSONArray("movieFormList")
 			
-			showTimeBranch.brchKR = brchKR
-			showTimeBranch.brchEN = brchEN
-			showTimeBranch.city = city
-			
-			val brchNo = theater.theaterCode
-			
-			val dates = getMBDates(brchNo, brchKR)
-			
-			for (date in dates) {
-				val datestr = chgStrtoDatestr(date)
-				showTimeBranch.date = datestr
-				val paramlist = HashMap<String, String>()
-				paramlist["brchNm"] = brchKR
-				paramlist["brchNo"] = brchNo
-				paramlist["brchNo1"] = brchNo
-				paramlist["masterType"] = "brch"
-				paramlist["playDe"] = date
-				paramlist["firstAt"] = "N"
-				val conn = Jsoup.connect(url)
-					.userAgent(userAgent)
-					.data(paramlist)
-					.ignoreContentType(true)//에러나면 추가
-				val doc = conn.post().body().text()
-				val showtimes = JSONObject(doc).getJSONObject("megaMap").getJSONArray("movieFormList")
+			val dtos = HashMap<Triple<String, String, String>, ShowTimeVO>()
+			for (i in 0 until showtimes.length()) {
+				val showtime = showtimes.getJSONObject(i)
+				val totalSeat = showtime.getInt("totSeatCnt")
+				val playSchldNo = showtime.getString("playSchdlNo")
+				val movieKR = showtime.getString("rpstMovieNm")
+				val playKind = showtime.getString("playKindNm")
+				val screenKR = showtime.getString("theabExpoNm")
+				val screenEN = showtime.getString("theabEngNm")
+				val ticketPage = "https://www.megabox.co.kr/bookingByPlaySchdlNo?playSchdlNo=${playSchldNo}"
 				
-				val dtos = HashMap<Triple<String, String, String>, ShowTimeVO>()
-				for (i in 0 until showtimes.length()) {
-					val showtime = showtimes.getJSONObject(i)
-					val totalSeat = showtime.getInt("totSeatCnt")
-					val playSchldNo = showtime.getString("playSchdlNo")
-					val movieKR = showtime.getString("rpstMovieNm")
-					val playKind = showtime.getString("playKindNm")
-					val screenKR = showtime.getString("theabExpoNm")
-					val screenEN = showtime.getString("theabEngNm")
-					val ticketPage = "https://www.megabox.co.kr/bookingByPlaySchdlNo?playSchdlNo=${playSchldNo}"
+				val restSeat = showtime.getInt("restSeatCnt").toString()
+				val startTime = showtime.getString("playStartTime")
+				val endTime = showtime.getString("playEndTime")
+				
+				val showTimeKey = Triple(movieKR, screenKR, playKind)
+				val item = HashMap<String, String>()
+				item["StartTime"] = startTime
+				item["EndTime"] = endTime
+				item["RestSeat"] = restSeat
+				item["TicketPage"] = ticketPage
+				if (dtos[showTimeKey] == null) {
+					val items = ArrayList<HashMap<String, String>>()
+					items.add(item)
 					
-					val restSeat = showtime.getInt("restSeatCnt").toString()
-					val startTime = showtime.getString("playStartTime")
-					val endTime = showtime.getString("playEndTime")
-					
-					val showTimeKey = Triple(movieKR, screenKR, playKind)
-					val item = HashMap<String, String>()
-					item["StartTime"] = startTime
-					item["EndTime"] = endTime
-					item["RestSeat"] = restSeat
-					item["TicketPage"] = ticketPage
-					if (dtos[showTimeKey] == null) {
-						val items = ArrayList<HashMap<String, String>>()
-						items.add(item)
-						
-						val showTimeVO =
-							ShowTimeVO(
-								screenEN,
-								totalSeat,
-								items
-							)
-						dtos[showTimeKey] = showTimeVO
-					} else {
-						dtos[showTimeKey]?.items?.add(item)
-					}
-					
+					val showTimeVO =
+						ShowTimeVO(
+							screenEN,
+							totalSeat,
+							items
+						)
+					dtos[showTimeKey] = showTimeVO
+				} else {
+					dtos[showTimeKey]?.items?.add(item)
 				}
 				
-				val list = retShowTimeList(dtos, showTimeBranch)
-				showTimeList += (list)
 			}
+			
+			val list = retShowTimeList(dtos, showTimeBranch)
+			showTimeList += (list)
 		}
 		return showTimeList
 	}
@@ -211,102 +241,100 @@ class ShowTimeScheduler(
 	}
 	
 	fun updateLCShowtimes(
-		theaters: List<TheaterData>
+		theater: Theater
 	): List<TmpShowTime> {
 		var showTimeBranch = ShowTimeBranchDTO("LC")
 		var showTimeList = ArrayList<TmpShowTime>()
-		for (theater in theaters) {
-			val brchKR = theater.brchKR
-			val brchEN = theater.brchEN
-			val city = theater.city
-			val cinemaCode = theater.theaterCode
-			val datelist = getLCDates(cinemaCode)
+		val brchKR = theater.brchKR
+		val brchEN = theater.brchEN
+		val city = theater.city
+		val cinemaCode = theater.theaterCode
+		val datelist = getLCDates(cinemaCode)
+		
+		showTimeBranch.city = city
+		showTimeBranch.brchKR = brchKR
+		showTimeBranch.brchEN = brchEN
+		for (date in datelist) {
+			showTimeBranch.date = date
+			val url: String =
+				LCurl + "/LCWS/Ticketing/TicketingData.aspx"
+			var paramlist = HashMap<String, String>()
+			paramlist["MethodName"] = "GetPlaySequence"
+			paramlist["channelType"] = "HO"
+			paramlist["osType"] = "W"
+			paramlist["osVersion"] = userAgent
+			paramlist["playDate"] = date
+			paramlist["cinemaID"] = cinemaCode
+			paramlist["representationMovieCode"] = ""
+			val conn = Jsoup.connect(url)
+				.userAgent(userAgent)
+				.data("ParamList", JSONObject(paramlist).toString())
+			val doc = conn.post().body().text()
+			val data = JSONObject(doc)
+			val playSeqs = data.getJSONObject("PlaySeqs").getJSONArray("Items")
+			val playHeaders = data.getJSONObject("PlaySeqsHeader").getJSONArray("Items")
+			val translation = HashMap<Int, String>()
 			
-			showTimeBranch.city = city
-			showTimeBranch.brchKR = brchKR
-			showTimeBranch.brchEN = brchEN
-			for (date in datelist) {
-				showTimeBranch.date = date
-				val url: String =
-					LCurl + "/LCWS/Ticketing/TicketingData.aspx"
-				var paramlist = HashMap<String, String>()
-				paramlist["MethodName"] = "GetPlaySequence"
-				paramlist["channelType"] = "HO"
-				paramlist["osType"] = "W"
-				paramlist["osVersion"] = userAgent
-				paramlist["playDate"] = date
-				paramlist["cinemaID"] = cinemaCode
-				paramlist["representationMovieCode"] = ""
-				val conn = Jsoup.connect(url)
-					.userAgent(userAgent)
-					.data("ParamList", JSONObject(paramlist).toString())
-				val doc = conn.post().body().text()
-				val data = JSONObject(doc)
-				val playSeqs = data.getJSONObject("PlaySeqs").getJSONArray("Items")
-				val playHeaders = data.getJSONObject("PlaySeqsHeader").getJSONArray("Items")
-				val translation = HashMap<Int, String>()
-				
-				for (i in 0 until playHeaders.length()) {
-					val headerdata = playHeaders.getJSONObject(i)
-					val translationCode = headerdata.getInt("TranslationDivisionCode")
-					val translationName = headerdata.getString("TranslationDivisionNameKR")
-					translation[translationCode] = translationName
-				}
-				
-				val dtos = HashMap<Triple<String, String, String>, ShowTimeVO>()
-				for (i in 0 until playSeqs.length()) {
-					val playdata = playSeqs.getJSONObject(i)
-					
-					val movieKR = playdata.getString("MovieNameKR")
-					val screenDivisionCode = playdata.getInt("ScreenDivisionCode")
-					var screenDivisionKR = ""
-					var screenDivisionEN = ""
-					if (screenDivisionCode != 100 && playdata.getString("ScreenDivisionNameKR") != playdata.get("ScreenNameKR")) {
-						screenDivisionKR = playdata.getString("ScreenDivisionNameKR") + " "
-						screenDivisionEN = playdata.getString("ScreenDivisionNameUS") + " "
-					}
-					val screenKR = screenDivisionKR + playdata.get("ScreenNameKR")
-					val screenEN = screenDivisionEN + playdata.get("ScreenNameUS")
-					
-					val startTime = playdata.getString("StartTime")
-					val endTime = playdata.getString("EndTime")
-					val totalSeat = playdata.getInt("TotalSeatCount")
-					val restSeat = playdata.getInt("BookingSeatCount").toString()
-					val translationCode = playdata.getInt("TranslationDivisionCode")
-					
-					var playKind = playdata.getString("FilmNameKR")
-					if (translationCode != 900)
-						playKind + "(${translation[translationCode]})"
-					
-					val ticketPage = getLCTicketAddr(playdata)
-					
-					val showTimeKey = Triple(movieKR, screenKR, playKind)
-					val item = HashMap<String, String>()
-					item["StartTime"] = startTime
-					item["EndTime"] = endTime
-					item["RestSeat"] = restSeat
-					item["TicketPage"] = ticketPage
-					
-					if (dtos[showTimeKey] == null) {
-						val items = ArrayList<HashMap<String, String>>()
-						items.add(item)
-						
-						val showTimeVO =
-							ShowTimeVO(
-								screenEN,
-								totalSeat,
-								items
-							)
-						dtos[showTimeKey] = showTimeVO
-					} else {
-						dtos[showTimeKey]?.items?.add(item)
-					}
-					
-				}
-				
-				val list = retShowTimeList(dtos, showTimeBranch)
-				showTimeList += list
+			for (i in 0 until playHeaders.length()) {
+				val headerdata = playHeaders.getJSONObject(i)
+				val translationCode = headerdata.getInt("TranslationDivisionCode")
+				val translationName = headerdata.getString("TranslationDivisionNameKR")
+				translation[translationCode] = translationName
 			}
+			
+			val dtos = HashMap<Triple<String, String, String>, ShowTimeVO>()
+			for (i in 0 until playSeqs.length()) {
+				val playdata = playSeqs.getJSONObject(i)
+				
+				val movieKR = playdata.getString("MovieNameKR")
+				val screenDivisionCode = playdata.getInt("ScreenDivisionCode")
+				var screenDivisionKR = ""
+				var screenDivisionEN = ""
+				if (screenDivisionCode != 100 && playdata.getString("ScreenDivisionNameKR") != playdata.get("ScreenNameKR")) {
+					screenDivisionKR = playdata.getString("ScreenDivisionNameKR") + " "
+					screenDivisionEN = playdata.getString("ScreenDivisionNameUS") + " "
+				}
+				val screenKR = screenDivisionKR + playdata.get("ScreenNameKR")
+				val screenEN = screenDivisionEN + playdata.get("ScreenNameUS")
+				
+				val startTime = playdata.getString("StartTime")
+				val endTime = playdata.getString("EndTime")
+				val totalSeat = playdata.getInt("TotalSeatCount")
+				val restSeat = playdata.getInt("BookingSeatCount").toString()
+				val translationCode = playdata.getInt("TranslationDivisionCode")
+				
+				var playKind = playdata.getString("FilmNameKR")
+				if (translationCode != 900)
+					playKind + "(${translation[translationCode]})"
+				
+				val ticketPage = getLCTicketAddr(playdata)
+				
+				val showTimeKey = Triple(movieKR, screenKR, playKind)
+				val item = HashMap<String, String>()
+				item["StartTime"] = startTime
+				item["EndTime"] = endTime
+				item["RestSeat"] = restSeat
+				item["TicketPage"] = ticketPage
+				
+				if (dtos[showTimeKey] == null) {
+					val items = ArrayList<HashMap<String, String>>()
+					items.add(item)
+					
+					val showTimeVO =
+						ShowTimeVO(
+							screenEN,
+							totalSeat,
+							items
+						)
+					dtos[showTimeKey] = showTimeVO
+				} else {
+					dtos[showTimeKey]?.items?.add(item)
+				}
+				
+			}
+			
+			val list = retShowTimeList(dtos, showTimeBranch)
+			showTimeList += list
 		}
 		return showTimeList
 	}
@@ -362,101 +390,100 @@ class ShowTimeScheduler(
 	}
 	
 	fun updateCGVShowtimes(
-		theaters: List<TheaterData>
+		theater: Theater
 	): List<TmpShowTime> {
 		var showTimeBranch = ShowTimeBranchDTO("CGV")
 		var showTimeList = ArrayList<TmpShowTime>()
-		for (theater in theaters) {
-			val theaterCode = theater.theaterCode
-			val brchKR = theater.brchKR
-			val brchEN = theater.brchEN
-			val city = theater.city
-			val datelist = getCGVDates(theaterCode)
+		
+		val theaterCode = theater.theaterCode
+		val brchKR = theater.brchKR
+		val brchEN = theater.brchEN
+		val city = theater.city
+		val datelist = getCGVDates(theaterCode)
+		
+		showTimeBranch.city = city
+		showTimeBranch.brchKR = brchKR
+		showTimeBranch.brchEN = brchEN
+		for (date in datelist) {
+			val datestr = chgStrtoDatestr(date)
+			showTimeBranch.date = datestr
+			val url: String =
+				CGVurl + "/common/showtimes/iframeTheater.aspx?theatercode=${theaterCode}&date=${date}"
+			val conn = Jsoup.connect(url)
+				.userAgent(userAgent)
+				.referrer(
+					CGVurl
+				)
+				.header(
+					"Accept",
+					"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+				)
+				.header("Accept-Language", "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7")
+				.header(
+					"Cookie",
+					"ASP.NET_SessionId=test;"
+				)
+			val doc = conn.get()
+			val showtimes = doc.getElementsByClass("col-times")
 			
-			showTimeBranch.city = city
-			showTimeBranch.brchKR = brchKR
-			showTimeBranch.brchEN = brchEN
-			for (date in datelist) {
-				val datestr = chgStrtoDatestr(date)
-				showTimeBranch.date = datestr
-				val url: String =
-					CGVurl + "/common/showtimes/iframeTheater.aspx?theatercode=${theaterCode}&date=${date}"
-				val conn = Jsoup.connect(url)
-					.userAgent(userAgent)
-					.referrer(
-						CGVurl
-					)
-					.header(
-						"Accept",
-						"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
-					)
-					.header("Accept-Language", "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7")
-					.header(
-						"Cookie",
-						"ASP.NET_SessionId=test;"
-					)
-				val doc = conn.get()
-				val showtimes = doc.getElementsByClass("col-times")
+			val dtos = HashMap<Triple<String, String, String>, ShowTimeVO>()
+			for (showtime in showtimes) {
+				val infoMovie = showtime.getElementsByClass("info-movie")[0]
+				val movieKR = infoMovie.getElementsByTag("a")[0].text()
 				
-				val dtos = HashMap<Triple<String, String, String>, ShowTimeVO>()
-				for (showtime in showtimes) {
-					val infoMovie = showtime.getElementsByClass("info-movie")[0]
-					val movieKR = infoMovie.getElementsByTag("a")[0].text()
+				val typeHalls = showtime.getElementsByClass("type-hall")
+				for (typeHall in typeHalls) {
+					val infoHall = typeHall.getElementsByClass("info-hall")[0]
+					val playKind = infoHall.getElementsByTag("li")[0].text()
+					val screenKR = infoHall.getElementsByTag("li")[1].text()
+					val screenEN = chgScreenKRtoEN(screenKR)
+					val totalSeat =
+						infoHall.getElementsByTag("li")[2].text().replace("[^0-9]+".toRegex(), "").toInt()
 					
-					val typeHalls = showtime.getElementsByClass("type-hall")
-					for (typeHall in typeHalls) {
-						val infoHall = typeHall.getElementsByClass("info-hall")[0]
-						val playKind = infoHall.getElementsByTag("li")[0].text()
-						val screenKR = infoHall.getElementsByTag("li")[1].text()
-						val screenEN = chgScreenKRtoEN(screenKR)
-						val totalSeat =
-							infoHall.getElementsByTag("li")[2].text().replace("[^0-9]+".toRegex(), "").toInt()
+					val infoTimeTable = typeHall.getElementsByClass("info-timetable")[0]
+					val timelist = infoTimeTable.getElementsByTag("li")
+					
+					for (timeinfo in timelist) {
+						val datas = timeinfo.getElementsByTag("a")
 						
-						val infoTimeTable = typeHall.getElementsByClass("info-timetable")[0]
-						val timelist = infoTimeTable.getElementsByTag("li")
+						if (datas.isEmpty() || datas[0].attr("href") == "/") {
+							continue
+						}
 						
-						for (timeinfo in timelist) {
-							val datas = timeinfo.getElementsByTag("a")
+						val startTime = chgStrtoTimestr(datas[0].attr("data-playstarttime"))
+						val endTime = chgStrtoTimestr(datas[0].attr("data-playendtime"))
+						val ticketPage = CGVurl + datas[0].attr("href")
+						val restSeat = datas[0].attr("data-seatremaincnt")
+						
+						val showTimeKey = Triple(movieKR, screenKR, playKind)
+						val item = HashMap<String, String>()
+						item["StartTime"] = startTime
+						item["EndTime"] = endTime
+						item["RestSeat"] = restSeat
+						item["TicketPage"] = ticketPage
+						
+						if (dtos[showTimeKey] == null) {
+							val items = ArrayList<HashMap<String, String>>()
+							items.add(item)
 							
-							if (datas.isEmpty() || datas[0].attr("href") == "/") {
-								continue
-							}
-							
-							val startTime = chgStrtoTimestr(datas[0].attr("data-playstarttime"))
-							val endTime = chgStrtoTimestr(datas[0].attr("data-playendtime"))
-							val ticketPage = CGVurl + datas[0].attr("href")
-							val restSeat = datas[0].attr("data-seatremaincnt")
-							
-							val showTimeKey = Triple(movieKR, screenKR, playKind)
-							val item = HashMap<String, String>()
-							item["StartTime"] = startTime
-							item["EndTime"] = endTime
-							item["RestSeat"] = restSeat
-							item["TicketPage"] = ticketPage
-							
-							if (dtos[showTimeKey] == null) {
-								val items = ArrayList<HashMap<String, String>>()
-								items.add(item)
-								
-								val showTimeVO =
-									ShowTimeVO(
-										screenEN,
-										totalSeat,
-										items
-									)
-								dtos[showTimeKey] = showTimeVO
-							} else {
-								dtos[showTimeKey]?.items?.add(item)
-							}
-							
+							val showTimeVO =
+								ShowTimeVO(
+									screenEN,
+									totalSeat,
+									items
+								)
+							dtos[showTimeKey] = showTimeVO
+						} else {
+							dtos[showTimeKey]?.items?.add(item)
 						}
 						
 					}
+					
 				}
-				
-				val list = retShowTimeList(dtos, showTimeBranch)
-				showTimeList += list
 			}
+			
+			val list = retShowTimeList(dtos, showTimeBranch)
+			showTimeList += list
 		}
 		return showTimeList
 	}

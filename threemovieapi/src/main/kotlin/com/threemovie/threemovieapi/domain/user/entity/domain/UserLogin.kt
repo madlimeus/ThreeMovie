@@ -1,22 +1,21 @@
 package com.threemovie.threemovieapi.domain.user.entity.domain
 
+import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
 import com.threemovie.threemovieapi.global.security.config.UserRole
 import jakarta.persistence.*
+import org.jetbrains.annotations.NotNull
 
 @Entity
 @Table(name = "UserLogin")
-data class UserLogin(
-	@Column(name = "UserEmail", length = 50)
+class UserLogin(
+	@Column(length = 50)
+	@NotNull
 	var userEmail: String = "",
 	
-	@Column(name = "UserPassword")
+	@NotNull
 	var userPassword: String = "",
 	
-	@Column(name = "UserRole")
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	var userRole: UserRole = UserRole.NOT_PERMITTED,
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	var id: Long = 0L,
-)
+) : PrimaryKeyEntity()

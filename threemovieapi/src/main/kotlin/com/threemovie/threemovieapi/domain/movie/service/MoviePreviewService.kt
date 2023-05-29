@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service
 class MoviePreviewService(
 	val MoviePreviewRepository: MoviePreviewRepository
 ) {
-	fun save_MoviePreview(One_movie_data: JSONObject, url_Daum_Main: String) {
+	fun save_MoviePreview(One_movie_data: JSONObject, url_Daum_Main: String): MoviePreview {
 		val api_steelcut_screening = "api/movie/" + One_movie_data.get("id").toString() + "/photoList"
 		
 		var tmp_data_steelcut = GET_DATA_USE_DAUM_API(url_Daum_Main + api_steelcut_screening)
 		val steelcut_Array = JSONObject(tmp_data_steelcut).getJSONArray("contents")
 		val movie_releaseDate =
-			JSONObject(One_movie_data.get("countryMoviedatarmation").toString()).get("releaseDate").toString()
+			JSONObject(One_movie_data.get("countryMovieInformation").toString()).get("releaseDate").toString()
 		
 		val imageUrl_list: ArrayList<String> = arrayListOf<String>()
 		var index: Int = 0
@@ -68,7 +68,8 @@ class MoviePreviewService(
 			str_videoUrl_list
 		)
 		
-		val res = MoviePreviewRepository.save(member_MoviePreview)
+//		val res = MoviePreviewRepository.save(member_MoviePreview)
+		return member_MoviePreview
 	}
 	
 	fun turncate_MoviePreview() {

@@ -1,17 +1,15 @@
 package com.threemovie.threemovieapi.domain.movie.entity.domain
 
-import jakarta.persistence.Column
+import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
 import jakarta.persistence.Entity
-import jakarta.persistence.Id
 import jakarta.persistence.Table
+import org.jetbrains.annotations.NotNull
 
 @Entity
 @Table(name = "MovieCreator")
-data class MovieCreator(
-	@Id
-	@Column(name = "MovieId")
+class MovieCreator(
+	@NotNull
 	val movieId: String = "",
 	
-	@Column(name = "Items")
 	val items: String? = "",
-)
+) : PrimaryKeyEntity()
