@@ -18,28 +18,28 @@ import org.springframework.stereotype.Component
 
 @Component
 class GetReviewFromTheater(
-	val MovieReviewService : MovieReviewService,
+	val MovieReviewService: MovieReviewService,
 	val movieDataService: MovieDataService,
 	val movieReviewRepository: MovieReviewRepository,
 	val lastUpdateTimeRepository: LastUpdateTimeRepository,
 	val LastUpdateTimeRepositorySupport: LastUpdateTimeRepositorySupport,
 ) {
 	private val code = "review"
-
+	
 	val userAgent: String =
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
-
+	
 	var movieList = HashMap<String, String?>()
-
+	
 	fun getMovieListDB(): HashMap<String, String?> {
 		val movieList = movieDataService.getMovieData()
 		var resultHashMap = HashMap<String, String?>()
 		for (oneMovie in movieList) {
-			resultHashMap[oneMovie.movieId] = oneMovie.nameKR
+			resultHashMap[oneMovie.movieId] = oneMovie.nameKr
 		}
 		return resultHashMap
 	}
-
+	
 	fun usePostApiLC(url: String, paramList: HashMap<String, Any>): String {
 		val conn = Jsoup.connect(url)
 			.userAgent(userAgent)
@@ -48,7 +48,7 @@ class GetReviewFromTheater(
 		val doc = conn.post().text()
 		return doc
 	}
-
+	
 	fun usePostApiMB(url: String, paramList: HashMap<String, String>): String {
 		val conn = Jsoup.connect(url)
 			.userAgent(userAgent)
@@ -57,7 +57,7 @@ class GetReviewFromTheater(
 		val doc = conn.post().text()
 		return convertStringUnicodeToKorean(doc)
 	}
-
+	
 	fun getMovieListLC(): HashMap<String, String> {
 		val url = "https://www.lottecinema.co.kr/LCWS/Movie/MovieData.aspx"
 		val paramList = HashMap<String, Any>()
@@ -74,7 +74,7 @@ class GetReviewFromTheater(
 		paramList["blockSize"] = 1000
 		paramList["pageNo"] = 1
 		paramList["memberOnNo"] = ""
-
+		
 		var movieLC = usePostApiLC(url, paramList)
 		var arr_movieList_tmp = JSONObject(JSONObject(movieLC).get("Movies").toString()).getJSONArray("Items")
 		for (json_tmp in arr_movieList_tmp) {
@@ -91,10 +91,10 @@ class GetReviewFromTheater(
 				}
 			}
 		}
-
+		
 		return movieListLC
 	}
-
+	
 	fun getReviewLT() {
 		val movieListLT = getMovieListLC()
 		val url = "https://www.lottecinema.co.kr/LCWS/Movie/MovieData.aspx"
@@ -129,7 +129,7 @@ class GetReviewFromTheater(
 //            println(movie_tmp.key + " " + LT_Moviedata.length().toString() + " " + LT_Moviedata.toString())
 		}
 	}
-
+	
 	fun convertStringUnicodeToKorean(data: String): String {
 		val sb = StringBuilder() // 단일 쓰레드이므로 StringBuilder 선언
 		var i = 0
@@ -145,7 +145,7 @@ class GetReviewFromTheater(
 		}
 		return sb.toString()
 	}
-
+	
 	fun getMovieListMB(): HashMap<String, String> {
 		val url = "https://www.megabox.co.kr/on/oh/oha/Movie/selectMovieList.do"
 		val paramList = HashMap<String, String>()
@@ -157,10 +157,10 @@ class GetReviewFromTheater(
 		paramList["recordCountPerPage"] = "100"
 		paramList["specialType"] = ""
 		paramList["specialYn"] = "N"
-
+		
 		var movieMB = usePostApiMB(url, paramList)
 		val split_movieMB = movieMB.split("\"")
-
+		
 		var tmpMovieListMB = HashMap<String, String>()
 		var movieNo: String = ""
 		var movieNm: String = ""
@@ -188,7 +188,7 @@ class GetReviewFromTheater(
 		}
 		return movieListMB
 	}
-
+	
 	fun getReviewMB() {
 		val movieListMB = getMovieListMB()
 //        println(movieListMB)
@@ -198,7 +198,7 @@ class GetReviewFromTheater(
 		paramList["onelnEvalDivCd"] = ""
 		paramList["orderCd"] = "one"
 		paramList["recordCountPerPage"] = "10"
-
+		
 		for (movie_tmp in movieListMB) {
 			paramList["movieNo"] = movie_tmp.value
 			val MovieId = movie_tmp.key
@@ -221,13 +221,13 @@ class GetReviewFromTheater(
 				} catch (e: Exception) {
 					println("is error")
 					println(MovieId)
-
+					
 				}
 			}
 //            println("===============================================================================")
 		}
 	}
-
+	
 	@Async
 	@Scheduled(cron = "0 0 0/1 * * *")
 	fun getReview() {

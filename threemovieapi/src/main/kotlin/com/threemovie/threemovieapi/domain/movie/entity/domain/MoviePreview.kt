@@ -13,9 +13,9 @@ class MoviePreview(
 	@NotNull
 	@Column(length = 500)
 	val link: String,
-	
+) : PrimaryKeyEntity() {
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "movie_data_movie_id")
-	var movieData: MovieData
-) : PrimaryKeyEntity()
+	lateinit var movieData: MovieData
+}

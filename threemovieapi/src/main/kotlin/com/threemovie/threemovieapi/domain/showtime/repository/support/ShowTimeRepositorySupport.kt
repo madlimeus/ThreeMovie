@@ -12,6 +12,7 @@ import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowMovieDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTheaterDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeItemDTO
 import com.threemovie.threemovieapi.domain.theater.entity.domain.QTheaterData
+import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 
@@ -24,6 +25,7 @@ class ShowTimeRepositorySupport(
 	val theaterData: QTheaterData = QTheaterData.theaterData
 	val em = entityManager
 	
+	@Transactional
 	fun deleteZeroReserveShowTime() {
 		query.delete(showTime)
 			.where(showTime.showTimeReserve.isEmpty)

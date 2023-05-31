@@ -10,18 +10,16 @@ class MovieCreator(
 	@NotNull
 	var nameKr: String,
 	
-	@NotNull
-	var nameEn: String,
+	var nameEn: String?,
 	
-	@NotNull
-	var roleKr: String,
+	var roleKr: String?,
 	
 	@NotNull
 	@Column(length = 500)
 	var link: String,
-	
+) : PrimaryKeyEntity() {
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "movie_data_movie_id")
-	var movieData: MovieData
-) : PrimaryKeyEntity()
+	lateinit var movieData: MovieData
+}

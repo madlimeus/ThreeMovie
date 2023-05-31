@@ -1,5 +1,6 @@
 package com.threemovie.threemovieapi.domain.movie.service
 
+import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieCreator
 import com.threemovie.threemovieapi.domain.movie.repository.MovieCreatorRepository
 import com.threemovie.threemovieapi.global.service.GET_DATA_USE_DAUM_API.Companion.GET_DATA_USE_DAUM_API
 import org.json.JSONArray
@@ -11,7 +12,7 @@ class MovieCreatorService(
 	val MovieCreatorRepository: MovieCreatorRepository
 ) {
 	
-	fun save_MovieCreator(One_movie_data: JSONObject, url_Daum_Main: String): MovieCreator {
+	fun save_MovieCreator(One_movie_data: JSONObject, url_Daum_Main: String): List<MovieCreator> {
 		val api_movie_data_screening = "api/movie/" + One_movie_data.get("id").toString() + "/main"
 		var tmp_data = GET_DATA_USE_DAUM_API(url_Daum_Main + api_movie_data_screening)
 		
@@ -21,6 +22,7 @@ class MovieCreatorService(
 		val movie_data_array = JSONObject(tmp_data).getJSONArray("casts")
 		
 		var casts_items = JSONArray()
+		var creators = ArrayList<MovieCreator>()
 		
 		for (One_person in movie_data_array) {
 			val One_person_json = JSONObject(One_person.toString())
@@ -35,20 +37,11 @@ class MovieCreatorService(
 			nameEN = if (nameEN != null && nameEN.length == 0) null else nameEN
 			roleKR = if (roleKR != null && (roleKR.equals("null") || roleKR.length == 0)) role else roleKR
 			
-			json_tmp.put("NameKR", nameKR)
-			json_tmp.put("NameEN", nameEN)
-			json_tmp.put("Role", roleKR)
-			json_tmp.put("PhotoAddress", One_person_json.get("profileImage"))
-			
-			casts_items.put(json_tmp)
+			creators.add(MovieCreator(nameKR as String, nameEN, roleKR, One_person_json.get("profileImage") as String))
 		}
 		
-		val member_MovieCreator = MovieCreator(
-			One_movie_data.get("titleKorean").toString() + "_" + movie_releaseDate,
-			casts_items.toString(),
-		)
 		
-		return member_MovieCreator;
+		return creators
 	}
 	
 	fun turncate_MovieCreator() {
