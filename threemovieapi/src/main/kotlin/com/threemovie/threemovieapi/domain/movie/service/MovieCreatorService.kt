@@ -1,6 +1,5 @@
 package com.threemovie.threemovieapi.domain.movie.service
 
-import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieCreator
 import com.threemovie.threemovieapi.domain.movie.repository.MovieCreatorRepository
 import com.threemovie.threemovieapi.global.service.GET_DATA_USE_DAUM_API.Companion.GET_DATA_USE_DAUM_API
 import org.json.JSONArray
@@ -43,13 +42,13 @@ class MovieCreatorService(
 			
 			casts_items.put(json_tmp)
 		}
-		
-		val member_MovieCreator = MovieCreator(
-			One_movie_data.get("titleKorean").toString() + "_" + movie_releaseDate,
-			casts_items.toString(),
-		)
-		
-		val res = MovieCreatorRepository.save(member_MovieCreator)
+
+//		val member_MovieCreator = MovieCreator(
+//			One_movie_data.get("titleKorean").toString() + "_" + movie_releaseDate,
+//			casts_items.toString(),
+//		)
+//
+//		val res = MovieCreatorRepository.save(member_MovieCreator)
 		
 	}
 	

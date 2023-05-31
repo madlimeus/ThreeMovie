@@ -1,6 +1,5 @@
 package com.threemovie.threemovieapi.domain.movie.service
 
-import com.threemovie.threemovieapi.domain.movie.entity.domain.MoviePreview
 import com.threemovie.threemovieapi.domain.movie.repository.MoviePreviewRepository
 import com.threemovie.threemovieapi.global.service.GET_DATA_USE_DAUM_API.Companion.GET_DATA_USE_DAUM_API
 import org.json.JSONObject
@@ -61,14 +60,14 @@ class MoviePreviewService(
 			str_videoUrl_list = videoUrl_list.toString()
 			
 		}
-		
-		val member_MoviePreview = MoviePreview(
-			One_movie_data.get("titleKorean").toString() + "_" + movie_releaseDate,
-			str_imageUrl_list,
-			str_videoUrl_list
-		)
-		
-		val res = MoviePreviewRepository.save(member_MoviePreview)
+
+//		val member_MoviePreview = MoviePreview(
+//			One_movie_data.get("titleKorean").toString() + "_" + movie_releaseDate,
+//			str_imageUrl_list,
+//			str_videoUrl_list
+//		)
+//
+//		val res = MoviePreviewRepository.save(member_MoviePreview)
 	}
 	
 	fun turncate_MoviePreview() {

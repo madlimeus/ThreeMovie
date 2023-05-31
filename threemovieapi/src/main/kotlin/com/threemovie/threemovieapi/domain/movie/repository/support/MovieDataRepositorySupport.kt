@@ -31,18 +31,17 @@ class MovieDataRepositorySupport(
 					movieData.movieId,
 					movieData.netizenAvgRate,
 					movieData.reservationRate,
-					movieData.nameKR,
-					movieData.nameEN,
+					movieData.nameKr,
+					movieData.nameEn,
 					movieData.poster,
 					movieData.category,
-					moviePreview.steelcuts,
-					moviePreview.trailer
+					moviePreview.type,
+					moviePreview.link
 				)
 			)
 			.from(movieData)
 			.leftJoin(moviePreview)
 			.fetchJoin()
-			.on(movieData.movieId.eq(moviePreview.movieId))
 			.orderBy(
 				movieData.reservationRate.desc(),
 				movieData.netizenAvgRate.desc()
@@ -61,25 +60,26 @@ class MovieDataRepositorySupport(
 					movieData.netizenAvgRate,
 					movieData.reservationRate,
 					movieData.summary,
-					movieData.nameKR,
-					movieData.nameEN,
+					movieData.nameKr,
+					movieData.nameEn,
 					movieData.makingNote,
 					movieData.releaseDate,
 					movieData.poster,
 					movieData.category,
-					moviePreview.steelcuts,
-					moviePreview.trailer,
-					movieCreator.items
+					moviePreview.type,
+					moviePreview.link,
+					movieCreator.nameKr,
+					movieCreator.nameEn,
+					movieCreator.roleKr,
+					movieCreator.link
 				)
 			)
 			.from(movieData)
 			.where(movieData.movieId.eq(movieId))
 			.join(moviePreview)
 			.fetchJoin()
-			.on(movieData.movieId.eq(moviePreview.movieId))
 			.join(movieCreator)
 			.fetchJoin()
-			.on(movieData.movieId.eq(movieCreator.movieId))
 			.fetchOne()
 	}
 }

@@ -6,5 +6,15 @@ data class ShowTimeVO(
 	val totalSeat: Int = 200,
 
 //	StartTime EndTime RestSeat TicketPage
-	val items: ArrayList<HashMap<String, String>> = ArrayList(),
-)
+	val items: ArrayList<ShowTimeReserveVO> = ArrayList(),
+) {
+	data class ShowTimeReserveVO(
+		val startTime: Long = 0L,
+		
+		val endTime: Long = 0L,
+		
+		val restSeat: Int = 0,
+		
+		val ticketPage: String = "",
+	)
+}

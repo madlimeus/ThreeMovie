@@ -33,7 +33,7 @@ class GetReviewFromTheater(
 		val movieList = movieDataService.getMovieData()
 		var resultHashMap = HashMap<String, String?>()
 		for (oneMovie in movieList) {
-			resultHashMap[oneMovie.movieId] = oneMovie.nameKR
+			resultHashMap[oneMovie.movieId] = oneMovie.nameKr
 		}
 		return resultHashMap
 	}
@@ -116,7 +116,6 @@ class GetReviewFromTheater(
 			val MovieId = movie_tmp.key
 			for (oneReview in LT_Moviedata) {
 				val member_MovieReview = MovieReview(
-					MovieId,
 					JSONObject(oneReview.toString()).get("RecommandCount").toString(),
 					JSONObject(oneReview.toString()).get("RegistDate").toString().replace(".", ""),
 					JSONObject(oneReview.toString()).get("ReviewText").toString(),
@@ -210,7 +209,6 @@ class GetReviewFromTheater(
 			}
 			for (oneReview in LT_Moviedata) {
 				val member_MovieReview = MovieReview(
-					MovieId,
 					JSONObject(oneReview.toString()).get("rcmmCnt").toString(),
 					JSONObject(oneReview.toString()).get("fullLstUptDt").toString().split(" ")[0].replace(".", ""),
 					JSONObject(oneReview.toString()).get("onelnEvalCn").toString(),
