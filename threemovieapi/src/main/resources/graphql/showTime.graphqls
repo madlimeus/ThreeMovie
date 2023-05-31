@@ -9,7 +9,7 @@ input Filter{
     movieFilter: [String]
     movieTheaterFilter: [String]
     brchFilter: [String]
-    dateFilter: [String]
+    dateFilter: [Int]
 }
 
 type MovieEntity {

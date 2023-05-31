@@ -3,7 +3,7 @@ package com.threemovie.threemovieapi.domain.movie.entity.domain
 import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
-import org.jetbrains.annotations.NotNull
+import jakarta.validation.constraints.NotNull
 
 @Entity
 @Table(name = "Moviedata")
@@ -12,7 +12,5 @@ class MovieNameData(
 	val movieId: String = "",
 	
 	@NotNull
-	val nameKR: String = "",
-	
-	val nameEN: String? = "",
+	val nameKr: String = "",
 ) : PrimaryKeyEntity()

@@ -1,6 +1,5 @@
 package com.threemovie.threemovieapi.domain.movie.service
 
-import com.threemovie.threemovieapi.domain.movie.entity.domain.MoviePreview
 import com.threemovie.threemovieapi.domain.movie.repository.MoviePreviewRepository
 import com.threemovie.threemovieapi.global.service.GET_DATA_USE_DAUM_API.Companion.GET_DATA_USE_DAUM_API
 import org.json.JSONObject
@@ -68,7 +67,6 @@ class MoviePreviewService(
 			str_videoUrl_list
 		)
 		
-//		val res = MoviePreviewRepository.save(member_MoviePreview)
 		return member_MoviePreview
 	}
 	

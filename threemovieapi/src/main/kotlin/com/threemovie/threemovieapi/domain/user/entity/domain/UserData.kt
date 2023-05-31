@@ -4,7 +4,7 @@ import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
-import org.jetbrains.annotations.NotNull
+import jakarta.validation.constraints.NotNull
 import java.time.LocalDate
 
 @Entity
@@ -20,7 +20,7 @@ class UserData(
 	
 	val userSex: Boolean? = false,
 	
-	val userBirth: LocalDate? = LocalDate.now(),
+	val userBirth: LocalDate?,
 	
 	@NotNull
 	val userCategories: String = "",

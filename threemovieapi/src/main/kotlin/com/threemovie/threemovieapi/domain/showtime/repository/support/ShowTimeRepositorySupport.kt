@@ -11,7 +11,7 @@ import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowDateDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowMovieDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTheaterDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeItemDTO
-import com.threemovie.threemovieapi.domain.theater.entity.domain.QTheater
+import com.threemovie.threemovieapi.domain.theater.entity.domain.QTheaterData
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 
@@ -21,7 +21,17 @@ class ShowTimeRepositorySupport(
 ) : QuerydslRepositorySupport(ShowTime::class.java) {
 	val movieData: QMovieData = QMovieData.movieData
 	val showTime: QShowTime = QShowTime.showTime
-	val theaterData: QTheater = QTheater.theater
+	val theaterData: QTheaterData = QTheaterData.theaterData
+	val em = entityManager
+	
+	fun deleteZeroReserveShowTime() {
+		query.delete(showTime)
+			.where(showTime.showTimeReserve.isEmpty)
+			.execute()
+		
+		em?.flush()
+		em?.clear()
+	}
 	
 	fun getMovieList(): List<ShowMovieDTO> {
 		
@@ -30,8 +40,8 @@ class ShowTimeRepositorySupport(
 				Projections.fields(
 					ShowMovieDTO::class.java,
 					showTime.movieId,
-					showTime.movieKR,
-					showTime.movieEN,
+					movieData.nameKr,
+					movieData.nameEn,
 					movieData.category,
 					movieData.runningTime,
 					movieData.country,
@@ -51,27 +61,26 @@ class ShowTimeRepositorySupport(
 			.fetch()
 	}
 	
-	fun getTheaterList(movieFilter: List<String>?, dateFilter: List<String>?): List<ShowTheaterDTO> {
+	fun getTheaterList(movieFilter: List<String>?, dateFilter: List<Int>?): List<ShowTheaterDTO> {
 		
 		return query
 			.select(
 				Projections.fields(
 					ShowTheaterDTO::class.java,
-					showTime.movieTheater,
-					showTime.brchKR,
-					showTime.brchEN,
+					theaterData.movieTheater,
+					theaterData.brchKr,
+					theaterData.brchEn,
 					theaterData.city,
-					theaterData.addrKR,
-					theaterData.addrEN
+					theaterData.addrKr,
+					theaterData.addrEn
 				)
 			)
 			.from(showTime)
 			.leftJoin(theaterData)
 			.fetchJoin()
 			.where(movieIn(movieFilter), dateIn(dateFilter))
-			.on(showTime.movieTheater.eq(theaterData.movieTheater), showTime.brchKR.eq(theaterData.brchKR))
 			.distinct()
-			.orderBy(showTime.brchKR.asc())
+			.orderBy(theaterData.brchKr.asc())
 			.fetch()
 	}
 	
@@ -80,12 +89,12 @@ class ShowTimeRepositorySupport(
 			.select(
 				Projections.fields(
 					ShowDateDTO::class.java,
-					showTime.date,
+					showTime.showYmd,
 				)
 			)
 			.from(showTime)
 			.where(movieIn(movieFilter), theaterIn(theaterFilter))
-			.orderBy(showTime.date.asc())
+			.orderBy(showTime.showYmd.asc())
 			.distinct()
 			.fetch()
 	}
@@ -93,38 +102,39 @@ class ShowTimeRepositorySupport(
 	fun getShowTimeList(
 		movieFilter: List<String>?,
 		theaterFilter: List<Pair<String, String>>?,
-		dateFilter: List<String>?
+		dateFilter: List<Int>?
 	): List<ShowTimeItemDTO> {
 		return query
 			.select(
 				Projections.fields(
 					ShowTimeItemDTO::class.java,
-					showTime.movieKR,
-					showTime.movieTheater,
-					showTime.brchKR,
-					showTime.brchEN,
-					showTime.date,
+					movieData.nameKr,
+					theaterData.movieTheater,
+					theaterData.brchKr,
+					theaterData.brchEn,
+					showTime.showYmd,
 					showTime.totalSeat,
 					showTime.playKind,
-					showTime.screenKR,
-					showTime.screenEN,
-					theaterData.addrKR,
-					theaterData.addrEN,
-					showTime.items
+					showTime.screenKr,
+					showTime.screenEn,
+					theaterData.addrKr,
+					theaterData.addrEn,
+					showTime.showTimeReserve
 				)
 			)
 			.from(showTime)
-			.orderBy(showTime.date.asc())
+			.orderBy(showTime.showYmd.asc())
 			.leftJoin(theaterData)
 			.fetchJoin()
-			.on(showTime.brchKR.eq(theaterData.brchKR), showTime.movieTheater.eq(theaterData.movieTheater))
+			.leftJoin(movieData)
+			.fetchJoin()
 			.where(movieIn(movieFilter), theaterIn(theaterFilter), dateIn(dateFilter))
 			.distinct()
 			.fetch()
 	}
 	
-	fun dateIn(date: List<String>?): BooleanExpression? {
-		return if (date.isNullOrEmpty()) null else showTime.date.`in`(date)
+	fun dateIn(date: List<Int>?): BooleanExpression? {
+		return if (date.isNullOrEmpty()) null else showTime.showYmd.`in`(date)
 	}
 	
 	fun movieIn(movieId: List<String>?): BooleanExpression? {
@@ -138,7 +148,7 @@ class ShowTimeRepositorySupport(
 			return null
 		
 		for (i in theater.indices) {
-			builder.or(showTime.movieTheater.eq(theater[i].first).and(showTime.brchKR.eq(theater[i].second)))
+			builder.or(theaterData.movieTheater.eq(theater[i].first).and(theaterData.brchKr.eq(theater[i].second)))
 		}
 		
 		return builder

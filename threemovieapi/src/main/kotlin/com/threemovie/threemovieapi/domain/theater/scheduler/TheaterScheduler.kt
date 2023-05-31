@@ -1,6 +1,6 @@
 package com.threemovie.threemovieapi.domain.theater.scheduler
 
-import com.threemovie.threemovieapi.domain.theater.entity.domain.Theater
+import com.threemovie.threemovieapi.domain.theater.entity.domain.TheaterData
 import com.threemovie.threemovieapi.domain.theater.repository.TheaterDataRepository
 import com.threemovie.threemovieapi.global.entity.LastUpdateTime
 import com.threemovie.threemovieapi.global.repository.LastUpdateTimeRepository
@@ -73,8 +73,8 @@ class TheaterScheduler(
 		return Triple(addr, addrEN, brchEN)
 	}
 	
-	fun getMBTheaters(): ArrayList<Theater> {
-		val theaterlist = ArrayList<Theater>()
+	fun getMBTheaters(): ArrayList<TheaterData> {
+		val theaterlist = ArrayList<TheaterData>()
 		val url = mburl + "/theater/list"
 		
 		val conn = Jsoup.connect(url)
@@ -98,8 +98,8 @@ class TheaterScheduler(
 				val (addr, addrEN, brchEN) = getMBAddr(brchNo, brchKR)
 				val city = addr.substring(0..1)
 				
-				val theater = Theater("MB", city, brchKR, brchEN, addr, addrEN, brchNo)
-				theaterlist.add(theater)
+				val theaterData = TheaterData("MB", city, brchKR, brchEN, addr, addrEN, brchNo)
+				theaterlist.add(theaterData)
 			}
 		}
 		
@@ -162,8 +162,8 @@ class TheaterScheduler(
 		return addr.trim()
 	}
 	
-	fun getCGVTheaters(): ArrayList<Theater> {
-		val theaterlist = ArrayList<Theater>()
+	fun getCGVTheaters(): ArrayList<TheaterData> {
+		val theaterlist = ArrayList<TheaterData>()
 		val brchsEN = getCGVBrchsEN()
 		if (brchsEN.isEmpty())
 			return theaterlist
@@ -206,9 +206,9 @@ class TheaterScheduler(
 				if ("CINE de CHEF" in brchKR)
 					continue
 				
-				val theater = Theater("CGV", city, brchKR, brchEN, addr, null, theaterCode)
+				val theaterData = TheaterData("CGV", city, brchKR, brchEN, addr, null, theaterCode)
 				
-				theaterlist.add(theater)
+				theaterlist.add(theaterData)
 			}
 		}
 		
@@ -239,8 +239,8 @@ class TheaterScheduler(
 		return addr
 	}
 	
-	fun getLCTheaters(): ArrayList<Theater> {
-		val theaterlist = ArrayList<Theater>()
+	fun getLCTheaters(): ArrayList<TheaterData> {
+		val theaterlist = ArrayList<TheaterData>()
 		val url: String =
 			LCurl + "/LCWS/Cinema/CinemaData.aspx"
 		
@@ -275,9 +275,9 @@ class TheaterScheduler(
 				addr = "강원도 춘천시 중앙로67번길 18 (죽림동)"
 			val city = addr.substring(0..1)
 			
-			val theater = Theater("LC", city, brchKR, brchEN, addr, null, cinemaCode)
+			val theaterData = TheaterData("LC", city, brchKR, brchEN, addr, null, cinemaCode)
 			
-			theaterlist.add(theater)
+			theaterlist.add(theaterData)
 		}
 		
 		return theaterlist
