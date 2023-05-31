@@ -28,14 +28,14 @@ class MovieDataService(
 		return movieDataRepository.findAll()
 	}
 	
-	fun save_MovieData(One_movie_data: JSONObject, url_Daum_Main: String) {
+	fun save_MovieData(One_movie_data: JSONObject, url_Daum_Main: String): MovieData {
 		val api_movie_data_screening = "api/movie/" + One_movie_data.get("id").toString() + "/main"
 		
 		var tmp_data = GET_DATA_USE_DAUM_API(url_Daum_Main + api_movie_data_screening)
 		val movie_data_json = JSONObject(JSONObject(tmp_data).get("movieCommon").toString())
 		val movie_releaseDate =
-			JSONObject(One_movie_data.get("countryMoviedatarmation").toString()).get("releaseDate").toString()
-		
+			JSONObject(One_movie_data.get("countryMovieInformation").toString()).get("releaseDate").toString()
+
 		var netizenAvgRate: Double
 		var reservationRate: Double
 		if (! One_movie_data.get("netizenAvgRate").equals(null)) {
@@ -81,15 +81,15 @@ class MovieDataService(
 		
 		var plot: String? = movie_data_json.get("plot").toString()
 		var makingNote: String? = movie_data_json.get("makingNote").toString()
-//		var runningTime : String? = JSONObject(movie_data_json.get("countryMoviedatarmation").toString()).get("duration").toString()
-//		var admissionCode : String? = JSONObject(movie_data_json.get("countryMoviedatarmation").toString()).get("admissionCode").toString()
+//		var runningTime : String? = JSONObject(movie_data_json.get("countryMovieInformation").toString()).get("duration").toString()
+//		var admissionCode : String? = JSONObject(movie_data_json.get("countryMovieInformation").toString()).get("admissionCode").toString()
 		var reservationRank: String? = movie_data_json.get("reservationRank").toString()
 		var totalAudience: String? = movie_data_json.get("totalAudienceCount").toString()
-		var countryMoviedatarmation = movie_data_json.getJSONArray("countryMoviedatarmation")
+		var countryMovieInformation = movie_data_json.getJSONArray("countryMovieInformation")
 		
 		var runningTime: String? = null
 		var admissionCode: String? = null
-		for (arr_tmp in countryMoviedatarmation) {
+		for (arr_tmp in countryMovieInformation) {
 			var countryId = JSONObject(JSONObject(arr_tmp.toString()).get("country").toString()).get("id").toString()
 			if (countryId.equals("KR")) {
 				runningTime = JSONObject(arr_tmp.toString()).get("duration").toString()
@@ -125,7 +125,8 @@ class MovieDataService(
 			reservationRank,
 			totalAudience
 		)
-		val res = movieDataRepository.save(member_MovieData)
+//		val res = movieDataRepository.save(member_MovieData)
+		return member_MovieData;
 	}
 	
 	fun turncate_MovieData() {

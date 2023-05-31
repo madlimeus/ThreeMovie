@@ -11,12 +11,12 @@ class MovieCreatorService(
 	val MovieCreatorRepository: MovieCreatorRepository
 ) {
 	
-	fun save_MovieCreator(One_movie_data: JSONObject, url_Daum_Main: String) {
+	fun save_MovieCreator(One_movie_data: JSONObject, url_Daum_Main: String): MovieCreator {
 		val api_movie_data_screening = "api/movie/" + One_movie_data.get("id").toString() + "/main"
 		var tmp_data = GET_DATA_USE_DAUM_API(url_Daum_Main + api_movie_data_screening)
 		
 		val movie_releaseDate =
-			JSONObject(One_movie_data.get("countryMoviedatarmation").toString()).get("releaseDate").toString()
+			JSONObject(One_movie_data.get("countryMovieInformation").toString()).get("releaseDate").toString()
 		
 		val movie_data_array = JSONObject(tmp_data).getJSONArray("casts")
 		
@@ -42,14 +42,13 @@ class MovieCreatorService(
 			
 			casts_items.put(json_tmp)
 		}
-
-//		val member_MovieCreator = MovieCreator(
-//			One_movie_data.get("titleKorean").toString() + "_" + movie_releaseDate,
-//			casts_items.toString(),
-//		)
-//
-//		val res = MovieCreatorRepository.save(member_MovieCreator)
 		
+		val member_MovieCreator = MovieCreator(
+			One_movie_data.get("titleKorean").toString() + "_" + movie_releaseDate,
+			casts_items.toString(),
+		)
+		
+		return member_MovieCreator;
 	}
 	
 	fun turncate_MovieCreator() {

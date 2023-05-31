@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import com.threemovie.threemovieapi.domain.movie.service.MovieDataControlService
 
 @RestController
 @RequestMapping("/api/movie")
 class MovieController(
-	val movieService: MovieDataService
+	val movieService: MovieDataService,
+	val movieDataControlService: MovieDataControlService
 ) {
 	@GetMapping("/movielist")
 	fun getMovieList(): ResponseEntity<List<MovieListDTO>> {
@@ -23,5 +25,10 @@ class MovieController(
 	fun getMovieDetail(@PathVariable movieId: String): ResponseEntity<MovieDetailDTO> {
 		return ResponseEntity.ok(movieService.getMovieDetail(movieId))
 	}
-	
+
+	@GetMapping("/test")
+	fun test() {
+		movieDataControlService.truncateAllMovieData()
+		movieDataControlService.GET_MOVIE_DATA_DAUM_for_upcoming()
+	}
 }
