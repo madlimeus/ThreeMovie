@@ -27,6 +27,11 @@ data class MovieDetailDTO @QueryProjection constructor(
 	
 	val trailer: String? = null,
 	
-	val items: String = "",
+	val nameKr: String,
 	
-	)
+	val nameEn: String,
+	
+	val roleKr: String,
+	
+	val link: String,
+)

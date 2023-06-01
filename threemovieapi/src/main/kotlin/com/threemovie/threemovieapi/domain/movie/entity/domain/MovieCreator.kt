@@ -1,15 +1,25 @@
 package com.threemovie.threemovieapi.domain.movie.entity.domain
 
 import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
-import org.jetbrains.annotations.NotNull
+import jakarta.persistence.*
+import jakarta.validation.constraints.NotNull
 
 @Entity
 @Table(name = "MovieCreator")
 class MovieCreator(
 	@NotNull
-	val movieId: String = "",
+	var nameKr: String,
 	
-	val items: String? = "",
-) : PrimaryKeyEntity()
+	var nameEn: String?,
+	
+	var roleKr: String?,
+	
+	@NotNull
+	@Column(length = 500)
+	var link: String,
+) : PrimaryKeyEntity() {
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "movie_data_movie_id")
+	lateinit var movieData: MovieData
+}

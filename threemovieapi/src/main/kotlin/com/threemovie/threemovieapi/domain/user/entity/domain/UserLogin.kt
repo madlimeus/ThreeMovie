@@ -3,14 +3,14 @@ package com.threemovie.threemovieapi.domain.user.entity.domain
 import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
 import com.threemovie.threemovieapi.global.security.config.UserRole
 import jakarta.persistence.*
-import org.jetbrains.annotations.NotNull
+import jakarta.validation.constraints.NotNull
 
 @Entity
 @Table(name = "UserLogin")
 class UserLogin(
 	@Column(length = 50)
 	@NotNull
-	var userEmail: String = "",
+	private var userEmail: String = "",
 	
 	@NotNull
 	var userPassword: String = "",

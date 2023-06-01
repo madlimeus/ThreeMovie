@@ -1,17 +1,21 @@
 package com.threemovie.threemovieapi.domain.movie.entity.domain
 
 import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
-import org.jetbrains.annotations.NotNull
+import jakarta.persistence.*
+import jakarta.validation.constraints.NotNull
 
 @Entity
 @Table(name = "MoviePreview")
 class MoviePreview(
 	@NotNull
-	val movieId: String = "",
+	val type: String,
 	
-	val steelcuts: String? = "",
-	
-	val trailer: String? = "",
-) : PrimaryKeyEntity()
+	@NotNull
+	@Column(length = 500)
+	val link: String,
+) : PrimaryKeyEntity() {
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "movie_data_movie_id")
+	lateinit var movieData: MovieData
+}
