@@ -1,6 +1,7 @@
 package com.threemovie.threemovieapi.domain.showtime.scheduler
 
-import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieNameData
+import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
+import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieNameDTO
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieNameInfoVO
 import com.threemovie.threemovieapi.domain.movie.repository.support.MovieDataRepositorySupport
 import com.threemovie.threemovieapi.domain.showtime.entity.domain.ShowTime
@@ -41,27 +42,27 @@ class ShowTimeScheduler(
 	val LCurl = "http://www.lottecinema.co.kr"
 	val mburl = "https://www.megabox.co.kr"
 	val nameMap = HashMap<String, MovieNameInfoVO>()
-	lateinit var movieNameInfo: List<MovieNameData>
+	lateinit var movieNameInfo: List<MovieNameDTO>
 	val square = "\\[[^)]*\\]".toRegex()
 	val code = "showtime"
 	var time = 202302110107
 	
 	@Async
-	@Scheduled(cron = "0 0/5 * * * ?")
+	@Scheduled(cron = "0 0/10 * * * ?")
 	fun chkMovieShowingTime() {
 		var chkTime = lastUpdateTimeRepositorySupport.getLastTime(code)
 		if (chkTime == null) {
 			lastUpdateTimeRepository.save(LastUpdateTime(code, 202302110107))
 			chkTime = 202302110107
 		}
-		if (ChkNeedUpdate.chkUpdateFiveMinute(chkTime)) {
+		if (ChkNeedUpdate.chkUpdateTenMinute(chkTime)) {
 			time = ChkNeedUpdate.retFormatterTime()
 			lastUpdateTimeRepositorySupport.updateLastTime(time, code)
 			movieNameInfo = movieDataRepositorySupport.getMovieNameData()
 			
-			val mbTheaters = theaterDataRepositorySupport.getTheaterData("MB")
-			val lcTheaters = theaterDataRepositorySupport.getTheaterData("LC")
-			val cgvTheaters = theaterDataRepositorySupport.getTheaterData("CGV")
+			val mbTheaters = theaterDataRepositorySupport.getTheaterEntityByMT("MB")
+			val lcTheaters = theaterDataRepositorySupport.getTheaterEntityByMT("LC")
+			val cgvTheaters = theaterDataRepositorySupport.getTheaterEntityByMT("CGV")
 			
 			val showTimeList: MutableList<ShowTime> = ArrayList()
 			val showTimeAsync: MutableList<Deferred<List<ShowTime>>> = ArrayList()
@@ -488,7 +489,6 @@ class ShowTimeScheduler(
 			var name = nameMap[movieKR]
 			val movieId = name?.movieId ?: movieKR
 			var showTime = ShowTime(
-				movieId,
 				screenKR,
 				screenEN,
 				date.toInt(),
@@ -496,6 +496,7 @@ class ShowTimeScheduler(
 				playKind,
 				theaterData
 			)
+			showTime.movieData = MovieData(movieId)
 			
 			val reservations = ArrayList<ShowTimeReserve>()
 			for (item in items) {

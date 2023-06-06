@@ -16,6 +16,6 @@ class MoviePreview(
 ) : PrimaryKeyEntity() {
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "movie_data_movie_id")
-	lateinit var movieData: MovieData
+	@JoinColumn(name = "movie_id", referencedColumnName = "movieId")
+	var movieData: MovieData? = null
 }

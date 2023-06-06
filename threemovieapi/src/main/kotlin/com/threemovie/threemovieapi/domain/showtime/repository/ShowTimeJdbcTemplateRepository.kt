@@ -41,7 +41,7 @@ class ShowTimeJdbcTemplateRepository {
 		jdbcTemplate.batchUpdate(sql,
 			object : BatchPreparedStatementSetter {
 				override fun setValues(ps: PreparedStatement, i: Int) {
-					ps.setString(1, showTimes[i].movieId)
+					ps.setString(1, showTimes[i].movieData?.movieId)
 					ps.setString(2, showTimes[i].playKind)
 					ps.setString(3, showTimes[i].screenEn)
 					ps.setString(4, showTimes[i].screenKr)

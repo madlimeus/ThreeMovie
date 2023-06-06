@@ -17,7 +17,10 @@ class MovieReview(
 ) : PrimaryKeyEntity() {
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "movie_data_movie_id", foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT))
-	lateinit var movieData: MovieData
-		protected set
+	@JoinColumn(
+		name = "movie_id",
+		referencedColumnName = "movieId",
+		foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT)
+	)
+	var movieData: MovieData? = null
 }

@@ -4,13 +4,14 @@ import com.threemovie.threemovieapi.domain.user.controller.request.AccountSignUp
 import com.threemovie.threemovieapi.domain.user.controller.request.AuthRequest
 import com.threemovie.threemovieapi.domain.user.controller.request.EmailRequest
 import com.threemovie.threemovieapi.domain.user.controller.request.LoginRequest
-import com.threemovie.threemovieapi.domain.user.service.EmailService
+import com.threemovie.threemovieapi.domain.user.controller.response.AccessTokenResponse
+import com.threemovie.threemovieapi.domain.user.exception.AlreadyExistEmailException
 import com.threemovie.threemovieapi.domain.user.service.UserAuthService
 import com.threemovie.threemovieapi.domain.user.service.UserDataService
+import com.threemovie.threemovieapi.global.security.config.UserRole
+import com.threemovie.threemovieapi.global.security.response.TokenResponse
 import com.threemovie.threemovieapi.global.security.service.JwtTokenProvider
 import com.threemovie.threemovieapi.global.security.service.RedisUtil
-import com.threemovie.threemovieapi.domain.user.exception.AlreadyExistEmailException
-import com.threemovie.threemovieapi.global.security.config.UserRole
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
@@ -22,20 +23,19 @@ import org.springframework.web.bind.annotation.*
 @CrossOrigin(origins = ["http://localhost:3000"])
 @RequestMapping("/api/auth")
 class UserAuthController(
-	val emailService: EmailService,
 	val userAuthService: UserAuthService,
 	val userDataService: UserDataService,
 	val jwtTokenProvider: JwtTokenProvider,
 	val redisUtil: RedisUtil
 ) {
 	
-	@PostMapping("/mail")
+	@PostMapping("/send/code")
 	fun sendAuthEmail(@RequestBody emailRequest: EmailRequest): ResponseEntity<String> {
 		val (email, isSignUp) = emailRequest
 		userDataService.existsEmail(email)
 		if (isSignUp)
 			throw AlreadyExistEmailException()
-		emailService.sendAuthMail(email)
+		userAuthService.sendAuth(email)
 		return ResponseEntity.status(HttpStatus.OK).body("success")
 	}
 	
@@ -48,7 +48,7 @@ class UserAuthController(
 	}
 	
 	@PostMapping("/login")
-	fun loginAccount(@RequestBody loginRequest: LoginRequest): ResponseEntity<Any> {
+	fun loginAccount(@RequestBody loginRequest: LoginRequest): ResponseEntity<TokenResponse> {
 		val (email, pass) = loginRequest
 		
 		userDataService.existsEmail(email)
@@ -85,7 +85,7 @@ class UserAuthController(
 		return ResponseEntity.status(HttpStatus.OK).body("성공적으로 가입 되었습니다.")
 	}
 	
-	@PostMapping("/signout")
+	@DeleteMapping("/signout")
 	fun signOutAccount(request: HttpServletRequest): ResponseEntity<String> {
 		val accessToken = request.getHeader("Authorization").substring(7)
 		userAuthService.signOutAccount(accessToken)
@@ -93,7 +93,7 @@ class UserAuthController(
 	}
 	
 	@PostMapping("/reissue")
-	fun reissue(request: HttpServletRequest): ResponseEntity<String> {
+	fun reissue(request: HttpServletRequest): ResponseEntity<AccessTokenResponse> {
 		val refreshToken = request.getHeader("Authorization").substring(7)
 		
 		userAuthService.reissue(refreshToken)
@@ -101,12 +101,13 @@ class UserAuthController(
 		val userRole = UserRole.USER.toString()
 		val email = jwtTokenProvider.getEmail(refreshToken)
 		val accessToken = jwtTokenProvider.generateAccessToken(email, userRole)
+		val ret = AccessTokenResponse(accessToken)
 		
 		return ResponseEntity.status(HttpStatus.OK)
-			.body(accessToken)
+			.body(ret)
 	}
 	
-	@PostMapping("/password/change")
+	@PatchMapping("/password")
 	fun changePassword(@RequestBody loginRequest: LoginRequest): ResponseEntity<String> {
 		val (email, pass) = loginRequest
 		userDataService.changePassword(email, pass)

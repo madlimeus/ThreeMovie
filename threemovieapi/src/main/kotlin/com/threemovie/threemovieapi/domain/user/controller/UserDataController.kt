@@ -3,7 +3,7 @@ package com.threemovie.threemovieapi.domain.user.controller
 import com.threemovie.threemovieapi.domain.user.controller.request.EmailRequest
 import com.threemovie.threemovieapi.domain.user.controller.request.NickNameRequest
 import com.threemovie.threemovieapi.domain.user.controller.request.UpdateUserDataRequest
-import com.threemovie.threemovieapi.domain.user.entity.domain.UserData
+import com.threemovie.threemovieapi.domain.user.entity.dto.UserDataDTO
 import com.threemovie.threemovieapi.domain.user.service.UserAuthService
 import com.threemovie.threemovieapi.domain.user.service.UserDataService
 import com.threemovie.threemovieapi.global.security.service.JwtTokenProvider
@@ -22,7 +22,7 @@ class UserDataController(
 	val jwtTokenProvider: JwtTokenProvider
 ) {
 	
-	@PostMapping("/password/reset")
+	@PostMapping("/reset/password")
 	fun resetPassword(@RequestBody emailRequest: EmailRequest): ResponseEntity<String> {
 		val (email) = emailRequest
 		var ret = userAuthService.existsAuth(email)
@@ -34,7 +34,7 @@ class UserDataController(
 		return ResponseEntity.ok("임시 비밀번호가 전송 되었습니다.")
 	}
 	
-	@PostMapping("/nickname/exists")
+	@PostMapping("/exist/nickname")
 	fun checkDuplicatedNickName(@RequestBody nickNameRequest: NickNameRequest): ResponseEntity<String> {
 		val (nickName) = nickNameRequest
 		userDataService.existsNickName(nickName)
@@ -42,8 +42,8 @@ class UserDataController(
 		return ResponseEntity.status(HttpStatus.OK).body("사용가능한 닉네임 입니다.")
 	}
 	
-	@PostMapping("/mypage")
-	fun getUserData(request: HttpServletRequest): ResponseEntity<UserData> {
+	@GetMapping("/data")
+	fun getUserData(request: HttpServletRequest): ResponseEntity<UserDataDTO> {
 		val accessToken = request.getHeader("Authorization").substring(7)
 		val email = jwtTokenProvider.getEmail(accessToken)
 		val res = userDataService.getUserData(email)
@@ -51,7 +51,7 @@ class UserDataController(
 		return ResponseEntity.status(HttpStatus.OK).body(res)
 	}
 	
-	@PatchMapping("/data/change")
+	@PatchMapping("/data")
 	fun updateUserData(@RequestBody updateUserdataRequest: UpdateUserDataRequest): ResponseEntity<String> {
 		val (email, nickName, sex, birth) = updateUserdataRequest
 		userDataService.updateUserdata(email, nickName, sex, birth)

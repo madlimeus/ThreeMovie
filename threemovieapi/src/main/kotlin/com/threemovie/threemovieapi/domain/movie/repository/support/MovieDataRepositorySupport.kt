@@ -2,9 +2,14 @@ package com.threemovie.threemovieapi.domain.movie.repository.support
 
 import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.threemovie.threemovieapi.domain.movie.entity.domain.*
+import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
+import com.threemovie.threemovieapi.domain.movie.entity.domain.QMovieCreator.movieCreator
+import com.threemovie.threemovieapi.domain.movie.entity.domain.QMovieData
+import com.threemovie.threemovieapi.domain.movie.entity.domain.QMoviePreview.moviePreview
+import com.threemovie.threemovieapi.domain.movie.entity.domain.QMovieReview.movieReview
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieDetailDTO
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieListDTO
+import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieNameDTO
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 
@@ -12,14 +17,18 @@ import org.springframework.stereotype.Repository
 class MovieDataRepositorySupport(
 	val query: JPAQueryFactory
 ) : QuerydslRepositorySupport(MovieData::class.java) {
-	val moviePreview: QMoviePreview = QMoviePreview.moviePreview
 	val movieData: QMovieData = QMovieData.movieData
-	val movieCreator: QMovieCreator = QMovieCreator.movieCreator
-	val movieNameData: QMovieNameData = QMovieNameData.movieNameData
 	
-	fun getMovieNameData(): List<MovieNameData> =
+	fun getMovieNameData(): List<MovieNameDTO> =
 		query
-			.selectFrom(movieNameData)
+			.select(
+				Projections.fields(
+					MovieNameDTO::class.java,
+					movieData.movieId,
+					movieData.nameKr
+				)
+			)
+			.from(movieData)
 			.fetch()
 	
 	fun getMovieList(): List<MovieListDTO>? {
@@ -40,7 +49,7 @@ class MovieDataRepositorySupport(
 				)
 			)
 			.from(movieData)
-			.leftJoin(moviePreview)
+			.leftJoin(movieData.previews, moviePreview)
 			.fetchJoin()
 			.orderBy(
 				movieData.reservationRate.desc(),
@@ -71,14 +80,17 @@ class MovieDataRepositorySupport(
 					movieCreator.nameKr,
 					movieCreator.nameEn,
 					movieCreator.roleKr,
-					movieCreator.link
+					movieCreator.link,
+					movieReview
 				)
 			)
 			.from(movieData)
 			.where(movieData.movieId.eq(movieId))
-			.join(moviePreview)
+			.join(movieData.previews, moviePreview)
 			.fetchJoin()
-			.join(movieCreator)
+			.join(movieData.creators, movieCreator)
+			.fetchJoin()
+			.join(movieData.reviews, movieReview)
 			.fetchJoin()
 			.fetchOne()
 	}

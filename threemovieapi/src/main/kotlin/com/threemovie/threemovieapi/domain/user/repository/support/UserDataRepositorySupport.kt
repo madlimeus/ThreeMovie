@@ -1,9 +1,11 @@
 package com.threemovie.threemovieapi.domain.user.repository.support
 
+import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.threemovie.threemovieapi.domain.user.entity.domain.QUserData
 import com.threemovie.threemovieapi.domain.user.entity.domain.QUserData.userData
-import com.threemovie.threemovieapi.domain.user.entity.domain.UserData
+import com.threemovie.threemovieapi.domain.user.entity.domain.QUserLogin.userLogin
+import com.threemovie.threemovieapi.domain.user.entity.dto.UserDataDTO
 import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
@@ -19,23 +21,15 @@ class UserDataRepositorySupport(
 		return query
 			.select(userData)
 			.from(userData)
-			.where(userData.userNickName.eq(nickName))
-			.fetchOne() != null
-	}
-	
-	fun existsEmail(email: String): Boolean {
-		return query
-			.select(userData)
-			.from(userData)
-			.where(userData.userEmail.eq(email))
+			.where(userData.nickName.eq(nickName))
 			.fetchOne() != null
 	}
 	
 	@Transactional
 	fun updateNickName(email: String, nickName: String) {
 		query.update(userData)
-			.set(userData.userNickName, nickName)
-			.where(userData.userEmail.eq(email))
+			.set(userData.nickName, nickName)
+			.where(userData.userLogin.email.eq(email))
 			.execute()
 		
 		entityManager?.clear()
@@ -45,10 +39,10 @@ class UserDataRepositorySupport(
 	@Transactional
 	fun updateUserData(email: String, nickName: String, sex: Boolean?, birth: LocalDate?) {
 		query.update(userData)
-			.set(userData.userNickName, nickName)
-			.set(userData.userSex, sex)
-			.set(userData.userBirth, birth)
-			.where(userData.userEmail.eq(email))
+			.set(userData.nickName, nickName)
+			.set(userData.sex, sex)
+			.set(userData.birth, birth)
+			.where(userData.userLogin.email.eq(email))
 			.execute()
 		
 		entityManager?.clear()
@@ -58,7 +52,7 @@ class UserDataRepositorySupport(
 	@Transactional
 	fun deleteUserData(email: String) {
 		query.delete(userData)
-			.where(userData.userEmail.eq(email))
+			.where(userData.userLogin.email.eq(email))
 			.execute()
 		
 		entityManager?.clear()
@@ -67,16 +61,30 @@ class UserDataRepositorySupport(
 	
 	fun getNickName(email: String): String? {
 		return query
-			.select(userData.userNickName)
+			.select(userData.nickName)
 			.from(userData)
-			.where(userData.userEmail.eq(email))
+			.join(userData.userLogin, userLogin)
+			.fetchJoin()
+			.where(userLogin.email.eq(email))
 			.fetchOne()
 	}
 	
-	fun getUserData(email: String): UserData? {
+	fun getUserData(email: String): UserDataDTO? {
 		return query
-			.selectFrom(userData)
-			.where(userData.userEmail.eq(email))
+			.select(
+				Projections.fields(
+					UserDataDTO::class.java,
+					userData.nickName,
+					userData.sex,
+					userData.birth,
+					userData.categories,
+					userData.brch
+				)
+			)
+			.from(userData)
+			.join(userData.userLogin, userLogin)
+			.fetchJoin()
+			.where(userLogin.email.eq(email))
 			.fetchOne()
 	}
 }
