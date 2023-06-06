@@ -10,12 +10,17 @@ import jakarta.validation.constraints.NotNull
 class UserLogin(
 	@Column(length = 50)
 	@NotNull
-	private var userEmail: String = "",
+	private val email: String = "",
 	
 	@NotNull
-	var userPassword: String = "",
-	
+	val password: String = "",
+) : PrimaryKeyEntity() {
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	var userRole: UserRole = UserRole.NOT_PERMITTED,
-) : PrimaryKeyEntity()
+	var role: UserRole = UserRole.USER
+	
+	@NotNull
+	@OneToOne(mappedBy = "userLogin", orphanRemoval = true, cascade = [CascadeType.ALL])
+	@JoinColumn(name = "user_data_id")
+	var userData: UserData? = null
+}

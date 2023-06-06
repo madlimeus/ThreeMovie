@@ -1,5 +1,6 @@
 package com.threemovie.threemovieapi.domain.showtime.entity.domain
 
+import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
 import com.threemovie.threemovieapi.domain.theater.entity.domain.TheaterData
 import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
 import jakarta.persistence.*
@@ -11,7 +12,7 @@ import org.hibernate.annotations.SQLInsert
 	name = "ShowTime",
 	uniqueConstraints = [UniqueConstraint(
 		name = "show_time_value_uk",
-		columnNames = ["movieId", "theater_data_id", "screenKr", "showYmd", "playKind"]
+		columnNames = ["movie_id", "theater_data_id", "screenKr", "showYmd", "playKind"]
 	)]
 )
 @SQLInsert(
@@ -19,9 +20,6 @@ import org.hibernate.annotations.SQLInsert
 			"VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
 )
 class ShowTime(
-	@NotNull
-	val movieId: String = "",
-	
 	@NotNull
 	@Column(length = 20)
 	val screenKr: String = "",
@@ -42,6 +40,15 @@ class ShowTime(
 	@JoinColumn(name = "theater_data_id")
 	val theaterData: TheaterData
 ) : PrimaryKeyEntity() {
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(
+		name = "movie_id",
+		referencedColumnName = "movieId",
+		foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT)
+	)
+	var movieData: MovieData? = null
+	
 	@OneToMany(
 		mappedBy = "showTime",
 		orphanRemoval = true,

@@ -28,10 +28,10 @@ class ShowTimeService(
 		for (item in dtolist) {
 			val tmpItem = ShowTheaterResponse.ShowTheaterItems(
 				item.movieTheater,
-				item.brchKR,
-				item.brchEN,
-				item.addrKR,
-				item.addrEN
+				item.brchKr,
+				item.brchEn,
+				item.addrKr,
+				item.addrEn
 			)
 			if (cityMap[item.city] == null) {
 				cityMap[item.city] = ArrayList()
@@ -91,17 +91,17 @@ class ShowTimeService(
 			}
 			
 			val tmpResponse = ShowTimeResponse(
-				showtime.movieKR,
+				showtime.movieKr,
 				showtime.movieTheater,
-				showtime.brchKR,
-				showtime.brchEN,
+				showtime.brchKr,
+				showtime.brchEn,
 				showtime.date,
 				showtime.totalSeat,
 				showtime.playKind,
-				showtime.screenKR,
-				showtime.screenEN,
-				showtime.addrKR,
-				showtime.addrEN,
+				showtime.screenKr,
+				showtime.screenEn,
+				showtime.addrKr,
+				showtime.addrEn,
 				items
 			)
 			

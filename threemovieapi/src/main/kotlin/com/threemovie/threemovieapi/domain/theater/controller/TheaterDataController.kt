@@ -1,6 +1,7 @@
 package com.threemovie.threemovieapi.domain.theater.controller
 
 import com.threemovie.threemovieapi.domain.theater.entity.domain.TheaterData
+import com.threemovie.threemovieapi.domain.theater.entity.dto.TheaterDTO
 import com.threemovie.threemovieapi.domain.theater.service.TheaterDataService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -14,5 +15,5 @@ class TheaterDataController(val service: TheaterDataService) {
 	fun getTheaterData(@PathVariable MovieTheater: String): List<TheaterData> = service.getTheaterData(MovieTheater)
 	
 	@GetMapping
-	fun getTheaterDataAll(): List<TheaterData> = service.getTheaterDataAll()
+	fun getTheaterDataAll(): List<TheaterDTO> = service.getTheaterDataAll()
 }

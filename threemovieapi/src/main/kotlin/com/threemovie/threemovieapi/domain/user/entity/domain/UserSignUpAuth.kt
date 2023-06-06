@@ -12,7 +12,7 @@ import java.time.LocalDateTime
 class UserSignUpAuth(
 	@Column(length = 50)
 	@NotNull
-	var userEmail: String = "",
+	var email: String = "",
 	
 	@Column(length = 8)
 	@NotNull

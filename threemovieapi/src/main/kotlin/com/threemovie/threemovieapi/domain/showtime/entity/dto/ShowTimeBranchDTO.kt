@@ -5,9 +5,9 @@ data class ShowTimeBranchDTO(
 	
 	var city: String = "신대방",
 	
-	var brchKR: String = "삼거리",
+	var brchKr: String = "삼거리",
 	
-	var brchEN: String = "sin",
+	var brchEn: String = "sin",
 	
 	var date: String = "2023-04-05",
 )

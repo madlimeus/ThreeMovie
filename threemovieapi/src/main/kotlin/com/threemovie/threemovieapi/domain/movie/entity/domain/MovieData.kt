@@ -74,6 +74,10 @@ class MovieData(
 		this.creators.addAll(creators)
 	}
 	
+	fun addPreviews(previews: List<MoviePreview>) {
+		this.previews.addAll(previews)
+	}
+	
 	fun addReviews(reviews: List<MovieReview>) {
 		this.reviews.addAll(reviews)
 	}

@@ -4,14 +4,15 @@ import com.querydsl.core.BooleanBuilder
 import com.querydsl.core.types.Projections
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.threemovie.threemovieapi.domain.movie.entity.domain.QMovieData
+import com.threemovie.threemovieapi.domain.movie.entity.domain.QMovieData.movieData
 import com.threemovie.threemovieapi.domain.showtime.entity.domain.QShowTime
+import com.threemovie.threemovieapi.domain.showtime.entity.domain.QShowTimeReserve.showTimeReserve
 import com.threemovie.threemovieapi.domain.showtime.entity.domain.ShowTime
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowDateDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowMovieDTO
-import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTheaterDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeItemDTO
-import com.threemovie.threemovieapi.domain.theater.entity.domain.QTheaterData
+import com.threemovie.threemovieapi.domain.theater.entity.domain.QTheaterData.theaterData
+import com.threemovie.threemovieapi.domain.theater.entity.dto.TheaterDTO
 import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
@@ -20,9 +21,7 @@ import org.springframework.stereotype.Repository
 class ShowTimeRepositorySupport(
 	val query: JPAQueryFactory
 ) : QuerydslRepositorySupport(ShowTime::class.java) {
-	val movieData: QMovieData = QMovieData.movieData
 	val showTime: QShowTime = QShowTime.showTime
-	val theaterData: QTheaterData = QTheaterData.theaterData
 	val em = entityManager
 	
 	@Transactional
@@ -41,7 +40,7 @@ class ShowTimeRepositorySupport(
 			.select(
 				Projections.fields(
 					ShowMovieDTO::class.java,
-					showTime.movieId,
+					movieData.movieId,
 					movieData.nameKr,
 					movieData.nameEn,
 					movieData.category,
@@ -51,24 +50,22 @@ class ShowTimeRepositorySupport(
 					movieData.reservationRank
 				)
 			)
-			.distinct()
 			.from(showTime)
-			.leftJoin(movieData)
+			.leftJoin(showTime.movieData, movieData)
 			.fetchJoin()
-			.on(showTime.movieId.eq(movieData.movieId))
-			.groupBy(showTime.movieId)
+			.groupBy(movieData.movieId)
 			.orderBy(
 				movieData.reservationRate.desc()
 			)
 			.fetch()
 	}
 	
-	fun getTheaterList(movieFilter: List<String>?, dateFilter: List<Int>?): List<ShowTheaterDTO> {
+	fun getTheaterList(movieFilter: List<String>?, dateFilter: List<Int>?): List<TheaterDTO> {
 		
 		return query
 			.select(
 				Projections.fields(
-					ShowTheaterDTO::class.java,
+					TheaterDTO::class.java,
 					theaterData.movieTheater,
 					theaterData.brchKr,
 					theaterData.brchEn,
@@ -78,7 +75,7 @@ class ShowTimeRepositorySupport(
 				)
 			)
 			.from(showTime)
-			.leftJoin(theaterData)
+			.leftJoin(showTime.theaterData, theaterData)
 			.fetchJoin()
 			.where(movieIn(movieFilter), dateIn(dateFilter))
 			.distinct()
@@ -121,14 +118,16 @@ class ShowTimeRepositorySupport(
 					showTime.screenEn,
 					theaterData.addrKr,
 					theaterData.addrEn,
-					showTime.showTimeReserve
+					showTimeReserve
 				)
 			)
 			.from(showTime)
 			.orderBy(showTime.showYmd.asc())
-			.leftJoin(theaterData)
+			.leftJoin(showTime.theaterData, theaterData)
 			.fetchJoin()
-			.leftJoin(movieData)
+			.leftJoin(showTime.movieData, movieData)
+			.fetchJoin()
+			.leftJoin(showTime.showTimeReserve, showTimeReserve)
 			.fetchJoin()
 			.where(movieIn(movieFilter), theaterIn(theaterFilter), dateIn(dateFilter))
 			.distinct()
@@ -140,7 +139,7 @@ class ShowTimeRepositorySupport(
 	}
 	
 	fun movieIn(movieId: List<String>?): BooleanExpression? {
-		return if (movieId.isNullOrEmpty()) null else showTime.movieId.`in`(movieId)
+		return if (movieId.isNullOrEmpty()) null else showTime.movieData.movieId.`in`(movieId)
 	}
 	
 	fun theaterIn(theater: List<Pair<String, String>>?): BooleanBuilder? {

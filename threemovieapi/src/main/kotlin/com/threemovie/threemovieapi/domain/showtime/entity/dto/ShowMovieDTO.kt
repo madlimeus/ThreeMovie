@@ -5,9 +5,9 @@ import com.querydsl.core.annotations.QueryProjection
 data class ShowMovieDTO @QueryProjection constructor(
 	val movieId: String = "",
 	
-	val movieKR: String = " ",
+	val movieKr: String = " ",
 	
-	val movieEN: String? = null,
+	val movieEn: String? = null,
 	
 	val category: String? = null,
 	
