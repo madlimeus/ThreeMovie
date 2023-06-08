@@ -18,7 +18,7 @@ class UserSignUpRepositorySupport(
 		val date = LocalDateTime.now().minusMinutes(5)
 		return query
 			.selectFrom(userSignUp)
-			.where(userSignUp.userEmail.eq(email), userSignUp.authCode.eq(authCode), userSignUp.expiredDate.goe(date))
+			.where(userSignUp.email.eq(email), userSignUp.authCode.eq(authCode), userSignUp.expiredDate.goe(date))
 			.fetchOne() != null
 	}
 	
@@ -26,7 +26,7 @@ class UserSignUpRepositorySupport(
 	fun updateAuthSuccess(email: String) {
 		query.update(userSignUp)
 			.set(userSignUp.authSuccess, true)
-			.where(userSignUp.userEmail.eq(email))
+			.where(userSignUp.email.eq(email))
 			.execute()
 		
 		entityManager?.clear()
@@ -36,7 +36,7 @@ class UserSignUpRepositorySupport(
 	@Transactional
 	fun deletePrevAuth(email: String) {
 		query.delete(userSignUp)
-			.where(userSignUp.userEmail.eq(email))
+			.where(userSignUp.email.eq(email))
 			.execute()
 		
 		entityManager?.clear()
@@ -45,10 +45,10 @@ class UserSignUpRepositorySupport(
 	
 	fun existsSuccessCode(email: String): Boolean {
 		return query
-			.select(userSignUp.userEmail)
+			.select(userSignUp.email)
 			.from(userSignUp)
 			.where(
-				userSignUp.userEmail.eq(email),
+				userSignUp.email.eq(email),
 				userSignUp.authSuccess.eq(true),
 			)
 			.fetchOne() != null

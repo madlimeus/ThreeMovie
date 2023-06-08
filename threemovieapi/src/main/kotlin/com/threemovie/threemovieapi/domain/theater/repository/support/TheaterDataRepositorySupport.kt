@@ -1,22 +1,38 @@
 package com.threemovie.threemovieapi.domain.theater.repository.support
 
+import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.threemovie.threemovieapi.domain.theater.entity.domain.QTheater
-import com.threemovie.threemovieapi.domain.theater.entity.domain.Theater
+import com.threemovie.threemovieapi.domain.theater.entity.domain.QTheaterData
+import com.threemovie.threemovieapi.domain.theater.entity.domain.TheaterData
+import com.threemovie.threemovieapi.domain.theater.entity.dto.TheaterDTO
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 
 @Repository
 class TheaterDataRepositorySupport(
 	val query: JPAQueryFactory
-) : QuerydslRepositorySupport(Theater::class.java) {
-	val theater: QTheater = QTheater.theater
-	fun getTheaterDataAll(): List<Theater>? = query
-		.selectFrom(theater)
+) : QuerydslRepositorySupport(TheaterData::class.java) {
+	val theater: QTheaterData = QTheaterData.theaterData
+	fun getTheaterAll(): List<TheaterDTO>? = query
+		.select(
+			Projections.fields(
+				TheaterDTO::class.java,
+				theater.movieTheater,
+				theater.city,
+				theater.brchKr,
+				theater.brchEn,
+				theater.addrKr,
+				theater.addrEn,
+			)
+		)
+		.from(theater)
 		.fetch()
 	
-	fun getTheaterData(movieTheater: String): List<Theater> = query
-		.selectFrom(theater)
+	fun getTheaterEntityByMT(movieTheater: String): List<TheaterData> = query
+		.select(
+			theater
+		)
+		.from(theater)
 		.where(theater.movieTheater.eq(movieTheater))
 		.fetch()
 	

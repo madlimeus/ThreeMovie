@@ -1,5 +1,6 @@
 package com.threemovie.threemovieapi.domain.movie.service
 
+import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
 import com.threemovie.threemovieapi.domain.movie.entity.domain.MoviePreview
 import com.threemovie.threemovieapi.domain.movie.repository.MoviePreviewRepository
 import com.threemovie.threemovieapi.global.service.GET_DATA_USE_DAUM_API.Companion.GET_DATA_USE_DAUM_API
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service
 class MoviePreviewService(
 	val MoviePreviewRepository: MoviePreviewRepository
 ) {
-	fun save_MoviePreview(One_movie_data: JSONObject, url_Daum_Main: String): MoviePreview {
+	fun save_MoviePreview(One_movie_data: JSONObject, url_Daum_Main: String, movieData: MovieData): List<MoviePreview> {
 		val api_steelcut_screening = "api/movie/" + One_movie_data.get("id").toString() + "/photoList"
 		
 		var tmp_data_steelcut = GET_DATA_USE_DAUM_API(url_Daum_Main + api_steelcut_screening)
@@ -46,30 +47,18 @@ class MoviePreviewService(
 			}
 		}
 		
-		var str_imageUrl_list: String?
-		var str_videoUrl_list: String?
+		var previews = ArrayList<MoviePreview>()
 		
-		if (imageUrl_list.size == 0) {
-			str_imageUrl_list = null
-		} else {
-			str_imageUrl_list = imageUrl_list.toString()
+		for (image in imageUrl_list) {
+			previews.add(MoviePreview("image", image, movieData))
 		}
 		
-		if (videoUrl_list.size == 0) {
-			str_videoUrl_list = null
-		} else {
-			str_videoUrl_list = videoUrl_list.toString()
-			
+		for (video in videoUrl_list) {
+			previews.add(MoviePreview("video", video, movieData))
 		}
 		
-		val member_MoviePreview = MoviePreview(
-			One_movie_data.get("titleKorean").toString() + "_" + movie_releaseDate,
-			str_imageUrl_list,
-			str_videoUrl_list
-		)
 		
-//		val res = MoviePreviewRepository.save(member_MoviePreview)
-		return member_MoviePreview
+		return previews
 	}
 	
 	fun turncate_MoviePreview() {

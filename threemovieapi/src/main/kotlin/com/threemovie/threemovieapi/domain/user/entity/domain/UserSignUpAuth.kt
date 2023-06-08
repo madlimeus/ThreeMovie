@@ -4,7 +4,7 @@ import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
-import org.jetbrains.annotations.NotNull
+import jakarta.validation.constraints.NotNull
 import java.time.LocalDateTime
 
 @Entity
@@ -12,14 +12,14 @@ import java.time.LocalDateTime
 class UserSignUpAuth(
 	@Column(length = 50)
 	@NotNull
-	var userEmail: String = "",
+	var email: String = "",
 	
 	@Column(length = 8)
 	@NotNull
 	var authCode: String = "",
 	
 	@NotNull
-	var expiredDate: LocalDateTime = LocalDateTime.now(),
+	var expiredDate: LocalDateTime,
 	
 	@NotNull
 	var authSuccess: Boolean = false,

@@ -18,7 +18,7 @@ class MovieDataScheduler(
 	private val code = "movie"
 	
 	@Async
-	@Scheduled(cron = "0 0 0/1 * * *")
+	@Scheduled(cron = "0 0/5 * * * ?")
 	fun getMovieDataFromDaum() {
 		var time = lastUpdateTimeRepositorySupport.getLastTime(code)
 		if (time == null) {
@@ -27,7 +27,6 @@ class MovieDataScheduler(
 		}
 		
 		if (ChkNeedUpdate.chkUpdateTwelveHours(time)) {
-			movieDataControlService.truncateAllMovieData()
 			movieDataControlService.GET_MOVIE_DATA_DAUM_for_upcoming()
 			lastUpdateTimeRepositorySupport.updateLastTime(ChkNeedUpdate.retFormatterTime(), code)
 		}

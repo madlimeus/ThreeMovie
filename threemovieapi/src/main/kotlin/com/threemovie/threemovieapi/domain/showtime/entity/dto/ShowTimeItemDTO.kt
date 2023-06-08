@@ -1,15 +1,16 @@
 package com.threemovie.threemovieapi.domain.showtime.entity.dto
 
 import com.querydsl.core.annotations.QueryProjection
+import com.threemovie.threemovieapi.domain.showtime.entity.domain.ShowTimeReserve
 
 data class ShowTimeItemDTO @QueryProjection constructor(
-	val movieKR: String = "MT제작기",
+	val movieKr: String = "MT제작기",
 	
 	val movieTheater: String = "MT",
 	
-	val brchKR: String = "신대방",
+	val brchKr: String = "신대방",
 	
-	val brchEN: String? = null,
+	val brchEn: String? = null,
 	
 	val date: String = "1998-01-20",
 	
@@ -17,13 +18,13 @@ data class ShowTimeItemDTO @QueryProjection constructor(
 	
 	val playKind: String = "0120",
 	
-	val screenKR: String = "0120",
+	val screenKr: String = "0120",
 	
-	val screenEN: String? = null,
+	val screenEn: String? = null,
 	
-	val addrKR: String = "신대방동",
+	val addrKr: String = "신대방동",
 	
-	val addrEN: String? = null,
+	val addrEn: String? = null,
 	
-	val items: String = "none",
+	val items: List<ShowTimeReserve>,
 )

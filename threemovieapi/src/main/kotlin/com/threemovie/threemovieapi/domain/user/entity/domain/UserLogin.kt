@@ -3,19 +3,24 @@ package com.threemovie.threemovieapi.domain.user.entity.domain
 import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
 import com.threemovie.threemovieapi.global.security.config.UserRole
 import jakarta.persistence.*
-import org.jetbrains.annotations.NotNull
+import jakarta.validation.constraints.NotNull
 
 @Entity
 @Table(name = "UserLogin")
 class UserLogin(
 	@Column(length = 50)
 	@NotNull
-	var userEmail: String = "",
+	private val email: String = "",
 	
 	@NotNull
-	var userPassword: String = "",
-	
+	val password: String = "",
+) : PrimaryKeyEntity() {
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	var userRole: UserRole = UserRole.NOT_PERMITTED,
-) : PrimaryKeyEntity()
+	var role: UserRole = UserRole.USER
+	
+	@NotNull
+	@OneToOne(mappedBy = "userLogin", orphanRemoval = true, cascade = [CascadeType.ALL])
+	@JoinColumn(name = "user_data_id")
+	var userData: UserData? = null
+}

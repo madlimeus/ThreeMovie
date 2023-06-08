@@ -1,13 +1,13 @@
 package com.threemovie.threemovieapi.domain.movie.service
 
+import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieDetailDTO
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieListDTO
-import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
+import com.threemovie.threemovieapi.domain.movie.exception.MovieNotFoundException
+import com.threemovie.threemovieapi.domain.movie.exception.MovieNullException
 import com.threemovie.threemovieapi.domain.movie.repository.MovieDataRepository
 import com.threemovie.threemovieapi.domain.movie.repository.support.MovieDataRepositorySupport
 import com.threemovie.threemovieapi.global.service.GET_DATA_USE_DAUM_API.Companion.GET_DATA_USE_DAUM_API
-import com.threemovie.threemovieapi.domain.movie.exception.MovieNotFoundException
-import com.threemovie.threemovieapi.domain.movie.exception.MovieNullException
 import org.json.JSONObject
 import org.springframework.stereotype.Service
 
@@ -21,7 +21,7 @@ class MovieDataService(
 	}
 	
 	fun getMovieList(): List<MovieListDTO> {
-		return movieDataRepositorySupport.getMovieList() ?: throw MovieNullException()
+		return movieDataRepositorySupport.getMainMovie() ?: throw MovieNullException()
 	}
 	
 	fun getMovieData(): List<MovieData> {
@@ -35,7 +35,7 @@ class MovieDataService(
 		val movie_data_json = JSONObject(JSONObject(tmp_data).get("movieCommon").toString())
 		val movie_releaseDate =
 			JSONObject(One_movie_data.get("countryMovieInformation").toString()).get("releaseDate").toString()
-
+		
 		var netizenAvgRate: Double
 		var reservationRate: Double
 		if (! One_movie_data.get("netizenAvgRate").equals(null)) {
@@ -57,16 +57,7 @@ class MovieDataService(
 			Poster = null
 		}
 		
-		var NameKR: String?
-		if (movie_data_json.get("titleKorean").equals(null)) {
-			NameKR = null
-		} else {
-			if (movie_data_json.get("titleKorean").toString().length == 0) {
-				NameKR = null
-			} else {
-				NameKR = movie_data_json.get("titleKorean").toString()
-			}
-		}
+		var NameKR: String = movie_data_json.get("titleKorean").toString()
 		
 		var NameEN: String?
 		if (movie_data_json.get("titleEnglish").equals(null)) {
@@ -126,7 +117,7 @@ class MovieDataService(
 			totalAudience
 		)
 //		val res = movieDataRepository.save(member_MovieData)
-		return member_MovieData;
+		return member_MovieData
 	}
 	
 	fun turncate_MovieData() {

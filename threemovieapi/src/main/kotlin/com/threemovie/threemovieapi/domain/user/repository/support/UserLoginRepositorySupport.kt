@@ -17,24 +17,24 @@ class UserLoginRepositorySupport(
 	
 	fun existsEmail(email: String): Boolean {
 		return query
-			.select(userLogin.userEmail)
+			.select(userLogin.email)
 			.from(userLogin)
-			.where(userLogin.userEmail.eq(email))
+			.where(userLogin.email.eq(email))
 			.fetchOne() != null
 	}
 	
 	fun getUserLoginByEmail(email: String): UserLogin? {
 		return query
 			.selectFrom(userLogin)
-			.where(userLogin.userEmail.eq(email))
+			.where(userLogin.email.eq(email))
 			.fetchOne()
 	}
 	
 	@Transactional
 	fun updatePass(email: String, pass: String) {
 		query.update(userLogin)
-			.set(userLogin.userPassword, pass)
-			.where(userLogin.userEmail.eq(email))
+			.set(userLogin.password, pass)
+			.where(userLogin.email.eq(email))
 			.execute()
 		
 		entityManager?.clear()
@@ -44,7 +44,7 @@ class UserLoginRepositorySupport(
 	@Transactional
 	fun deleteUserLogin(email: String) {
 		query.delete(userLogin)
-			.where(userLogin.userEmail.eq(email))
+			.where(userLogin.email.eq(email))
 			.execute()
 		
 		entityManager?.clear()
