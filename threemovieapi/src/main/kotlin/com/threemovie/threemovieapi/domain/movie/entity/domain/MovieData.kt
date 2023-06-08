@@ -3,9 +3,14 @@ package com.threemovie.threemovieapi.domain.movie.entity.domain
 import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
+import org.hibernate.annotations.SQLInsert
 
 @Entity
 @Table(name = "MovieData")
+@SQLInsert(
+	sql = "INSERT IGNORE INTO movie_data(admission_code, category, country, making_note, movie_id, name_en, name_kr, netizen_avg_rate, poster, release_date, reservation_rank, reservation_rate, running_time, summary, total_audience, id)" +
+			" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+)
 class MovieData(
 	@NotNull
 	@Column(unique = true)
@@ -18,11 +23,11 @@ class MovieData(
 	@Column(columnDefinition = "longtext")
 	val summary: String? = "",
 	
-	val nameKr: String? = "",
+	@NotNull
+	val nameKr: String = "",
 	
 	val nameEn: String? = "",
 	
-	@NotNull
 	val releaseDate: String = "",
 	
 	val poster: String? = "",
@@ -66,7 +71,7 @@ class MovieData(
 		mappedBy = "movieData",
 		orphanRemoval = true,
 		cascade = [CascadeType.ALL],
-		fetch = FetchType.LAZY
+		fetch = FetchType.LAZY,
 	)
 	var reviews: MutableList<MovieReview> = ArrayList()
 	

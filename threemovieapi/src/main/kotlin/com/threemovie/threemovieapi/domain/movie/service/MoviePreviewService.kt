@@ -1,5 +1,6 @@
 package com.threemovie.threemovieapi.domain.movie.service
 
+import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
 import com.threemovie.threemovieapi.domain.movie.entity.domain.MoviePreview
 import com.threemovie.threemovieapi.domain.movie.repository.MoviePreviewRepository
 import com.threemovie.threemovieapi.global.service.GET_DATA_USE_DAUM_API.Companion.GET_DATA_USE_DAUM_API
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service
 class MoviePreviewService(
 	val MoviePreviewRepository: MoviePreviewRepository
 ) {
-	fun save_MoviePreview(One_movie_data: JSONObject, url_Daum_Main: String): List<MoviePreview> {
+	fun save_MoviePreview(One_movie_data: JSONObject, url_Daum_Main: String, movieData: MovieData): List<MoviePreview> {
 		val api_steelcut_screening = "api/movie/" + One_movie_data.get("id").toString() + "/photoList"
 		
 		var tmp_data_steelcut = GET_DATA_USE_DAUM_API(url_Daum_Main + api_steelcut_screening)
@@ -49,11 +50,11 @@ class MoviePreviewService(
 		var previews = ArrayList<MoviePreview>()
 		
 		for (image in imageUrl_list) {
-			previews.add(MoviePreview("image", image))
+			previews.add(MoviePreview("image", image, movieData))
 		}
 		
 		for (video in videoUrl_list) {
-			previews.add(MoviePreview("video", video))
+			previews.add(MoviePreview("video", video, movieData))
 		}
 		
 		

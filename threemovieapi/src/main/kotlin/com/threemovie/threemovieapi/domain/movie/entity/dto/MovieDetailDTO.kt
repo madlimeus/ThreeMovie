@@ -24,10 +24,6 @@ data class MovieDetailDTO @QueryProjection constructor(
 	
 	val category: String = "",
 	
-	val steelcuts: String? = null,
-	
-	val trailer: String? = null,
-	
 	val nameKr: String,
 	
 	val nameEn: String,
@@ -36,5 +32,7 @@ data class MovieDetailDTO @QueryProjection constructor(
 	
 	val link: String,
 	
-	val reviews: List<MovieReview>
+	val reviews: List<MovieReview>,
+	
+	val previews: List<MoviePreviewDTO>,
 )

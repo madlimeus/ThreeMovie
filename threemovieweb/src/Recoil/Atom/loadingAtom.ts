@@ -1,8 +1,8 @@
 import { atom } from 'recoil';
 
-const loadingAtom = atom<string[]>({
+const loadingAtom = atom<number>({
     key: 'loading',
-    default: [],
+    default: 0,
 });
 
 export default loadingAtom;

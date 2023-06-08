@@ -1,5 +1,7 @@
 package com.threemovie.threemovieapi.domain.movie.repository.support
 
+import com.querydsl.core.group.GroupBy.groupBy
+import com.querydsl.core.group.GroupBy.list
 import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
@@ -10,6 +12,7 @@ import com.threemovie.threemovieapi.domain.movie.entity.domain.QMovieReview.movi
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieDetailDTO
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieListDTO
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieNameDTO
+import com.threemovie.threemovieapi.domain.movie.entity.dto.MoviePreviewDTO
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 
@@ -29,34 +32,42 @@ class MovieDataRepositorySupport(
 				)
 			)
 			.from(movieData)
+			.orderBy(moviePreview.type.desc())
 			.fetch()
 	
-	fun getMovieList(): List<MovieListDTO>? {
+	fun getMainMovie(): List<MovieListDTO>? {
 		
 		return query
-			.select(
-				Projections.fields(
-					MovieListDTO::class.java,
-					movieData.movieId,
-					movieData.netizenAvgRate,
-					movieData.reservationRate,
-					movieData.nameKr,
-					movieData.nameEn,
-					movieData.poster,
-					movieData.category,
-					moviePreview.type,
-					moviePreview.link
-				)
-			)
 			.from(movieData)
 			.leftJoin(movieData.previews, moviePreview)
-			.fetchJoin()
 			.orderBy(
 				movieData.reservationRate.desc(),
-				movieData.netizenAvgRate.desc()
+				movieData.netizenAvgRate.desc(),
+				moviePreview.type.asc()
 			)
-			.limit(30)
-			.fetch()
+			.transform(
+				groupBy(movieData.movieId).list(
+					(
+							Projections.constructor(
+								MovieListDTO::class.java,
+								movieData.movieId,
+								movieData.netizenAvgRate,
+								movieData.reservationRate,
+								movieData.nameKr,
+								movieData.nameEn,
+								movieData.poster,
+								movieData.category,
+								list(
+									Projections.constructor(
+										MoviePreviewDTO::class.java,
+										moviePreview.type,
+										moviePreview.link,
+									)
+								)
+							)
+							)
+				)
+			).subList(0, 20)
 	}
 	
 	fun getMovieDetail(movieId: String): MovieDetailDTO? {
@@ -86,12 +97,9 @@ class MovieDataRepositorySupport(
 			)
 			.from(movieData)
 			.where(movieData.movieId.eq(movieId))
-			.join(movieData.previews, moviePreview)
-			.fetchJoin()
-			.join(movieData.creators, movieCreator)
-			.fetchJoin()
-			.join(movieData.reviews, movieReview)
-			.fetchJoin()
+			.leftJoin(movieData.previews, moviePreview)
+			.leftJoin(movieData.creators, movieCreator)
+			.leftJoin(movieData.reviews, movieReview)
 			.fetchOne()
 	}
 }

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Box } from '@mui/material';
+import React, {useEffect} from 'react';
+import {Box} from '@mui/material';
 
 import useAxios from '../../hook/useAxios';
 import MovieData from '../../interfaces/MovieData';
@@ -7,35 +7,35 @@ import MovieProfile from '../../layout/MovieProfile';
 import '../../style/scss/_moviePage.scss';
 
 const MainMovieList = () => {
-    const [{ response, loading, error }, refetch] = useAxios<MovieData[]>({
-        method: 'get',
-        url: '/movie/movielist',
-        config: {
-            headers: { 'Content-Type': `application/json` },
-        },
-    });
-
-    useEffect(() => {
-        refetch();
-    }, []);
-
-    return (
-        <Box className="moviePageBox">
-            {response &&
-                response.map((movieData, index) => (
-                    <Box className="moviePageProfileBox" key={movieData.movieId}>
-                        <MovieProfile
-                            movieId={movieData.movieId}
-                            poster={movieData.poster}
-                            nameKR={movieData.nameKR}
-                            reservationRate={movieData.reservationRate}
-                            netizenAvgRate={movieData.netizenAvgRate}
-                            index={index}
-                        />
-                    </Box>
-                ))}
-        </Box>
-    );
+	const [{response}, refetch] = useAxios<MovieData[]>({
+		method: 'get',
+		url: '/movie/movielist',
+		config: {
+			headers: {'Content-Type': `application/json`},
+		},
+	});
+	
+	useEffect(() => {
+		refetch();
+	}, []);
+	
+	return (
+		<Box className="moviePageBox">
+			{response &&
+				response.map((movieData, index) => (
+					<Box className="moviePageProfileBox" key={movieData.movieId}>
+						<MovieProfile
+							movieId={movieData.movieId}
+							poster={movieData.poster}
+							nameKR={movieData.nameKR}
+							reservationRate={movieData.reservationRate}
+							netizenAvgRate={movieData.netizenAvgRate}
+							index={index}
+						/>
+					</Box>
+				))}
+		</Box>
+	);
 };
 
 export default MainMovieList;
