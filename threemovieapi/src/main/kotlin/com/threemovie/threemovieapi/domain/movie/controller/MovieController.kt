@@ -4,6 +4,7 @@ import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieDetailDTO
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieListDTO
 import com.threemovie.threemovieapi.domain.movie.service.MovieDataControlService
 import com.threemovie.threemovieapi.domain.movie.service.MovieDataService
+import com.threemovie.threemovieapi.domain.movie.service.MovieSearchService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/movie")
 class MovieController(
 	val movieService: MovieDataService,
-	val movieDataControlService: MovieDataControlService
+	val movieDataControlService: MovieDataControlService,
+	val movieSearchService: MovieSearchService
 ) {
 	@GetMapping("/main")
 	fun getMovieList(): ResponseEntity<List<MovieListDTO>> {
@@ -27,4 +29,10 @@ class MovieController(
 	fun getMovieDetail(@PathVariable movieId: String): ResponseEntity<MovieDetailDTO> {
 		return ResponseEntity.ok(movieService.getMovieDetail(movieId))
 	}
+
+	@GetMapping("/searchTest/{movieName}")
+	fun searchTest(@PathVariable movieName: String) {
+		movieSearchService.movieSearchService(movieName)
+	}
+
 }

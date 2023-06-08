@@ -11,29 +11,39 @@ import org.springframework.stereotype.Service
 class MoviePreviewService(
 	val MoviePreviewRepository: MoviePreviewRepository
 ) {
-	fun save_MoviePreview(One_movie_data: JSONObject, url_Daum_Main: String, movieData: MovieData): List<MoviePreview> {
-		val api_steelcut_screening = "api/movie/" + One_movie_data.get("id").toString() + "/photoList"
-		
-		var tmp_data_steelcut = GET_DATA_USE_DAUM_API(url_Daum_Main + api_steelcut_screening)
-		val steelcut_Array = JSONObject(tmp_data_steelcut).getJSONArray("contents")
+
+	fun save_MoviePreview_new(movieId : String, movieData: MovieData): List<MoviePreview> {
+		val api_movie_data_screening = "https://movie.daum.net/api/movie/" + movieId + "/main"
+
+		var tmp_data = GET_DATA_USE_DAUM_API(api_movie_data_screening)
+		val movie_data_json = JSONObject(JSONObject(tmp_data).get("movieCommon").toString())
+		val countryMovieInfo = movie_data_json.getJSONArray("countryMovieInformation")[0]
+
 		val movie_releaseDate =
-			JSONObject(One_movie_data.get("countryMovieInformation").toString()).get("releaseDate").toString()
-		
+			JSONObject(countryMovieInfo.toString()).get("releaseDate").toString()
+
+
+
+		val api_steelcut_screening = "https://movie.daum.net/api/movie/" +movieId + "/photoList"
+
+		var tmp_data_steelcut = GET_DATA_USE_DAUM_API(api_steelcut_screening)
+		val steelcut_Array = JSONObject(tmp_data_steelcut).getJSONArray("contents")
+
 		val imageUrl_list: ArrayList<String> = arrayListOf<String>()
 		var index: Int = 0
 		for (One_steelcut in steelcut_Array) {
 			val imageUrl = JSONObject(One_steelcut.toString()).get("imageUrl")
 			imageUrl_list.add(imageUrl.toString())
 			if (index > 5) break
-			
+
 			index += 1
 		}
-		
-		val api_preview_screening = "api/video/list/movie/" + One_movie_data.get("id").toString() + "?page=1&size=20"
-		
-		var tmp_data_preview = GET_DATA_USE_DAUM_API(url_Daum_Main + api_preview_screening)
+
+		val api_preview_screening = "https://movie.daum.net/api/video/list/movie/" + movieId + "?page=1&size=20"
+
+		var tmp_data_preview = GET_DATA_USE_DAUM_API(api_preview_screening)
 		val preview_Array = JSONObject(tmp_data_preview).getJSONArray("contents")
-		
+
 		val videoUrl_list: ArrayList<String> = arrayListOf<String>()
 		for (One_preview in preview_Array) {
 			val One_preview_json = JSONObject(One_preview.toString())
@@ -46,20 +56,69 @@ class MoviePreviewService(
 				videoUrl_list.add(iframeUrl)
 			}
 		}
-		
+
 		var previews = ArrayList<MoviePreview>()
-		
+
 		for (image in imageUrl_list) {
 			previews.add(MoviePreview("image", image, movieData))
 		}
-		
+
 		for (video in videoUrl_list) {
 			previews.add(MoviePreview("video", video, movieData))
 		}
-		
-		
+
+
 		return previews
 	}
+//	fun save_MoviePreview(One_movie_data: JSONObject, url_Daum_Main: String, movieData: MovieData): List<MoviePreview> {
+//		val api_steelcut_screening = "api/movie/" + One_movie_data.get("id").toString() + "/photoList"
+//
+//		var tmp_data_steelcut = GET_DATA_USE_DAUM_API(url_Daum_Main + api_steelcut_screening)
+//		val steelcut_Array = JSONObject(tmp_data_steelcut).getJSONArray("contents")
+//		val movie_releaseDate =
+//			JSONObject(One_movie_data.get("countryMovieInformation").toString()).get("releaseDate").toString()
+//
+//		val imageUrl_list: ArrayList<String> = arrayListOf<String>()
+//		var index: Int = 0
+//		for (One_steelcut in steelcut_Array) {
+//			val imageUrl = JSONObject(One_steelcut.toString()).get("imageUrl")
+//			imageUrl_list.add(imageUrl.toString())
+//			if (index > 5) break
+//
+//			index += 1
+//		}
+//
+//		val api_preview_screening = "api/video/list/movie/" + One_movie_data.get("id").toString() + "?page=1&size=20"
+//
+//		var tmp_data_preview = GET_DATA_USE_DAUM_API(url_Daum_Main + api_preview_screening)
+//		val preview_Array = JSONObject(tmp_data_preview).getJSONArray("contents")
+//
+//		val videoUrl_list: ArrayList<String> = arrayListOf<String>()
+//		for (One_preview in preview_Array) {
+//			val One_preview_json = JSONObject(One_preview.toString())
+//			if (One_preview_json.get("title").toString().contains("예고편")) {
+//				val videoUrl = One_preview_json.get("videoUrl")
+//				val str_tmp = videoUrl.toString()
+//				val split_arr_tmp = str_tmp.split("/")
+//				val iframeUrl =
+//					"https://play-tv.kakao.com/embed/player/cliplink/${split_arr_tmp[split_arr_tmp.size - 1]}?service=player_share#clipCoverImagePanel"
+//				videoUrl_list.add(iframeUrl)
+//			}
+//		}
+//
+//		var previews = ArrayList<MoviePreview>()
+//
+//		for (image in imageUrl_list) {
+//			previews.add(MoviePreview("image", image, movieData))
+//		}
+//
+//		for (video in videoUrl_list) {
+//			previews.add(MoviePreview("video", video, movieData))
+//		}
+//
+//
+//		return previews
+//	}
 	
 	fun turncate_MoviePreview() {
 		MoviePreviewRepository.truncate()

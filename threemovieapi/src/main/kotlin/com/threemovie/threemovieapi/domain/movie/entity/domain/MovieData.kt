@@ -28,7 +28,7 @@ class MovieData(
 	
 	val nameEn: String? = "",
 	
-	val releaseDate: String = "",
+	val releaseDate: String? = "",
 	
 	val poster: String? = "",
 	

@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc19afb8-4a96-4a9d-94b1-ecd36c2e28bc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/resources/application.properties" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieSearchService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/controller/MovieController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/controller/MovieController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/entity/domain/MovieData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/entity/domain/MovieData.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieCreatorService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieCreatorService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieDataControlService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieDataControlService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieDataService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieDataService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MoviePreviewService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MoviePreviewService.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +31,22 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/threemovieapi">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="threemovieapi" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="threemovieapi" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -86,7 +107,35 @@
     &quot;spring.configuration.checksum&quot;: &quot;48cd2c94586386322d4b8bab4255d30d&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.ThreemovieapiApplication">
+    <configuration name="threemovieapi [classes]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/threemovieapi" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="classes" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="build.gradle.kts" type="KotlinStandaloneScriptRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="ThreeMovie" />
+      <option name="filePath" value="$PROJECT_DIR$/threemovieapi/build.gradle.kts" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ThreemovieapiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="threemovieapi.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.threemovie.threemovieapi.ThreemovieapiApplication" />
@@ -94,11 +143,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.threemovieapi [classes]" />
+        <item itemvalue="Kotlin script (Beta).build.gradle.kts" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f8d5caa7-84d9-4c3a-b7a6-90151f0c830a" name="Changes" comment="" />
+      <changelist id="bc19afb8-4a96-4a9d-94b1-ecd36c2e28bc" name="Changes" comment="" />
       <created>1675080808525</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -111,6 +166,9 @@
       <workItem from="1675582307537" duration="3035000" />
       <workItem from="1675589664198" duration="1151000" />
       <workItem from="1675590831977" duration="330000" />
+      <workItem from="1686211292701" duration="3109000" />
+      <workItem from="1686214417320" duration="4290000" />
+      <workItem from="1686218757263" duration="2142000" />
     </task>
     <servers />
   </component>
