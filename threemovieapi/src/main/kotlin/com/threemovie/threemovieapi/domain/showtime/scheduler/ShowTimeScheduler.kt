@@ -48,14 +48,14 @@ class ShowTimeScheduler(
 	var time = 202302110107
 	
 	@Async
-	@Scheduled(cron = "0 0/10 * * * ?")
+	@Scheduled(cron = "0 0/30 * * * ?")
 	fun chkMovieShowingTime() {
 		var chkTime = lastUpdateTimeRepositorySupport.getLastTime(code)
 		if (chkTime == null) {
 			lastUpdateTimeRepository.save(LastUpdateTime(code, 202302110107))
 			chkTime = 202302110107
 		}
-		if (ChkNeedUpdate.chkUpdateTenMinute(chkTime)) {
+		if (ChkNeedUpdate.chkUpdateFiveMinute(chkTime)) {
 			time = ChkNeedUpdate.retFormatterTime()
 			lastUpdateTimeRepositorySupport.updateLastTime(time, code)
 			movieNameInfo = movieDataRepositorySupport.getMovieNameData()
@@ -88,7 +88,7 @@ class ShowTimeScheduler(
 			
 			showTimeRepository.saveAll(showTimeList)
 			showTimeReserveRepositorySupport.deleteShowTimeReserveByTime(time)
-			showTimeRepositorySupport.deleteZeroReserveShowTime()
+			showTimeRepositorySupport.deleteZeroReserveShowTime(time)
 		}
 	}
 	
@@ -494,7 +494,8 @@ class ShowTimeScheduler(
 				date.toInt(),
 				totalSeat,
 				playKind,
-				theaterData
+				theaterData,
+				time
 			)
 			showTime.movieData = MovieData(movieId)
 			

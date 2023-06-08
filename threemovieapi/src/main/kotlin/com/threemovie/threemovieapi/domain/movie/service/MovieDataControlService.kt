@@ -27,14 +27,12 @@ class MovieDataControlService(
 			val tmp_one_movie_data = JSONObject(One_movie_data.toString())
 			try {
 				val movieData = movieDataService.save_MovieData(tmp_one_movie_data, url_Daum_Main)
-				val movieCreators = movieCreatorService.save_MovieCreator(tmp_one_movie_data, url_Daum_Main)
-				val moviePreviews = moviePreviewService.save_MoviePreview(tmp_one_movie_data, url_Daum_Main)
+				val movieCreators = movieCreatorService.save_MovieCreator(tmp_one_movie_data, url_Daum_Main, movieData)
+				val moviePreviews = moviePreviewService.save_MoviePreview(tmp_one_movie_data, url_Daum_Main, movieData)
 				
 				movieData.addCreators(movieCreators)
 				movieData.addPreviews(moviePreviews)
-				movieData_List.add(
-					movieDataService.save_MovieData(tmp_one_movie_data, url_Daum_Main)
-				)
+				movieData_List.add(movieData)
 			} catch (e: Exception) {
 				println("save_error")
 				println("movie name : " + tmp_one_movie_data.get("titleKorean") + tmp_one_movie_data.get("id"))

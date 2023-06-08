@@ -1,13 +1,14 @@
+import MoviePreview from "./MoviePreview";
+
 interface MovieData {
-    movieId: string;
-    netizenAvgRate: number;
-    reservationRate: number;
-    nameKR: string;
-    nameEN: string;
-    poster: string | null;
-    category: string;
-    steelcuts: string | null;
-    trailer: string | null;
+	movieId: string;
+	netizenAvgRate: number;
+	reservationRate: number;
+	nameKR: string;
+	nameEN: string | null;
+	poster: string | null;
+	category: string | null;
+	previews: [MoviePreview];
 }
 
 export default MovieData;

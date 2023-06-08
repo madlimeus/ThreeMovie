@@ -1,5 +1,6 @@
 package com.threemovie.threemovieapi.domain.movie.scheduler
 
+import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
 import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieReview
 import com.threemovie.threemovieapi.domain.movie.repository.MovieReviewRepository
 import com.threemovie.threemovieapi.domain.movie.service.MovieDataService
@@ -216,20 +217,15 @@ class GetReviewFromTheater(
 					JSONObject(oneReview.toString()).get("onelnEvalCn").toString(),
 					"MB",
 				)
-				try {
-					val res = movieReviewRepository.save(member_MovieReview)
-				} catch (e: Exception) {
-					println("is error")
-					println(MovieId)
-					
-				}
+				member_MovieReview.movieData = MovieData(MovieId)
+				movieReviewRepository.save(member_MovieReview)
 			}
 //            println("===============================================================================")
 		}
 	}
 	
 	@Async
-	@Scheduled(cron = "0 0 0/1 * * *")
+	@Scheduled(cron = "0 0/5 * * * ?")
 	fun getReview() {
 		var time = LastUpdateTimeRepositorySupport.getLastTime(code)
 		if (time == null) {
@@ -237,7 +233,7 @@ class GetReviewFromTheater(
 			time = 202302110107
 		}
 		
-		if (ChkNeedUpdate.chkUpdateTwelveHours(time)) {
+		if (ChkNeedUpdate.chkUpdateTenMinute(time)) {
 			movieReviewRepository.truncate()
 			MovieReviewService.saveReviewData()
 			LastUpdateTimeRepositorySupport.updateLastTime(ChkNeedUpdate.retFormatterTime(), code)

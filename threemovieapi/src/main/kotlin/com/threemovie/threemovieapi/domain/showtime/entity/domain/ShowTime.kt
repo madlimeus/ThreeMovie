@@ -16,12 +16,14 @@ import org.hibernate.annotations.SQLInsert
 	)]
 )
 @SQLInsert(
-	sql = "INSERT IGNORE INTO show_time(movie_id, play_kind, screen_en, screen_kr, show_ymd, theater_data_id, total_seat, id)" +
-			"VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+	sql = "INSERT INTO show_time(movie_id, play_kind, screen_en, screen_kr, show_ymd, theater_data_id, total_seat, updated_at, id)" +
+			"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)" +
+			"ON DUPLICATE KEY UPDATE" +
+			" updated_at = VALUES(updated_at)"
 )
 class ShowTime(
 	@NotNull
-	@Column(length = 20)
+	@Column(length = 50)
 	val screenKr: String = "",
 	
 	@NotNull
@@ -38,14 +40,16 @@ class ShowTime(
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "theater_data_id")
-	val theaterData: TheaterData
-) : PrimaryKeyEntity() {
+	val theaterData: TheaterData,
+	
 	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
+	val updatedAt: Long = 0L,
+) : PrimaryKeyEntity() {
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
 	@JoinColumn(
 		name = "movie_id",
-		referencedColumnName = "movieId",
-		foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT)
+		referencedColumnName = "movieId"
 	)
 	var movieData: MovieData? = null
 	

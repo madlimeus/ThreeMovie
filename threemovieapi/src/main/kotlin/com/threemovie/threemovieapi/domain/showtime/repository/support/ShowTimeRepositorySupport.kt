@@ -16,6 +16,7 @@ import com.threemovie.threemovieapi.domain.theater.entity.dto.TheaterDTO
 import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
+import java.util.*
 
 @Repository
 class ShowTimeRepositorySupport(
@@ -25,9 +26,9 @@ class ShowTimeRepositorySupport(
 	val em = entityManager
 	
 	@Transactional
-	fun deleteZeroReserveShowTime() {
+	fun deleteZeroReserveShowTime(time: Long) {
 		query.delete(showTime)
-			.where(showTime.showTimeReserve.isEmpty)
+			.where(showTime.updatedAt.lt(time))
 			.execute()
 		
 		em?.flush()
@@ -134,12 +135,16 @@ class ShowTimeRepositorySupport(
 			.fetch()
 	}
 	
+	fun idIn(idList: List<UUID>): BooleanExpression {
+		return showTime.id.`in`(idList)
+	}
+	
 	fun dateIn(date: List<Int>?): BooleanExpression? {
 		return if (date.isNullOrEmpty()) null else showTime.showYmd.`in`(date)
 	}
 	
 	fun movieIn(movieId: List<String>?): BooleanExpression? {
-		return if (movieId.isNullOrEmpty()) null else showTime.movieData.movieId.`in`(movieId)
+		return if (movieId.isNullOrEmpty()) null else movieData.movieId.`in`(movieId)
 	}
 	
 	fun theaterIn(theater: List<Pair<String, String>>?): BooleanBuilder? {

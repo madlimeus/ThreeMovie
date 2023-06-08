@@ -3,23 +3,33 @@ package com.threemovie.threemovieapi.domain.movie.entity.domain
 import com.threemovie.threemovieapi.global.entity.PrimaryKeyEntity
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
+import org.hibernate.annotations.SQLInsert
 
 @Entity
-@Table(name = "MovieCreator")
+@Table(
+	name = "MovieCreator",
+	uniqueConstraints = [UniqueConstraint(
+		name = "creator_uk",
+		columnNames = ["nameKr", "roleKr", "movie_id"]
+	)]
+)
+@SQLInsert(
+	sql = "INSERT IGNORE INTO movie_creator(link, movie_id, name_en, name_kr, role_kr, id)"
+			+ " VALUES (?, ?, ?, ?, ?, ?)"
+)
 class MovieCreator(
 	@NotNull
-	var nameKr: String,
+	val nameKr: String,
 	
-	var nameEn: String?,
+	val nameEn: String?,
 	
-	var roleKr: String?,
+	val roleKr: String?,
 	
-	@NotNull
 	@Column(length = 500)
-	var link: String,
-) : PrimaryKeyEntity() {
+	val link: String?,
+	
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "movie_id", referencedColumnName = "movieId")
-	var movieData: MovieData? = null
-}
+	val movieData: MovieData? = null
+) : PrimaryKeyEntity()
