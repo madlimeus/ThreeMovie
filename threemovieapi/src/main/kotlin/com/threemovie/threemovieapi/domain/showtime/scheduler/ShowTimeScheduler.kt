@@ -4,6 +4,7 @@ import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieNameDTO
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieNameInfoVO
 import com.threemovie.threemovieapi.domain.movie.repository.support.MovieDataRepositorySupport
+import com.threemovie.threemovieapi.domain.movie.service.MovieSearchService
 import com.threemovie.threemovieapi.domain.showtime.entity.domain.ShowTime
 import com.threemovie.threemovieapi.domain.showtime.entity.domain.ShowTimeReserve
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeVO
@@ -34,7 +35,8 @@ class ShowTimeScheduler(
 	val lastUpdateTimeRepository: LastUpdateTimeRepository,
 	val showTimeRepository: ShowTimeRepository,
 	val showTimeReserveRepositorySupport: ShowTimeReserveRepositorySupport,
-	val showTimeRepositorySupport: ShowTimeRepositorySupport
+	val showTimeRepositorySupport: ShowTimeRepositorySupport,
+	val movieSearchService: MovieSearchService
 ) {
 	val userAgent: String =
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
@@ -487,7 +489,9 @@ class ShowTimeScheduler(
 				nameMap[movieKR] = movieName
 			}
 			var name = nameMap[movieKR]
-			val movieId = name?.movieId ?: movieKR
+//			val movieId = name?.movieId ?: movieKR
+			val movieId = name?.movieId ?: movieSearchService.movieSearchService(movieKR)
+
 			var showTime = ShowTime(
 				screenKR,
 				screenEN,

@@ -36,7 +36,7 @@ class MovieDataService(
 		val countryMovieInfo = movie_data_json.getJSONArray("countryMovieInformation")[0]
 
 		val movie_releaseDate =
-			JSONObject(countryMovieInfo.toString()).get("releaseDate").toString()
+			JSONObject(countryMovieInfo.toString()).get("releaseDate").toString().toLong()
 
 		println(movie_releaseDate)
 
