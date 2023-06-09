@@ -14,14 +14,17 @@ import org.hibernate.annotations.SQLInsert
 			" recommendation = VALUES(recommendation)"
 )
 class MovieReview(
-	val recommendation: String? = "",
-	
-	val date: String? = "",
-	
+	@NotNull
+	val recommendation: Int = 0,
+
+	@NotNull
+	val date: Long = 202303030506,
+
 	@Column(length = 500, unique = true)
 	val review: String? = "",
-	
-	val movieTheater: String? = "",
+
+	@NotNull
+	val movieTheater: String = "",
 ) : PrimaryKeyEntity() {
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])

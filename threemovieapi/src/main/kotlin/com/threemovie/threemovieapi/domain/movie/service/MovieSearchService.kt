@@ -14,7 +14,8 @@ class MovieSearchService(
     val movieCreatorService: MovieCreatorService,
     val moviePreviewService: MoviePreviewService
     ) {
-    fun movieSearchService(movieName : String){
+    fun movieSearchService(movieName : String): String{
+        val result : String
         val url_search = "https://movie.daum.net/api/search/all?q=" + movieName
         val responseData = JSONObject(GET_DATA_USE_DAUM_API(url_search))
         val search_result = JSONObject(JSONObject(responseData
@@ -27,10 +28,13 @@ class MovieSearchService(
                 .get("document").toString())
                 .get("movieId").toString()
             saveMovieDataSearchSuccess(resultMovieId)
+            result = resultMovieId
         } else {
             println("else")
             saveMovieDataSearchFail(movieName)
+            result = movieName
         }
+        return result
     }
 
     fun saveMovieDataSearchFail(movieName : String){
@@ -43,7 +47,7 @@ class MovieSearchService(
                 null,
                 movieName,
                 null,
-                null,
+                0,
                 null,
                 null,
                 null,

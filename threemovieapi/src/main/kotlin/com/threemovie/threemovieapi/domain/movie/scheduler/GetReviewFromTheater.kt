@@ -119,8 +119,8 @@ class GetReviewFromTheater(
 			val MovieId = movie_tmp.key
 			for (oneReview in LT_Moviedata) {
 				val member_MovieReview = MovieReview(
-					JSONObject(oneReview.toString()).get("RecommandCount").toString(),
-					JSONObject(oneReview.toString()).get("RegistDate").toString().replace(".", ""),
+					JSONObject(oneReview.toString()).get("RecommandCount").toString().toInt(),
+					JSONObject(oneReview.toString()).get("RegistDate").toString().replace(".", "").toLong(),
 					JSONObject(oneReview.toString()).get("ReviewText").toString(),
 					"LC",
 				)
@@ -212,8 +212,8 @@ class GetReviewFromTheater(
 			}
 			for (oneReview in LT_Moviedata) {
 				val member_MovieReview = MovieReview(
-					JSONObject(oneReview.toString()).get("rcmmCnt").toString(),
-					JSONObject(oneReview.toString()).get("fullLstUptDt").toString().split(" ")[0].replace(".", ""),
+					JSONObject(oneReview.toString()).get("rcmmCnt").toString().toInt(),
+					JSONObject(oneReview.toString()).get("fullLstUptDt").toString().split(" ")[0].replace(".", "").toLong(),
 					JSONObject(oneReview.toString()).get("onelnEvalCn").toString(),
 					"MB",
 				)
@@ -234,7 +234,6 @@ class GetReviewFromTheater(
 		}
 		
 		if (ChkNeedUpdate.chkUpdateTenMinute(time)) {
-			movieReviewRepository.truncate()
 			MovieReviewService.saveReviewData()
 			LastUpdateTimeRepositorySupport.updateLastTime(ChkNeedUpdate.retFormatterTime(), code)
 		}

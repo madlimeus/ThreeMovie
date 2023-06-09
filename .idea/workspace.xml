@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc19afb8-4a96-4a9d-94b1-ecd36c2e28bc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieSearchService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/controller/MovieController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/controller/MovieController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/entity/domain/MovieData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/entity/domain/MovieData.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieCreatorService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieCreatorService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieDataControlService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieDataControlService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/entity/domain/MovieReview.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/entity/domain/MovieReview.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/scheduler/GetReviewFromTheater.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/scheduler/GetReviewFromTheater.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieDataService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieDataService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MoviePreviewService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MoviePreviewService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieReviewService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieReviewService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieSearchService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieSearchService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/showtime/scheduler/ShowTimeScheduler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/showtime/scheduler/ShowTimeScheduler.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,6 +168,9 @@
       <workItem from="1686211292701" duration="3109000" />
       <workItem from="1686214417320" duration="4290000" />
       <workItem from="1686218757263" duration="2142000" />
+      <workItem from="1686228617136" duration="80000" />
+      <workItem from="1686291681847" duration="106000" />
+      <workItem from="1686295867011" duration="6584000" />
     </task>
     <servers />
   </component>
