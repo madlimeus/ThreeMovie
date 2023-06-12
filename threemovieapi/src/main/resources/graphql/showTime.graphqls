@@ -9,13 +9,13 @@ input Filter{
     movieFilter: [String]
     movieTheaterFilter: [String]
     brchFilter: [String]
-    dateFilter: [String]
+    dateFilter: [Float]
 }
 
 type MovieEntity {
     movieId : String!
-    movieKR : String!
-    movieEN : String
+    movieKr : String!
+    movieEn : String
     category : String
     runningTime : String
     country : String
@@ -30,34 +30,35 @@ type TheaterEntity {
 
 type TheaterItems{
     movieTheater : String!
-    brchKR : String!
-    brchEN : String
-    addrKR : String!
-    addrEN : String
+    brchKr : String!
+    brchEn : String
+    addrKr : String!
+    addrEn : String
 }
 
 type DateEntity {
-    date : String
+    date : Float!
 }
 
 type ShowTimeEntity {
-    movieKR : String
-    movieTheater : String
-    brchKR : String
-    brchEN : String
-    date : String
-    totalSeat : Int
-    playKind : String
-    screenKR : String
-    screenEN : String
-    addrKR : String!
-    addrEN : String
-    items : [showTimeItems]
+    movieKr : String!
+    poster : String
+    movieTheater : String!
+    brchKr : String!
+    brchEn : String
+    date : Float!
+    totalSeat : Int!
+    playKind : String!
+    screenKr : String!
+    screenEn : String
+    addrKr : String!
+    addrEn : String
+    res : [showTimeItem]
 }
 
-type showTimeItems{
-    ticketPage: String,
-    startTime: String,
-    endTime: String,
-    restSeat: String
+type showTimeItem{
+    startTime: Float!,
+    endTime: Float!,
+    restSeat: Int!,
+    ticketPage: String!
 }

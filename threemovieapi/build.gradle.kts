@@ -3,10 +3,21 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "3.0.1"
 	id("io.spring.dependency-management") version "1.1.0"
+	id("org.jetbrains.kotlin.plugin.noarg") version "1.7.22"
 	kotlin("jvm") version "1.7.22"
 	kotlin("plugin.spring") version "1.7.22"
 	kotlin("plugin.jpa") version "1.7.22"
 	kotlin("kapt") version "1.7.22"
+}
+
+noArg {
+	annotation("jakarta.persistence.Entity")
+}
+
+allOpen {
+	annotation("jakarta.persistence.Entity")
+	annotation("jakarta.persistence.MappedSuperclass")
+	annotation("jakarta.persistence.Embeddable")
 }
 
 group = "com.threemovie"
@@ -36,12 +47,12 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
 	implementation("org.json:json:20230227")
-	implementation("com.bucket4j:bucket4j-core:8.1.0")
-	implementation("com.bucket4j:bucket4j-jcache:8.1.0")
 	implementation("org.ehcache:ehcache:3.10.8")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
 	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+	implementation("com.github.f4b6a3:ulid-creator:5.2.0")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
 	

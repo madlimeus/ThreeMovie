@@ -1,9 +1,9 @@
-import { atom } from 'recoil';
-import MovieData from '../../interfaces/MovieData';
+import {atom} from 'recoil';
+import {MovieData} from '../../interfaces/MovieData';
 
 const movieListAtom = atom<MovieData[]>({
-    key: 'movieList',
-    default: [],
+	key: 'movieList',
+	default: [],
 });
 
 export default movieListAtom;

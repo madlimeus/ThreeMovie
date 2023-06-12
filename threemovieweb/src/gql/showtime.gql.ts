@@ -1,11 +1,11 @@
-import { gql } from 'graphql-tag';
+import {gql} from 'graphql-tag';
 
 export const GET_MOVIE_LIST = gql`
     query {
         getMovieList {
             movieId
-            movieKR
-            movieEN
+            movieKr
+            movieEn
             category
             runningTime
             poster
@@ -20,10 +20,10 @@ export const GET_THEATER_LIST = gql`
             city
             items {
                 movieTheater
-                brchKR
-                brchEN
-                addrKR
-                addrEN
+                brchKr
+                brchEn
+                addrKr
+                addrEn
             }
         }
     }
@@ -40,22 +40,22 @@ export const GET_DATE_LIST = gql`
 export const GET_SHOW_TIME_LIST = gql`
     query ($filter: Filter) {
         getShowTimeList(filter: $filter) {
-            movieKR
+            movieKr
             movieTheater
-            brchKR
-            brchEN
+            brchKr
+            brchEn
             date
             totalSeat
             playKind
-            screenKR
-            screenEN
-            addrKR
-            addrEN
-            items {
-                ticketPage
+            screenKr
+            screenEn
+            addrKr
+            addrEn
+            res {
                 startTime
                 endTime
                 restSeat
+                ticketPage
             }
         }
     }
