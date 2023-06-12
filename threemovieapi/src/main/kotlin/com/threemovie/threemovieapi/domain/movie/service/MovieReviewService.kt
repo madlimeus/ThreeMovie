@@ -1,5 +1,6 @@
 package com.threemovie.threemovieapi.domain.movie.service
 
+import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
 import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieReview
 import com.threemovie.threemovieapi.domain.movie.repository.MovieReviewRepository
 import com.threemovie.threemovieapi.global.service.CalcSimilarity
@@ -10,12 +11,10 @@ import org.springframework.stereotype.Service
 
 @Service
 class MovieReviewService(
-	val movieDataRepository: MovieReviewRepository,
 	val movieDataService: MovieDataService,
 	val movieReviewRepository: MovieReviewRepository,
 ) {
 	//MB 에서 MovieList 뽑아 오는 과정에서 줄거리에 " 가 들어 가서 JSON 으로 파싱이 안되는 문제 : getMovieListMB
-	private val code = "review"
 	val userAgent: String =
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
 	
@@ -70,7 +69,6 @@ class MovieReviewService(
 			var similarity: Double = 0.0
 			val movieNameLC = JSONObject(json_tmp.toString()).get("MovieNameKR").toString()
 			for (arr_tmp in movieList) {
-				println(movieNameLC + " | " + arr_tmp.value)
 				
 				val tmpSimilarity = CalcSimilarity.calcSimilarity(arr_tmp.value, movieNameLC)
 				if (similarity < tmpSimilarity) {
@@ -85,7 +83,7 @@ class MovieReviewService(
 		return movieListLC
 	}
 	
-	fun getReviewLT() {
+	fun getReviewLC(): List<MovieReview> {
 		val movieListLT = getMovieListLC()
 		val url = "https://www.lottecinema.co.kr/LCWS/Movie/MovieData.aspx"
 		val movieReview_List = ArrayList<MovieReview>()
@@ -103,22 +101,23 @@ class MovieReviewService(
 		paramList["pageSize"] = 10
 //        println(movieListLT.size)
 		for (movie_tmp in movieListLT) {
-			paramList["representationMovieCode"] = movie_tmp.value.toString()
+			paramList["representationMovieCode"] = movie_tmp.value
 			val LT_Moviedata = JSONObject(
-				JSONObject(usePostApiLC(url, paramList).toString()).get("TotalReviewItems").toString()
+				JSONObject(usePostApiLC(url, paramList)).get("TotalReviewItems").toString()
 			).getJSONArray("Items")
-			val MovieId = movie_tmp.key
+			val movieId = movie_tmp.key
 			for (oneReview in LT_Moviedata) {
 				val member_MovieReview = MovieReview(
-					JSONObject(oneReview.toString()).get("RecommandCount").toString(),
-					JSONObject(oneReview.toString()).get("RegistDate").toString().replace(".", ""),
+					JSONObject(oneReview.toString()).getInt("RecommandCount"),
+					JSONObject(oneReview.toString()).get("RegistDate").toString().replace(".", "").trim().toLong(),
 					JSONObject(oneReview.toString()).get("ReviewText").toString(),
 					"LC",
 				)
+				member_MovieReview.movieData = MovieData(movieId)
 				movieReview_List.add(member_MovieReview)
 			}
 		}
-		movieReviewRepository.saveAll(movieReview_List)
+		return movieReview_List
 	}
 	
 	fun convertStringUnicodeToKorean(data: String): String {
@@ -180,7 +179,7 @@ class MovieReviewService(
 		return movieListMB
 	}
 	
-	fun getReviewMB() {
+	fun getReviewMB(): List<MovieReview> {
 		val movieListMB = getMovieListMB()
 		
 		val url = "https://www.megabox.co.kr/on/oh/oha/Movie/selectOneLnList.do"
@@ -195,37 +194,38 @@ class MovieReviewService(
 		
 		for (movie_tmp in movieListMB) {
 			paramList["movieNo"] = movie_tmp.value
-			val MovieId = movie_tmp.key
-			var LT_Moviedata = JSONArray()
+			val movieId = movie_tmp.key
+			var MB_Moviedata = JSONArray()
 			try {
-				LT_Moviedata = JSONObject(usePostApiMB(url, paramList)).getJSONArray("list")
+				MB_Moviedata = JSONObject(usePostApiMB(url, paramList)).getJSONArray("list")
 			} catch (e: Exception) {
-				println(MovieId)
+				println(movieId)
 				continue
 			}
 			
-			for (oneReview in LT_Moviedata) {
+			for (oneReview in MB_Moviedata) {
 				val member_MovieReview = MovieReview(
-					JSONObject(oneReview.toString()).get("rcmmCnt").toString(),
-					JSONObject(oneReview.toString()).get("fullLstUptDt").toString().split(" ")[0].replace(".", ""),
+					JSONObject(oneReview.toString()).getInt("rcmmCnt"),
+					JSONObject(oneReview.toString()).get("fullLstUptDt").toString().split(" ")[0].replace(".", "")
+						.trim().toLong(),
 					JSONObject(oneReview.toString()).get("onelnEvalCn").toString(),
 					"MB",
 				)
+				member_MovieReview.movieData = MovieData(movieId)
 				movieReview_List.add(member_MovieReview)
 			}
 		}
 		
-		try {
-			movieReviewRepository.saveAll(movieReview_List)
-		} catch (e: Exception) {
-			println("is error in review")
-		}
+		return movieReview_List
 	}
 	
 	fun saveReviewData() {
+		val reviews = ArrayList<MovieReview>()
 		getMovieListDB()
-		println(movieList)
-		getReviewMB()
-		getReviewLT()
+		
+		reviews.addAll(getReviewMB())
+		reviews.addAll(getReviewLC())
+		
+		movieReviewRepository.saveAll(reviews)
 	}
 }

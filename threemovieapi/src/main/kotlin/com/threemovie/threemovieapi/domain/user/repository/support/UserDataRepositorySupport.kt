@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 import java.time.LocalDate
+import java.util.*
 
 @Repository
 class UserDataRepositorySupport(
@@ -37,12 +38,12 @@ class UserDataRepositorySupport(
 	}
 	
 	@Transactional
-	fun updateUserData(email: String, nickName: String, sex: Boolean?, birth: LocalDate?) {
+	fun updateUserData(id: UUID, nickName: String, sex: Boolean?, birth: LocalDate?) {
 		query.update(userData)
 			.set(userData.nickName, nickName)
 			.set(userData.sex, sex)
 			.set(userData.birth, birth)
-			.where(userData.userLogin.email.eq(email))
+			.where(userData.id.eq(id))
 			.execute()
 		
 		entityManager?.clear()
@@ -50,9 +51,9 @@ class UserDataRepositorySupport(
 	}
 	
 	@Transactional
-	fun deleteUserData(email: String) {
+	fun deleteUserData(id: UUID) {
 		query.delete(userData)
-			.where(userData.userLogin.email.eq(email))
+			.where(userData.id.eq(id))
 			.execute()
 		
 		entityManager?.clear()
@@ -64,7 +65,6 @@ class UserDataRepositorySupport(
 			.select(userData.nickName)
 			.from(userData)
 			.join(userData.userLogin, userLogin)
-			.fetchJoin()
 			.where(userLogin.email.eq(email))
 			.fetchOne()
 	}
@@ -72,8 +72,9 @@ class UserDataRepositorySupport(
 	fun getUserData(email: String): UserDataDTO? {
 		return query
 			.select(
-				Projections.fields(
+				Projections.constructor(
 					UserDataDTO::class.java,
+					userLogin.email,
 					userData.nickName,
 					userData.sex,
 					userData.birth,
@@ -82,8 +83,7 @@ class UserDataRepositorySupport(
 				)
 			)
 			.from(userData)
-			.join(userData.userLogin, userLogin)
-			.fetchJoin()
+			.leftJoin(userData.userLogin, userLogin)
 			.where(userLogin.email.eq(email))
 			.fetchOne()
 	}

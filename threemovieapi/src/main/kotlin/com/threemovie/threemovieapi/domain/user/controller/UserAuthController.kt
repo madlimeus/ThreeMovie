@@ -5,7 +5,6 @@ import com.threemovie.threemovieapi.domain.user.controller.request.AuthRequest
 import com.threemovie.threemovieapi.domain.user.controller.request.EmailRequest
 import com.threemovie.threemovieapi.domain.user.controller.request.LoginRequest
 import com.threemovie.threemovieapi.domain.user.controller.response.AccessTokenResponse
-import com.threemovie.threemovieapi.domain.user.exception.AlreadyExistEmailException
 import com.threemovie.threemovieapi.domain.user.service.UserAuthService
 import com.threemovie.threemovieapi.domain.user.service.UserDataService
 import com.threemovie.threemovieapi.global.security.config.UserRole
@@ -32,9 +31,8 @@ class UserAuthController(
 	@PostMapping("/send/code")
 	fun sendAuthEmail(@RequestBody emailRequest: EmailRequest): ResponseEntity<String> {
 		val (email, isSignUp) = emailRequest
-		userDataService.existsEmail(email)
-		if (isSignUp)
-			throw AlreadyExistEmailException()
+		userDataService.existsEmail(email, isSignUp)
+		
 		userAuthService.sendAuth(email)
 		return ResponseEntity.status(HttpStatus.OK).body("success")
 	}
@@ -51,7 +49,6 @@ class UserAuthController(
 	fun loginAccount(@RequestBody loginRequest: LoginRequest): ResponseEntity<TokenResponse> {
 		val (email, pass) = loginRequest
 		
-		userDataService.existsEmail(email)
 		userAuthService.loginAccount(email, pass)
 		
 		val nickName = userDataService.getNickName(email)
@@ -77,7 +74,7 @@ class UserAuthController(
 	fun signUpAccount(@RequestBody account: AccountSignUpRequest): ResponseEntity<String> {
 		userAuthService.existsAuth(account.email)
 		
-		userDataService.existsEmail(account.email)
+		userDataService.existsEmail(account.email, true)
 		userDataService.existsNickName(account.nickName)
 		
 		
@@ -107,7 +104,7 @@ class UserAuthController(
 			.body(ret)
 	}
 	
-	@PatchMapping("/password")
+	@PostMapping("/password")
 	fun changePassword(@RequestBody loginRequest: LoginRequest): ResponseEntity<String> {
 		val (email, pass) = loginRequest
 		userDataService.changePassword(email, pass)

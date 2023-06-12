@@ -13,20 +13,21 @@ class TheaterDataRepositorySupport(
 	val query: JPAQueryFactory
 ) : QuerydslRepositorySupport(TheaterData::class.java) {
 	val theater: QTheaterData = QTheaterData.theaterData
-	fun getTheaterAll(): List<TheaterDTO>? = query
-		.select(
-			Projections.fields(
-				TheaterDTO::class.java,
-				theater.movieTheater,
-				theater.city,
-				theater.brchKr,
-				theater.brchEn,
-				theater.addrKr,
-				theater.addrEn,
+	fun getTheaterAll(): List<TheaterDTO> =
+		query
+			.select(
+				Projections.fields(
+					TheaterDTO::class.java,
+					theater.movieTheater,
+					theater.city,
+					theater.brchKr,
+					theater.brchEn,
+					theater.addrKr,
+					theater.addrEn
+				)
 			)
-		)
-		.from(theater)
-		.fetch()
+			.from(theater)
+			.fetch()
 	
 	fun getTheaterEntityByMT(movieTheater: String): List<TheaterData> = query
 		.select(

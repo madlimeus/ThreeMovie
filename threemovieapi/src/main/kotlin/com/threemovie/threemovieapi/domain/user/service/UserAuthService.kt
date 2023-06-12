@@ -50,7 +50,7 @@ class UserAuthService(
 		val encodePass = passwordEncoder.encode(pass)
 		
 		val userLogin = UserLogin(email, encodePass)
-		val userdata = UserData(nickName, sex, birth)
+		val userdata = UserData(nickName, sex, birth?.plusDays(1))
 		userLogin.userData = userdata
 		userdata.userLogin = userLogin
 		userLoginRepository.save(userLogin)
@@ -59,15 +59,12 @@ class UserAuthService(
 	}
 	
 	fun signOutAccount(accessToken: String) {
-		try {
-			val email = jwtTokenProvider.getEmail(accessToken)
-			
-			userLoginRepositorySupport.deleteUserLogin(email)
-			userdataRepositorySupport.deleteUserData(email)
-			redisUtil.deleteData(email)
-		} catch (e: Exception) {
-			return
-		}
+		val email = jwtTokenProvider.getEmail(accessToken)
+		
+		val id = userLoginRepositorySupport.getUserDataIdByEmail(email)
+		userdataRepositorySupport.deleteUserData(id)
+		userLoginRepositorySupport.deleteUserLogin(email)
+		redisUtil.deleteData(email)
 		
 	}
 	
@@ -102,8 +99,7 @@ class UserAuthService(
 	}
 	
 	fun existsAuth(email: String): Boolean {
-		val ret = userSignUpRepositorySupport.existsSuccessCode(email)
-		if (! ret)
+		if (! userSignUpRepositorySupport.existsSuccessCode(email))
 			throw AuthNotFoundException()
 		return true
 	}

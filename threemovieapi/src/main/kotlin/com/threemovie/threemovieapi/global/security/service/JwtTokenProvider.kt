@@ -42,7 +42,7 @@ class JwtTokenProvider(
 			.build()
 			.parseClaimsJws(token)
 			.body
-		println(ret)
+		
 		return ret
 	}
 	
@@ -79,7 +79,7 @@ class JwtTokenProvider(
 	
 	fun generateAccessToken(email: String, userRole: String): String {
 		val now = LocalDateTime.now().plusSeconds(ACCESS_TOKEN_EXPIRE_TIME.toLong())
-		println(now)
+		
 		val accessToken = Jwts.builder()
 			.setSubject(email)
 			.claim("role", userRole)

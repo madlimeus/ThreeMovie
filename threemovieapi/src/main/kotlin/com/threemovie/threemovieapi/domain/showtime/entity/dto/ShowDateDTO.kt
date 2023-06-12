@@ -3,5 +3,5 @@ package com.threemovie.threemovieapi.domain.showtime.entity.dto
 import com.querydsl.core.annotations.QueryProjection
 
 data class ShowDateDTO @QueryProjection constructor(
-	val date: String? = null,
+	val date: Long = 202304050603,
 )

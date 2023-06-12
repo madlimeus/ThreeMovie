@@ -1,10 +1,10 @@
 interface MyPageInfo {
-    userBirth: Date;
-    userBrch: string[];
-    userCategories: string[];
-    userEmail: string;
-    userNickName: string;
-    userSex: boolean | undefined;
+	birth: Date;
+	brch: string[];
+	categories: string[];
+	email: string;
+	nickName: string;
+	sex: boolean | undefined;
 }
 
 export default MyPageInfo;

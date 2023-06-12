@@ -9,6 +9,11 @@
 	flex-direction: column;
 	text-align: center;
 	
+	.divide {
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+	
 	.myPageTitle {
 		font-size: 25px;
 		font-weight: bold;
@@ -76,12 +81,6 @@
 		}
 	}
 	
-	.divide {
-		margin-top: 20px;
-		margin-bottom: 20px;
-		border-color: white;
-	}
-	
 	.myPageBirth {
 		margin-top: 20px;
 		margin-bottom: 20px;
@@ -143,8 +142,8 @@
 			}
 		}
 	}
-}
-
-.Mui-selected {
-	background-color: black !important;
+	
+	.Mui-selected {
+		background-color: black !important;
+	}
 }

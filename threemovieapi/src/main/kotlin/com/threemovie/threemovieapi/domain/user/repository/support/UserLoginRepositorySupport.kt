@@ -1,12 +1,14 @@
 package com.threemovie.threemovieapi.domain.user.repository.support
 
 import com.querydsl.jpa.impl.JPAQueryFactory
+import com.threemovie.threemovieapi.domain.user.entity.domain.QUserData.userData
 import com.threemovie.threemovieapi.domain.user.entity.domain.QUserLogin
 import com.threemovie.threemovieapi.domain.user.entity.domain.UserLogin
 import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Repository
+import java.util.*
 
 @Repository
 class UserLoginRepositorySupport(
@@ -14,6 +16,15 @@ class UserLoginRepositorySupport(
 	val passwordEncoder: BCryptPasswordEncoder
 ) : QuerydslRepositorySupport(UserLogin::class.java) {
 	val userLogin: QUserLogin = QUserLogin.userLogin
+	
+	fun getUserDataIdByEmail(email: String): UUID {
+		return query
+			.select(userData.id)
+			.from(userLogin)
+			.leftJoin(userLogin.userData, userData)
+			.where(userLogin.email.eq(email))
+			.fetchFirst()
+	}
 	
 	fun existsEmail(email: String): Boolean {
 		return query
