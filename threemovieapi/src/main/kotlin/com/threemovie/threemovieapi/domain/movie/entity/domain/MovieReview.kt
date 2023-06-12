@@ -16,13 +16,13 @@ import org.hibernate.annotations.SQLInsert
 class MovieReview(
 	@NotNull
 	val recommendation: Int = 0,
-	
+
 	@NotNull
 	val date: Long = 202303030506,
-	
+
 	@Column(length = 500, unique = true)
 	val review: String? = "",
-	
+  
 	@NotNull
 	val movieTheater: String = "",
 ) : PrimaryKeyEntity() {

@@ -31,6 +31,7 @@ class GetReviewFromTheater(
 		if (ChkNeedUpdate.chkUpdateTenMinute(time)) {
 			movieReviewService.saveReviewData()
 			lastUpdateTimeRepositorySupport.updateLastTime(ChkNeedUpdate.retFormatterTime(), code)
+
 		}
 	}
 	

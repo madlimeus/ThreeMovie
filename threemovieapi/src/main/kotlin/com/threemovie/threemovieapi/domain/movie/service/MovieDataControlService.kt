@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class MovieDataControlService(
-	val movieDataService: MovieDataService,
 	val movieDataRepository: MovieDataRepository,
+	val movieDataService: MovieDataService,
 	val movieCreatorService: MovieCreatorService,
 	val moviePreviewService: MoviePreviewService,
 ) {
@@ -26,10 +26,11 @@ class MovieDataControlService(
 		for (One_movie_data in list_screening_Array) {
 			val tmp_one_movie_data = JSONObject(One_movie_data.toString())
 			try {
-				val movieData = movieDataService.save_MovieData(tmp_one_movie_data, url_Daum_Main)
-				val movieCreators = movieCreatorService.save_MovieCreator(tmp_one_movie_data, url_Daum_Main, movieData)
-				val moviePreviews = moviePreviewService.save_MoviePreview(tmp_one_movie_data, url_Daum_Main, movieData)
-				
+				val movieId = tmp_one_movie_data.get("id").toString()
+				val movieData = movieDataService.save_MovieData_new(movieId)
+				val movieCreators = movieCreatorService.save_MovieCreator_new(movieId, movieData)
+				val moviePreviews = moviePreviewService.save_MoviePreview_new(movieId, movieData)
+
 				movieData.addCreators(movieCreators)
 				movieData.addPreviews(moviePreviews)
 				movieData_List.add(movieData)

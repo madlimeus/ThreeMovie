@@ -108,7 +108,9 @@ class MovieReviewService(
 			val movieId = movie_tmp.key
 			for (oneReview in LT_Moviedata) {
 				val member_MovieReview = MovieReview(
+
 					JSONObject(oneReview.toString()).getInt("RecommandCount"),
+
 					JSONObject(oneReview.toString()).get("RegistDate").toString().replace(".", "").trim().toLong(),
 					JSONObject(oneReview.toString()).get("ReviewText").toString(),
 					"LC",
@@ -205,6 +207,7 @@ class MovieReviewService(
 			
 			for (oneReview in MB_Moviedata) {
 				val member_MovieReview = MovieReview(
+
 					JSONObject(oneReview.toString()).getInt("rcmmCnt"),
 					JSONObject(oneReview.toString()).get("fullLstUptDt").toString().split(" ")[0].replace(".", "")
 						.trim().toLong(),
