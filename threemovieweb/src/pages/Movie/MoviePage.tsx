@@ -1,15 +1,19 @@
 import React, {useEffect} from 'react';
 import {Box} from '@mui/material';
-
+import {useLocation} from "react-router-dom";
+import QueryString from "qs";
 import useAxios from '../../hook/useAxios';
-import MovieData from '../../interfaces/MovieData';
 import MovieProfile from '../../layout/MovieProfile';
 import '../../style/scss/_moviePage.scss';
+import {MovieSearchData} from "../../interfaces/MovieData";
+
 
 const MainMovieList = () => {
-	const [{response}, refetch] = useAxios<MovieData[]>({
+	const location = useLocation();
+	const queryData = QueryString.parse(location.search, {ignoreQueryPrefix: true});
+	const [{response}, refetch] = useAxios<MovieSearchData[]>({
 		method: 'get',
-		url: '/movie/movielist',
+		url: `/movie/search/${queryData.keyword ?? ''}`,
 		config: {
 			headers: {'Content-Type': `application/json`},
 		},
@@ -27,7 +31,7 @@ const MainMovieList = () => {
 						<MovieProfile
 							movieId={movieData.movieId}
 							poster={movieData.poster}
-							nameKR={movieData.nameKR}
+							nameKr={movieData.nameKr}
 							reservationRate={movieData.reservationRate}
 							netizenAvgRate={movieData.netizenAvgRate}
 							index={index}

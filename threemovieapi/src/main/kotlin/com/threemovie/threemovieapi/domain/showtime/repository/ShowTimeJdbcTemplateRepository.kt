@@ -45,7 +45,7 @@ class ShowTimeJdbcTemplateRepository {
 					ps.setString(2, showTimes[i].playKind)
 					ps.setString(3, showTimes[i].screenEn)
 					ps.setString(4, showTimes[i].screenKr)
-					ps.setInt(5, showTimes[i].showYmd)
+					ps.setLong(5, showTimes[i].showYmd)
 					ps.setString(6, showTimes[i].theaterData.id.toString())
 					ps.setInt(7, showTimes[i].totalSeat)
 					ps.setString(8, showTimes[i].id.toString())

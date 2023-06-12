@@ -8,12 +8,12 @@ data class ShowTheaterResponse(
 	data class ShowTheaterItems(
 		val movieTheater: String = "MT",
 		
-		val brchKR: String = "본점",
+		val brchKr: String = "본점",
 		
-		val brchEN: String? = null,
+		val brchEn: String? = null,
 		
-		val addrKR: String = "삼거리",
+		val addrKr: String = "삼거리",
 		
-		val addrEN: String? = "null",
+		val addrEn: String? = "null",
 	)
 }

@@ -1,8 +1,8 @@
 package com.threemovie.threemovieapi.domain.movie.controller
 
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieDetailDTO
-import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieListDTO
-import com.threemovie.threemovieapi.domain.movie.service.MovieDataControlService
+import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieMainDTO
+import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieSearchDTO
 import com.threemovie.threemovieapi.domain.movie.service.MovieDataService
 import com.threemovie.threemovieapi.domain.movie.service.MovieSearchService
 import org.springframework.http.ResponseEntity
@@ -19,9 +19,8 @@ class MovieController(
 	val movieSearchService: MovieSearchService
 ) {
 	@GetMapping("/main")
-	fun getMovieList(): ResponseEntity<List<MovieListDTO>> {
+	fun getMovieList(): ResponseEntity<List<MovieMainDTO>> {
 		val ret = movieService.getMovieList()
-		println(ret)
 		return ResponseEntity.ok(ret)
 	}
 	
@@ -30,9 +29,11 @@ class MovieController(
 		return ResponseEntity.ok(movieService.getMovieDetail(movieId))
 	}
 
-	@GetMapping("/searchTest/{movieName}")
-	fun searchTest(@PathVariable movieName: String) {
-		movieSearchService.movieSearchService(movieName)
+	
+	@GetMapping("/search/{keyword}", "/search/")
+	fun getMovieSearchKeyword(@PathVariable(required = false) keyword: String?): ResponseEntity<Set<MovieSearchDTO>> {
+		val ret = movieService.getMovieByKeyword(keyword)
+		println(ret)
+		return ResponseEntity.ok(ret)
 	}
-
 }

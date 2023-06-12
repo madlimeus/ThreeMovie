@@ -1,7 +1,6 @@
 package com.threemovie.threemovieapi.domain.movie.entity.dto
 
 import com.querydsl.core.annotations.QueryProjection
-import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieReview
 
 data class MovieDetailDTO @QueryProjection constructor(
 	val movieId: String = "",
@@ -10,29 +9,33 @@ data class MovieDetailDTO @QueryProjection constructor(
 	
 	val reservationRate: Double = 0.0,
 	
+	val runningTime: String? = "",
+	
+	val admissionCode: String? = "",
+	
+	val country: String? = "",
+	
+	val reservationRank: String? = "",
+	
+	val totalAudience: String? = "",
+	
 	val summary: String = "",
 	
 	val makingNote: String? = null,
 	
-	val nameKR: String = "",
+	val nameKr: String = "",
 	
-	val nameEN: String = "",
+	val nameEn: String = "",
 	
-	val releaseDate: String? = null,
+	val releaseDate: Long = 202304050607,
 	
 	val poster: String? = null,
 	
 	val category: String = "",
 	
-	val nameKr: String,
+	val creators: Set<MovieCreatorDTO>?,
 	
-	val nameEn: String,
+	val reviews: Set<MovieReviewDTO>?,
 	
-	val roleKr: String,
-	
-	val link: String,
-	
-	val reviews: List<MovieReview>,
-	
-	val previews: List<MoviePreviewDTO>,
+	val previews: Set<MoviePreviewDTO>?,
 )

@@ -57,7 +57,7 @@ class ShowTimeScheduler(
 			lastUpdateTimeRepository.save(LastUpdateTime(code, 202302110107))
 			chkTime = 202302110107
 		}
-		if (ChkNeedUpdate.chkUpdateFiveMinute(chkTime)) {
+		if (ChkNeedUpdate.chkUpdateTwelveHours(chkTime)) {
 			time = ChkNeedUpdate.retFormatterTime()
 			lastUpdateTimeRepositorySupport.updateLastTime(time, code)
 			movieNameInfo = movieDataRepositorySupport.getMovieNameData()
@@ -495,7 +495,7 @@ class ShowTimeScheduler(
 			var showTime = ShowTime(
 				screenKR,
 				screenEN,
-				date.toInt(),
+				date.toLong(),
 				totalSeat,
 				playKind,
 				theaterData,

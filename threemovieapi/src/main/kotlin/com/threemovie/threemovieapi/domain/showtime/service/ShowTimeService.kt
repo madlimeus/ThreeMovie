@@ -2,11 +2,10 @@ package com.threemovie.threemovieapi.domain.showtime.service
 
 import com.threemovie.threemovieapi.domain.showtime.controller.request.FilterRequest
 import com.threemovie.threemovieapi.domain.showtime.controller.response.ShowTheaterResponse
-import com.threemovie.threemovieapi.domain.showtime.controller.response.ShowTimeResponse
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowDateDTO
 import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowMovieDTO
+import com.threemovie.threemovieapi.domain.showtime.entity.dto.ShowTimeItemDTO
 import com.threemovie.threemovieapi.domain.showtime.repository.support.ShowTimeRepositorySupport
-import org.json.JSONArray
 import org.springframework.stereotype.Service
 
 @Service
@@ -14,7 +13,9 @@ class ShowTimeService(
 	val showTimeRepositorySupport: ShowTimeRepositorySupport,
 ) {
 	fun getMovieList(): List<ShowMovieDTO> {
-		return showTimeRepositorySupport.getMovieList()
+		val ret = showTimeRepositorySupport.getMovieList()
+		println(ret)
+		return ret
 	}
 	
 	fun getTheaterList(filter: FilterRequest?): List<ShowTheaterResponse> {
@@ -46,9 +47,7 @@ class ShowTimeService(
 			ret.add(tmpRes)
 		}
 		
-		val comparator: Comparator<ShowTheaterResponse> = compareBy { it.items?.size }
-		
-		return ret.sortedWith(comparator).reversed()
+		return ret.sortedByDescending { it.items?.size }
 	}
 	
 	fun getDateList(filter: FilterRequest): List<ShowDateDTO> {
@@ -56,12 +55,14 @@ class ShowTimeService(
 			filter.movieTheaterFilter,
 			filter.brchFilter
 		)
-		return showTimeRepositorySupport.getDateList(filter.movieFilter, theaterFilter)
+		val ret = showTimeRepositorySupport.getDateList(filter.movieFilter, theaterFilter)
+		
+		return ret
 	}
 	
-	fun getShowTimeList(filter: FilterRequest?): List<ShowTimeResponse> {
-		if (filter?.movieFilter.isNullOrEmpty() || filter?.brchFilter.isNullOrEmpty() || filter?.dateFilter.isNullOrEmpty())
-			return ArrayList<ShowTimeResponse>()
+	fun getShowTimeList(filter: FilterRequest?): List<ShowTimeItemDTO> {
+		if (filter?.brchFilter.isNullOrEmpty() || filter?.dateFilter.isNullOrEmpty())
+			return ArrayList()
 		
 		val theaterFilter = makeTheaterList(
 			filter?.movieTheaterFilter,
@@ -72,45 +73,9 @@ class ShowTimeService(
 			filter?.movieFilter,
 			theaterFilter,
 			filter?.dateFilter
-		)
-		val ret = ArrayList<ShowTimeResponse>()
+		).sortedBy { it.movieKr }
 		
-		for (showtime in dtolist) {
-			val items = ArrayList<ShowTimeResponse.ShowTimeItems>()
-			val jsonArr = JSONArray(showtime.items)
-			
-			for (i in 0 until jsonArr.length()) {
-				val item = jsonArr.getJSONObject(i)
-				val tmpItem = ShowTimeResponse.ShowTimeItems(
-					item["TicketPage"].toString(),
-					item["StartTime"].toString(),
-					item["EndTime"].toString(),
-					item["RestSeat"].toString()
-				)
-				items.add(tmpItem)
-			}
-			
-			val tmpResponse = ShowTimeResponse(
-				showtime.movieKr,
-				showtime.movieTheater,
-				showtime.brchKr,
-				showtime.brchEn,
-				showtime.date,
-				showtime.totalSeat,
-				showtime.playKind,
-				showtime.screenKr,
-				showtime.screenEn,
-				showtime.addrKr,
-				showtime.addrEn,
-				items
-			)
-			
-			ret.add(
-				tmpResponse
-			)
-		}
-		
-		return ret
+		return dtolist
 	}
 	
 	fun makeTheaterList(movieTheater: List<String>?, brchKR: List<String>?): List<Pair<String, String>>? {

@@ -2,7 +2,8 @@ package com.threemovie.threemovieapi.domain.movie.service
 
 import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
 import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieDetailDTO
-import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieListDTO
+import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieMainDTO
+import com.threemovie.threemovieapi.domain.movie.entity.dto.MovieSearchDTO
 import com.threemovie.threemovieapi.domain.movie.exception.MovieNotFoundException
 import com.threemovie.threemovieapi.domain.movie.exception.MovieNullException
 import com.threemovie.threemovieapi.domain.movie.repository.MovieDataRepository
@@ -16,11 +17,24 @@ class MovieDataService(
 	val movieDataRepository: MovieDataRepository,
 	val movieDataRepositorySupport: MovieDataRepositorySupport,
 ) {
-	fun getMovieDetail(movieId: String): MovieDetailDTO? {
-		return movieDataRepositorySupport.getMovieDetail(movieId) ?: throw MovieNotFoundException()
+	fun getMovieByKeyword(keyword: String?): Set<MovieSearchDTO> {
+		val ret = movieDataRepositorySupport.getMovieByKeyword(keyword)
+		if (ret.isNullOrEmpty())
+			throw MovieNotFoundException()
+		
+		return ret
 	}
 	
-	fun getMovieList(): List<MovieListDTO> {
+	fun getMovieDetail(movieId: String): MovieDetailDTO? {
+		val ret = movieDataRepositorySupport.getMovieDetail(movieId)
+		
+		if (ret.isNullOrEmpty())
+			throw MovieNotFoundException()
+		
+		return ret[0]
+	}
+	
+	fun getMovieList(): List<MovieMainDTO> {
 		return movieDataRepositorySupport.getMainMovie() ?: throw MovieNullException()
 	}
 	
@@ -115,7 +129,7 @@ class MovieDataService(
 			plot,
 			NameKR,
 			NameEN,
-			movie_releaseDate,
+			movie_releaseDate.toLong(),
 			Poster,
 			movie_data_json.get("genres").toString().replace("\"", ""),
 			makingNote,

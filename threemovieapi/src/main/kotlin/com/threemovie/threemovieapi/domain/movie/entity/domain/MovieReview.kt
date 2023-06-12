@@ -22,7 +22,7 @@ class MovieReview(
 
 	@Column(length = 500, unique = true)
 	val review: String? = "",
-
+  
 	@NotNull
 	val movieTheater: String = "",
 ) : PrimaryKeyEntity() {
