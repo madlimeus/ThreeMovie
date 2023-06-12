@@ -23,11 +23,11 @@ class UserDataService(
 ) {
 	
 	fun updateUserdata(email: String, nickName: String, sex: Boolean?, birth: LocalDate?): Boolean {
-		if (userDataRepositorySupport.existsNickName(nickName))
-			throw AlreadyExistNickNameException()
 		if (! userLoginRepositorySupport.existsEmail(email))
 			throw AccountNotFoundException()
-		userDataRepositorySupport.updateUserData(email, nickName, sex, birth)
+		
+		val id = userLoginRepositorySupport.getUserDataIdByEmail(email)
+		userDataRepositorySupport.updateUserData(id, nickName, sex, birth)
 		
 		return true
 	}
@@ -55,13 +55,13 @@ class UserDataService(
 		userLoginRepositorySupport.updatePass(email, newPassword)
 	}
 	
-	fun existsEmail(email: String) {
-		if (! userLoginRepositorySupport.existsEmail(email))
+	fun existsEmail(email: String, isSignUp: Boolean) {
+		if (userLoginRepositorySupport.existsEmail(email) && isSignUp)
 			throw AlreadyExistEmailException()
 	}
 	
 	fun existsNickName(nickName: String) {
-		if (! userDataRepositorySupport.existsNickName(nickName))
+		if (userDataRepositorySupport.existsNickName(nickName))
 			throw AlreadyExistNickNameException()
 	}
 }

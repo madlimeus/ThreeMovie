@@ -4,6 +4,8 @@ import com.querydsl.core.annotations.QueryProjection
 import java.time.LocalDate
 
 data class UserDataDTO @QueryProjection constructor(
+	val email: String = "",
+	
 	val nickName: String = "",
 	
 	val sex: Boolean? = false,

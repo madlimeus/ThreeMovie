@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Box} from '@mui/material';
 import {useSetRecoilState} from 'recoil';
 import useAxios from '../../hook/useAxios';
-import MovieData from '../../interfaces/MovieData';
+import {MovieData} from '../../interfaces/MovieData';
 import movieListAtom from '../../Recoil/Atom/movieLIstAtom';
 import movieNowAtom from '../../Recoil/Atom/movieNowAtom';
 import '../../style/scss/_mainpage.scss';
@@ -25,7 +25,7 @@ const MainPage = () => {
 	}, []);
 	
 	useEffect(() => {
-		if (response && Array.isArray(response) && response[0]) {
+		if (response && response[0]) {
 			setMovieList(response);
 			setMovieNow(response[0].movieId);
 			console.log(response);

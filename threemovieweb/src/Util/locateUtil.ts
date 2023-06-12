@@ -1,15 +1,15 @@
-export const locateDetail = (movieId : string) => {
+export const locateDetail = (movieId: string) => {
 	document.location.href = `/detail/movie?movie=${movieId}`
 }
 
-export const locateBookData = (movieId? : string, brchKR? : string) => {
-	if(movieId && brchKR)
+export const locateBookData = (movieId?: string, brchKR?: string) => {
+	if (movieId && brchKR)
 		document.location.href = `/book?movie=${movieId}&brch=${brchKR}`
 	
-	else if(movieId)
+	else if (movieId)
 		document.location.href = `/book?movie=${movieId}`
 	
-	else if(brchKR)
+	else if (brchKR)
 		document.location.href = `/book?brch=${brchKR}`
 	
 	else
@@ -36,10 +36,14 @@ export const locateFindPass = () => {
 	document.location.href = '/user/find/pass'
 }
 
-export const locateMovie = (movieId? : string) => {
-	if(movieId)
-		document.location.href = `/movie?movie=${movieId}`
-		
+export const locateMovie = (keyword?: string) => {
+	if (keyword)
+		document.location.href = `/movie?keyword=${keyword}`
+	
 	else
 		document.location.href = `/movie`
+}
+
+export const locateTheater = () => {
+	document.location.href = '/theater'
 }

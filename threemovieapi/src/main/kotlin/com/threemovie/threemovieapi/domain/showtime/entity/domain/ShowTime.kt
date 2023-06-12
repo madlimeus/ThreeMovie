@@ -30,7 +30,7 @@ class ShowTime(
 	val screenEn: String = "",
 	
 	@NotNull
-	val showYmd: Int = 0,
+	val showYmd: Long = 0,
 	
 	@NotNull
 	val totalSeat: Int = 200,

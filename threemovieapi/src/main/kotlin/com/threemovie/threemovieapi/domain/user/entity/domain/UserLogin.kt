@@ -6,7 +6,7 @@ import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 
 @Entity
-@Table(name = "UserLogin")
+@Table(name = "userLogin")
 class UserLogin(
 	@Column(length = 50)
 	@NotNull
@@ -20,7 +20,7 @@ class UserLogin(
 	var role: UserRole = UserRole.USER
 	
 	@NotNull
-	@OneToOne(mappedBy = "userLogin", orphanRemoval = true, cascade = [CascadeType.ALL])
+	@OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL], mappedBy = "userLogin")
 	@JoinColumn(name = "user_data_id")
 	var userData: UserData? = null
 }

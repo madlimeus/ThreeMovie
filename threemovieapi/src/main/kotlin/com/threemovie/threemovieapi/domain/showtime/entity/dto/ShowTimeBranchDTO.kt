@@ -9,5 +9,5 @@ data class ShowTimeBranchDTO(
 	
 	var brchEn: String = "sin",
 	
-	var date: String = "2023-04-05",
+	var date: Long = 202304050703,
 )

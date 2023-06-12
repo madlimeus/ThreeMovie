@@ -1,0 +1,79 @@
+.theaterHeader {
+	display: flex;
+	flex-direction: row;
+	
+	.MuiTabs-indicator {
+		display: none;
+	}
+	
+	.Mui-selected {
+		color: white !important;
+		background-color: #87A0C9 !important;
+	}
+	
+	button {
+		margin: 10px;
+		border: 1px solid black;
+		border-radius: 10px;
+		
+		&:hover {
+			
+			background-color: #aacafd !important;
+		}
+	}
+	
+	img {
+		height: 70px;
+		width: 70px;
+	}
+}
+
+.tab {
+	width: 150px;
+	
+}
+
+.tabPanel {
+	width: 80vw;
+	border: 1px black solid;
+	border-radius: 15px;
+	
+	.cityButton {
+		&:hover {
+			background-color: #aacafd;
+		}
+	}
+	
+	.activeButton {
+		background-color: #87A0C9;
+	}
+}
+
+.cityTab {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	
+	
+	button {
+		color: white;
+		font-size: 20px;
+	}
+	
+	.cityBox {
+		margin: 5px;
+		color: black;
+	}
+	
+}
+
+.activeTab {
+	border-bottom: 1px solid black;
+}
+
+.branchTab {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 20px;
+}

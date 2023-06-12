@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Box, Divider} from '@mui/material';
 import {useRecoilValue} from "recoil";
 import {Outlet, useLocation} from 'react-router-dom';
@@ -13,16 +13,10 @@ const NavBarPage = () => {
 	const loading = useRecoilValue(loadingAtom);
 	const location = useLocation();
 	
-	useEffect(() => {
-		console.log(loading)
-	}, [loading])
-	
-	if (!loading)
-		return <Loading/>
-	
 	return (
 		<Box className="flexbox">
 			{location.pathname.search('user') !== -1 && <Box className="backgroundImage"/>}
+			{loading > 0 && <Loading/>}
 			<Box className="coverHeader">
 				<NavHeader/>
 				<Divider className="divide"/>

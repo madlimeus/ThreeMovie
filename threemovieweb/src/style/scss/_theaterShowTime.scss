@@ -1,0 +1,67 @@
+.theaterDateCover {
+	width: 90vw;
+	
+	.dateSwiper {
+		border: 1px solid black;
+		margin: 0px;
+		margin-top: 20px;
+		text-align: center;
+		overflow: hidden;
+		width: 90vw;
+		
+		.dateSlide {
+			width: 50px;
+			display: flex;
+			
+			.dateButton {
+				margin: auto;
+				font-size: 15px !important;
+				
+				color: black;
+				display: flex;
+				flex-direction: column;
+				height: 70px;
+				width: 30px;
+				text-align: center;
+				
+				&:hover {
+					transition-duration: 0.2s;
+					background-color: #aacafd;
+				}
+			}
+			
+			.active {
+				background-color: darkgray;
+				filter: brightness(110%);
+			}
+		}
+		
+		
+		.swiper-button-next {
+			color: white;
+			--swiper-navigation-size: 20px;
+		}
+		
+		.swiper-button-prev {
+			color: white;
+			--swiper-navigation-size: 20px;
+		}
+	}
+	
+	.filterCover {
+		margin-top: 10px;
+		text-align: center;
+		width: 100%;
+		border: 1px solid gray;
+	}
+	
+	.selectDate {
+		color: black;
+		
+		p {
+			font-size: 30px;
+			font-weight: bolder;
+		}
+		
+	}
+}

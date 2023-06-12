@@ -9,7 +9,7 @@ data class TheaterDTO @QueryProjection constructor(
 	
 	val brchKr: String = "",
 	
-	val brchEn: String = "",
+	val brchEn: String? = null,
 	
 	val addrKr: String = "",
 	

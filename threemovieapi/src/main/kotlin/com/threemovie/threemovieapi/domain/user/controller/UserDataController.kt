@@ -51,10 +51,11 @@ class UserDataController(
 		return ResponseEntity.status(HttpStatus.OK).body(res)
 	}
 	
-	@PatchMapping("/data")
+	@PostMapping("/data")
 	fun updateUserData(@RequestBody updateUserdataRequest: UpdateUserDataRequest): ResponseEntity<String> {
 		val (email, nickName, sex, birth) = updateUserdataRequest
-		userDataService.updateUserdata(email, nickName, sex, birth)
+		
+		userDataService.updateUserdata(email, nickName, sex, birth?.plusDays(1))
 		
 		return ResponseEntity.status(HttpStatus.OK).body("정보가 변경 되었습니다.")
 	}

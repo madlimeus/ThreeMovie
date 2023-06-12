@@ -8,7 +8,7 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import movieInfoSelector from '../../Recoil/Selector/movieInfoSelector';
 import {onErrorImg} from '../../Util/onErrorImg';
-import MoviePreview from "../../interfaces/MoviePreview";
+import {MoviePreview} from "../../interfaces/MovieData";
 
 const MainPreview = () => {
 	const [steelcuts, setSteelcuts] = useState<MoviePreview[]>();
@@ -17,7 +17,7 @@ const MainPreview = () => {
 	SwiperCore.use([Navigation, Pagination]);
 	
 	useEffect(() => {
-		if (movieData) {
+		if (movieData && movieData.previews) {
 			const steelcuts = movieData.previews.filter((preview) =>
 				preview.type === "image"
 			);
@@ -54,7 +54,7 @@ const MainPreview = () => {
 				trailer.map((teaser) => (
 					<SwiperSlide key={teaser.link}>
 						<iframe
-							title={movieData.nameKR}
+							title={movieData.nameKr}
 							width="100%"
 							height="100%"
 							src={`${teaser.link}?service=player_share`}

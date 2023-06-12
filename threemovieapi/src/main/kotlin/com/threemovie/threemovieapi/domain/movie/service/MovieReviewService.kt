@@ -15,7 +15,6 @@ class MovieReviewService(
 	val movieReviewRepository: MovieReviewRepository,
 ) {
 	//MB 에서 MovieList 뽑아 오는 과정에서 줄거리에 " 가 들어 가서 JSON 으로 파싱이 안되는 문제 : getMovieListMB
-	private val code = "review"
 	val userAgent: String =
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
 	
@@ -109,8 +108,8 @@ class MovieReviewService(
 			val movieId = movie_tmp.key
 			for (oneReview in LT_Moviedata) {
 				val member_MovieReview = MovieReview(
-					JSONObject(oneReview.toString()).get("RecommandCount").toString(),
-					JSONObject(oneReview.toString()).get("RegistDate").toString().replace(".", "").trim(),
+					JSONObject(oneReview.toString()).getInt("RecommandCount"),
+					JSONObject(oneReview.toString()).get("RegistDate").toString().replace(".", "").trim().toLong(),
 					JSONObject(oneReview.toString()).get("ReviewText").toString(),
 					"LC",
 				)
@@ -206,9 +205,9 @@ class MovieReviewService(
 			
 			for (oneReview in MB_Moviedata) {
 				val member_MovieReview = MovieReview(
-					JSONObject(oneReview.toString()).get("rcmmCnt").toString(),
+					JSONObject(oneReview.toString()).getInt("rcmmCnt"),
 					JSONObject(oneReview.toString()).get("fullLstUptDt").toString().split(" ")[0].replace(".", "")
-						.trim(),
+						.trim().toLong(),
 					JSONObject(oneReview.toString()).get("onelnEvalCn").toString(),
 					"MB",
 				)

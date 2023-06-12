@@ -14,7 +14,8 @@ const MainMovieList = () => {
 	const movieList = useRecoilValue(movieListAtom);
 	
 	const handleMovieNow = (index: number) => {
-		setMovieNow(movieList[index].movieId);
+		if (typeof movieList[index] !== "undefined")
+			setMovieNow(movieList[index].movieId);
 	};
 	
 	SwiperCore.use([Navigation]);
@@ -23,6 +24,8 @@ const MainMovieList = () => {
 			onSlideChange={(swiper) => handleMovieNow(swiper.realIndex)}
 			style={{paddingLeft: '40px', paddingRight: '40px'}}
 			className="listSwiper"
+			slideToClickedSlide
+			loop
 			slidesPerView={4}
 			breakpoints={{
 				1024: {
@@ -35,8 +38,6 @@ const MainMovieList = () => {
 					slidesPerView: 6,
 				},
 			}}
-			slideToClickedSlide
-			loop
 			navigation
 			modules={[Navigation]}
 			centeredSlides
@@ -46,7 +47,7 @@ const MainMovieList = () => {
 					<MovieProfile
 						movieId={movieData.movieId}
 						poster={movieData.poster}
-						nameKR={movieData.nameKR}
+						nameKr={movieData.nameKr}
 						reservationRate={movieData.reservationRate}
 						netizenAvgRate={movieData.netizenAvgRate}
 						index={index}

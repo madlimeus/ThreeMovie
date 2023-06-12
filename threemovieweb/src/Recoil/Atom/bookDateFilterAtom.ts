@@ -1,8 +1,8 @@
-import { atom } from 'recoil';
+import {atom} from 'recoil';
 
-const bookDateFilterAtom = atom<string[]>({
-    key: 'bookDateFilter',
-    default: [],
+const bookDateFilterAtom = atom<number[]>({
+	key: 'bookDateFilter',
+	default: [],
 });
 
 export default bookDateFilterAtom;
