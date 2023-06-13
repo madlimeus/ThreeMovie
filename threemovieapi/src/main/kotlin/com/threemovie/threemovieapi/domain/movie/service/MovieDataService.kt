@@ -47,12 +47,20 @@ class MovieDataService(
 
 		var tmp_data = GET_DATA_USE_DAUM_API(api_movie_data_screening)
 		val movie_data_json = JSONObject(JSONObject(tmp_data).get("movieCommon").toString())
-		val countryMovieInfo = movie_data_json.getJSONArray("countryMovieInformation")[0]
+		val countryMovieInfos = movie_data_json.getJSONArray("countryMovieInformation")
 
-		val movie_releaseDate =
-			JSONObject(countryMovieInfo.toString()).get("releaseDate").toString().toLong()
+		var movie_releaseDate: Long = 0
 
-		println(movie_releaseDate)
+		for(countryMovieInfo in countryMovieInfos){
+			val country = JSONObject(JSONObject(countryMovieInfo.toString()).get("country").toString()).get("id").toString()
+			if(!JSONObject(countryMovieInfo.toString()).get("releaseDate").equals(null) && country.equals("KR")){
+				movie_releaseDate =
+					JSONObject(countryMovieInfo.toString()).get("releaseDate").toString().toLong()
+				break
+			}
+		}
+
+
 
 		var netizenAvgRate: Double = 0.0
 		var reservationRate: Double = 0.0
