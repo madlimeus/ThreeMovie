@@ -38,7 +38,8 @@ class MovieDataService(
 		var movie_releaseDate: Long = 0
 
 		for(countryMovieInfo in countryMovieInfos){
-			if(!JSONObject(countryMovieInfo.toString()).get("releaseDate").equals(null)){
+			val country = JSONObject(JSONObject(countryMovieInfo.toString()).get("country").toString()).get("id").toString()
+			if(!JSONObject(countryMovieInfo.toString()).get("releaseDate").equals(null) && country.equals("KR")){
 				movie_releaseDate =
 					JSONObject(countryMovieInfo.toString()).get("releaseDate").toString().toLong()
 				break
