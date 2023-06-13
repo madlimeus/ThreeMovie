@@ -50,14 +50,14 @@ class ShowTimeScheduler(
 	var time = 202302110107
 	
 	@Async
-	@Scheduled(cron = "0 0/30 * * * ?")
+	@Scheduled(cron = "0 0/5 * * * ?")
 	fun chkMovieShowingTime() {
 		var chkTime = lastUpdateTimeRepositorySupport.getLastTime(code)
 		if (chkTime == null) {
 			lastUpdateTimeRepository.save(LastUpdateTime(code, 202302110107))
 			chkTime = 202302110107
 		}
-		if (ChkNeedUpdate.chkUpdateTwelveHours(chkTime)) {
+		if (ChkNeedUpdate.chkUpdateFiveMinute(chkTime)) {
 			time = ChkNeedUpdate.retFormatterTime()
 			lastUpdateTimeRepositorySupport.updateLastTime(time, code)
 			movieNameInfo = movieDataRepositorySupport.getMovieNameData()
@@ -88,6 +88,7 @@ class ShowTimeScheduler(
 				}
 			}
 			
+			println("showtime")
 			showTimeRepository.saveAll(showTimeList)
 			showTimeReserveRepositorySupport.deleteShowTimeReserveByTime(time)
 			showTimeRepositorySupport.deleteZeroReserveShowTime(time)
@@ -489,9 +490,15 @@ class ShowTimeScheduler(
 				nameMap[movieKR] = movieName
 			}
 			var name = nameMap[movieKR]
-//			val movieId = name?.movieId ?: movieKR
-			val movieId = name?.movieId ?: movieSearchService.movieSearchService(movieKR)
-
+			
+			var movieId: String = ""
+			if (name == null || name.movieId.isNullOrEmpty()) {
+				movieId = movieSearchService.movieSearchService(movieKR)
+				nameMap[movieKR] = MovieNameInfoVO(movieId, 1.0)
+			} else {
+				movieId = name.movieId !!
+			}
+			
 			var showTime = ShowTime(
 				screenKR,
 				screenEN,
