@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bc19afb8-4a96-4a9d-94b1-ecd36c2e28bc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieDataService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieDataService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieSearchService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/threemovieapi/src/main/kotlin/com/threemovie/threemovieapi/domain/movie/service/MovieSearchService.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +165,8 @@
       <workItem from="1686228617136" duration="80000" />
       <workItem from="1686291681847" duration="106000" />
       <workItem from="1686295867011" duration="6584000" />
-      <workItem from="1686651535391" duration="1209000" />
+      <workItem from="1686651535391" duration="1866000" />
+      <workItem from="1686660372602" duration="272000" />
     </task>
     <servers />
   </component>

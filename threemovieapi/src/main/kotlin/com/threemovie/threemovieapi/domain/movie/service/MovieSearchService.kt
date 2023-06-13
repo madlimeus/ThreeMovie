@@ -14,8 +14,8 @@ class MovieSearchService(
 	val moviePreviewService: MoviePreviewService
 ) {
 	fun movieSearchService(movieName: String): String {
-		val pattern = Regex("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]")
 		val result: String
+		val pattern = Regex("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]")
 		val url_search = "https://movie.daum.net/api/search/all?q=" + movieName.replace(pattern, "")
 		val responseData = JSONObject(GET_DATA_USE_DAUM_API(url_search))
 		val search_result = JSONObject(
@@ -33,7 +33,7 @@ class MovieSearchService(
 					.get("document").toString()
 			)
 				.get("movieId").toString()
-			saveMovieDataSearchSuccess(resultMovieId)
+			saveMovieDataSearchSuccess(movieName, resultMovieId)
 			result = resultMovieId
 		} else {
 			println("else")
@@ -71,7 +71,7 @@ class MovieSearchService(
 		movieDataRepository.saveAll(movieData_List)
 	}
 	
-	fun saveMovieDataSearchSuccess(movieId: String) {
+	fun saveMovieDataSearchSuccess(movieName: String, movieId: String) {
 		val movieData_List = ArrayList<MovieData>()
 		try {
 			val movieData = movieDataService.save_MovieData_new(movieId)
@@ -83,6 +83,7 @@ class MovieSearchService(
 			movieData_List.add(movieData)
 		} catch (e: Exception) {
 			println("error in searchSuccess")
+			println(movieName)
 			println(e)
 		}
 		movieDataRepository.saveAll(movieData_List)
