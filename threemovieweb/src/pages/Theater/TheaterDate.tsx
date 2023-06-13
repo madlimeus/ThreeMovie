@@ -18,7 +18,8 @@ const TheaterDate = () => {
 	
 	
 	useEffect(() => {
-		refetch();
+		if (brchFilter.length > 0)
+			refetch();
 	}, [brchFilter]);
 	
 	useEffect(() => {
